@@ -12,7 +12,6 @@
       background-color: #0a0f1a;
       color: #e4e4e4;
     }
-    /* Header styles */
     header {
       position: sticky;
       top: 0;
@@ -22,9 +21,8 @@
       align-items: center;
       padding: 0.75rem 2rem;
       z-index: 1000;
-      justify-content: space-between;
+      justify-content: space-between; /* logo left, nav right */
     }
-    /* Logo + team number container */
     .logo-team {
       display: flex;
       align-items: center;
@@ -37,16 +35,14 @@
     .team-number {
       font-weight: 700;
       font-size: 1.5rem;
-      color: #7ec8ff; /* lighter blue accent */
+      color: #7ec8ff;
       user-select: none;
     }
-    /* Navigation */
     nav {
       display: flex;
-      gap: 4rem; /* increased spacing between tabs */
-      margin-left: 3rem; /* space from logo */
+      gap: 4rem; /* spacing between tabs */
+      justify-content: flex-end; /* align nav items right */
       flex-grow: 1;
-      justify-content: flex-start;
     }
     .nav-link {
       color: #b2d7ff;
@@ -78,10 +74,8 @@
     @media (max-width: 600px) {
       nav {
         gap: 1.5rem;
-        margin-left: 1rem;
       }
     }
-    /* Hero section */
     .hero {
       text-align: center;
       padding: 3rem 1rem 5rem;
@@ -91,14 +85,11 @@
     .hero img {
       width: 100%;
       max-width: 600px;
-      border-radius: 2rem; /* more pronounced rounded corners */
+      border-radius: 2rem;
       object-fit: cover;
-      /* cropping white edges: hide overflow */
-      overflow: hidden;
       box-shadow: 0 0 25px rgba(0, 170, 255, 0.3);
       display: inline-block;
     }
-    /* Basic sections styling */
     section {
       max-width: 900px;
       margin: 4rem auto;
@@ -153,6 +144,7 @@
 
 </body>
 </html>
+
 
 
 
