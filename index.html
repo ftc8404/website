@@ -1,151 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FTC Team 8404 Quixilver</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quixilver 8404</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #60aaff;
-      --background-color: #0a0a0a;
-      --text-color: #ffffff;
-      --card-color: #1a1a1a;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
-    }
-
     body {
-      background-color: var(--background-color);
-      color: var(--text-color);
-      line-height: 1.6;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #0d1117;
+      color: #e6edf3;
     }
-
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #111;
+      background-color: #161b22;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
-
-    header img.logo {
-      height: 48px;
+    .logo {
+      display: flex;
+      align-items: center;
     }
-
+    .logo svg {
+      height: 40px;
+      margin-right: 10px;
+    }
     nav a {
-      margin-left: 1.5rem;
-      color: var(--primary-color);
+      margin: 0 1rem;
       text-decoration: none;
-      font-weight: bold;
+      color: #58a6ff;
+      font-weight: 500;
     }
-
     nav a:hover {
       text-decoration: underline;
     }
-
     .hero {
       text-align: center;
       padding: 4rem 2rem;
     }
-
     .hero img {
       max-width: 90%;
       height: auto;
-      border-radius: 16px;
-      box-shadow: 0 0 30px rgba(96, 170, 255, 0.3);
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
     }
-
     .section {
       padding: 3rem 2rem;
       max-width: 1000px;
       margin: auto;
     }
-
-    .section h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-    }
-
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 2rem;
     }
-
-    .team-member {
-      background-color: var(--card-color);
-      border-radius: 12px;
+    .member {
+      background-color: #161b22;
       padding: 1rem;
+      border-radius: 0.75rem;
       text-align: center;
     }
-
-    .team-member img {
-      width: 100%;
-      border-radius: 8px;
+    .member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
       margin-bottom: 0.5rem;
+      object-fit: cover;
     }
-
-    .footer {
+    footer {
       text-align: center;
       padding: 2rem;
-      background-color: #111;
+      color: #8b949e;
       font-size: 0.9rem;
     }
   </style>
 </head>
-
 <body>
-  <header>
-    <img src="logo-placeholder.svg" alt="Quixilver Logo" class="logo">
-    <nav>
-      <a href="#about">About</a>
-      <a href="#team">Team</a>
-      <a href="#sponsors">Sponsors</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
 
-  <section class="hero">
-    <img src="robot-placeholder.jpg" alt="Hero Robot Render">
-  </section>
+<header>
+  <div class="logo">
+    <!-- Simple Line Fox SVG -->
+    <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="#58a6ff" stroke-width="2">
+      <path d="M5 40 Q20 20, 32 32 Q44 20, 59 40" />
+      <circle cx="20" cy="32" r="2" fill="#58a6ff"/>
+      <circle cx="44" cy="32" r="2" fill="#58a6ff"/>
+    </svg>
+    <h1 style="font-family: 'Orbitron', sans-serif; font-size: 1.5rem;">Quixilver 8404</h1>
+  </div>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#team">Team</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <section class="section" id="about">
-    <h2>About Us</h2>
-    <p>We are FTC Team 8404 Quixilver, a passionate group of high school students dedicated to robotics, engineering, and innovation. Based in San Jose, CA, we compete in the FIRST Tech Challenge, designing competitive robots and developing lifelong STEM skills.</p>
-  </section>
+<section class="hero">
+  <img src="https://quixilver8404.org/images/robot-ug.jpg" alt="Quixilver Robot Render">
+</section>
 
-  <section class="section" id="team">
-    <h2>Meet the Team</h2>
-    <div class="team-grid">
-      <!-- Team members will be inserted here -->
+<section id="about" class="section">
+  <h2>About Us</h2>
+  <p>
+    We are FTC Team 8404 Quixilver, a student-run robotics team from San Jose, California. Our mission is to learn, teach, and inspire through the power of robotics and creative engineering.
+  </p>
+</section>
+
+<section id="team" class="section">
+  <h2>Meet the Team</h2>
+  <div class="team-grid">
+    <!-- Sample member entries, you can replace images if needed -->
+    <div class="member">
+      <img src="https://quixilver8404.org/images/team/1.jpg" alt="Member">
+      <p><strong>Alex H.</strong></p>
+      <p>Team Captain</p>
     </div>
-  </section>
+    <div class="member">
+      <img src="https://quixilver8404.org/images/team/2.jpg" alt="Member">
+      <p><strong>Jordan M.</strong></p>
+      <p>Lead Programmer</p>
+    </div>
+    <div class="member">
+      <img src="https://quixilver8404.org/images/team/3.jpg" alt="Member">
+      <p><strong>Sophia T.</strong></p>
+      <p>CAD Engineer</p>
+    </div>
+    <!-- Add all 12 members like above -->
+  </div>
+</section>
 
-  <section class="section" id="sponsors">
-    <h2>Our Sponsors</h2>
-    <p>Thank you to our amazing sponsors who support our mission!</p>
-    <img src="sponsor-placeholder.png" alt="Sponsor Logos" style="max-width:100%;">
-  </section>
+<section id="contact" class="section">
+  <h2>Contact Us</h2>
+  <p>Email: <a href="mailto:quixilver8404@gmail.com" style="color:#58a6ff;">quixilver8404@gmail.com</a></p>
+</section>
 
-  <section class="section" id="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:quixilver8404@gmail.com">quixilver8404@gmail.com</a></p>
-  </section>
+<footer>
+  &copy; 2025 Quixilver 8404. Built with ❤️ by the team.
+</footer>
 
-  <footer class="footer">
-    <p>© 2025 FTC Team 8404 Quixilver. All rights reserved.</p>
-  </footer>
 </body>
-
 </html>
