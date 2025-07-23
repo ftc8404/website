@@ -43,8 +43,8 @@
     /* Navigation */
     nav {
       display: flex;
-      gap: 3rem; /* more spacing between tabs */
-      margin-left: 3rem; /* more space from the logo */
+      gap: 4rem; /* increased spacing between tabs */
+      margin-left: 3rem; /* space from logo */
       flex-grow: 1;
       justify-content: flex-start;
     }
@@ -81,6 +81,23 @@
         margin-left: 1rem;
       }
     }
+    /* Hero section */
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .hero img {
+      width: 100%;
+      max-width: 600px;
+      border-radius: 2rem; /* more pronounced rounded corners */
+      object-fit: cover;
+      /* cropping white edges: hide overflow */
+      overflow: hidden;
+      box-shadow: 0 0 25px rgba(0, 170, 255, 0.3);
+      display: inline-block;
+    }
     /* Basic sections styling */
     section {
       max-width: 900px;
@@ -107,6 +124,10 @@
     </nav>
   </header>
 
+  <section class="hero">
+    <img src="robot.png" alt="Ultimate Goal Robot Render" />
+  </section>
+
   <section id="about">
     <h1>Welcome to Quixilver 8404</h1>
     <p>
@@ -132,6 +153,7 @@
 
 </body>
 </html>
+
 
 
 
