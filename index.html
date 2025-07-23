@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quixilver 8404</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     body {
       margin: 0;
@@ -19,6 +19,9 @@
       align-items: center;
       padding: 1rem 2rem;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .logo {
       height: 60px;
@@ -45,9 +48,12 @@
     h1 {
       font-size: 2.5rem;
       color: #b2d7ff;
+      margin-bottom: 1rem;
     }
     .section {
       padding: 3rem 2rem;
+      max-width: 1000px;
+      margin: auto;
     }
     .team {
       display: grid;
@@ -76,7 +82,7 @@
 </head>
 <body>
   <header>
-    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/charlie_orig.jpg" class="logo" alt="Quixilver Logo">
+    <img src="logo.png" class="logo" alt="Quixilver Logo" />
     <nav>
       <a href="#about">About</a>
       <a href="#team">Team</a>
@@ -87,34 +93,40 @@
 
   <section class="hero">
     <h1>Quixilver 8404</h1>
-    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/7_orig.png" alt="Ultimate Goal Robot Render">
+    <img src="robot.png" alt="Ultimate Goal Robot Render" />
   </section>
 
   <section id="about" class="section">
     <h2>About Us</h2>
-    <p>We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.</p>
+    <p>
+      We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.
+    </p>
   </section>
 
   <section id="team" class="section">
     <h2>Meet the Team</h2>
     <div class="team">
       <div class="member">
-        <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/charlie_orig.jpg" alt="Charlie">
-        <p><strong>Charlie</strong><br>Team Captain</p>
+        <img src="charlie.jpg" alt="Charlie" />
+        <p><strong>Charlie</strong><br />Team Captain</p>
       </div>
-      <!-- Add more members using the same structure as above -->
+      <!-- Add your other 11 team members here in the same format -->
     </div>
   </section>
 
   <section id="robot" class="section">
     <h2>Our Robot</h2>
-    <p>This is our robot from the Ultimate Goal season — a culmination of design innovation, precision machining, and software control. Check back soon for our newest Into the Deep robot!</p>
-    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/7_orig.png" alt="Robot" style="margin-top:1rem; max-width: 600px; width: 100%;">
+    <p>
+      This is our robot from the Ultimate Goal season — a culmination of design innovation, precision machining, and software control. Check back soon for our newest Into the Deep robot!
+    </p>
   </section>
 
   <section id="contact" class="section">
     <h2>Contact Us</h2>
-    <p>Email us at <a href="mailto:quixilver8404@gmail.com" style="color:#b2d7ff;">quixilver8404@gmail.com</a></p>
+    <p>
+      Email us at
+      <a href="mailto:quixilver8404@gmail.com" style="color:#b2d7ff;">quixilver8404@gmail.com</a>
+    </p>
   </section>
 
   <footer>
@@ -122,4 +134,5 @@
   </footer>
 </body>
 </html>
+
 
