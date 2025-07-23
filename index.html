@@ -4,135 +4,135 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FTC Team 8404 Quixilver</title>
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rubik&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      background-color: #0f0f0f;
-      font-family: 'Urbanist', sans-serif;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Rubik', sans-serif;
+      background-color: #0a0a0a;
       color: white;
     }
 
     header {
+      background-color: #121212;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 50px;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to right, rgba(18, 18, 18, 0.85), rgba(25, 25, 25, 0.85));
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 20px 60px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 15px;
     }
 
     .logo-container img {
-      height: 55px;
-      width: 55px;
-      object-fit: contain;
-      image-rendering: crisp-edges;
+      height: 60px;
+      margin-right: 15px;
       border-radius: 12px;
-      transition: transform 0.3s ease;
     }
 
-    .logo-container:hover img {
-      transform: scale(1.05);
-    }
-
-    .logo-text {
+    .team-number {
+      font-family: 'Orbitron', sans-serif;
       font-size: 1.8rem;
-      font-weight: 700;
       letter-spacing: 1px;
-      color: #b0e0ff;
-      text-shadow: 2px 2px 5px rgba(0, 170, 255, 0.4);
-      transition: transform 0.3s ease;
+      color: #0cf;
+      text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
     }
 
-    .logo-container:hover .logo-text {
-      transform: translateX(2px);
-    }
-
-    nav {
+    nav ul {
+      list-style: none;
       display: flex;
-      gap: 50px;
-      margin-right: 40px;
+      gap: 35px;
     }
 
     nav a {
       text-decoration: none;
-      color: #e0e0e0;
+      color: white;
       font-size: 1rem;
       position: relative;
-      transition: all 0.3s ease;
-      padding: 6px 4px;
+      transition: color 0.3s ease;
     }
 
     nav a::after {
-      content: "";
+      content: '';
       position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: #63cfff;
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
       width: 100%;
+      height: 2px;
+      background-color: #0cf;
+      bottom: -6px;
+      left: 0;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
     }
 
     nav a:hover {
-      color: #ffffff;
-      transform: translateY(-1px);
+      color: #0cf;
     }
 
-    .render-container {
+    nav a:hover::after {
+      transform: scaleX(1);
+    }
+
+    main {
       text-align: center;
-      margin-top: 50px;
+      padding: 60px 20px 40px;
     }
 
-    .render-container img {
-      max-width: 80%;
+    .render-image {
+      width: 80%;
+      max-width: 900px;
+      margin: 40px auto;
+      display: block;
       border-radius: 30px;
       object-fit: cover;
-      height: auto;
-      margin: 0 auto;
-      display: block;
-      box-shadow: 0 0 25px rgba(0, 153, 255, 0.25);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .description {
+      max-width: 800px;
+      margin: 30px auto 0;
+      font-size: 1.1rem;
+      color: #ccc;
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
+
   <header>
     <div class="logo-container">
-      <img src="logo.png" alt="Team Logo" />
-      <div class="logo-text">FTC 8404<br>Quixilver</div>
+      <img src="logo.png" alt="Quixilver Logo" />
+      <span class="team-number">FTC Team 8404</span>
     </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Team</a>
-      <a href="#">Robot</a>
-      <a href="#">Outreach</a>
-      <a href="#">Sponsors</a>
-      <a href="#">Contact</a>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Outreach</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Robot</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
   <main>
-    <div class="render-container">
-      <img src="7_orig.jpg" alt="Robot Render" />
-    </div>
+    <img src="robot.png" alt="Quixilver Robot Render" class="render-image" />
+    <p class="description">
+      Welcome to FTC Team 8404 Quixilver! We're a passionate, award-winning robotics team dedicated to innovation, outreach, and community impact. Dive into our journey, meet our team, and explore the robot behind our mission.
+    </p>
   </main>
+
 </body>
 </html>
+
 
 
 
