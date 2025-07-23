@@ -2,42 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Quixilver 8404</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
+      background-color: #0a0f1a;
+      color: #e4e4e4;
     }
     header {
+      background-color: #101926;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #161b22;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
     .logo {
-      display: flex;
-      align-items: center;
-    }
-    .logo svg {
-      height: 40px;
-      margin-right: 10px;
+      height: 60px;
     }
     nav a {
+      color: #b2d7ff;
       margin: 0 1rem;
       text-decoration: none;
-      color: #58a6ff;
-      font-weight: 500;
+      font-weight: 600;
     }
     nav a:hover {
-      text-decoration: underline;
+      color: #ffffff;
     }
     .hero {
       text-align: center;
@@ -47,100 +40,86 @@
       max-width: 90%;
       height: auto;
       border-radius: 1rem;
-      box-shadow: 0 0 30px rgba(88, 166, 255, 0.2);
+      box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #b2d7ff;
     }
     .section {
       padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
     }
-    .team-grid {
+    .team {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 2rem;
+      padding-top: 1rem;
     }
     .member {
-      background-color: #161b22;
-      padding: 1rem;
-      border-radius: 0.75rem;
       text-align: center;
     }
     .member img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 0.5rem;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
+      border-radius: 100px;
+      margin-bottom: 0.5rem;
+      box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
     }
     footer {
+      background-color: #101926;
       text-align: center;
-      padding: 2rem;
-      color: #8b949e;
-      font-size: 0.9rem;
+      padding: 1rem;
+      color: #888;
     }
   </style>
 </head>
 <body>
+  <header>
+    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/charlie_orig.jpg" class="logo" alt="Quixilver Logo">
+    <nav>
+      <a href="#about">About</a>
+      <a href="#team">Team</a>
+      <a href="#robot">Robot</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-<header>
-  <div class="logo">
-    <!-- Simple Line Fox SVG -->
-    <svg viewBox="0 0 64 64" width="40" height="40" fill="none" stroke="#58a6ff" stroke-width="2">
-      <path d="M5 40 Q20 20, 32 32 Q44 20, 59 40" />
-      <circle cx="20" cy="32" r="2" fill="#58a6ff"/>
-      <circle cx="44" cy="32" r="2" fill="#58a6ff"/>
-    </svg>
-    <h1 style="font-family: 'Orbitron', sans-serif; font-size: 1.5rem;">Quixilver 8404</h1>
-  </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#team">Team</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+  <section class="hero">
+    <h1>Quixilver 8404</h1>
+    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/7_orig.png" alt="Ultimate Goal Robot Render">
+  </section>
 
-<section class="hero">
-  <img src="https://quixilver8404.org/images/robot-ug.jpg" alt="Quixilver Robot Render">
-</section>
+  <section id="about" class="section">
+    <h2>About Us</h2>
+    <p>We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.</p>
+  </section>
 
-<section id="about" class="section">
-  <h2>About Us</h2>
-  <p>
-    We are FTC Team 8404 Quixilver, a student-run robotics team from San Jose, California. Our mission is to learn, teach, and inspire through the power of robotics and creative engineering.
-  </p>
-</section>
-
-<section id="team" class="section">
-  <h2>Meet the Team</h2>
-  <div class="team-grid">
-    <!-- Sample member entries, you can replace images if needed -->
-    <div class="member">
-      <img src="https://quixilver8404.org/images/team/1.jpg" alt="Member">
-      <p><strong>Alex H.</strong></p>
-      <p>Team Captain</p>
+  <section id="team" class="section">
+    <h2>Meet the Team</h2>
+    <div class="team">
+      <div class="member">
+        <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/charlie_orig.jpg" alt="Charlie">
+        <p><strong>Charlie</strong><br>Team Captain</p>
+      </div>
+      <!-- Add more members using the same structure as above -->
     </div>
-    <div class="member">
-      <img src="https://quixilver8404.org/images/team/2.jpg" alt="Member">
-      <p><strong>Jordan M.</strong></p>
-      <p>Lead Programmer</p>
-    </div>
-    <div class="member">
-      <img src="https://quixilver8404.org/images/team/3.jpg" alt="Member">
-      <p><strong>Sophia T.</strong></p>
-      <p>CAD Engineer</p>
-    </div>
-    <!-- Add all 12 members like above -->
-  </div>
-</section>
+  </section>
 
-<section id="contact" class="section">
-  <h2>Contact Us</h2>
-  <p>Email: <a href="mailto:quixilver8404@gmail.com" style="color:#58a6ff;">quixilver8404@gmail.com</a></p>
-</section>
+  <section id="robot" class="section">
+    <h2>Our Robot</h2>
+    <p>This is our robot from the Ultimate Goal season — a culmination of design innovation, precision machining, and software control. Check back soon for our newest Into the Deep robot!</p>
+    <img src="https://www.quixilver8404.org/uploads/1/4/7/1/147175695/7_orig.png" alt="Robot" style="margin-top:1rem; max-width: 600px; width: 100%;">
+  </section>
 
-<footer>
-  &copy; 2025 Quixilver 8404. Built with ❤️ by the team.
-</footer>
+  <section id="contact" class="section">
+    <h2>Contact Us</h2>
+    <p>Email us at <a href="mailto:quixilver8404@gmail.com" style="color:#b2d7ff;">quixilver8404@gmail.com</a></p>
+  </section>
 
+  <footer>
+    <p>&copy; 2025 Quixilver 8404. All rights reserved.</p>
+  </footer>
 </body>
 </html>
+
