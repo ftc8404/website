@@ -25,6 +25,7 @@
     }
     .logo {
       height: 60px;
+      object-fit: contain;
     }
     nav a {
       color: #b2d7ff;
@@ -39,11 +40,21 @@
       text-align: center;
       padding: 4rem 2rem;
     }
-    .hero img {
+    .robot-image-container {
       max-width: 90%;
-      height: auto;
-      border-radius: 1rem;
+      margin: 0 auto;
+      border-radius: 1.5rem; /* stronger rounding */
+      overflow: hidden; /* crop edges */
       box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
+      width: fit-content;
+    }
+    .robot-image-container img {
+      display: block;
+      width: calc(100% + 12px); /* compensate cropping */
+      height: auto;
+      margin: -6px;
+      border-radius: 0;
+      object-fit: cover;
     }
     h1 {
       font-size: 2.5rem;
@@ -93,7 +104,9 @@
 
   <section class="hero">
     <h1>Quixilver 8404</h1>
-    <img src="robot.png" alt="Ultimate Goal Robot Render" />
+    <div class="robot-image-container">
+      <img src="robot.png" alt="Ultimate Goal Robot Render" />
+    </div>
   </section>
 
   <section id="about" class="section">
@@ -134,5 +147,3 @@
   </footer>
 </body>
 </html>
-
-
