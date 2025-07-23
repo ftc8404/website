@@ -12,128 +12,127 @@
       background-color: #0a0f1a;
       color: #e4e4e4;
     }
+    /* Header styles */
     header {
-      background-color: #101926;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
-      z-index: 100;
+      background-color: #101926;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      padding: 0.75rem 2rem;
+      z-index: 1000;
+      justify-content: space-between;
+    }
+    /* Logo + team number container */
+    .logo-team {
+      display: flex;
+      align-items: center;
     }
     .logo {
-      height: 60px;
+      height: 50px;
+      margin-right: 0.75rem;
+      background-color: transparent;
     }
-    nav a {
+    .team-number {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #7ec8ff; /* lighter blue accent */
+      user-select: none;
+    }
+    /* Navigation */
+    nav {
+      display: flex;
+      gap: 2.5rem; /* spacing between tabs */
+      margin-left: 1rem;
+      flex-grow: 1;
+      justify-content: flex-start;
+      max-width: 600px;
+    }
+    .nav-link {
       color: #b2d7ff;
-      margin: 0 1rem;
       text-decoration: none;
       font-weight: 600;
+      font-size: 1rem;
+      padding: 0.5rem 0;
+      position: relative;
+      transition: color 0.3s ease;
     }
-    nav a:hover {
+    .nav-link:hover,
+    .nav-link:focus {
       color: #ffffff;
     }
-    .hero {
-      text-align: center;
-      padding: 4rem 2rem;
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0%;
+      height: 2px;
+      background: #7ec8ff;
+      transition: width 0.3s ease;
     }
-    .hero img {
-      max-width: 90%;
-      height: auto;
-      border-radius: 1rem;
-      box-shadow: 0 0 20px rgba(0, 170, 255, 0.25);
+    .nav-link:hover::after,
+    .nav-link:focus::after {
+      width: 100%;
     }
-    h1 {
-      font-size: 2.5rem;
-      color: #b2d7ff;
-      margin-bottom: 1rem;
+    @media (max-width: 600px) {
+      nav {
+        gap: 1.5rem;
+      }
     }
-    .section {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: auto;
+    /* Basic sections styling */
+    section {
+      max-width: 900px;
+      margin: 4rem auto;
+      padding: 0 1rem;
     }
-    .team {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 2rem;
-      padding-top: 1rem;
-    }
-    .member {
-      text-align: center;
-    }
-    .member img {
-      width: 150px;
-      height: 150px;
-      object-fit: cover;
-      border-radius: 100px;
-      margin-bottom: 0.5rem;
-      box-shadow: 0 0 10px rgba(0, 170, 255, 0.2);
-    }
-    footer {
-      background-color: #101926;
-      text-align: center;
-      padding: 1rem;
-      color: #888;
+    h1, h2 {
+      color: #7ec8ff;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <img src="logo.png" class="logo" alt="Quixilver Logo" />
+    <div class="logo-team">
+      <img src="logo.png" alt="Quixilver Logo" class="logo" />
+      <span class="team-number">8404</span>
+    </div>
     <nav>
-      <a href="#about">About</a>
-      <a href="#team">Team</a>
-      <a href="#robot">Robot</a>
-      <a href="#contact">Contact</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#team" class="nav-link">Team</a>
+      <a href="#robot" class="nav-link">Robot</a>
+      <a href="#contact" class="nav-link">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <h1>Quixilver 8404</h1>
-    <img src="robot.png" alt="Ultimate Goal Robot Render" />
-  </section>
-
-  <section id="about" class="section">
-    <h2>About Us</h2>
+  <section id="about">
+    <h1>Welcome to Quixilver 8404</h1>
     <p>
-      We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.
+      We are an FTC team passionate about robotics, engineering, and innovation.
+      Explore the site to learn more about us, our team members, and our robots.
     </p>
   </section>
 
-  <section id="team" class="section">
+  <section id="team">
     <h2>Meet the Team</h2>
-    <div class="team">
-      <div class="member">
-        <img src="charlie.jpg" alt="Charlie" />
-        <p><strong>Charlie</strong><br />Team Captain</p>
-      </div>
-      <!-- Add your other 11 team members here -->
-    </div>
+    <p>Team member info coming soon...</p>
   </section>
 
-  <section id="robot" class="section">
+  <section id="robot">
     <h2>Our Robot</h2>
-    <p>
-      This is our robot from the Ultimate Goal season — a culmination of design innovation, precision machining, and software control. Check back soon for our newest Into the Deep robot!
-    </p>
+    <p>Robot details coming soon...</p>
   </section>
 
-  <section id="contact" class="section">
+  <section id="contact">
     <h2>Contact Us</h2>
-    <p>
-      Email us at
-      <a href="mailto:quixilver8404@gmail.com" style="color:#b2d7ff;">quixilver8404@gmail.com</a>
-    </p>
+    <p>Email: <a href="mailto:quixilver8404@gmail.com" style="color:#7ec8ff;">quixilver8404@gmail.com</a></p>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Quixilver 8404. All rights reserved.</p>
-  </footer>
 </body>
 </html>
+
 
 
 
