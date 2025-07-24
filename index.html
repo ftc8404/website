@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FTC Team 8404</title>
 
-  <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -86,7 +85,6 @@
       width: 100%;
     }
 
-    /* Hero Section */
     .hero {
       position: relative;
       padding-top: 0;
@@ -104,21 +102,23 @@
       object-fit: cover;
       margin-top: -50px;
 
-      /* Slight crop: top/bottom 2mm, sides 1.5mm */
+      /* Crop: 2mm top/bottom, 1.5mm sides */
       clip-path: inset(2mm 1.5mm round 24px);
 
-      /* Glow highlight */
+      /* 💡 Glow highlight restored */
       box-shadow:
-        0 0 60px rgba(0, 191, 255, 0.7),
-        0 0 30px rgba(0, 191, 255, 0.5);
+        0 0 70px rgba(0, 191, 255, 0.75),
+        0 0 40px rgba(0, 191, 255, 0.5),
+        0 0 20px rgba(0, 191, 255, 0.4);
       background-color: #0a0a0a;
     }
 
     .robot-render:hover {
       transform: scale(1.03);
       box-shadow:
-        0 0 90px rgba(0, 191, 255, 1),
-        0 0 50px rgba(0, 191, 255, 0.7);
+        0 0 100px rgba(0, 191, 255, 0.95),
+        0 0 60px rgba(0, 191, 255, 0.75),
+        0 0 30px rgba(0, 191, 255, 0.6);
     }
 
     .hero-label {
@@ -136,12 +136,12 @@
 
     .top-left-label {
       top: 120px;
-      left: 120px; /* Moved 30mm right (was 90px) */
+      left: 180px; /* doubled from 90px → 180px */
     }
 
     .bottom-right-label {
-      bottom: 180px; /* Moved 10mm up (was 140px) */
-      right: 120px;  /* Moved 30mm left (was 90px) */
+      bottom: 180px; /* 10mm up */
+      right: 180px;  /* doubled from 90px → 180px */
       font-style: italic;
       font-size: 90px;
     }
@@ -151,10 +151,9 @@
       50% { transform: translateY(-10px); }
     }
 
-    /* Team Section */
     .team-section {
       max-width: 1200px;
-      margin: 100px auto 100px auto;
+      margin: 100px auto;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
@@ -238,6 +237,7 @@
   </section>
 </body>
 </html>
+
 
 
 
