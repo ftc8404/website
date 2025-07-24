@@ -98,17 +98,18 @@
 
     
     .robot-render {
-    width: 96%;
-    max-width: 960px;
-    aspect-ratio: 16/9;
-    object-fit: cover;
-    object-position: center 52%; /* shifts the visible area slightly down */
-    border-radius: 32px;
-    box-shadow: 0 0 90px rgba(85, 198, 246, 0.8);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
-    z-index: 1;
-    margin-top: -25px; /* slight upward shift */
-    }
+  width: calc(100% - 4mm); /* crops ~2mm from each side */
+  max-width: calc(1000px - 4mm); /* same here for consistency */
+  aspect-ratio: 16 / 8.7; /* slightly taller frame = less top/bottom crop */
+  object-fit: cover;
+  object-position: center 49.5%; /* nudge slightly up */
+  border-radius: 32px;
+  box-shadow: 0 0 90px rgba(85, 198, 246, 0.8);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  z-index: 1;
+  margin-top: -20px; /* move up */
+}
+
 
 
 
