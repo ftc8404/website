@@ -119,119 +119,118 @@ nav a:hover::after {
 </header>
 
 <div class="content-home">
-  <div class="hero-container">
-    <div class="hero-accent accent-left">8404</div>
-    <img src="robot.png" alt="Ultimate Goal Robot Render" class="robot-render" />
-    <div class="hero-accent accent-right">Quixilver</div>
+  <div class="hero-wrapper">
+    <div class="hero-label left-label">8404</div>
+    <div class="hero-center">
+      <img src="robot.png" alt="Ultimate Goal Robot Render" class="robot-render" />
+    </div>
+    <div class="hero-label right-label">Quixilver</div>
   </div>
-  
+
   <section class="team-section">
-    <img src="team_photo.jpg" alt="Team Photo" class="team-photo" />
-    <div class="team-blurb">
+    <div class="team-text">
       <h2>About the Team</h2>
       <p>
         We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.
       </p>
     </div>
+    <img src="team_photo.jpg" alt="Team Photo" class="team-photo" />
   </section>
 </div>
 
 <style>
-/* Container for hero */
-.hero-container {
+/* Wrapper for the hero section with spacing */
+.hero-wrapper {
   position: relative;
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto 60px;
+  max-width: 1200px;
+  margin: 120px auto 80px;
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 60px;
+  padding: 0 40px;
 }
 
-/* Accent text left and right */
-.hero-accent {
-  position: absolute;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-weight: 900;
-  color: #55c6f6;
-  user-select: none;
-  pointer-events: none;
-  text-shadow:
-    0 0 5px rgba(85,198,246,0.9),
-    0 0 15px rgba(85,198,246,0.6);
-  font-size: 140px;
-  opacity: 0.3;
-}
-
-.accent-left {
-  top: 20px;
-  left: 40px;
-}
-
-.accent-right {
-  bottom: 20px;
-  right: 40px;
-  font-size: 100px;
-  font-weight: 700;
-  opacity: 0.25;
-  font-style: italic;
-}
-
-/* Robot image styling */
+/* Render image styling */
 .robot-render {
-  width: 70%;
-  max-width: 600px;
-  border-radius: 30px;
-  object-fit: cover;
-  /* cropping edges by a bit using clip-path */
-  clip-path: inset(8px 8px 8px 8px round 30px);
-  box-shadow:
-    0 0 30px 5px rgba(85,198,246,0.5);
+  width: 100%;
+  max-width: 700px;
+  border-radius: 32px;
+  clip-path: inset(10px round 32px);
+  box-shadow: 0 0 35px rgba(85,198,246,0.5);
   transition: box-shadow 0.3s ease;
 }
 
 .robot-render:hover {
-  box-shadow:
-    0 0 45px 10px rgba(85,198,246,0.8);
+  box-shadow: 0 0 50px rgba(85,198,246,0.8);
 }
 
-/* Team section below */
-.team-section {
-  max-width: 900px;
-  margin: 40px auto 100px;
-  text-align: center;
+/* Label styles (8404 and Quixilver) */
+.hero-label {
+  position: absolute;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: white;
-}
-
-.team-photo {
-  width: 90%;
-  max-width: 800px;
-  border-radius: 20px;
-  box-shadow:
-    0 0 20px rgba(85,198,246,0.5);
-  margin-bottom: 20px;
-  object-fit: cover;
-}
-
-.team-blurb {
-  max-width: 700px;
-  margin: 0 auto;
-  color: #ccc;
-}
-
-.team-blurb h2 {
+  font-weight: 900;
+  font-size: 100px;
   color: #55c6f6;
-  font-weight: 700;
-  font-size: 28px;
+  text-shadow: 0 0 15px rgba(85,198,246,0.6);
+  opacity: 0.15;
+  pointer-events: none;
+  user-select: none;
+}
+
+.left-label {
+  top: -40px;
+  left: 0;
+}
+
+.right-label {
+  bottom: -40px;
+  right: 0;
+  font-style: italic;
+  font-size: 90px;
+  text-align: right;
+}
+
+/* Team section styles */
+.team-section {
+  max-width: 1100px;
+  margin: 80px auto 120px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 0 40px;
+  flex-wrap: wrap;
+}
+
+.team-text {
+  flex: 1;
+  color: #ccc;
+  max-width: 500px;
+}
+
+.team-text h2 {
+  color: #55c6f6;
+  font-weight: bold;
+  font-size: 32px;
   margin-bottom: 10px;
 }
 
-.team-blurb p {
+.team-text p {
   font-size: 18px;
   line-height: 1.6;
 }
+
+.team-photo {
+  flex: 1;
+  max-width: 500px;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(85,198,246,0.5);
+  object-fit: cover;
+}
 </style>
+
 
 </body>
 </html>
