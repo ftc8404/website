@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FTC Team 8404 - Quixilver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -25,17 +26,14 @@
       align-items: center;
       justify-content: space-between;
       padding: 24px 40px;
-      height: 80px;
+      height: 100px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 20px;
+      gap: 30px;
       transition: transform 0.4s ease, filter 0.4s ease;
       cursor: pointer;
     }
@@ -46,25 +44,25 @@
     }
 
     .logo-container img {
-      height: 50px;
+      height: 64px;
     }
 
     .logo-text {
-      font-size: 28px;
+      font-size: 36px;
       color: #55c6f6;
       font-weight: bold;
     }
 
     nav {
       display: flex;
-      gap: 40px;
-      margin-right: 40px;
+      gap: 120px;
+      margin-right: 80px;
     }
 
     nav a {
       color: white;
       text-decoration: none;
-      font-size: 18px;
+      font-size: 20px;
       position: relative;
       transition: color 0.3s ease;
     }
@@ -106,60 +104,63 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><circle cx="10%" cy="10%" r="2" fill="#55c6f6" opacity="0.3"><animate attributeName="r" values="2;3;2" dur="2s" repeatCount="indefinite"/></circle><circle cx="90%" cy="20%" r="2" fill="#55c6f6" opacity="0.3"><animate attributeName="r" values="2;3;2" dur="2.5s" repeatCount="indefinite"/></circle><circle cx="30%" cy="80%" r="2" fill="#55c6f6" opacity="0.3"><animate attributeName="r" values="2;3;2" dur="1.8s" repeatCount="indefinite"/></circle><circle cx="70%" cy="70%" r="2" fill="#55c6f6" opacity="0.3"><animate attributeName="r" values="2;3;2" dur="2.2s" repeatCount="indefinite"/></circle></g></svg>') no-repeat center;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 L12 8 L14 10 L12 12 Z" fill="#55c6f6" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="0 12 10" to="360 12 10" dur="10s" repeatCount="indefinite"/></path><path d="M90 20 L92 18 L94 20 L92 22 Z" fill="#55c6f6" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="0 92 20" to="360 92 20" dur="12s" repeatCount="indefinite"/></path><path d="M30 80 L32 78 L34 80 L32 82 Z" fill="#55c6f6" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="0 32 80" to="360 32 80" dur="8s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background-size: cover;
       z-index: 1;
     }
 
     .robot-render {
-      width: 60vw;
-      max-width: 800px;
-      border-radius: 16px;
-      transition: transform 0.5s ease, box-shadow 0.5s ease;
+      width: 70vw;
+      max-width: 900px;
+      border-radius: 24px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       object-fit: cover;
       z-index: 2;
-      clip-path: inset(2mm 1.5mm round 16px);
+      clip-path: inset(2mm 1.5mm round 24px);
       box-shadow:
-        0 0 60px rgba(0, 191, 255, 0.8),
-        0 0 40px rgba(0, 191, 255, 0.5),
-        0 0 20px rgba(0, 191, 255, 0.3);
+        0 0 90px rgba(0, 191, 255, 0.95),
+        0 0 60px rgba(0, 191, 255, 0.7),
+        0 0 40px rgba(0, 191, 255, 0.4);
+      background-color: #0a0a0a;
+      cursor: pointer;
     }
 
-    .robot-render:hover {
-      transform: scale(1.05) translateY(-10px);
+    .robot-render:hover, .robot-render.clicked {
+      transform: scale(1.03);
       box-shadow:
-        0 0 80px rgba(0, 191, 255, 1),
-        0 0 60px rgba(0, 191, 255, 0.7),
-        0 0 40px rgba(0, 191, 255, 0.5);
+        0 0 110px rgba(0, 191, 255, 1),
+        0 0 80px rgba(0, 191, 255, 0.85),
+        0 0 50px rgba(0, 191, 255, 0.6);
     }
 
     .hero-label {
       position: absolute;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-weight: 900;
-      font-size: 80px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 90px;
       color: #55c6f6;
-      text-shadow: 0 0 20px rgba(85, 198, 246, 0.9);
+      text-shadow: 0 0 25px rgba(85, 198, 246, 1);
       pointer-events: none;
       user-select: none;
       z-index: 3;
-      animation: floatText 4s ease-in-out infinite;
+      animation: pulseGlow 2s ease-in-out infinite;
     }
 
     .top-left-label {
       top: 10%;
-      left: 10%;
+      left: 5%;
     }
 
     .bottom-right-label {
       bottom: 15%;
-      right: 10%;
+      right: 5%;
       font-style: italic;
-      font-size: 70px;
+      font-size: 80px;
     }
 
-    @keyframes floatText {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-15px); }
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.8); transform: translateY(0); }
+      50% { text-shadow: 0 0 40px rgba(85, 198, 246, 1); transform: translateY(-10px); }
     }
 
     .team-section {
@@ -171,29 +172,43 @@
       justify-content: space-between;
       gap: 40px;
       flex-wrap: wrap;
+    }
+
+    .team-photo, .team-text {
       opacity: 0;
       transform: translateY(50px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
 
-    .team-section.visible {
+    .team-photo.visible {
       opacity: 1;
       transform: translateY(0);
+      transition-delay: 0.2s;
+    }
+
+    .team-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
     }
 
     .team-photo {
       flex: 1;
-      max-width: 550px;
+      max-width: 600px;
       width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 30px rgba(85, 198, 246, 0.5);
+      border-radius: 20px;
+      box-shadow:
+        0 0 40px rgba(85, 198, 246, 0.6),
+        0 0 60px rgba(85, 198, 246, 0.4);
       object-fit: cover;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .team-photo:hover {
       transform: scale(1.03);
-      box-shadow: 0 0 50px rgba(85, 198, 246, 0.8);
+      box-shadow:
+        0 0 70px rgba(85, 198, 246, 0.9),
+        0 0 50px rgba(85, 198, 246, 0.6);
     }
 
     .team-text {
@@ -212,9 +227,10 @@
 
     .team-text h2 {
       color: #55c6f6;
-      font-weight: bold;
-      font-size: 32px;
+      font-weight: 700;
+      font-size: 34px;
       margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
     }
 
     .team-text p {
@@ -222,6 +238,22 @@
       line-height: 1.8;
       color: #d0d0d0;
       margin-bottom: 16px;
+    }
+
+    .learn-more {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #55c6f6;
+      color: #0d0d0d;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .learn-more:hover {
+      background: #3aa8d6;
+      transform: scale(1.05);
     }
 
     @media (max-width: 768px) {
@@ -239,11 +271,11 @@
       }
 
       .logo-container img {
-        height: 40px;
+        height: 48px;
       }
 
       .logo-text {
-        font-size: 24px;
+        font-size: 28px;
       }
 
       .hero-label {
@@ -254,8 +286,18 @@
         font-size: 40px;
       }
 
+      .top-left-label {
+        top: 5%;
+        left: 5%;
+      }
+
+      .bottom-right-label {
+        bottom: 5%;
+        right: 5%;
+      }
+
       .robot-render {
-        width: 80vw;
+        width: 85vw;
       }
 
       .team-section {
@@ -263,8 +305,7 @@
         align-items: center;
       }
 
-      .team-photo,
-      .team-text {
+      .team-photo, .team-text {
         max-width: 100%;
       }
     }
@@ -297,11 +338,12 @@
     <div class="team-text">
       <h2>About Quixilver</h2>
       <p>
-        FTC Team 8404 Quixilver Robotics is a competitive high school robotics team based in San Jose, CA. Fueled by a passion for STEM, we design and build innovative robots for the FIRST Tech Challenge (FTC) each season, pushing the boundaries of engineering and creativity.
+        FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
       </p>
       <p>
-        Beyond the competition field, we’re committed to inspiring the next generation. Through mentoring younger students, hosting STEM workshops, and engaging with our community, we aim to make robotics accessible and exciting. Our team thrives on collaboration, resilience, and a shared drive to innovate.
+        We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of roboticists.
       </p>
+      <a href="#team" class="learn-more">Learn More</a>
     </div>
   </section>
 
@@ -317,19 +359,28 @@
       robot.style.transform = `translate(${moveX}px, ${moveY}px) scale(1)`;
     });
 
-    // Fade-in animation for team section on scroll
-    const teamSection = document.querySelector('.team-section');
+    // Click effect for robot render
+    const robot = document.querySelector('.robot-render');
+    robot.addEventListener('click', () => {
+      robot.classList.add('clicked');
+      setTimeout(() => robot.classList.remove('clicked'), 500);
+    });
+
+    // Scroll animations
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
+            entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
+              setTimeout(() => el.classList.add('visible'), index * 200);
+            });
           }
         });
       },
       { threshold: 0.2 }
     );
-    observer.observe(teamSection);
+
+    observer.observe(document.querySelector('.team-section'));
   </script>
 </body>
 </html>
