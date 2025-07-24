@@ -118,11 +118,121 @@ nav a:hover::after {
   </nav>
 </header>
 
-<div class="content">
-  <img src="robot.png" alt="Robot Render" />
-  <h1>Welcome to Quixilver Robotics</h1>
-  <p>We're a passionate FTC team from San Jose, CA competing with creativity, innovation, and teamwork.</p>
+<div class="content-home">
+  <div class="hero-container">
+    <div class="hero-accent accent-left">8404</div>
+    <img src="robot.png" alt="Ultimate Goal Robot Render" class="robot-render" />
+    <div class="hero-accent accent-right">Quixilver</div>
+  </div>
+  
+  <section class="team-section">
+    <img src="team_photo.jpg" alt="Team Photo" class="team-photo" />
+    <div class="team-blurb">
+      <h2>About the Team</h2>
+      <p>
+        We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.
+      </p>
+    </div>
+  </section>
 </div>
+
+<style>
+/* Container for hero */
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Accent text left and right */
+.hero-accent {
+  position: absolute;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 900;
+  color: #55c6f6;
+  user-select: none;
+  pointer-events: none;
+  text-shadow:
+    0 0 5px rgba(85,198,246,0.9),
+    0 0 15px rgba(85,198,246,0.6);
+  font-size: 140px;
+  opacity: 0.3;
+}
+
+.accent-left {
+  top: 20px;
+  left: 40px;
+}
+
+.accent-right {
+  bottom: 20px;
+  right: 40px;
+  font-size: 100px;
+  font-weight: 700;
+  opacity: 0.25;
+  font-style: italic;
+}
+
+/* Robot image styling */
+.robot-render {
+  width: 70%;
+  max-width: 600px;
+  border-radius: 30px;
+  object-fit: cover;
+  /* cropping edges by a bit using clip-path */
+  clip-path: inset(8px 8px 8px 8px round 30px);
+  box-shadow:
+    0 0 30px 5px rgba(85,198,246,0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.robot-render:hover {
+  box-shadow:
+    0 0 45px 10px rgba(85,198,246,0.8);
+}
+
+/* Team section below */
+.team-section {
+  max-width: 900px;
+  margin: 40px auto 100px;
+  text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+}
+
+.team-photo {
+  width: 90%;
+  max-width: 800px;
+  border-radius: 20px;
+  box-shadow:
+    0 0 20px rgba(85,198,246,0.5);
+  margin-bottom: 20px;
+  object-fit: cover;
+}
+
+.team-blurb {
+  max-width: 700px;
+  margin: 0 auto;
+  color: #ccc;
+}
+
+.team-blurb h2 {
+  color: #55c6f6;
+  font-weight: 700;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.team-blurb p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+</style>
+
 </body>
 </html>
 
