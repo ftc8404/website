@@ -124,25 +124,23 @@ nav a:hover::after {
   </nav>
 </header>
 
-<div class="content-home">
-  <div class="hero-wrapper">
-    <div class="hero-label left-label">8404</div>
-    <div class="hero-center">
-      <img src="robot.png" alt="Ultimate Goal Robot Render" class="robot-render" />
-    </div>
-    <div class="hero-label right-label">Quixilver</div>
-  </div>
+<section class="hero">
+  <img src="robot.png" alt="Robot Render" />
+  <div class="hero-text" id="text-8404">8404</div>
+  <div class="hero-text" id="text-quixilver">Quixilver</div>
+</section>
 
-  <section class="team-section">
-    <div class="team-text">
-      <h2>About the Team</h2>
-      <p>
-        We are Quixilver 8404, an FTC team of 12 dedicated students passionate about robotics, engineering, and innovation. Our team designs, builds, and programs competition-ready robots while fostering STEM outreach and mentorship in our community.
-      </p>
-    </div>
-    <img src="team_photo.jpg" alt="Team Photo" class="team-photo" />
-  </section>
-</div>
+<section class="team-section">
+  <div class="team-info">
+    <h2>About the Team</h2>
+    <p>
+      FTC Team 8404 Quixilver Robotics is a competitive high school robotics team based in San Jose, CA.
+      We’re passionate about STEM, teamwork, and building innovative robots for every FTC season.
+    </p>
+  </div>
+  <img src="team.jpg" alt="Team Photo" />
+</section>
+
 
 <style>
 /* Wrapper for the hero section with spacing */
@@ -235,6 +233,79 @@ nav a:hover::after {
   box-shadow: 0 0 20px rgba(85,198,246,0.5);
   object-fit: cover;
 }
+
+.hero {
+  position: relative;
+  padding-top: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.hero img {
+  width: 80%;
+  max-width: 900px;
+  border-radius: 30px;
+  box-shadow: 0 0 30px rgba(85, 198, 246, 0.3);
+}
+
+.hero-text {
+  position: absolute;
+  font-weight: bold;
+  font-size: 48px;
+  color: #55c6f6;
+  text-shadow: 0 0 20px rgba(85, 198, 246, 0.7);
+  animation: floatText 3s ease-in-out infinite;
+}
+
+#text-8404 {
+  top: 10%;
+  left: 5%;
+}
+
+#text-quixilver {
+  bottom: 5%;
+  right: 5%;
+}
+
+@keyframes floatText {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.team-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 60px 120px;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.team-section img {
+  width: 420px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+}
+
+.team-info {
+  max-width: 500px;
+}
+
+.team-info h2 {
+  font-size: 32px;
+  color: #55c6f6;
+  margin-bottom: 20px;
+}
+
+.team-info p {
+  font-size: 18px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+  
 </style>
 
 
