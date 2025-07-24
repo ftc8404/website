@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FTC Team 8404</title>
-  
+
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -89,24 +89,24 @@
     /* Hero Section */
     .hero {
       position: relative;
-      padding-top: 80px;
+      padding-top: 40px;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 80vh;
+      height: 75vh;
     }
 
     .robot-render {
-      width: 90%;
-      max-width: 900px;
+      width: 100%;
+      max-width: 1000px;
       border-radius: 32px;
-      clip-path: inset(10px round 32px);
-      box-shadow: 0 0 80px rgba(85, 198, 246, 0.7);
+      box-shadow: 0 0 120px rgba(85, 198, 246, 1);
       transition: box-shadow 0.3s ease;
+      z-index: 1;
     }
 
     .robot-render:hover {
-      box-shadow: 0 0 120px rgba(85, 198, 246, 1);
+      box-shadow: 0 0 160px rgba(85, 198, 246, 1);
     }
 
     .hero-label {
@@ -115,31 +115,27 @@
       font-weight: 900;
       font-size: 100px;
       color: #55c6f6;
-      text-shadow: 0 0 25px rgba(85, 198, 246, 0.8);
+      text-shadow: 0 0 25px rgba(85, 198, 246, 0.95);
       pointer-events: none;
       user-select: none;
       animation: floatText 4s ease-in-out infinite;
-      opacity: 0.35;
     }
 
-    .left-label {
-      top: 50%;
-      left: 10%;
-      transform: translateY(-50%);
+    .top-right-label {
+      top: 40px;
+      right: 60px;
     }
 
-    .right-label {
-      top: 50%;
-      right: 10%;
-      transform: translateY(-50%);
+    .bottom-left-label {
+      bottom: 40px;
+      left: 60px;
       font-style: italic;
       font-size: 90px;
-      text-align: right;
     }
 
     @keyframes floatText {
-      0%, 100% { transform: translateY(-50%) translateX(0); }
-      50% { transform: translateY(-52%) translateX(10px); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
     }
 
     /* Team Section */
@@ -202,8 +198,8 @@
   <!-- Hero Section -->
   <section class="hero">
     <img class="robot-render" src="robot.png" alt="Robot Render" />
-    <div class="hero-label left-label">8404</div>
-    <div class="hero-label right-label">Quixilver</div>
+    <div class="hero-label top-right-label">8404</div>
+    <div class="hero-label bottom-left-label">Quixilver</div>
   </section>
 
   <!-- Team Section -->
@@ -215,8 +211,9 @@
         We’re passionate about STEM, teamwork, and building innovative robots for every FTC season.
       </p>
     </div>
-    <img class="team-photo" src="team.jpg" alt="Team Photo" />
+    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" />
   </section>
 </body>
 </html>
+
 
