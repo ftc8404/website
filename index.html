@@ -97,6 +97,7 @@
       align-items: center;
       overflow: hidden;
       background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
+      animation: pulseBackground 6s infinite alternate;
     }
 
     .hero::before {
@@ -106,10 +107,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H80 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.6;0.4" dur="4s" repeatCount="indefinite"/></path><circle cx="40" cy="60" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="3s" repeatCount="indefinite"/></circle><circle cx="70" cy="80" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="3.5s" repeatCount="indefinite"/></circle></g></svg>') no-repeat center;
-      background-size: cover;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
+      background-size: 300px;
       z-index: 1;
-      opacity: 0.6;
+      opacity: 0.5;
+      animation: gridPulse 8s infinite alternate;
     }
 
     .hero::after {
@@ -119,11 +121,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="20s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
-      background-size: 250px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background-size: 300px;
       z-index: 1;
-      opacity: 0.4;
-      animation: rotateGear 20s linear infinite;
+      opacity: 0.5;
+      animation: rotateGear 25s linear infinite;
     }
 
     canvas {
@@ -140,29 +142,43 @@
       width: 70vw;
       max-width: 900px;
       border-radius: 24px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
       object-fit: cover;
       z-index: 2;
       clip-path: inset(2mm 1.5mm round 24px);
       box-shadow:
-        0 0 40px rgba(85, 198, 246, 0.6),
-        0 0 60px rgba(85, 198, 246, 0.4);
+        0 0 50px rgba(85, 198, 246, 0.8),
+        0 0 80px rgba(85, 198, 246, 0.6);
       background-color: #0a0a0a;
+      position: relative;
       cursor: pointer;
     }
 
+    .robot-render::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      width: calc(100% + 20px);
+      height: calc(100% + 20px);
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="streakGlow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#streakGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="1" opacity="0.5"><animate attributeName="x2" values="40;60;40" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="1" opacity="0.5"><animate attributeName="x2" values="80;100;80" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
+      z-index: -1;
+      opacity: 0.7;
+      animation: streakMove 3s infinite linear;
+    }
+
     .robot-render:hover {
-      transform: scale(1.03);
+      transform: scale(1.05);
       box-shadow:
-        0 0 70px rgba(85, 198, 246, 0.9),
-        0 0 50px rgba(85, 198, 246, 0.6);
+        0 0 100px rgba(85, 198, 246, 1),
+        0 0 120px rgba(85, 198, 246, 0.8);
     }
 
     .robot-render.clicked {
-      transform: scale(1.03);
+      transform: scale(1.05);
       box-shadow:
-        0 0 70px rgba(85, 198, 246, 0.9),
-        0 0 50px rgba(85, 198, 246, 0.6);
+        0 0 100px rgba(85, 198, 246, 1),
+        0 0 120px rgba(85, 198, 246, 0.8);
     }
 
     .hero-label {
@@ -171,7 +187,7 @@
       font-weight: 700;
       font-size: 90px;
       color: #55c6f6;
-      text-shadow: 0 0 20px rgba(85, 198, 246, 0.8);
+      text-shadow: 0 0 20px rgba(85, 198, 246, 0.8), 0 0 10px rgba(85, 198, 246, 0.5);
       pointer-events: none;
       user-select: none;
       z-index: 3;
@@ -191,13 +207,28 @@
     }
 
     @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(0); }
-      50% { text-shadow: 0 0 30px rgba(85, 198, 246, 1); transform: translateY(-5px); }
+      0%, 100% { text-shadow: 0 0 20px rgba(85, 198, 246, 0.8), 0 0 10px rgba(85, 198, 246, 0.5); transform: translateY(0); }
+      50% { text-shadow: 0 0 30px rgba(85, 198, 246, 1), 0 0 15px rgba(85, 198, 246, 0.7); transform: translateY(-5px); }
+    }
+
+    @keyframes pulseBackground {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
+    }
+
+    @keyframes gridPulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 0.7; }
     }
 
     @keyframes rotateGear {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes streakMove {
+      0% { background-position: 0 0; }
+      100% { background-position: -50px 0; }
     }
 
     .team-section {
@@ -209,25 +240,42 @@
       justify-content: space-between;
       gap: 40px;
       flex-wrap: wrap;
-      background: linear-gradient(to top, rgba(15, 32, 39, 0.2), transparent);
+      background: linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
+      position: relative;
+    }
+
+    .team-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGlow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/></feMerge></filter></defs><g filter="url(#teamGlow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.2"/></g></svg>') repeat;
+      opacity: 0.1;
+      z-index: 0;
     }
 
     .team-photo, .team-text {
       opacity: 0;
       transform: translateY(50px);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      position: relative;
+      z-index: 1;
     }
 
     .team-photo.visible {
       opacity: 1;
       transform: translateY(0);
       transition-delay: 0.2s;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
     }
 
     .team-text.visible {
       opacity: 1;
       transform: translateY(0);
       transition-delay: 0.4s;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
     }
 
     .team-photo {
@@ -406,11 +454,11 @@
     function updateRobotTransform() {
       const robot = document.querySelector('.robot-render');
       const isHovering = robot.matches(':hover');
-      const scale = isHovering ? 1.03 : 1;
+      const scale = isHovering ? 1.05 : 1;
       robot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
     }
 
-    // Particle system for hero section
+    // Particle system for hero section (orbiting around robot)
     const canvas = document.getElementById('particles');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
@@ -421,18 +469,21 @@
 
     class Particle {
       constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
+        const robotRect = robot.getBoundingClientRect();
+        this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 100;
+        this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 100;
         this.size = Math.random() * 1.5 + 1;
-        this.speedX = Math.random() * 0.2 - 0.1;
-        this.speedY = Math.random() * 0.2 - 0.1;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.1 + 0.05;
       }
 
       update() {
-        this.x += this.speedX;
-        this.y += this.speedY;
-        if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+        const robotRect = robot.getBoundingClientRect();
+        const centerX = robotRect.left + robotRect.width / 2;
+        const centerY = robotRect.top + robotRect.height / 2;
+        this.angle += this.speed;
+        this.x = centerX + Math.cos(this.angle) * 100;
+        this.y = centerY + Math.sin(this.angle) * 100;
       }
 
       draw() {
@@ -471,6 +522,11 @@
     window.addEventListener('resize', () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      particles.forEach(p => {
+        const robotRect = robot.getBoundingClientRect();
+        p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 100;
+        p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 100;
+      });
     });
 
     // Scroll animations
