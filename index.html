@@ -89,38 +89,36 @@
     /* Hero Section */
     .hero {
       position: relative;
+      padding-top: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      padding-top: 0;
-    }
-
-    .robot-container {
-      width: 64vw;
-      max-width: 860px;
-      overflow: hidden;
-      border-radius: 24px;
-      background-color: #0a0a0a;
-      box-shadow:
-        0 0 40px rgba(0, 191, 255, 0.5),
-        0 0 20px rgba(0, 191, 255, 0.3);
-      transition: box-shadow 0.4s ease, transform 0.4s ease;
-    }
-
-    .robot-container:hover {
-      box-shadow:
-        0 0 70px rgba(0, 191, 255, 0.9),
-        0 0 40px rgba(0, 191, 255, 0.6);
-      transform: scale(1.03);
     }
 
     .robot-render {
-      width: calc(100% + 4mm); /* Slight horizontal crop */
-      height: auto;
-      display: block;
-      transform: translate(-2mm, -2mm); /* Top/left crop */
-      border-radius: 0; /* Already handled by wrapper */
+      width: 64vw;
+      max-width: 860px;
+      border-radius: 24px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      object-fit: cover;
+      margin-top: -50px;
+
+      /* Slight crop: top/bottom 2mm, sides 1.5mm */
+      clip-path: inset(2mm 1.5mm round 24px);
+
+      /* Glow highlight */
+      box-shadow:
+        0 0 60px rgba(0, 191, 255, 0.7),
+        0 0 30px rgba(0, 191, 255, 0.5);
+      background-color: #0a0a0a;
+    }
+
+    .robot-render:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 0 90px rgba(0, 191, 255, 1),
+        0 0 50px rgba(0, 191, 255, 0.7);
     }
 
     .hero-label {
@@ -137,13 +135,13 @@
     }
 
     .top-left-label {
-      top: 80px;
-      left: 100px;
+      top: 120px;
+      left: 90px;
     }
 
     .bottom-right-label {
-      bottom: 180px;
-      right: 100px;
+      bottom: 140px;
+      right: 90px;
       font-style: italic;
       font-size: 90px;
     }
@@ -220,9 +218,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
-    <div class="robot-container">
-      <img class="robot-render" src="robot.png" alt="Robot Render" />
-    </div>
+    <img class="robot-render" src="robot.png" alt="Robot Render" />
     <div class="hero-label top-left-label">8404</div>
     <div class="hero-label bottom-right-label">Quixilver</div>
   </section>
@@ -242,6 +238,7 @@
   </section>
 </body>
 </html>
+
 
 
 
