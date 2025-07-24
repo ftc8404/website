@@ -94,7 +94,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: radial-gradient(circle at center, rgba(30, 30, 30, 0.9) 0%, #0d0d0d 100%);
+      background: radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
     }
 
     .hero::before {
@@ -104,10 +104,24 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.3"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite"/></path><path d="M90 20 V120 H100 V20 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.3"><animate attributeName="opacity" values="0.3;0.6;0.3" dur="5s" repeatCount="indefinite"/></path><circle cx="30" cy="80" r="3" fill="#55c6f6" opacity="0.4"><animate attributeName="r" values="3;5;3" dur="3s" repeatCount="indefinite"/></circle><circle cx="70" cy="50" r="3" fill="#55c6f6" opacity="0.4"><animate attributeName="r" values="3;5;3" dur="4s" repeatCount="indefinite"/></circle><circle cx="20" cy="60" r="3" fill="#55c6f6" opacity="0.4"><animate attributeName="r" values="3;5;3" dur="3.5s" repeatCount="indefinite"/></circle></g></svg>') no-repeat center;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H90 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/></path><path d="M20 30 V110 H30 V30 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="4s" repeatCount="indefinite"/></path><circle cx="40" cy="60" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/></circle><circle cx="70" cy="80" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="2.5s" repeatCount="indefinite"/></circle><path d="M50 50 A20 20 0 0 1 70 70" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="10s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
       background-size: cover;
       z-index: 1;
-      opacity: 0.5;
+      opacity: 0.6;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="15s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background-size: 200px;
+      z-index: 1;
+      opacity: 0.4;
+      animation: rotateGear 15s linear infinite;
     }
 
     canvas {
@@ -155,7 +169,7 @@
       font-weight: 700;
       font-size: 90px;
       color: #55c6f6;
-      text-shadow: 0 0 25px rgba(85, 198, 246, 1);
+      text-shadow: 0 0 20px rgba(85, 198, 246, 0.8);
       pointer-events: none;
       user-select: none;
       z-index: 3;
@@ -175,8 +189,13 @@
     }
 
     @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.8); transform: translateY(0); }
-      50% { text-shadow: 0 0 40px rgba(85, 198, 246, 1); transform: translateY(-10px); }
+      0%, 100% { text-shadow: 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(0); }
+      50% { text-shadow: 0 0 30px rgba(85, 198, 246, 1); transform: translateY(-5px); }
+    }
+
+    @keyframes rotateGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     .team-section {
@@ -395,15 +414,15 @@
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 50;
+    const particleCount = 30;
 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 3 + 1;
-        this.speedX = Math.random() * 0.5 - 0.25;
-        this.speedY = Math.random() * 0.5 - 0.25;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = Math.random() * 0.3 - 0.15;
+        this.speedY = Math.random() * 0.3 - 0.15;
       }
 
       update() {
@@ -414,7 +433,7 @@
       }
 
       draw() {
-        ctx.fillStyle = 'rgba(85, 198, 246, 0.5)';
+        ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -425,12 +444,22 @@
       particles.push(new Particle());
     }
 
-    function animateParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(particle => {
-        particle.update();
-        particle.draw();
-      });
+    let lastTime = 0;
+    const fps = 60;
+    const interval = 1000 / fps;
+
+    function animateParticles(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const delta = timestamp - lastTime;
+
+      if (delta >= interval) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+          particle.update();
+          particle.draw();
+        });
+        lastTime = timestamp - (delta % interval);
+      }
       requestAnimationFrame(animateParticles);
     }
 
