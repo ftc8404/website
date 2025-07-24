@@ -28,6 +28,8 @@
       padding: 24px 40px;
       height: 100px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 10;
     }
 
     .logo-container {
@@ -94,7 +96,7 @@
       justify-content: center;
       align-items: center;
       overflow: hidden;
-      background: radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
+      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
     }
 
     .hero::before {
@@ -104,7 +106,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H90 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="3s" repeatCount="indefinite"/></path><path d="M20 30 V110 H30 V30 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.7;0.4" dur="4s" repeatCount="indefinite"/></path><circle cx="40" cy="60" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="2s" repeatCount="indefinite"/></circle><circle cx="70" cy="80" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="2.5s" repeatCount="indefinite"/></circle><path d="M50 50 A20 20 0 0 1 70 70" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animateTransform attributeName="transform" type="rotate" from="0 60 60" to="360 60 60" dur="10s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H80 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="1" opacity="0.4"><animate attributeName="opacity" values="0.4;0.6;0.4" dur="4s" repeatCount="indefinite"/></path><circle cx="40" cy="60" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="3s" repeatCount="indefinite"/></circle><circle cx="70" cy="80" r="3" fill="#55c6f6" opacity="0.5"><animate attributeName="r" values="3;4;3" dur="3.5s" repeatCount="indefinite"/></circle></g></svg>') no-repeat center;
       background-size: cover;
       z-index: 1;
       opacity: 0.6;
@@ -117,11 +119,11 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="15s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
-      background-size: 200px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="20s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background-size: 250px;
       z-index: 1;
       opacity: 0.4;
-      animation: rotateGear 15s linear infinite;
+      animation: rotateGear 20s linear infinite;
     }
 
     canvas {
@@ -207,6 +209,7 @@
       justify-content: space-between;
       gap: 40px;
       flex-wrap: wrap;
+      background: linear-gradient(to top, rgba(15, 32, 39, 0.2), transparent);
     }
 
     .team-photo, .team-text {
@@ -414,15 +417,15 @@
     canvas.height = window.innerHeight;
 
     const particles = [];
-    const particleCount = 30;
+    const particleCount = 20;
 
     class Particle {
       constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = Math.random() * 0.3 - 0.15;
-        this.speedY = Math.random() * 0.3 - 0.15;
+        this.size = Math.random() * 1.5 + 1;
+        this.speedX = Math.random() * 0.2 - 0.1;
+        this.speedY = Math.random() * 0.2 - 0.1;
       }
 
       update() {
