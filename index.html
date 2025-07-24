@@ -13,24 +13,27 @@ body {
 }
 
 header {
-  background-color: #121212;
+  background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 24px 40px;
   height: 100px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  transition: background 0.4s ease;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 30px; /* Was 20px → 1.5x gap */
-  transition: transform 0.4s ease;
+  gap: 30px;
+  transition: transform 0.4s ease, filter 0.4s ease;
   cursor: pointer;
 }
 
 .logo-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.07);
+  filter: drop-shadow(0 0 6px #55c6f6);
 }
 
 .logo-container img {
@@ -38,15 +41,15 @@ header {
 }
 
 .logo-text {
-  font-size: 36px; /* Was 32px → slightly bigger */
+  font-size: 36px;
   color: #55c6f6;
   font-weight: bold;
 }
 
 nav {
   display: flex;
-  gap: 120px; /* TRIPLED spacing between tabs */
-  margin-right: 80px; /* Move tabs to the left slightly */
+  gap: 120px;
+  margin-right: 80px;
 }
 
 nav a {
@@ -67,7 +70,7 @@ nav a::after {
   width: 0%;
   height: 2px;
   background: #55c6f6;
-  transition: width 0.3s;
+  transition: width 0.3s ease-in-out;
   position: absolute;
   bottom: -6px;
   left: 0;
@@ -122,6 +125,7 @@ nav a:hover::after {
 </div>
 </body>
 </html>
+
 
 
 
