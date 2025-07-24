@@ -89,7 +89,7 @@
     /* Hero Section */
     .hero {
       position: relative;
-      padding-top: 40px;
+      padding-top: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -100,13 +100,14 @@
       width: 100%;
       max-width: 1000px;
       border-radius: 32px;
-      box-shadow: 0 0 120px rgba(85, 198, 246, 1);
-      transition: box-shadow 0.3s ease;
+      box-shadow: 0 0 90px rgba(85, 198, 246, 0.8);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
       z-index: 1;
     }
 
     .robot-render:hover {
-      box-shadow: 0 0 160px rgba(85, 198, 246, 1);
+      box-shadow: 0 0 140px rgba(85, 198, 246, 1);
+      transform: scale(1.02);
     }
 
     .hero-label {
@@ -115,27 +116,28 @@
       font-weight: 900;
       font-size: 100px;
       color: #55c6f6;
-      text-shadow: 0 0 25px rgba(85, 198, 246, 0.95);
+      text-shadow: 0 0 35px rgba(85, 198, 246, 1);
       pointer-events: none;
       user-select: none;
-      animation: floatText 4s ease-in-out infinite;
+      animation: floatText 3s ease-in-out infinite;
+      z-index: 2;
     }
 
-    .top-right-label {
+    .top-left-label {
       top: 40px;
-      right: 60px;
+      left: 60px;
     }
 
-    .bottom-left-label {
+    .bottom-right-label {
       bottom: 40px;
-      left: 60px;
+      right: 60px;
       font-style: italic;
       font-size: 90px;
     }
 
     @keyframes floatText {
       0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-6px); }
+      50% { transform: translateY(-10px); }
     }
 
     /* Team Section */
@@ -150,10 +152,25 @@
       flex-wrap: wrap;
     }
 
+    .team-photo {
+      flex: 1;
+      max-width: 520px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 0 40px rgba(85,198,246,0.6);
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-photo:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 70px rgba(85,198,246,0.9);
+    }
+
     .team-text {
       flex: 1;
       color: #ccc;
-      max-width: 500px;
+      max-width: 520px;
     }
 
     .team-text h2 {
@@ -166,15 +183,6 @@
     .team-text p {
       font-size: 18px;
       line-height: 1.6;
-    }
-
-    .team-photo {
-      flex: 1;
-      max-width: 500px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow: 0 0 40px rgba(85,198,246,0.6);
-      object-fit: cover;
     }
   </style>
 </head>
@@ -198,12 +206,13 @@
   <!-- Hero Section -->
   <section class="hero">
     <img class="robot-render" src="robot.png" alt="Robot Render" />
-    <div class="hero-label top-right-label">8404</div>
-    <div class="hero-label bottom-left-label">Quixilver</div>
+    <div class="hero-label top-left-label">8404</div>
+    <div class="hero-label bottom-right-label">Quixilver</div>
   </section>
 
   <!-- Team Section -->
   <section class="team-section">
+    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" />
     <div class="team-text">
       <h2>About the Team</h2>
       <p>
@@ -211,9 +220,9 @@
         We’re passionate about STEM, teamwork, and building innovative robots for every FTC season.
       </p>
     </div>
-    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" />
   </section>
 </body>
 </html>
+
 
 
