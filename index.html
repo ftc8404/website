@@ -97,16 +97,18 @@
     }
 
     .robot-render {
-      width: 90%;
-      max-width: 1000px;
-      height: 80vh;
-      object-fit: cover;
-      object-position: center;
-      border-radius: 28px;
-      box-shadow: 0 0 90px rgba(85, 198, 246, 0.8);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-      z-index: 1;
+    width: 86%;
+    max-width: 950px;
+    height: 76vh;
+    object-fit: cover;
+    object-position: center top; /* More crop from top */
+    border-radius: 24px;
+    box-shadow: 0 0 90px rgba(85, 198, 246, 0.8);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    z-index: 1;
+    margin-top: -20px; /* Move render up slightly */
     }
+
 
     .robot-render:hover {
       box-shadow: 0 0 140px rgba(85, 198, 246, 1);
