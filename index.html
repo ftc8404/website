@@ -98,20 +98,21 @@
 
     
    .robot-render {
-  width: 60vw;
-  max-width: 800px;
+  width: 64vw; /* slightly larger overall */
+  max-width: 860px;
   border-radius: 24px;
-  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6);
+  box-shadow: 0 0 40px rgba(0, 191, 255, 0.6); /* 💡 glow is back */
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   object-fit: cover;
-  clip-path: inset(2mm round 24px); /* ✅ THIS crops 2mm on all sides */
-  margin-top: -30px; /* ✅ shift the image up slightly */
+  clip-path: inset(2mm 1.2mm round 24px); /* 🔧 less crop on sides */
+  margin-top: -30px; /* keeps it nicely centered on load */
 }
 
 .robot-render:hover {
   transform: scale(1.03);
-  box-shadow: 0 0 70px rgba(0, 191, 255, 0.9);
+  box-shadow: 0 0 70px rgba(0, 191, 255, 0.9); /* 💡 stronger glow on hover */
 }
+
 
 
     .hero-label {
