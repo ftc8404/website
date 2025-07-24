@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>FTC Team 8404</title>
+  
   <!-- Favicon -->
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -26,7 +27,6 @@
       padding: 24px 40px;
       height: 100px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-      transition: background 0.4s ease;
     }
 
     .logo-container {
@@ -89,21 +89,24 @@
     /* Hero Section */
     .hero {
       position: relative;
-      padding-top: 100px;
-      text-align: center;
+      padding-top: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
     }
 
     .robot-render {
       width: 90%;
-      max-width: 960px;
+      max-width: 900px;
       border-radius: 32px;
       clip-path: inset(10px round 32px);
-      box-shadow: 0 0 35px rgba(85,198,246,0.6);
+      box-shadow: 0 0 80px rgba(85, 198, 246, 0.7);
       transition: box-shadow 0.3s ease;
     }
 
     .robot-render:hover {
-      box-shadow: 0 0 60px rgba(85,198,246,0.9);
+      box-shadow: 0 0 120px rgba(85, 198, 246, 1);
     }
 
     .hero-label {
@@ -112,29 +115,37 @@
       font-weight: 900;
       font-size: 100px;
       color: #55c6f6;
-      text-shadow: 0 0 15px rgba(85,198,246,0.6);
-      opacity: 0.15;
+      text-shadow: 0 0 25px rgba(85, 198, 246, 0.8);
       pointer-events: none;
       user-select: none;
+      animation: floatText 4s ease-in-out infinite;
+      opacity: 0.35;
     }
 
     .left-label {
-      top: 30px;
-      left: 30px;
+      top: 50%;
+      left: 10%;
+      transform: translateY(-50%);
     }
 
     .right-label {
-      bottom: 30px;
-      right: 30px;
+      top: 50%;
+      right: 10%;
+      transform: translateY(-50%);
       font-style: italic;
       font-size: 90px;
       text-align: right;
     }
 
+    @keyframes floatText {
+      0%, 100% { transform: translateY(-50%) translateX(0); }
+      50% { transform: translateY(-52%) translateX(10px); }
+    }
+
     /* Team Section */
     .team-section {
       max-width: 1100px;
-      margin: 120px auto;
+      margin: 100px auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -152,8 +163,8 @@
     .team-text h2 {
       color: #55c6f6;
       font-weight: bold;
-      font-size: 32px;
-      margin-bottom: 10px;
+      font-size: 36px;
+      margin-bottom: 12px;
     }
 
     .team-text p {
@@ -166,12 +177,14 @@
       max-width: 500px;
       width: 100%;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(85,198,246,0.5);
+      box-shadow: 0 0 40px rgba(85,198,246,0.6);
       object-fit: cover;
     }
   </style>
 </head>
+
 <body>
+  <!-- Top Bar -->
   <header>
     <div class="logo-container">
       <img src="logo_old5.png" alt="Team Logo" />
@@ -186,14 +199,14 @@
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
+  <!-- Hero Section -->
   <section class="hero">
     <img class="robot-render" src="robot.png" alt="Robot Render" />
     <div class="hero-label left-label">8404</div>
     <div class="hero-label right-label">Quixilver</div>
   </section>
 
-  <!-- ABOUT TEAM SECTION -->
+  <!-- Team Section -->
   <section class="team-section">
     <div class="team-text">
       <h2>About the Team</h2>
@@ -206,3 +219,4 @@
   </section>
 </body>
 </html>
+
