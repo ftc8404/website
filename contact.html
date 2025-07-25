@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - FTC Team 8404 Quixilver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>') repeat;
+      color: white;
+      min-height: 100vh;
+    }
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      cursor: pointer;
+      transition: transform 0.4s ease, filter 0.4s ease;
+    }
+    .logo-container:hover {
+      transform: scale(1.07);
+      filter: drop-shadow(0 0 6px #55c6f6);
+    }
+    .logo-container img { height: 64px; }
+    .logo-text {
+      font-size: 36px;
+      color: #55c6f6;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 120px;
+      margin-right: 80px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active {
+      color: #55c6f6;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: #55c6f6;
+      transition: width 0.3s ease-in-out;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
+    nav a:hover::after, nav a.active::after {
+      width: 100%;
+    }
+
+    .contact-section {
+      max-width: 800px;
+      margin: 80px auto;
+      padding: 40px;
+      background: rgba(20, 30, 36, 0.6);
+      border: 1px solid rgba(85, 198, 246, 0.2);
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .contact-section h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 42px;
+      color: #55c6f6;
+      text-align: center;
+      margin-bottom: 30px;
+      text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(85, 198, 246, 0.3);
+      background-color: #1a1a1a;
+      color: #e0e0e0;
+      font-size: 16px;
+      outline: none;
+      transition: border 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border: 1px solid #55c6f6;
+    }
+
+    button {
+      padding: 14px;
+      font-size: 18px;
+      background-color: #55c6f6;
+      color: #0d0d0d;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3bb7df;
+    }
+
+    footer {
+      margin-top: 100px;
+      text-align: center;
+      color: #888;
+      font-size: 14px;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .contact-section {
+        margin: 40px 20px;
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container" onclick="window.location.href='index.html'">
+      <img src="logo_old5.png" alt="Team Logo">
+      <div class="logo-text">FTC Team 8404</div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="robots.html">Robots</a>
+      <a href="team.html">Team</a>
+      <a href="awards.html">Awards</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <section class="contact-section">
+    <h1>Contact Us</h1>
+    <form action="https://formspree.io/f/xrblqljz" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="_replyto" placeholder="Your Email" required />
+      <textarea name="message" rows="6" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    © 2025 FTC Team 8404 Quixilver. All rights reserved.
+  </footer>
+</body>
+</html>
