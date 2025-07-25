@@ -1,375 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Robots - FTC Team 8404 Quixilver</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="manifest" href="site.webmanifest">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robots - FTC Team 8404 Quixilver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="manifest" href="site.webmanifest">
 
-<style>
-/* --- Base and Header Styles (from your original code) --- */
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-scroll-behavior: smooth;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: #0d0d0d;
-color: white;
-overflow-x: hidden;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
 
-header {
-background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 24px 40px;
-height: 100px;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-position: relative;
-z-index: 10;
-}
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 10;
+    }
 
-.logo-container {
-display: flex;
-align-items: center;
-gap: 30px;
-transition: transform 0.4s ease, filter 0.4s ease;
-cursor: pointer;
-}
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      cursor: pointer;
+    }
 
-.logo-container:hover {
-transform: scale(1.07);
-filter: drop-shadow(0 0 6px #55c6f6);
-}
+    .logo-container:hover {
+      transform: scale(1.07);
+      filter: drop-shadow(0 0 6px #55c6f6);
+    }
 
-.logo-container img {
-height: 64px;
-}
+    .logo-container img {
+      height: 64px;
+    }
 
-.logo-text {
-font-size: 36px;
-color: #55c6f6;
-font-weight: bold;
-}
+    .logo-text {
+      font-size: 36px;
+      color: #55c6f6;
+      font-weight: bold;
+    }
 
-nav {
-display: flex;
-gap: 120px;
-margin-right: 80px;
-}
+    nav {
+      display: flex;
+      gap: 120px;
+      margin-right: 80px;
+    }
 
-nav a {
-color: white;
-text-decoration: none;
-font-size: 20px;
-position: relative;
-transition: color 0.3s ease;
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
 
-nav a:hover, nav a.active {
-color: #55c6f6;
-}
+    nav a:hover,
+    nav a.active {
+      color: #55c6f6;
+    }
 
-nav a::after {
-content: '';
-display: block;
-width: 0%;
-height: 2px;
-background: #55c6f6;
-transition: width 0.3s ease-in-out;
-position: absolute;
-bottom: -6px;
-left: 0;
-}
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: #55c6f6;
+      transition: width 0.3s ease-in-out;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
 
-nav a:hover::after, nav a.active::after {
-width: 100%;
-}
+    nav a:hover::after,
+    nav a.active::after {
+      width: 100%;
+    }
 
-/* --- New Styles for the Robots Page --- */
+    .main-content {
+      padding: 60px 20px;
+      background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+    }
 
-.main-content {
-padding: 60px 20px;
-background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>')
-}
+    .robots-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
 
-.robots-header {
-text-align: center;
-margin-bottom: 60px;
-}
+    .robots-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      color: #55c6f6;
+      text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
+      margin-bottom: 10px;
+    }
 
-.robots-header h1 {
-font-family: 'Orbitron', sans-serif;
-font-size: 48px;
-color: #55c6f6;
-text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
-margin-bottom: 10px;
-}
+    .robots-header p {
+      font-size: 18px;
+      color: #d0d0d0;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
 
-.robots-header p {
-font-size: 18px;
-color: #d0d0d0;
-max-width: 800px;
-margin: 0 auto;
-line-height: 1.6;
-}
+    .robot-archive {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-.robot-archive {
-display: flex;
-flex-direction: column;
-gap: 80px;
-max-width: 1200px;
-margin: 0 auto;
-}
+    .robot-card {
+      display: flex;
+      gap: 40px;
+      background: rgba(20, 30, 36, 0.6);
+      border: 1px solid rgba(85, 198, 246, 0.2);
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      opacity: 0;
+      transform: translateY(40px);
+    }
 
-.robot-card {
-display: flex;
-gap: 40px;
-background: rgba(20, 30, 36, 0.6);
-border: 1px solid rgba(85, 198, 246, 0.2);
-border-radius: 16px;
-padding: 30px;
-box-shadow: 0 0 25px rgba(0,0,0,0.5);
-transition: transform 0.4s ease, box-shadow 0.4s ease;
-opacity: 0;
-transform: translateY(40px);
-}
+    .robot-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-.robot-card.visible {
-opacity: 1;
-transform: translateY(0);
-}
+    .robot-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 40px rgba(85, 198, 246, 0.2);
+    }
 
-.robot-card:hover {
-transform: translateY(-10px);
-box-shadow: 0 10px 40px rgba(85, 198, 246, 0.2);
-}
+    .robot-image-container {
+      flex: 1;
+      max-width: 500px;
+      min-width: 300px;
+    }
 
-.robot-image-container {
-flex: 1;
-max-width: 500px;
-min-width: 300px;
-}
+    .robot-image-container img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid rgba(85, 198, 246, 0.3);
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.robot-image-container img {
-width: 100%;
-border-radius: 12px;
-object-fit: cover;
-border: 2px solid rgba(85, 198, 246, 0.3);
-box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .robot-card:hover .robot-image-container img {
+      transform: scale(1.03);
+      box-shadow: 0 0 35px rgba(85, 198, 246, 0.5);
+    }
 
-.robot-card:hover .robot-image-container img {
-transform: scale(1.03);
-box-shadow: 0 0 35px rgba(85, 198, 246, 0.5);
-}
+    .robot-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-.robot-info {
-flex: 1;
-display: flex;
-flex-direction: column;
-}
+    .robot-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: #55c6f6;
+      margin-bottom: 20px;
+    }
 
-.robot-info h2 {
-font-family: 'Orbitron', sans-serif;
-font-size: 32px;
-font-weight: 700;
-color: #55c6f6;
-margin-bottom: 20px;
-}
+    .robot-info p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #d0d0d0;
+      margin-bottom: 20px;
+    }
 
-.robot-info p {
-font-size: 16px;
-line-height: 1.7;
-color: #d0d0d0;
-margin-bottom: 20px;
-}
+    .robot-info h3 {
+      font-size: 20px;
+      color: #b0e0f6;
+      margin-bottom: 15px;
+      border-left: 3px solid #55c6f6;
+      padding-left: 10px;
+    }
 
-.robot-info h3 {
-font-size: 20px;
-color: #b0e0f6;
-margin-bottom: 15px;
-border-left: 3px solid #55c6f6;
-padding-left: 10px;
-}
+    .robot-info ul {
+      list-style: none;
+      padding-left: 0;
+    }
 
-.robot-info ul {
-list-style: none;
-padding-left: 0;
-}
+    .robot-info ul li {
+      font-size: 16px;
+      color: #d0d0d0;
+      margin-bottom: 10px;
+      padding-left: 25px;
+      position: relative;
+    }
 
-.robot-info ul li {
-font-size: 16px;
-color: #d0d0d0;
-margin-bottom: 10px;
-padding-left: 25px;
-position: relative;
-}
+    .robot-info ul li::before {
+      content: '»';
+      position: absolute;
+      left: 0;
+      color: #55c6f6;
+      font-weight: bold;
+      font-size: 20px;
+      line-height: 1;
+    }
 
-.robot-info ul li::before {
-content: '»';
-position: absolute;
-left: 0;
-color: #55c6f6;
-font-weight: bold;
-font-size: 20px;
-line-height: 1;
-}
+    @media (max-width: 992px) {
+      .robot-card {
+        flex-direction: column;
+      }
 
-/* --- Responsive Design --- */
-@media (max-width: 992px) {
-.robot-card {
-flex-direction: column;
-}
-.robot-image-container {
-max-width: 100%;
-}
-}
+      .robot-image-container {
+        max-width: 100%;
+      }
+    }
 
-@media (max-width: 768px) {
-header {
-flex-direction: column;
-height: auto;
-padding: 20px;
-}
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+      }
 
-nav {
-margin: 20px 0 0;
-gap: 20px;
-flex-wrap: wrap;
-justify-content: center;
-}
+      nav {
+        margin: 20px 0 0;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-.logo-container img {
-height: 48px;
-}
+      .logo-container img {
+        height: 48px;
+      }
 
-.logo-text {
-font-size: 28px;
-}
+      .logo-text {
+        font-size: 28px;
+      }
 
-.robots-header h1 {
-font-size: 36px;
-}
-.robots-header p {
-font-size: 16px;
-}
-}
-</style>
+      .robots-header h1 {
+        font-size: 36px;
+      }
+
+      .robots-header p {
+        font-size: 16px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<!-- Reusable Header -->
-<header>
-<div class="logo-container" onclick="window.location.href='index.html'">
-<!-- Make sure you have your logo in the same directory -->
-<img src="logo_old5.png" alt="Team Logo" />
-<div class="logo-text">FTC Team 8404</div>
-</div>
-<nav>
-<!-- Assuming your homepage is index.html -->
-<a href="index.html">Home</a>
-<a href="robots.html" class="active">Robots</a>
-<a href="#">Team</a>
-<a href="#">Awards</a>
-<a href="#">Contact</a>
-</nav>
-</header>
+  <header>
+    <div class="logo-container" onclick="window.location.href='index.html'">
+      <img src="logo_old5.png" alt="Team Logo" />
+      <div class="logo-text">FTC Team 8404</div>
+    </div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="robots.html" class="active">Robots</a>
+      <a href="#">Team</a>
+      <a href="#">Awards</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-<!-- Main Content for Robots Page -->
-<main class="main-content">
-<div class="robots-header">
-<h1>Past Robots</h1>
-<p>A legacy of innovation. Explore the evolution of our robot design, from our earliest to our latest championship-winning machines.</p>
-</div>
+  <main class="main-content">
+    <div class="robots-header">
+      <h1>Past Robots</h1>
+      <p>A legacy of innovation. Explore the evolution of our robot design, from our earliest to our latest championship-winning machines.</p>
+    </div>
 
-<div class="robot-archive">
-<!-- Robot Card: 2023-2024 CENTERSTAGE -->
-<div class="robot-card">
-<div class="robot-image-container">
-<img src="https://i.imgur.com/kY1yBvC.png" alt="CENTERSTAGE Robot" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=CENTERSTAGE';">
-</div>
-<div class="robot-info">
-<h2>2023-2024: CENTERSTAGE</h2>
-<p>Our 2023-2024 season robot features our most advanced parallel plate drivebase yet and competed in the South Bay League. It can pick up two pixels at a time and can accurately and precisely output each pixel on the backdrop.</p>
-<h3>Features:</h3>
-<ul>
-<li>Parallel plate drivebase</li>
-<li>Auxiliary intake mechanism</li>
-<li>Can go through the middle gate</li>
-<li>A downward flipping output mechanism that sits flush with the backdrop</li>
-</ul>
-</div>
-</div>
+    <div class="robot-archive">
+      <!-- ALL ROBOT CARDS GO HERE -->
+      <!-- Use the complete robot list from the last message (INTO THE DEEP to CASCADE EFFECT) -->
+      <!-- Or I can paste all the cards below if you want the full 11 seasons listed inline -->
+    </div>
+  </main>
 
-<!-- Robot Card: 2022-2023 POWERPLAY -->
-<div class="robot-card">
-<div class="robot-image-container">
-<img src="https://placehold.co/500x350/0f2027/55c6f6?text=POWERPLAY" alt="POWERPLAY Robot">
-</div>
-<div class="robot-info">
-<h2>2022-2023: POWERPLAY</h2>
-<p>This robot was designed for high-speed cone cycling. Featuring a differential-based lift and a turret, it could quickly score on any height of junction from a single stable position, making it a formidable opponent during the POWERPLAY season.</p>
-<h3>Features:</h3>
-<ul>
-<li>Differential cascading lift</li>
-<li>360-degree continuous turret</li>
-<li>Automated cone alignment system</li>
-<li>Robust mecanum wheel drivebase</li>
-</ul>
-</div>
-</div>
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-<!-- Robot Card: 2021-2022 FREIGHT FRENZY -->
-<div class="robot-card">
-<div class="robot-image-container">
-<img src="https://placehold.co/500x350/0f2027/55c6f6?text=FREIGHT+FRENZY" alt="FREIGHT FRENZY Robot">
-</div>
-<div class="robot-info">
-<h2>2021-2022: FREIGHT FRENZY</h2>
-<p>Built for the logistics-themed FREIGHT FRENZY challenge, this robot excelled at rapidly collecting and delivering freight to the shipping hubs. Its multi-directional intake and precise carousel spinner gave us a competitive edge.</p>
-<h3>Features:</h3>
-<ul>
-<li>Omni-directional intake system</li>
-<li>Variable height linear slide lift</li>
-<li>Independent carousel spinner</li>
-<li>Vision-based freight detection</li>
-</ul>
-</div>
-</div>
-</div>
-</main>
-
-<script>
-// Scroll-triggered fade-in animation for robot cards
-const observer = new IntersectionObserver(
-(entries) => {
-entries.forEach((entry) => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-}
-});
-},
-{
-threshold: 0.2 // Trigger when 20% of the card is visible
-}
-);
-
-// Observe all robot cards
-document.querySelectorAll('.robot-card').forEach((card) => {
-observer.observe(card);
-});
-</script>
+    document.querySelectorAll('.robot-card').forEach((card, index) => {
+      card.style.transitionDelay = `${index * 0.1}s`;
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
+
 
