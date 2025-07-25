@@ -17,6 +17,7 @@
       --bg: #0e0e0e;
       --text: #ffffff;
       --text-light: #aaaaaa;
+      --glow: 0 0 8px #55c6f6;
     }
 
     * {
@@ -29,7 +30,6 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
     }
 
     header {
@@ -92,88 +92,58 @@
       font-size: 1.1rem;
     }
 
-    .robot-archive {
-      display: flex;
-      flex-direction: column;
-      gap: 4rem;
+    .robot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
     }
 
     .robot-card {
-      display: flex;
-      flex-direction: row;
-      gap: 2rem;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      background-color: var(--secondary);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      position: relative;
     }
 
-    .robot-card.visible {
-      opacity: 1;
-      transform: translateY(0);
+    .robot-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px var(--primary);
     }
 
-    .robot-card:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-
-    .robot-image-container {
-      flex: 1;
-    }
-
-    .robot-image-container img {
+    .robot-card img {
       width: 100%;
-      border-radius: 0.5rem;
+      height: 200px;
       object-fit: cover;
     }
 
     .robot-info {
-      flex: 2;
+      padding: 1rem;
     }
 
     .robot-info h2 {
-      font-size: 1.8rem;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
       color: var(--primary);
       margin-bottom: 0.5rem;
     }
 
-    .robot-info h3 {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      margin-bottom: 0.5rem;
-      color: var(--text-light);
-    }
-
     .robot-info p {
-      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
       color: var(--text-light);
+      margin-bottom: 0.5rem;
     }
 
     .robot-info ul {
-      list-style: disc;
-      padding-left: 1.5rem;
-    }
-
-    .robot-info ul li {
-      margin-bottom: 0.3rem;
-    }
-
-    @media (max-width: 768px) {
-      .robot-card {
-        flex-direction: column !important;
-      }
-
-      .robot-image-container,
-      .robot-info {
-        width: 100%;
-      }
-
-      .robot-info h2 {
-        font-size: 1.4rem;
-      }
+      list-style-type: disc;
+      padding-left: 1.2rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
     }
   </style>
 </head>
-
 <body>
   <header>
     <div class="logo-container" onclick="window.location.href='index.html'">
@@ -195,175 +165,84 @@
       <p>A legacy of innovation. Explore the evolution of our robot design, from our earliest to our latest championship-winning machines.</p>
     </div>
 
-    <div class="robot-archive">
-
-      <!-- 2025 -->
+    <div class="robot-grid">
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="intothedeep.jpg" alt="INTO THE DEEP Robot">
-        </div>
+        <img src="intothedeep.jpg" alt="INTO THE DEEP">
         <div class="robot-info">
           <h2>2024–2025: INTO THE DEEP</h2>
-          <p>Designed for precision and underwater-themed challenges, this robot featured optimized scoring and advanced vision.</p>
-          <h3>Features:</h3>
+          <p>Precision scoring & enhanced AprilTag auto routines.</p>
           <ul>
-            <li>Efficient pixel intake and placement</li>
-            <li>Backdrop-scoring linear slides</li>
-            <li>AprilTag autonomous</li>
-            <li>Parallel plate chassis</li>
+            <li>Backdrop pixel placement</li>
+            <li>Compact claw + slide system</li>
+            <li>Vision autonomous refinement</li>
           </ul>
         </div>
       </div>
-
-      <!-- 2023 -->
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="centerstage.jpg" alt="CENTERSTAGE Robot">
-        </div>
+        <img src="centerstage.jpg" alt="CENTERSTAGE">
         <div class="robot-info">
           <h2>2023–2024: CENTERSTAGE</h2>
-          <p>Award-winning robot designed for the CENTERSTAGE challenge. Fast, modular, and precise.</p>
-          <h3>Features:</h3>
+          <p>Slide + drone combo bot with top precision and flexibility.</p>
           <ul>
-            <li>Ultra-fast intake and lift</li>
-            <li>Preload pixel placement in < 2s</li>
-            <li>Automatic vision-based auto</li>
-            <li>Odometry localization</li>
+            <li>4-stage linear slide</li>
+            <li>Drone launcher</li>
+            <li>Center pivot grabber</li>
           </ul>
         </div>
       </div>
-
-      <!-- 2022 -->
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="powerplay.jpg" alt="POWERPLAY Robot">
-        </div>
+        <img src="powerplay.jpg" alt="POWERPLAY">
         <div class="robot-info">
           <h2>2022–2023: POWERPLAY</h2>
-          <p>Compact and efficient, this robot featured a powerful arm with a claw for cone manipulation and stacking.</p>
-          <h3>Features:</h3>
+          <p>Championship robot with blazing speed and accuracy.</p>
           <ul>
-            <li>Custom-made omni drivetrain</li>
-            <li>Team Element placement and detection</li>
-            <li>High-stability lifting</li>
+            <li>Telescopic linear slides</li>
+            <li>Pivoting claw</li>
+            <li>Fast auto and cycle time</li>
           </ul>
         </div>
       </div>
-
-      <!-- 2021 -->
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="freightfrenzy.jpg" alt="FREIGHT FRENZY Robot">
-        </div>
+        <img src="freightfrenzy.jpg" alt="FREIGHT FRENZY">
         <div class="robot-info">
           <h2>2021–2022: FREIGHT FRENZY</h2>
-          <p>Utilized a powerful intake and an adjustable arm system to manage various freight objects.</p>
-          <h3>Features:</h3>
+          <p>Tank-tread bot with intake bucket & carousel spinner.</p>
           <ul>
-            <li>360-degree rotation arm</li>
-            <li>Carousel spinner for ducks</li>
-            <li>Multiple auto routines</li>
+            <li>Custom intake ramp</li>
+            <li>Parallel slide deposit</li>
+            <li>High freight throughput</li>
           </ul>
         </div>
       </div>
-
-      <!-- 2020–2014 -->
-      <!-- I’ll generate the rest for these years using brief summaries: -->
-
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="ultimategoal.jpg" alt="ULTIMATE GOAL Robot">
-        </div>
-        <div class="robot-info">
-          <h2>2020–2021: ULTIMATE GOAL</h2>
-          <p>Focus on ring intake and shooting system. Features included rapid fire shooter and flexible drivetrain.</p>
-        </div>
-      </div>
-
-      <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="skystone.jpg" alt="SKYSTONE Robot">
-        </div>
+        <img src="skystone.jpg" alt="SKYSTONE">
         <div class="robot-info">
           <h2>2019–2020: SKYSTONE</h2>
-          <p>Skystone placement and foundation movement with linear slides and claw system.</p>
+          <p>Unique stacking arm and capstone placer.</p>
+          <ul>
+            <li>Custom stacking claw</li>
+            <li>Double-arm system</li>
+            <li>Capstone autonomous routine</li>
+          </ul>
         </div>
       </div>
-
       <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="roverruckus.jpg" alt="ROVER RUCKUS Robot">
-        </div>
-        <div class="robot-info">
-          <h2>2018–2019: ROVER RUCKUS</h2>
-          <p>Hanging and mineral sorting robot. Used claw and extending arm for scoring.</p>
-        </div>
-      </div>
-
-      <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="relicrecovery.jpg" alt="RELIC RECOVERY Robot">
-        </div>
-        <div class="robot-info">
-          <h2>2017–2018: RELIC RECOVERY</h2>
-          <p>Glyph placement and relic recovery with jewel-knocker and omni chassis.</p>
-        </div>
-      </div>
-
-      <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="velocityvortex.jpg" alt="VELOCITY VORTEX Robot">
-        </div>
-        <div class="robot-info">
-          <h2>2016–2017: VELOCITY VORTEX</h2>
-          <p>Ball shooter and cap ball pusher. Autonomous beacons and particle management.</p>
-        </div>
-      </div>
-
-      <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="resq.jpg" alt="RES-Q Robot">
-        </div>
+        <img src="resq.jpg" alt="RES-Q">
         <div class="robot-info">
           <h2>2015–2016: RES-Q</h2>
-          <p>Mountain climber robot with debris sweeper and pull-up mechanism.</p>
+          <p>Debut of our continuous improvement chassis style.</p>
+          <ul>
+            <li>Linear slide lift</li>
+            <li>Zipline scorer</li>
+            <li>Endgame climber</li>
+          </ul>
         </div>
       </div>
-
-      <div class="robot-card">
-        <div class="robot-image-container">
-          <img src="cascade.jpg" alt="CASCADE EFFECT Robot">
-        </div>
-        <div class="robot-info">
-          <h2>2014–2015: CASCADE EFFECT</h2>
-          <p>Game piece collection and ramp scoring robot. Quixilver’s FTC debut season.</p>
-        </div>
-      </div>
-
     </div>
   </main>
-
-  <script>
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
-      },
-      {
-        threshold: 0.2
-      }
-    );
-
-    document.querySelectorAll('.robot-card').forEach((card, index) => {
-      card.style.transitionDelay = `${index * 0.1}s`;
-      observer.observe(card);
-    });
-  </script>
 </body>
 </html>
+
 
 
 
