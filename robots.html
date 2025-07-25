@@ -11,33 +11,19 @@
   <link rel="manifest" href="site.webmanifest">
 
   <style>
-    :root {
-      --primary: #55c6f6;
-      --secondary: #1f1f1f;
-      --bg: #0e0e0e;
-      --text: #ffffff;
-      --text-light: #aaaaaa;
-      --glow: 0 0 8px #55c6f6;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     body {
+      margin: 0;
       font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
+      background-color: #0e0e0e;
+      color: white;
     }
 
     header {
-      background-color: var(--secondary);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
+      background-color: #1f1f1f;
       border-bottom: 1px solid #222;
     }
 
@@ -55,11 +41,11 @@
     .logo-text {
       font-family: 'Orbitron', sans-serif;
       font-size: 1.5rem;
-      color: var(--primary);
+      color: #55c6f6;
     }
 
     nav a {
-      color: var(--text-light);
+      color: #aaa;
       margin-left: 2rem;
       text-decoration: none;
       transition: color 0.2s;
@@ -67,80 +53,47 @@
 
     nav a:hover,
     nav a.active {
-      color: var(--primary);
+      color: #55c6f6;
     }
 
-    .main-content {
+    main {
+      padding: 2rem;
       max-width: 1000px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+      margin: auto;
     }
 
-    .robots-header {
+    h1 {
       text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .robots-header h1 {
-      font-size: 2.5rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-
-    .robots-header p {
-      color: var(--text-light);
-      font-size: 1.1rem;
-    }
-
-    .robot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .robot-card {
-      background-color: var(--secondary);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      transition: transform 0.3s, box-shadow 0.3s;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .robot-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 20px var(--primary);
-    }
-
-    .robot-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .robot-info {
-      padding: 1rem;
-    }
-
-    .robot-info h2 {
       font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
-      color: var(--primary);
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      color: #55c6f6;
     }
 
-    .robot-info p {
-      font-size: 0.95rem;
-      color: var(--text-light);
-      margin-bottom: 0.5rem;
+    .robot {
+      background-color: #1c1c1c;
+      padding: 1.5rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      box-shadow: 0 0 15px rgba(85, 198, 246, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .robot-info ul {
-      list-style-type: disc;
-      padding-left: 1.2rem;
-      color: var(--text-light);
-      font-size: 0.9rem;
+    .robot:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 25px rgba(85, 198, 246, 0.4);
+    }
+
+    .robot h2 {
+      font-size: 1.8rem;
+      color: #55c6f6;
+    }
+
+    .robot p, .robot li {
+      color: #ddd;
+    }
+
+    .robot ul {
+      padding-left: 1.5rem;
     }
   </style>
 </head>
@@ -158,90 +111,126 @@
       <a href="#">Contact</a>
     </nav>
   </header>
+  <main>
+    <h1>Past Robots</h1>
 
-  <main class="main-content">
-    <div class="robots-header">
-      <h1>Past Robots</h1>
-      <p>A legacy of innovation. Explore the evolution of our robot design, from our earliest to our latest championship-winning machines.</p>
+    <div class="robot">
+      <h2>2024–2025: INTO THE DEEP</h2>
+      <p>Designed for underwater-themed challenges, this robot improved on scoring, vision, and chassis performance.</p>
+      <ul>
+        <li>Backdrop alignment + pixel placement system</li>
+        <li>Fast intake and pixel sorting</li>
+        <li>Vision AprilTag + auto tuning</li>
+        <li>New parallel plate chassis</li>
+      </ul>
     </div>
 
-    <div class="robot-grid">
-      <div class="robot-card">
-        <img src="intothedeep.jpg" alt="INTO THE DEEP">
-        <div class="robot-info">
-          <h2>2024–2025: INTO THE DEEP</h2>
-          <p>Precision scoring & enhanced AprilTag auto routines.</p>
-          <ul>
-            <li>Backdrop pixel placement</li>
-            <li>Compact claw + slide system</li>
-            <li>Vision autonomous refinement</li>
-          </ul>
-        </div>
-      </div>
-      <div class="robot-card">
-        <img src="centerstage.jpg" alt="CENTERSTAGE">
-        <div class="robot-info">
-          <h2>2023–2024: CENTERSTAGE</h2>
-          <p>Slide + drone combo bot with top precision and flexibility.</p>
-          <ul>
-            <li>4-stage linear slide</li>
-            <li>Drone launcher</li>
-            <li>Center pivot grabber</li>
-          </ul>
-        </div>
-      </div>
-      <div class="robot-card">
-        <img src="powerplay.jpg" alt="POWERPLAY">
-        <div class="robot-info">
-          <h2>2022–2023: POWERPLAY</h2>
-          <p>Championship robot with blazing speed and accuracy.</p>
-          <ul>
-            <li>Telescopic linear slides</li>
-            <li>Pivoting claw</li>
-            <li>Fast auto and cycle time</li>
-          </ul>
-        </div>
-      </div>
-      <div class="robot-card">
-        <img src="freightfrenzy.jpg" alt="FREIGHT FRENZY">
-        <div class="robot-info">
-          <h2>2021–2022: FREIGHT FRENZY</h2>
-          <p>Tank-tread bot with intake bucket & carousel spinner.</p>
-          <ul>
-            <li>Custom intake ramp</li>
-            <li>Parallel slide deposit</li>
-            <li>High freight throughput</li>
-          </ul>
-        </div>
-      </div>
-      <div class="robot-card">
-        <img src="skystone.jpg" alt="SKYSTONE">
-        <div class="robot-info">
-          <h2>2019–2020: SKYSTONE</h2>
-          <p>Unique stacking arm and capstone placer.</p>
-          <ul>
-            <li>Custom stacking claw</li>
-            <li>Double-arm system</li>
-            <li>Capstone autonomous routine</li>
-          </ul>
-        </div>
-      </div>
-      <div class="robot-card">
-        <img src="resq.jpg" alt="RES-Q">
-        <div class="robot-info">
-          <h2>2015–2016: RES-Q</h2>
-          <p>Debut of our continuous improvement chassis style.</p>
-          <ul>
-            <li>Linear slide lift</li>
-            <li>Zipline scorer</li>
-            <li>Endgame climber</li>
-          </ul>
-        </div>
-      </div>
+    <div class="robot">
+      <h2>2023–2024: CENTERSTAGE</h2>
+      <p>Focused on drone launches, backdrop precision, and endgame scoring.</p>
+      <ul>
+        <li>2-drone launcher system</li>
+        <li>AprilTag auto pathing</li>
+        <li>360° turret for flexible delivery</li>
+        <li>Championship Semifinalist Alliance</li>
+      </ul>
     </div>
+
+    <div class="robot">
+      <h2>2022–2023: POWER PLAY</h2>
+      <p>Compact, high-speed robot optimized for cone stacking and cycling.</p>
+      <ul>
+        <li>4-bar linear slide with claw</li>
+        <li>High-efficiency ground intake</li>
+        <li>Fast 5-cone autonomous</li>
+        <li>1st place Inspire Award NorCal</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2021–2022: FREIGHT FRENZY</h2>
+      <p>Warehouse cycling beast with a duck spinner and fully automated deposit.</p>
+      <ul>
+        <li>Double intake + 2-stage lift</li>
+        <li>Alliance shipping hub scoring</li>
+        <li>NorCal Championship Qualifier</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2020–2021: ULTIMATE GOAL</h2>
+      <p>High-performance shooter robot with ring vision tracking.</p>
+      <ul>
+        <li>Custom flywheel shooter</li>
+        <li>360° turret and intake</li>
+        <li>Advanced odometry navigation</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2019–2020: SKYSTONE</h2>
+      <p>Focused on stone collection and Skybridge navigation.</p>
+      <ul>
+        <li>Side-grabbing intake arm</li>
+        <li>Foundation moving hooks</li>
+        <li>Autonomous skystone pathing</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2018–2019: ROVER RUCKUS</h2>
+      <p>Lander hanging and mineral cycling robot with dual-arm design.</p>
+      <ul>
+        <li>Hanging hook lift</li>
+        <li>Mineral sweeper and sorter</li>
+        <li>Autonomous mineral sampling</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2017–2018: RELIC RECOVERY</h2>
+      <p>Relic placement and glyph cycling robot with multi-jointed arm.</p>
+      <ul>
+        <li>Extendable relic arm</li>
+        <li>Multi-glyph tray intake</li>
+        <li>VuMark alignment</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2016–2017: VELOCITY VORTEX</h2>
+      <p>Flywheel shooter robot designed to score particles and cap the center vortex.</p>
+      <ul>
+        <li>Beacon pusher</li>
+        <li>Fast flywheel shooter</li>
+        <li>Cap ball lift</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2015–2016: RES-Q</h2>
+      <p>Mountain climbing and debris clearing robot with rescue-themed mechanisms.</p>
+      <ul>
+        <li>Mountain climbing hooks</li>
+        <li>Debris sweeper</li>
+        <li>Rescue beacon auto</li>
+      </ul>
+    </div>
+
+    <div class="robot">
+      <h2>2014–2015: CASCADE EFFECT</h2>
+      <p>Our rookie robot! Focused on stacking batons and reliable autonomous.</p>
+      <ul>
+        <li>Chain lift system</li>
+        <li>Baton funnel intake</li>
+        <li>First Inspire Award qualifier</li>
+      </ul>
+    </div>
+
   </main>
 </body>
 </html>
+
 
 
 
