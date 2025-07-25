@@ -148,6 +148,7 @@
     }
 
     .robot-render {
+      will-change: transform;
       width: 80vw;
       max-width: 1000px;
       border-radius: 30px;
@@ -611,13 +612,7 @@
 
   <script>
     // Parallax effect for robot render
-    let mouseX = 0, mouseY = 0;
-    window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX - window.innerWidth / 2) / 50;
-      mouseY = (e.clientY - window.innerHeight / 2) / 50;
-      updateRobotTransform();
-    });
-
+  
     // Click effect for robot render
     const robot = document.querySelector('.robot-render');
     robot.addEventListener('click', () => {
@@ -625,13 +620,14 @@
       setTimeout(() => robot.classList.remove('clicked'), 500);
     });
 
-    // Consolidate transform updates to prevent jitter
-    function updateRobotTransform() {
-      const robot = document.querySelector('.robot-render');
-      const isHovering = robot.matches(':hover');
-      const scale = isHovering ? 1.06 : 1;
-      robot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
-    }
+    robot.addEventListener('mouseenter', () => {
+      robot.style.transform = 'scale(1.06)';
+    });
+
+    robot.addEventListener('mouseleave', () => {
+      robot.style.transform = 'scale(1)';
+    });
+
 
     // Particle system for hero section (around robot)
     const canvas = document.getElementById('particles');
