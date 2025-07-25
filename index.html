@@ -255,17 +255,21 @@
       position: relative;
     }
 
-    .team-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGlow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/></feMerge></filter></defs><g filter="url(#teamGlow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.2"/></g></svg>') repeat;
-      opacity: 0.1;
-      z-index: 0;
-    }
+
+.team-section .grid-overlay {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGrid"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#teamGrid)"><path d="M0 0 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 10 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 20 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/></g></svg>') repeat;
+  background-size: 300px;
+  z-index: 0;
+  opacity: 0.15;
+  animation: gridPulse 8s infinite alternate;
+  pointer-events: none;
+}
+
 
     .team-photo, .team-text {
       opacity: 0;
@@ -583,18 +587,21 @@
   </section>
 
   <section class="team-section">
-    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
-    <div class="team-text">
-      <h2>About Quixilver</h2>
-      <p>
-        FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
-      </p>
-      <p>
-        We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of roboticists.
-      </p>
-      <a href="team.html" class="learn-more">Learn More</a>
-    </div>
-  </section>
+  <div class="grid-overlay"></div> <!-- NEW background layer -->
+
+  <img class="team-photo" src="team_photo.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
+  <div class="team-text">
+    <h2>About Quixilver</h2>
+    <p>
+      FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
+    </p>
+    <p>
+      We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.
+    </p>
+    <a href="team.html" class="learn-more">Learn More</a>
+  </div>
+</section>
+
 
   <script>
     // Parallax effect for robot render
