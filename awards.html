@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF‑8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awards – FTC Team 8404 Quixilver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>') repeat;
+      color: white;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 10;
+    }
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      cursor: pointer;
+    }
+    .logo-container:hover {
+      transform: scale(1.07);
+      filter: drop-shadow(0 0 6px #55c6f6);
+    }
+    .logo-container img { height: 64px; }
+    .logo-text {
+      font-size: 36px;
+      color: #55c6f6;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      gap: 120px;
+      margin-right: 80px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    nav a:hover, nav a.active {
+      color: #55c6f6;
+    }
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: #55c6f6;
+      transition: width 0.3s ease-in-out;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
+    nav a:hover::after, nav a.active::after {
+      width: 100%;
+    }
+    .awards-header {
+      text-align: center;
+      padding: 60px 20px 30px;
+    }
+    .awards-header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 48px;
+      color: #55c6f6;
+      text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
+    }
+    .awards-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .season {
+      margin-bottom: 50px;
+      padding: 20px;
+      background: rgba(20, 30, 36, 0.5);
+      border-left: 4px solid #55c6f6;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .season:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 35px rgba(85, 198, 246, 0.2);
+    }
+    .season h2 {
+      font-size: 28px;
+      color: #b0e0f6;
+      margin-bottom: 15px;
+    }
+    .season ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .season ul li {
+      padding-left: 20px;
+      margin-bottom: 10px;
+      position: relative;
+      color: #d0d0d0;
+      font-size: 16px;
+    }
+    .season ul li::before {
+      content: '\2022';
+      position: absolute;
+      left: 0;
+      color: #55c6f6;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-container" onclick="window.location.href='/website/index.html'">
+      <img src="logo_old5.png" alt="Team Logo"><div class="logo-text">FTC Team 8404</div>
+    </div>
+    <nav>
+      <a href="/website/index.html">Home</a>
+      <a href="/website/robots.html">Robots</a>
+      <a href="/website/team.html">Team</a>
+      <a href="/website/awards.html" class="active">Awards</a>
+      <a href="/website/contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="awards-header">
+    <h1>Awards &amp; Achievements</h1>
+  </section>
+
+  <section class="awards-container">
+    <!-- 2024–2025 -->
+    <div class="season">
+      <h2>2024–2025 Season</h2>
+      <ul>
+        <li>Google Qualifying Tournament – Control Award</li>
+        <li>Fremont High School Qualifying Tournament – Innovate Award</li>
+        <li>Santa Clara High School Qualifying Tournament – Inspire Award</li>
+      </ul>
+    </div>
+
+    <!-- 2023–2024 -->
+    <div class="season">
+      <h2>2023–2024 Season</h2>
+      <ul>
+        <li>NorCal South Bay League Tournament – 2nd place Inspire</li>
+        <li>NorCal South Bay League Tournament – Motivate Award</li>
+        <li>NorCal South Bay League Tournament – Winning Alliance (1st team selected)</li>
+      </ul>
+    </div>
+
+    <!-- 2022–2023 -->
+    <div class="season">
+      <h2>2022–2023 Season</h2>
+      <ul>
+        <li>South Bay Metro League – 2nd place Inspire</li>
+        <li>South Bay Metro League – Design Award</li>
+      </ul>
+    </div>
+
+    <!-- 2021–2022 -->
+    <div class="season">
+      <h2>2021–2022 Season</h2>
+      <ul>
+        <li>Saratoga Qualifying Tournament – 1st Place Innovate Award; 4th Seed Alliance Partner</li>
+        <li>Elk Grove Qualifying Tournament – 2nd Place Inspire Award; 1st Place Connect Award; Finalist Alliance Captain</li>
+        <li>Northern California Regional Championship – Winning Alliance, 1st Pick; 2nd Place Connect Award</li>
+        <li>World Championship – Motivate Award Nominee</li>
+      </ul>
+    </div>
+
+    <!-- 2020–2021 -->
+    <div class="season">
+      <h2>2020–2021 Season</h2>
+      <ul>
+        <li>Daly City Qualifying Tournament – 1st Place Connect Award (Ranked top 4)</li>
+        <li>Oregon League Tournament – 1st Place Design Award (Ranked top 4)</li>
+        <li>NorCal Regional Championship – Ranked top 10; Dean's List Finalist – Aroshi Ghosh</li>
+      </ul>
+    </div>
+
+    <!-- 2019–2020 -->
+    <div class="season">
+      <h2>2019–2020 Season</h2>
+      <ul>
+        <li>Saratoga Qualifying Tournament – 2nd Place Inspire Award; Winning Alliance, 1st Pick; 1st Place Motivate Award; 2nd Place Design Award; 2nd Place Innovate Award</li>
+        <li>San Jose (Micron) Qualifying Tournament – 1st Place Inspire Award; Winning Alliance Captain; 2nd Place Think Award; 2nd Place Connect</li>
+        <li>Napa Qualifying Tournament – Winning Alliance Captain; 1st Place Think Award; 3rd Place Connect Award</li>
+        <li>NorCal Regional Championship – 2nd Place Inspire Award; Winning Alliance, 1st Pick; 1st Place Innovate Award</li>
+        <li>World Championship – Qualified; championship cancelled due to COVID‑19</li>
+      </ul>
+    </div>
+
+    <!-- 2018–2019 -->
+    <div class="season">
+      <h2>2018–2019 Season</h2>
+      <ul>
+        <li>Saratoga Qualifying Tournament – 1st Place Inspire Award; Finalist Alliance, 1st pick; 2nd Place Think Award; 3rd Place Connect Award; 3rd Place Design Award</li>
+        <li>Piedmont Qualifying Tournament – 2nd Place Inspire Award; 1st Place Think Award; 2nd Place Connect Award; 2nd Place Design Award; Semi‑Finalist Alliance, 1st pick</li>
+        <li>Daly City Qualifying Tournament – 1st Place Connect Award; 2nd Place Think Award; Semi‑Finalist Alliance, 1st pick</li>
+        <li>NorCal Regional Championship – 1st Place Innovate Award; 2nd Place Inspire Award; 3rd Place Motivate Award; Semi‑Finalist Alliance, 1st pick</li>
+        <li>World Championship – 1st Place Control Award</li>
+      </ul>
+    </div>
+
+    <!-- 2017–2018 -->
+    <div class="season">
+      <h2>2017–2018 Season</h2>
+      <ul>
+        <li>Saratoga Qualifying Tournament – 3rd Place Inspire Award; 1st Place Connect Award; 2nd Place Think Award</li>
+        <li>Burlingame Qualifying Tournament – 1st Place Connect Award; 2nd Place Think Award</li>
+        <li>Daly City Qualifying Tournament – 1st Place Think Award; 2nd Place Motivate Award; 2nd Place Control Award</li>
+        <li>Northern California Championship Tournament – Semi‑Finalist Alliance; Dean's List Finalist – Jessica Pearson</li>
+      </ul>
+    </div>
+
+    <!-- 2016–2017 -->
+    <div class="season">
+      <h2>2016–2017 Season</h2>
+      <ul>
+        <li>Redwood Qualifying Tournament – Finalist Alliance; 1st Place PTC Design Award; 2nd Place Inspire Award; 2nd Place Connect Award</li>
+        <li>Google HQ Qualifying Tournament – Finalist Alliance; 1st Place PTC Design Award; 2nd Place Think Award</li>
+        <li>GitHub HQ Qualifying Tournament – 1st Place Inspire Award; Semi‑Finalist Alliance Captain; 2nd Place Innovate Award; 3rd Place PTC Design Award; 3rd Place Think Award</li>
+        <li>Northern California Championship Tournament – 1st Place Think Award</li>
+        <li>Western Super‑Regionals Tournament – Ranked top 10 in division</li>
+        <li>World Championship – Finalist Think Award; Ranked 19th in division</li>
+      </ul>
+    </div>
+
+    <!-- 2015–2016 -->
+    <div class="season">
+      <h2>2015–2016 Season</h2>
+      <ul>
+        <li>Saratoga Qualifying Tournament – 1st Place Connect Award</li>
+        <li>Burlingame Qualifying Tournament – Winning Alliance Captain</li>
+      </ul>
+    </div>
+
+    <!-- 2014–2015 -->
+    <div class="season">
+      <h2>2014–2015 Season</h2>
+      <ul>
+        <li>Carmichael Qualifying Tournament – 1st Place Think Award</li>
+        <li>Elk Grove Qualifying Tournament – Semi‑Finalist Alliance</li>
+      </ul>
+    </div>
+  </section>
+</body>
+</html>
