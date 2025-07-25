@@ -1,553 +1,558 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>FTC Team 8404 - Quixilver</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-<style>
-* {
-margin: 0;
-padding: 0;
-box-sizing: border-box;
-scroll-behavior: smooth;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FTC Team 8404 - Quixilver</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
-body {
-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-background-color: #0d0d0d;
-color: white;
-overflow-x: hidden;
-}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: white;
+      overflow-x: hidden;
+    }
 
-header {
-background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-display: flex;
-align-items: center;
-justify-content: space-between;
-padding: 24px 40px;
-height: 100px;
-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-position: relative;
-z-index: 10;
-}
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      height: 100px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 10;
+    }
 
-.logo-container {
-display: flex;
-align-items: center;
-gap: 30px;
-transition: transform 0.4s ease, filter 0.4s ease;
-cursor: pointer;
-}
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      cursor: pointer;
+    }
 
-.logo-container:hover {
-transform: scale(1.07);
-filter: drop-shadow(0 0 6px #55c6f6);
-}
+    .logo-container:hover {
+      transform: scale(1.07);
+      filter: drop-shadow(0 0 6px #55c6f6);
+    }
 
-.logo-container img {
-height: 64px;
-}
+    .logo-container img {
+      height: 64px;
+    }
 
-.logo-text {
-font-size: 36px;
-color: #55c6f6;
-font-weight: bold;
-}
+    .logo-text {
+      font-size: 36px;
+      color: #55c6f6;
+      font-weight: bold;
+    }
 
-nav {
-display: flex;
-gap: 120px;
-margin-right: 80px;
-}
+    nav {
+      display: flex;
+      gap: 120px;
+      margin-right: 80px;
+    }
 
-nav a {
-color: white;
-text-decoration: none;
-font-size: 20px;
-position: relative;
-transition: color 0.3s ease;
-}
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 20px;
+      position: relative;
+      transition: color 0.3s ease;
+    }
 
-nav a:hover {
-color: #55c6f6;
-}
+    /* --- UPDATED: Added .active selector for consistent styling --- */
+    nav a:hover, nav a.active {
+      color: #55c6f6;
+    }
 
-nav a::after {
-content: '';
-display: block;
-width: 0%;
-height: 2px;
-background: #55c6f6;
-transition: width 0.3s ease-in-out;
-position: absolute;
-bottom: -6px;
-left: 0;
-}
+    nav a::after {
+      content: '';
+      display: block;
+      width: 0%;
+      height: 2px;
+      background: #55c6f6;
+      transition: width 0.3s ease-in-out;
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+    }
 
-nav a:hover::after {
-width: 100%;
-}
+    /* --- UPDATED: Added .active selector for consistent styling --- */
+    nav a:hover::after, nav a.active::after {
+      width: 100%;
+    }
 
-.hero {
-position: relative;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-overflow: hidden;
-background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
-animation: pulseBackground 6s infinite alternate;
-}
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
+      animation: pulseBackground 6s infinite alternate;
+    }
 
-.hero::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
-background-size: 300px;
-z-index: 1;
-opacity: 0.5;
-animation: gridPulse 8s infinite alternate;
-}
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
+      background-size: 300px;
+      z-index: 1;
+      opacity: 0.5;
+      animation: gridPulse 8s infinite alternate;
+    }
 
-.hero::after {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
-background-size: 300px;
-z-index: 1;
-opacity: 0.5;
-animation: rotateGear 25s linear infinite;
-}
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+      background-size: 300px;
+      z-index: 1;
+      opacity: 0.5;
+      animation: rotateGear 25s linear infinite;
+    }
 
-canvas {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 1;
-opacity: 0.3;
-}
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      opacity: 0.3;
+    }
 
-.robot-render {
-width: 80vw;
-max-width: 1000px;
-border-radius: 30px;
-transition: transform 0.4s ease, box-shadow 0.4s ease;
-object-fit: cover;
-z-index: 2;
-clip-path: inset(3mm 2mm round 30px);
-box-shadow:
-0 0 50px rgba(85, 198, 246, 0.8),
-0 0 80px rgba(85, 198, 246, 0.6);
-background-color: #0a0a0a;
-position: relative;
-padding: 10px;
-border: 2px solid rgba(85, 198, 246, 0.3);
-}
+    .robot-render {
+      width: 80vw;
+      max-width: 1000px;
+      border-radius: 30px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      object-fit: cover;
+      z-index: 2;
+      clip-path: inset(3mm 2mm round 30px);
+      box-shadow:
+        0 0 50px rgba(85, 198, 246, 0.8),
+        0 0 80px rgba(85, 198, 246, 0.6);
+      background-color: #0a0a0a;
+      position: relative;
+      padding: 10px;
+      border: 2px solid rgba(85, 198, 246, 0.3);
+    }
 
-.robot-render::before {
-content: '';
-position: absolute;
-top: -5px;
-left: -5px;
-width: calc(100% + 10px);
-height: calc(100% + 10px);
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
-z-index: -1;
-opacity: 0.7;
-animation: pulseFrame 3s infinite linear;
-}
+    .robot-render::before {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      width: calc(100% + 10px);
+      height: calc(100% + 10px);
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
+      z-index: -1;
+      opacity: 0.7;
+      animation: pulseFrame 3s infinite linear;
+    }
 
-.robot-render:hover {
-transform: scale(1.06);
-box-shadow:
-0 0 100px rgba(85, 198, 246, 1),
-0 0 120px rgba(85, 198, 246, 0.8);
-}
+    .robot-render:hover {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 100px rgba(85, 198, 246, 1),
+        0 0 120px rgba(85, 198, 246, 0.8);
+    }
 
-.robot-render.clicked {
-transform: scale(1.06);
-box-shadow:
-0 0 100px rgba(85, 198, 246, 1),
-0 0 120px rgba(85, 198, 246, 0.8);
-}
+    .robot-render.clicked {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 100px rgba(85, 198, 246, 1),
+        0 0 120px rgba(85, 198, 246, 0.8);
+    }
 
-.hero-label {
-position: absolute;
-font-family: 'Orbitron', sans-serif;
-font-weight: 700;
-font-size: 100px;
-color: #55c6f6;
-text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6);
-pointer-events: none;
-user-select: none;
-z-index: 3;
-animation: pulseGlow 2s ease-in-out infinite;
-}
+    .hero-label {
+      position: absolute;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 100px;
+      color: #55c6f6;
+      text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6);
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
 
-.top-left-label {
-top: 15%;
-left: 5%;
-}
+    .top-left-label {
+      top: 15%;
+      left: 5%;
+    }
 
-.bottom-right-label {
-bottom: 10%;
-right: 5%;
-font-style: italic;
-font-size: 90px;
-}
+    .bottom-right-label {
+      bottom: 10%;
+      right: 5%;
+      font-style: italic;
+      font-size: 90px;
+    }
 
-@keyframes pulseGlow {
-0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
-50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
-}
+    @keyframes pulseGlow {
+      0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
+      50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
+    }
 
-@keyframes pulseBackground {
-0% { background-position: 0% 0%; }
-100% { background-position: 0% 100%; }
-}
+    @keyframes pulseBackground {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 0% 100%; }
+    }
 
-@keyframes gridPulse {
-0% { opacity: 0.5; }
-100% { opacity: 0.7; }
-}
+    @keyframes gridPulse {
+      0% { opacity: 0.5; }
+      100% { opacity: 0.7; }
+    }
 
-@keyframes rotateGear {
-from { transform: rotate(0deg); }
-to { transform: rotate(360deg); }
-}
+    @keyframes rotateGear {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-@keyframes pulseFrame {
-0% { opacity: 0.7; }
-50% { opacity: 0.9; }
-100% { opacity: 0.7; }
-}
+    @keyframes pulseFrame {
+      0% { opacity: 0.7; }
+      50% { opacity: 0.9; }
+      100% { opacity: 0.7; }
+    }
 
-.team-section {
-max-width: 1200px;
-margin: 80px auto;
-padding: 0 20px;
-display: flex;
-align-items: center;
-justify-content: space-between;
-gap: 40px;
-flex-wrap: wrap;
-background: linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
-position: relative;
-}
+    .team-section {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      background: linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
+      position: relative;
+    }
 
-.team-section::before {
-content: '';
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGlow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/></feMerge></filter></defs><g filter="url(#teamGlow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.2"/></g></svg>') repeat;
-opacity: 0.1;
-z-index: 0;
-}
+    .team-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGlow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/></feMerge></filter></defs><g filter="url(#teamGlow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.2"/></g></svg>') repeat;
+      opacity: 0.1;
+      z-index: 0;
+    }
 
-.team-photo, .team-text {
-opacity: 0;
-transform: translateY(50px);
-transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-position: relative;
-z-index: 1;
-}
+    .team-photo, .team-text {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+      position: relative;
+      z-index: 1;
+    }
 
-.team-photo.visible {
-opacity: 1;
-transform: translateY(0);
-transition-delay: 0.2s;
-box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-}
+    .team-photo.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.2s;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
+    }
 
-.team-text.visible {
-opacity: 1;
-transform: translateY(0);
-transition-delay: 0.4s;
-box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-}
+    .team-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0.4s;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
+    }
 
-.team-photo {
-flex: 1;
-max-width: 600px;
-width: 100%;
-border-radius: 20px;
-box-shadow:
-0 0 40px rgba(85, 198, 246, 0.6),
-0 0 60px rgba(85, 198, 246, 0.4);
-object-fit: cover;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    .team-photo {
+      flex: 1;
+      max-width: 600px;
+      width: 100%;
+      border-radius: 20px;
+      box-shadow:
+        0 0 40px rgba(85, 198, 246, 0.6),
+        0 0 60px rgba(85, 198, 246, 0.4);
+      object-fit: cover;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
 
-.team-photo:hover {
-transform: scale(1.03);
-box-shadow:
-0 0 70px rgba(85, 198, 246, 0.9),
-0 0 50px rgba(85, 198, 246, 0.6);
-}
+    .team-photo:hover {
+      transform: scale(1.03);
+      box-shadow:
+        0 0 70px rgba(85, 198, 246, 0.9),
+        0 0 50px rgba(85, 198, 246, 0.6);
+    }
 
-.team-text {
-flex: 1;
-max-width: 550px;
-background: rgba(20, 20, 20, 0.8);
-padding: 30px;
-border-radius: 12px;
-box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
-transition: transform 0.4s ease;
-}
+    .team-text {
+      flex: 1;
+      max-width: 550px;
+      background: rgba(20, 20, 20, 0.8);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
+      transition: transform 0.4s ease;
+    }
 
-.team-text:hover {
-transform: translateY(-5px);
-}
+    .team-text:hover {
+      transform: translateY(-5px);
+    }
 
-.team-text h2 {
-color: #55c6f6;
-font-weight: 700;
-font-size: 34px;
-margin-bottom: 20px;
-font-family: 'Orbitron', sans-serif;
-}
+    .team-text h2 {
+      color: #55c6f6;
+      font-weight: 700;
+      font-size: 34px;
+      margin-bottom: 20px;
+      font-family: 'Orbitron', sans-serif;
+    }
 
-.team-text p {
-font-size: 16px;
-line-height: 1.8;
-color: #d0d0d0;
-margin-bottom: 16px;
-}
+    .team-text p {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #d0d0d0;
+      margin-bottom: 16px;
+    }
 
-.learn-more {
-display: inline-block;
-padding: 12px 24px;
-background: #55c6f6;
-color: #0d0d0d;
-text-decoration: none;
-border-radius: 8px;
-font-weight: bold;
-transition: background 0.3s ease, transform 0.3s ease;
-}
+    .learn-more {
+      display: inline-block;
+      padding: 12px 24px;
+      background: #55c6f6;
+      color: #0d0d0d;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
 
-.learn-more:hover {
-background: #3aa8d6;
-transform: scale(1.05);
-}
+    .learn-more:hover {
+      background: #3aa8d6;
+      transform: scale(1.05);
+    }
 
-@media (max-width: 768px) {
-header {
-flex-direction: column;
-height: auto;
-padding: 20px;
-}
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+      }
 
-nav {
-margin: 20px 0 0;
-gap: 20px;
-flex-wrap: wrap;
-justify-content: center;
-}
+      nav {
+        margin: 20px 0 0;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
 
-.logo-container img {
-height: 48px;
-}
+      .logo-container img {
+        height: 48px;
+      }
 
-.logo-text {
-font-size: 28px;
-}
+      .logo-text {
+        font-size: 28px;
+      }
 
-.hero-label {
-font-size: 60px;
-}
+      .hero-label {
+        font-size: 60px;
+      }
 
-.bottom-right-label {
-font-size: 50px;
-}
+      .bottom-right-label {
+        font-size: 50px;
+      }
 
-.top-left-label {
-top: 10%;
-left: 5%;
-}
+      .top-left-label {
+        top: 10%;
+        left: 5%;
+      }
 
-.bottom-right-label {
-bottom: 10%;
-right: 5%;
-}
+      .bottom-right-label {
+        bottom: 10%;
+        right: 5%;
+      }
 
-.robot-render {
-width: 90vw;
-max-width: 90vw;
-}
+      .robot-render {
+        width: 90vw;
+        max-width: 90vw;
+      }
 
-.team-section {
-flex-direction: column;
-align-items: center;
-}
+      .team-section {
+        flex-direction: column;
+        align-items: center;
+      }
 
-.team-photo, .team-text {
-max-width: 100%;
-}
-}
-</style>
+      .team-photo, .team-text {
+        max-width: 100%;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<header>
-<div class="logo-container">
-<img src="logo_old5.png" alt="Team Logo" />
-<div class="logo-text">FTC Team 8404</div>
-</div>
-<nav>
-<a href="#">Home</a>
-<a href="#">Robots</a>
-<a href="#">Team</a>
-<a href="#">Awards</a>
-<a href="#">Contact</a>
-</nav>
-</header>
+  <header>
+    <div class="logo-container" onclick="window.location.href='index.html'">
+      <!-- Make sure you have your logo in the same directory -->
+      <img src="logo_old5.png" alt="Team Logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f2027/55c6f6?text=Logo';">
+      <div class="logo-text">FTC Team 8404</div>
+    </div>
+    <!-- --- UPDATED: Corrected file paths for navigation --- -->
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="robots.html">Robots</a>
+      <a href="#">Team</a>
+      <a href="#">Awards</a>
+      <a href="#">Contact</a>
+    </nav>
+  </header>
 
-<section class="hero">
-<canvas id="particles"></canvas>
-<img class="robot-render" src="qual1_team.png" alt="Robot Render" />
-<div class="hero-label top-left-label">8404</div>
-<div class="hero-label bottom-right-label">Quixilver</div>
-</section>
+  <section class="hero">
+    <canvas id="particles"></canvas>
+    <img class="robot-render" src="qual1_team.png" alt="Robot Render" onerror="this.onerror=null;this.src='https://placehold.co/1000x600/0d0d0d/ffffff?text=Team+8404';">
+    <div class="hero-label top-left-label">8404</div>
+    <div class="hero-label bottom-right-label">Quixilver</div>
+  </section>
 
-<section class="team-section">
-<img class="team-photo" src="team_photo.jpg" alt="Team Photo" />
-<div class="team-text">
-<h2>About Quixilver</h2>
-<p>
-FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
-</p>
-<p>
-We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of roboticists.
-</p>
-<a href="#team" class="learn-more">Learn More</a>
-</div>
-</section>
+  <section class="team-section">
+    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
+    <div class="team-text">
+      <h2>About Quixilver</h2>
+      <p>
+        FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
+      </p>
+      <p>
+        We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of roboticists.
+      </p>
+      <a href="#team" class="learn-more">Learn More</a>
+    </div>
+  </section>
 
-<script>
-// Parallax effect for robot render
-let mouseX = 0, mouseY = 0;
-window.addEventListener('mousemove', (e) => {
-mouseX = (e.clientX - window.innerWidth / 2) / 50;
-mouseY = (e.clientY - window.innerHeight / 2) / 50;
-updateRobotTransform();
-});
+  <script>
+    // Parallax effect for robot render
+    let mouseX = 0, mouseY = 0;
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) / 50;
+      mouseY = (e.clientY - window.innerHeight / 2) / 50;
+      updateRobotTransform();
+    });
 
-// Click effect for robot render
-const robot = document.querySelector('.robot-render');
-robot.addEventListener('click', () => {
-robot.classList.add('clicked');
-setTimeout(() => robot.classList.remove('clicked'), 500);
-});
+    // Click effect for robot render
+    const robot = document.querySelector('.robot-render');
+    robot.addEventListener('click', () => {
+      robot.classList.add('clicked');
+      setTimeout(() => robot.classList.remove('clicked'), 500);
+    });
 
-// Consolidate transform updates to prevent jitter
-function updateRobotTransform() {
-const robot = document.querySelector('.robot-render');
-const isHovering = robot.matches(':hover');
-const scale = isHovering ? 1.06 : 1;
-robot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
-}
+    // Consolidate transform updates to prevent jitter
+    function updateRobotTransform() {
+      const robot = document.querySelector('.robot-render');
+      const isHovering = robot.matches(':hover');
+      const scale = isHovering ? 1.06 : 1;
+      robot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
+    }
 
-// Particle system for hero section (around robot)
-const canvas = document.getElementById('particles');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+    // Particle system for hero section (around robot)
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-const particles = [];
-const particleCount = 20;
+    const particles = [];
+    const particleCount = 20;
 
-class Particle {
-constructor() {
-const robotRect = robot.getBoundingClientRect();
-this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-this.size = Math.random() * 2 + 1;
-this.angle = Math.random() * Math.PI * 2;
-this.speed = Math.random() * 0.1 + 0.05;
-}
+    class Particle {
+      constructor() {
+        const robotRect = robot.getBoundingClientRect();
+        this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
+        this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
+        this.size = Math.random() * 2 + 1;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 0.1 + 0.05;
+      }
 
-update() {
-const robotRect = robot.getBoundingClientRect();
-const centerX = robotRect.left + robotRect.width / 2;
-const centerY = robotRect.top + robotRect.height / 2;
-this.angle += this.speed;
-this.x = centerX + Math.cos(this.angle) * 150;
-this.y = centerY + Math.sin(this.angle) * 150;
-}
+      update() {
+        const robotRect = robot.getBoundingClientRect();
+        const centerX = robotRect.left + robotRect.width / 2;
+        const centerY = robotRect.top + robotRect.height / 2;
+        this.angle += this.speed;
+        this.x = centerX + Math.cos(this.angle) * 150;
+        this.y = centerY + Math.sin(this.angle) * 150;
+      }
 
-draw() {
-ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
-ctx.beginPath();
-ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-ctx.fill();
-}
-}
+      draw() {
+        ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
 
-for (let i = 0; i < particleCount; i++) {
-particles.push(new Particle());
-}
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
 
-let lastTime = 0;
-const fps = 60;
-const interval = 1000 / fps;
+    let lastTime = 0;
+    const fps = 60;
+    const interval = 1000 / fps;
 
-function animateParticles(timestamp) {
-if (!lastTime) lastTime = timestamp;
-const delta = timestamp - lastTime;
+    function animateParticles(timestamp) {
+      if (!lastTime) lastTime = timestamp;
+      const delta = timestamp - lastTime;
 
-if (delta >= interval) {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
-particles.forEach(particle => {
-particle.update();
-particle.draw();
-});
-lastTime = timestamp - (delta % interval);
-}
-requestAnimationFrame(animateParticles);
-}
+      if (delta >= interval) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(particle => {
+          particle.update();
+          particle.draw();
+        });
+        lastTime = timestamp - (delta % interval);
+      }
+      requestAnimationFrame(animateParticles);
+    }
 
-animateParticles();
+    animateParticles();
 
-window.addEventListener('resize', () => {
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-particles.forEach(p => {
-const robotRect = robot.getBoundingClientRect();
-p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-});
-});
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      particles.forEach(p => {
+        const robotRect = robot.getBoundingClientRect();
+        p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
+        p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
+      });
+    });
 
-// Scroll animations
-const observer = new IntersectionObserver(
-(entries) => {
-entries.forEach((entry) => {
-if (entry.isIntersecting) {
-entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
-setTimeout(() => el.classList.add('visible'), index * 200);
-});
-}
-});
-},
-{ threshold: 0.2 }
-);
+    // Scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
+              setTimeout(() => el.classList.add('visible'), index * 200);
+            });
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-observer.observe(document.querySelector('.team-section'));
-</script>
+    observer.observe(document.querySelector('.team-section'));
+  </script>
 </body>
 </html>
+
 
