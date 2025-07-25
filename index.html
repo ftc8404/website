@@ -410,38 +410,54 @@
       }
     }
 
-  .site-footer {
+.site-footer {
   background: linear-gradient(90deg, #0f2027, #203a43);
   color: #d0d0d0;
   padding: 50px 20px 30px;
-  font-size: 14px;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
-.footer-content {
+.footer-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
   max-width: 1200px;
-  margin: auto;
+  margin: 0 auto;
 }
 
-.footer-content > div {
+.footer-brand {
   flex: 1;
-  min-width: 250px;
-  margin: 10px 20px;
+  min-width: 260px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
 }
 
-.footer-about h3 {
-  color: #55c6f6;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 24px;
-  margin-bottom: 10px;
+.footer-brand img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px #55c6f6);
+}
+
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #ccc;
+  max-width: 380px;
+}
+
+.footer-links {
+  flex: 1;
+  min-width: 180px;
 }
 
 .footer-links h4 {
-  color: #55c6f6;
   font-family: 'Orbitron', sans-serif;
-  font-size: 18px;
+  color: #55c6f6;
   margin-bottom: 10px;
 }
 
@@ -451,45 +467,79 @@
 }
 
 .footer-links ul li {
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 .footer-links ul li a {
-  color: #d0d0d0;
+  color: #ccc;
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-size: 14px;
+  transition: color 0.3s;
 }
 
 .footer-links ul li a:hover {
   color: #55c6f6;
 }
 
-.footer-links ul li i {
-  margin-right: 8px;
+.footer-socials {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-socials h4 {
+  font-family: 'Orbitron', sans-serif;
   color: #55c6f6;
+  margin-bottom: 12px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 28px;
+}
+
+.social-icons a {
+  transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 6px rgba(85, 198, 246, 0.6));
 }
 
 .footer-bottom {
+  margin-top: 40px;
   text-align: center;
-  margin-top: 30px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 15px;
   font-size: 13px;
-  color: #aaa;
+  color: #888;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 15px;
 }
 
-
 @media (max-width: 768px) {
-  .footer-content {
+  .footer-container {
     flex-direction: column;
     align-items: center;
     text-align: center;
   }
 
+  .footer-brand {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-brand img {
+    width: 60px;
+    height: 60px;
+  }
+
   .social-icons {
     justify-content: center;
+    margin-top: 10px;
   }
 }
+
 
   </style>
 </head>
@@ -652,40 +702,44 @@
 
 
 <footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-about">
-      <img src="logo_old5.png" alt="Quixilver Fox Logo" style="height: 60px; margin-bottom: 15px;">
-      <h3>FTC Team 8404</h3>
-      <p>Quixilver is a high school robotics team from San Jose, CA. We design competitive robots and foster STEM growth through outreach, mentorship, and innovation.</p>
+  <div class="footer-container">
+    <!-- Left: Logo + About -->
+    <div class="footer-brand">
+      <img src="logo_old5.png" alt="Team 8404 Logo">
+      <p>
+        FTC Team 8404 Quixilver is a high-school robotics team based in San Jose, CA. We build award-winning robots, promote STEM, and compete in the FIRST Tech Challenge with passion and precision.
+      </p>
     </div>
 
+    <!-- Middle: Sitemap -->
     <div class="footer-links">
       <h4>Sitemap</h4>
       <ul>
-        <li><a href="/website/index.html"><i class="fas fa-home"></i> Home</a></li>
-        <li><a href="/website/robots.html"><i class="fas fa-robot"></i> Robots</a></li>
-        <li><a href="/website/team.html"><i class="fas fa-users"></i> Team</a></li>
-        <li><a href="/website/awards.html"><i class="fas fa-trophy"></i> Awards</a></li>
-        <li><a href="/website/contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
+        <li><a href="/website/index.html">Home</a></li>
+        <li><a href="/website/robots.html">Robots</a></li>
+        <li><a href="/website/team.html">Team</a></li>
+        <li><a href="/website/awards.html">Awards</a></li>
+        <li><a href="/website/contact.html">Contact</a></li>
       </ul>
     </div>
 
-    <div class="footer-links">
+    <!-- Right: Social Icons Only -->
+    <div class="footer-socials">
       <h4>Follow Us</h4>
-      <ul class="social-links">
-        <li><a href="https://twitter.com/ftc8404" target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
-        <li><a href="https://www.instagram.com/ftc8404" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-        <li><a href="https://www.facebook.com/ftc8404" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-        <li><a href="https://www.youtube.com/@ftc8404" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-        <li><a href="mailto:admin@quixilver8404.org"><i class="fas fa-envelope"></i> Email</a></li>
-      </ul>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ftc8404" target="_blank" aria-label="Instagram"><i class="fab fa-instagram" style="color:#e4405f;"></i></a>
+        <a href="https://twitter.com/ftc8404" target="_blank" aria-label="Twitter"><i class="fab fa-twitter" style="color:#1da1f2;"></i></a>
+        <a href="https://www.facebook.com/ftc8404" target="_blank" aria-label="Facebook"><i class="fab fa-facebook" style="color:#1877f2;"></i></a>
+        <a href="https://www.youtube.com/@ftc8404" target="_blank" aria-label="YouTube"><i class="fab fa-youtube" style="color:#ff0000;"></i></a>
+      </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>⚙️ Powered by FIRST Robotics spirit & creativity · © 2025 FTC Team 8404 Quixilver</p>
+    © 2025 FTC Team 8404 Quixilver. All rights reserved.
   </div>
 </footer>
+
 
 
 
