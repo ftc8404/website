@@ -1,188 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Team 8404 | Our Robots</title>
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background-color: #0d0d0d;
-      color: #e0e0e0;
-      font-family: 'Orbitron', sans-serif;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Robots - FTC Team 8404 Quixilver</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<style>
+/* --- Base and Header Styles (from your original code) --- */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+}
 
-    header {
-      display: flex;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #111;
-      border-bottom: 1px solid #333;
-    }
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #0d0d0d;
+color: white;
+overflow-x: hidden;
+}
 
-    header img {
-      height: 40px;
-      margin-right: 1rem;
-    }
+header {
+background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 24px 40px;
+height: 100px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+position: relative;
+z-index: 10;
+}
 
-    header h1 {
-      font-size: 1.8rem;
-      color: #55c6f6;
-    }
+.logo-container {
+display: flex;
+align-items: center;
+gap: 30px;
+transition: transform 0.4s ease, filter 0.4s ease;
+cursor: pointer;
+}
 
-    main {
-      padding: 2rem;
-    }
+.logo-container:hover {
+transform: scale(1.07);
+filter: drop-shadow(0 0 6px #55c6f6);
+}
 
-    h2 {
-      font-size: 2rem;
-      color: #55c6f6;
-      margin-bottom: 1rem;
-    }
+.logo-container img {
+height: 64px;
+}
 
-    .robot-card {
-      display: flex;
-      flex-wrap: wrap;
-      margin-bottom: 3rem;
-      background-color: #1a1a1a;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.2);
-      overflow: hidden;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+.logo-text {
+font-size: 36px;
+color: #55c6f6;
+font-weight: bold;
+}
 
-    .robot-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 30px rgba(85, 198, 246, 0.4);
-    }
+nav {
+display: flex;
+gap: 120px;
+margin-right: 80px;
+}
 
-    .robot-image-container {
-      flex: 1 1 300px;
-      max-width: 50%;
-    }
+nav a {
+color: white;
+text-decoration: none;
+font-size: 20px;
+position: relative;
+transition: color 0.3s ease;
+}
 
-    .robot-image-container img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+nav a:hover, nav a.active {
+color: #55c6f6;
+}
 
-    .robot-info {
-      flex: 1 1 300px;
-      padding: 1.5rem;
-    }
+nav a::after {
+content: '';
+display: block;
+width: 0%;
+height: 2px;
+background: #55c6f6;
+transition: width 0.3s ease-in-out;
+position: absolute;
+bottom: -6px;
+left: 0;
+}
 
-    .robot-info h3 {
-      color: #55c6f6;
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
-    }
+nav a:hover::after, nav a.active::after {
+width: 100%;
+}
 
-    .robot-info p {
-      line-height: 1.6;
-    }
+/* --- New Styles for the Robots Page --- */
 
-    @media (max-width: 768px) {
-      .robot-card {
-        flex-direction: column;
-      }
+.main-content {
+padding: 60px 20px;
+background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>')
+}
 
-      .robot-image-container,
-      .robot-info {
-        max-width: 100%;
-      }
-    }
-  </style>
+.robots-header {
+text-align: center;
+margin-bottom: 60px;
+}
+
+.robots-header h1 {
+font-family: 'Orbitron', sans-serif;
+font-size: 48px;
+color: #55c6f6;
+text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
+margin-bottom: 10px;
+}
+
+.robots-header p {
+font-size: 18px;
+color: #d0d0d0;
+max-width: 800px;
+margin: 0 auto;
+line-height: 1.6;
+}
+
+.robot-archive {
+display: flex;
+flex-direction: column;
+gap: 80px;
+max-width: 1200px;
+margin: 0 auto;
+}
+
+.robot-card {
+display: flex;
+gap: 40px;
+background: rgba(20, 30, 36, 0.6);
+border: 1px solid rgba(85, 198, 246, 0.2);
+border-radius: 16px;
+padding: 30px;
+box-shadow: 0 0 25px rgba(0,0,0,0.5);
+transition: transform 0.4s ease, box-shadow 0.4s ease;
+opacity: 0;
+transform: translateY(40px);
+}
+
+.robot-card.visible {
+opacity: 1;
+transform: translateY(0);
+}
+
+.robot-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 40px rgba(85, 198, 246, 0.2);
+}
+
+.robot-image-container {
+flex: 1;
+max-width: 500px;
+min-width: 300px;
+}
+
+.robot-image-container img {
+width: 100%;
+border-radius: 12px;
+object-fit: cover;
+border: 2px solid rgba(85, 198, 246, 0.3);
+box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.robot-card:hover .robot-image-container img {
+transform: scale(1.03);
+box-shadow: 0 0 35px rgba(85, 198, 246, 0.5);
+}
+
+.robot-info {
+flex: 1;
+display: flex;
+flex-direction: column;
+}
+
+.robot-info h2 {
+font-family: 'Orbitron', sans-serif;
+font-size: 32px;
+font-weight: 700;
+color: #55c6f6;
+margin-bottom: 20px;
+}
+
+.robot-info p {
+font-size: 16px;
+line-height: 1.7;
+color: #d0d0d0;
+margin-bottom: 20px;
+}
+
+.robot-info h3 {
+font-size: 20px;
+color: #b0e0f6;
+margin-bottom: 15px;
+border-left: 3px solid #55c6f6;
+padding-left: 10px;
+}
+
+.robot-info ul {
+list-style: none;
+padding-left: 0;
+}
+
+.robot-info ul li {
+font-size: 16px;
+color: #d0d0d0;
+margin-bottom: 10px;
+padding-left: 25px;
+position: relative;
+}
+
+.robot-info ul li::before {
+content: '»';
+position: absolute;
+left: 0;
+color: #55c6f6;
+font-weight: bold;
+font-size: 20px;
+line-height: 1;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 992px) {
+.robot-card {
+flex-direction: column;
+}
+.robot-image-container {
+max-width: 100%;
+}
+}
+
+@media (max-width: 768px) {
+header {
+flex-direction: column;
+height: auto;
+padding: 20px;
+}
+
+nav {
+margin: 20px 0 0;
+gap: 20px;
+flex-wrap: wrap;
+justify-content: center;
+}
+
+.logo-container img {
+height: 48px;
+}
+
+.logo-text {
+font-size: 28px;
+}
+
+.robots-header h1 {
+font-size: 36px;
+}
+.robots-header p {
+font-size: 16px;
+}
+}
+</style>
 </head>
 
 <body>
-  <header>
-    <img src="assets/logo.png" alt="Team Logo">
-    <h1>Team 8404 Quixilver | Robots</h1>
-  </header>
+<!-- Reusable Header -->
+<header>
+<div class="logo-container" onclick="window.location.href='index.html'">
+<!-- Make sure you have your logo in the same directory -->
+<img src="https://quixilver8404.org/uploads/1/4/2/1/142171833/published/logo-old5.png?1675753493" alt="Team Logo" />
+<div class="logo-text">FTC Team 8404</div>
+</div>
+<nav>
+<!-- Assuming your homepage is index.html -->
+<a href="index.html">Home</a>
+<a href="robots.html" class="active">Robots</a>
+<a href="#">Team</a>
+<a href="#">Awards</a>
+<a href="#">Contact</a>
+</nav>
+</header>
 
-  <main>
-    <h2>Our Robots Through the Years</h2>
+<!-- Main Content for Robots Page -->
+<main class="main-content">
+<div class="robots-header">
+<h1>Robot Archive</h1>
+<p>A legacy of innovation. Explore the evolution of our robots, from our earliest designs to our latest championship-contending machines.</p>
+</div>
 
-    <!-- Into the Deep (2024–25) -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/into_the_deep.jpg" alt="Into the Deep Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2024–2025: Into the Deep</h3>
-        <p>This year’s challenge takes us underwater in “Into the Deep.” Our robot features an arm extension and object sorter designed to maneuver and place objects in simulated underwater environments. This season brings major mechanical improvements and a refined control system.</p>
-      </div>
-    </div>
+<div class="robot-archive">
+<!-- Robot Card: 2023-2024 CENTERSTAGE -->
+<div class="robot-card">
+<div class="robot-image-container">
+<img src="https://i.imgur.com/kY1yBvC.png" alt="CENTERSTAGE Robot" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=CENTERSTAGE';">
+</div>
+<div class="robot-info">
+<h2>2023-2024: CENTERSTAGE</h2>
+<p>Our 2023-2024 season robot features our most advanced parallel plate drivebase yet and competed in the South Bay League. It can pick up two pixels at a time and can accurately and precisely output each pixel on the backdrop.</p>
+<h3>Features:</h3>
+<ul>
+<li>Parallel plate drivebase</li>
+<li>Auxiliary intake mechanism</li>
+<li>Can go through the middle gate</li>
+<li>A downward flipping output mechanism that sits flush with the backdrop</li>
+</ul>
+</div>
+</div>
 
-    <!-- Centerstage -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/centerstage.jpg" alt="Centerstage Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2023–2024: Centerstage</h3>
-        <p>Our robot focused on precision placement of pixels and backdrop scoring. It used a linear slide system and dual intake for effective cycle times. This season marked our return to the NorCal Championships!</p>
-      </div>
-    </div>
+<!-- Robot Card: 2022-2023 POWERPLAY -->
+<div class="robot-card">
+<div class="robot-image-container">
+<img src="https://placehold.co/500x350/0f2027/55c6f6?text=POWERPLAY" alt="POWERPLAY Robot">
+</div>
+<div class="robot-info">
+<h2>2022-2023: POWERPLAY</h2>
+<p>This robot was designed for high-speed cone cycling. Featuring a differential-based lift and a turret, it could quickly score on any height of junction from a single stable position, making it a formidable opponent during the POWERPLAY season.</p>
+<h3>Features:</h3>
+<ul>
+<li>Differential cascading lift</li>
+<li>360-degree continuous turret</li>
+<li>Automated cone alignment system</li>
+<li>Robust mecanum wheel drivebase</li>
+</ul>
+</div>
+</div>
 
-    <!-- Power Play -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/powerplay.jpg" alt="Power Play Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2022–2023: Power Play</h3>
-        <p>For Power Play, we built a turreted arm robot that specialized in cone placement. We iterated heavily on drivetrain tuning, autonomous reliability, and signal sleeve vision.</p>
-      </div>
-    </div>
+<!-- Robot Card: 2021-2022 FREIGHT FRENZY -->
+<div class="robot-card">
+<div class="robot-image-container">
+<img src="https://placehold.co/500x350/0f2027/55c6f6?text=FREIGHT+FRENZY" alt="FREIGHT FRENZY Robot">
+</div>
+<div class="robot-info">
+<h2>2021-2022: FREIGHT FRENZY</h2>
+<p>Built for the logistics-themed FREIGHT FRENZY challenge, this robot excelled at rapidly collecting and delivering freight to the shipping hubs. Its multi-directional intake and precise carousel spinner gave us a competitive edge.</p>
+<h3>Features:</h3>
+<ul>
+<li>Omni-directional intake system</li>
+<li>Variable height linear slide lift</li>
+<li>Independent carousel spinner</li>
+<li>Vision-based freight detection</li>
+</ul>
+</div>
+</div>
+</div>
+</main>
 
-    <!-- Freight Frenzy -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/freight_frenzy.jpg" alt="Freight Frenzy Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2021–2022: Freight Frenzy</h3>
-        <p>Our Freight Frenzy robot used mecanum wheels and a linear slide to score freight at multiple levels. We also experimented with active intakes and duck spinners.</p>
-      </div>
-    </div>
+<script>
+// Scroll-triggered fade-in animation for robot cards
+const observer = new IntersectionObserver(
+(entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+}
+});
+},
+{
+threshold: 0.2 // Trigger when 20% of the card is visible
+}
+);
 
-    <!-- Ultimate Goal -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/ultimate_goal.jpg" alt="Ultimate Goal Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2020–2021: Ultimate Goal</h3>
-        <p>Despite COVID, our team developed a ring-shooting robot with a hopper-style magazine and flywheel. It was our first year diving into custom CAD-heavy designs.</p>
-      </div>
-    </div>
-
-    <!-- Skystone -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/skystone.jpg" alt="Skystone Robot">
-      </div>
-      <div class="robot-info">
-        <h3>2019–2020: Skystone</h3>
-        <p>In Skystone, our team emphasized autonomous precision and block stacking. The robot was one of our first to use a full aluminum frame and active intake system.</p>
-      </div>
-    </div>
-
-    <!-- Earlier Seasons -->
-    <div class="robot-card">
-      <div class="robot-image-container">
-        <img src="assets/robots/early_years.jpg" alt="Early Robots">
-      </div>
-      <div class="robot-info">
-        <h3>2014–2018: Early Years</h3>
-        <p>From our rookie year in 2014 to Rover Ruckus in 2018, our team learned the fundamentals of engineering, programming, and teamwork. These years laid the foundation for our success in future challenges.</p>
-      </div>
-    </div>
-  </main>
+// Observe all robot cards
+document.querySelectorAll('.robot-card').forEach((card) => {
+observer.observe(card);
+});
+</script>
 </body>
 </html>
 
