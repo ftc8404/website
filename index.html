@@ -405,6 +405,85 @@
       .team-photo, .team-text {
         max-width: 100%;
       }
+      .site-footer {
+  background: linear-gradient(90deg, #0f2027, #203a43);
+  color: #d0d0d0;
+  padding: 40px 20px 20px;
+  text-shadow: 0 0 5px rgba(0,0,0,0.4);
+}
+
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-content > div {
+  flex: 1;
+  min-width: 240px;
+  margin: 10px;
+}
+
+.footer-about h3 {
+  color: #55c6f6;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 12px;
+}
+
+.footer-about p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-links h4 {
+  color: #55c6f6;
+  font-family: 'Orbitron', sans-serif;
+  margin-bottom: 8px;
+}
+
+.footer-links ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-links ul li {
+  margin-bottom: 6px;
+}
+
+.footer-links ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s;
+}
+
+.footer-links ul li a:hover {
+  color: #55c6f6;
+}
+
+.social-links li a {
+  display: inline-block;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 15px;
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+
     }
   </style>
 </head>
@@ -558,6 +637,40 @@
 
     observer.observe(document.querySelector('.team-section'));
   </script>
+
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-about">
+      <h3>About Quixilver 8404</h3>
+      <p>FTC Team 8404 Quixilver is a high‑school robotics team based in San Jose, CA. We’re passionate about innovation, STEM outreach, and building award-winning robots to compete in the FIRST Tech Challenge.</p>
+    </div>
+    <div class="footer-links">
+      <div>
+        <h4>Sitemap</h4>
+        <ul>
+          <li><a href="/website/index.html">Home</a></li>
+          <li><a href="/website/robots.html">Robots</a></li>
+          <li><a href="/website/team.html">Team</a></li>
+          <li><a href="/website/awards.html">Awards</a></li>
+          <li><a href="/website/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul class="social-links">
+          <li><a href="https://twitter.com/ftc8404">Twitter</a></li>
+          <li><a href="https://www.instagram.com/ftc8404">Instagram</a></li>
+          <li><a href="mailto:admin@quixilver8404.org">Email</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © 2025 FTC Team 8404 Quixilver. All Rights Reserved.
+  </div>
+</footer>
+
+
 </body>
 </html>
 
