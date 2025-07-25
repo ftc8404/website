@@ -2,20 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Robots - FTC Team 8404 Quixilver</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+  <link rel="manifest" href="site.webmanifest" />
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0e0e0e;
-      color: white;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      color: #fff;
     }
 
     header {
@@ -23,8 +22,8 @@
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #1f1f1f;
-      border-bottom: 1px solid #222;
+      background-color: #000;
+      border-bottom: 2px solid #55c6f6;
     }
 
     .logo-container {
@@ -39,64 +38,122 @@
     }
 
     .logo-text {
-      font-family: 'Orbitron', sans-serif;
       font-size: 1.5rem;
       color: #55c6f6;
     }
 
     nav a {
-      color: #aaa;
       margin-left: 2rem;
       text-decoration: none;
-      transition: color 0.2s;
+      color: #aaa;
+      font-size: 1rem;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover,
-    nav a.active {
+    nav a.active,
+    nav a:hover {
       color: #55c6f6;
     }
 
-    main {
-      padding: 2rem;
-      max-width: 1000px;
-      margin: auto;
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
-    h1 {
+    .robots-header {
       text-align: center;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .robots-header h1 {
+      font-size: 3rem;
       color: #55c6f6;
     }
 
-    .robot {
-      background-color: #1c1c1c;
-      padding: 1.5rem;
-      border-radius: 10px;
-      margin-top: 2rem;
-      box-shadow: 0 0 15px rgba(85, 198, 246, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .robots-header p {
+      font-size: 1.2rem;
+      color: #ccc;
     }
 
-    .robot:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 25px rgba(85, 198, 246, 0.4);
+    .robot-archive {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
     }
 
-    .robot h2 {
-      font-size: 1.8rem;
+    .robot-card {
+      background-color: #111;
+      border: 2px solid #55c6f6;
+      border-radius: 12px;
+      overflow: hidden;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+    }
+
+    .robot-card.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .robot-image-container {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .robot-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .robot-image-container:hover img {
+      transform: scale(1.05);
+    }
+
+    .robot-info {
+      padding: 1rem;
+    }
+
+    .robot-info h2 {
+      font-size: 1.4rem;
+      color: #55c6f6;
+      margin: 0 0 0.5rem 0;
+    }
+
+    .robot-info p {
+      font-size: 1rem;
+      color: #ccc;
+      margin: 0 0 1rem 0;
+    }
+
+    .robot-info h3 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+
+    .robot-info ul {
+      list-style: none;
+      padding-left: 1rem;
+      margin: 0;
+    }
+
+    .robot-info ul li::before {
+      content: '⟡ ';
       color: #55c6f6;
     }
 
-    .robot p, .robot li {
-      color: #ddd;
-    }
-
-    .robot ul {
-      padding-left: 1.5rem;
+    .robot-info ul li {
+      color: #ccc;
+      margin-bottom: 0.5rem;
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo-container" onclick="window.location.href='index.html'">
@@ -111,125 +168,224 @@
       <a href="#">Contact</a>
     </nav>
   </header>
-  <main>
-    <h1>Past Robots</h1>
 
-    <div class="robot">
-      <h2>2024–2025: INTO THE DEEP</h2>
-      <p>Designed for underwater-themed challenges, this robot improved on scoring, vision, and chassis performance.</p>
-      <ul>
-        <li>Backdrop alignment + pixel placement system</li>
-        <li>Fast intake and pixel sorting</li>
-        <li>Vision AprilTag + auto tuning</li>
-        <li>New parallel plate chassis</li>
-      </ul>
+  <main class="main-content">
+    <div class="robots-header">
+      <h1>Past Robots</h1>
+      <p>A legacy of innovation. Explore the evolution of our robot design, from our earliest to our latest championship-winning machines.</p>
     </div>
 
-    <div class="robot">
-      <h2>2023–2024: CENTERSTAGE</h2>
-      <p>Focused on drone launches, backdrop precision, and endgame scoring.</p>
-      <ul>
-        <li>2-drone launcher system</li>
-        <li>AprilTag auto pathing</li>
-        <li>360° turret for flexible delivery</li>
-        <li>Championship Semifinalist Alliance</li>
-      </ul>
-    </div>
+    <div class="robot-archive">
+      <!-- === START: ROBOT CARDS FOR EACH SEASON === -->
+      <!-- Replace placeholder image/text if you want -->
 
-    <div class="robot">
-      <h2>2022–2023: POWER PLAY</h2>
-      <p>Compact, high-speed robot optimized for cone stacking and cycling.</p>
-      <ul>
-        <li>4-bar linear slide with claw</li>
-        <li>High-efficiency ground intake</li>
-        <li>Fast 5-cone autonomous</li>
-        <li>1st place Inspire Award NorCal</li>
-      </ul>
-    </div>
+      <!-- 2014–2015 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="cascadeeffect.jpg" alt="Cascade Effect" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Cascade+Effect';">
+        </div>
+        <div class="robot-info">
+          <h2>2014–2015: CASCADE EFFECT</h2>
+          <p>Our rookie season! Focused on precision ball handling and a stable drive base.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Side sweeper intake</li>
+            <li>Rolling goal delivery</li>
+            <li>Simple tank drive</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2021–2022: FREIGHT FRENZY</h2>
-      <p>Warehouse cycling beast with a duck spinner and fully automated deposit.</p>
-      <ul>
-        <li>Double intake + 2-stage lift</li>
-        <li>Alliance shipping hub scoring</li>
-        <li>NorCal Championship Qualifier</li>
-      </ul>
-    </div>
+      <!-- 2015–2016 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="resq.jpg" alt="RES-Q" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=RES-Q';">
+        </div>
+        <div class="robot-info">
+          <h2>2015–2016: RES-Q</h2>
+          <p>Designed for climbing and debris collection — our first year attempting hanging!</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Climbing hook lift</li>
+            <li>Bucket intake</li>
+            <li>Treaded drivetrain</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2020–2021: ULTIMATE GOAL</h2>
-      <p>High-performance shooter robot with ring vision tracking.</p>
-      <ul>
-        <li>Custom flywheel shooter</li>
-        <li>360° turret and intake</li>
-        <li>Advanced odometry navigation</li>
-      </ul>
-    </div>
+      <!-- 2016–2017 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="velocityvortex.jpg" alt="Velocity Vortex" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Velocity+Vortex';">
+        </div>
+        <div class="robot-info">
+          <h2>2016–2017: VELOCITY VORTEX</h2>
+          <p>Our first flywheel shooter robot, with beacon pressers and autonomous pathing.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Flywheel particle launcher</li>
+            <li>Beacon color sensors</li>
+            <li>Omnidirectional mecanum drive</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2019–2020: SKYSTONE</h2>
-      <p>Focused on stone collection and Skybridge navigation.</p>
-      <ul>
-        <li>Side-grabbing intake arm</li>
-        <li>Foundation moving hooks</li>
-        <li>Autonomous skystone pathing</li>
-      </ul>
-    </div>
+      <!-- 2017–2018 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="relicrecovery.jpg" alt="Relic Recovery" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Relic+Recovery';">
+        </div>
+        <div class="robot-info">
+          <h2>2017–2018: RELIC RECOVERY</h2>
+          <p>Focused on glyph stacking and relic extension, with precision and reach.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Dual gripper intake</li>
+            <li>Relic arm with extension</li>
+            <li>Auto balance & alignment</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2018–2019: ROVER RUCKUS</h2>
-      <p>Lander hanging and mineral cycling robot with dual-arm design.</p>
-      <ul>
-        <li>Hanging hook lift</li>
-        <li>Mineral sweeper and sorter</li>
-        <li>Autonomous mineral sampling</li>
-      </ul>
-    </div>
+      <!-- 2018–2019 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="rovers.jpg" alt="Rover Ruckus" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Rover+Ruckus';">
+        </div>
+        <div class="robot-info">
+          <h2>2018–2019: ROVER RUCKUS</h2>
+          <p>Lander hanging, mineral sorting, and one of our first complex auto routines.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>2-stage lift</li>
+            <li>Latch & hang system</li>
+            <li>Team marker dropper</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2017–2018: RELIC RECOVERY</h2>
-      <p>Relic placement and glyph cycling robot with multi-jointed arm.</p>
-      <ul>
-        <li>Extendable relic arm</li>
-        <li>Multi-glyph tray intake</li>
-        <li>VuMark alignment</li>
-      </ul>
-    </div>
+      <!-- 2019–2020 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="skystone.jpg" alt="Skystone" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Skystone';">
+        </div>
+        <div class="robot-info">
+          <h2>2019–2020: SKYSTONE</h2>
+          <p>Precision block stacking and foundation manipulation with capstone deployment.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Stacking lift</li>
+            <li>Skystone detection</li>
+            <li>Foundation grabbers</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2016–2017: VELOCITY VORTEX</h2>
-      <p>Flywheel shooter robot designed to score particles and cap the center vortex.</p>
-      <ul>
-        <li>Beacon pusher</li>
-        <li>Fast flywheel shooter</li>
-        <li>Cap ball lift</li>
-      </ul>
-    </div>
+      <!-- 2020–2021 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="ultimategoal.jpg" alt="Ultimate Goal" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Ultimate+Goal';">
+        </div>
+        <div class="robot-info">
+          <h2>2020–2021: ULTIMATE GOAL</h2>
+          <p>A high-speed ring shooter with wobble goal delivery and turret targeting.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Ring shooter & indexer</li>
+            <li>Wobble goal arm</li>
+            <li>Vision assisted aim</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2015–2016: RES-Q</h2>
-      <p>Mountain climbing and debris clearing robot with rescue-themed mechanisms.</p>
-      <ul>
-        <li>Mountain climbing hooks</li>
-        <li>Debris sweeper</li>
-        <li>Rescue beacon auto</li>
-      </ul>
-    </div>
+      <!-- 2021–2022 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="freightfrenzy.jpg" alt="Freight Frenzy" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Freight+Frenzy';">
+        </div>
+        <div class="robot-info">
+          <h2>2021–2022: FREIGHT FRENZY</h2>
+          <p>Specialized in intake and delivery of freight onto shared hubs.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>4-bar linkage lift</li>
+            <li>Omni intake ramp</li>
+            <li>Duck spinner arm</li>
+          </ul>
+        </div>
+      </div>
 
-    <div class="robot">
-      <h2>2014–2015: CASCADE EFFECT</h2>
-      <p>Our rookie robot! Focused on stacking batons and reliable autonomous.</p>
-      <ul>
-        <li>Chain lift system</li>
-        <li>Baton funnel intake</li>
-        <li>First Inspire Award qualifier</li>
-      </ul>
-    </div>
+      <!-- 2022–2023 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="powerplay.jpg" alt="Power Play" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Power+Play';">
+        </div>
+        <div class="robot-info">
+          <h2>2022–2023: POWER PLAY</h2>
+          <p>Cone stacking on tall poles with custom claw and linear lift system.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Telescoping lift</li>
+            <li>Auto-align claw</li>
+            <li>Field sensing nav</li>
+          </ul>
+        </div>
+      </div>
 
+      <!-- 2023–2024 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="centerstage.jpg" alt="CENTERSTAGE" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Centerstage';">
+        </div>
+        <div class="robot-info">
+          <h2>2023–2024: CENTERSTAGE</h2>
+          <p>Pixel manipulation and drone launch with high reliability and accuracy.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Dual-stage lift</li>
+            <li>Chain-driven intake</li>
+            <li>Drone launcher</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2024–2025 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="placeholder.jpg" alt="2024–25 Season" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=Coming+Soon';">
+        </div>
+        <div class="robot-info">
+          <h2>2024–2025: [TBD]</h2>
+          <p>This season's robot is under development. Stay tuned for updates!</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>⚙️ In progress…</li>
+            <li>⚙️ In progress…</li>
+            <li>⚙️ In progress…</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- === END ROBOT CARDS === -->
+    </div>
   </main>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.robot-card').forEach((card) => {
+      observer.observe(card);
+    });
+  </script>
 </body>
 </html>
+
 
 
 
