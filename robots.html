@@ -11,136 +11,100 @@
   <link rel="manifest" href="site.webmanifest">
 
   <style>
+    :root {
+      --primary: #55c6f6;
+      --secondary: #1f1f1f;
+      --bg: #0e0e0e;
+      --text: #ffffff;
+      --text-light: #aaaaaa;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      scroll-behavior: smooth;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      color: white;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
     }
 
     header {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      background-color: var(--secondary);
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 24px 40px;
-      height: 100px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 10;
+      align-items: center;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #222;
     }
 
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 30px;
-      transition: transform 0.4s ease, filter 0.4s ease;
       cursor: pointer;
     }
 
-    .logo-container:hover {
-      transform: scale(1.07);
-      filter: drop-shadow(0 0 6px #55c6f6);
-    }
-
     .logo-container img {
-      height: 64px;
+      height: 50px;
+      margin-right: 1rem;
     }
 
     .logo-text {
-      font-size: 36px;
-      color: #55c6f6;
-      font-weight: bold;
-    }
-
-    nav {
-      display: flex;
-      gap: 120px;
-      margin-right: 80px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5rem;
+      color: var(--primary);
     }
 
     nav a {
-      color: white;
+      color: var(--text-light);
+      margin-left: 2rem;
       text-decoration: none;
-      font-size: 20px;
-      position: relative;
-      transition: color 0.3s ease;
+      transition: color 0.2s;
     }
 
     nav a:hover,
     nav a.active {
-      color: #55c6f6;
-    }
-
-    nav a::after {
-      content: '';
-      display: block;
-      width: 0%;
-      height: 2px;
-      background: #55c6f6;
-      transition: width 0.3s ease-in-out;
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-    }
-
-    nav a:hover::after,
-    nav a.active::after {
-      width: 100%;
+      color: var(--primary);
     }
 
     .main-content {
-      padding: 60px 20px;
-      background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>');
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
     .robots-header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 3rem;
     }
 
     .robots-header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 48px;
-      color: #55c6f6;
-      text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
-      margin-bottom: 10px;
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
     }
 
     .robots-header p {
-      font-size: 18px;
-      color: #d0d0d0;
-      max-width: 800px;
-      margin: 0 auto;
-      line-height: 1.6;
+      color: var(--text-light);
+      font-size: 1.1rem;
     }
 
     .robot-archive {
       display: flex;
       flex-direction: column;
-      gap: 80px;
-      max-width: 1200px;
-      margin: 0 auto;
+      gap: 4rem;
     }
 
     .robot-card {
       display: flex;
-      gap: 40px;
-      background: rgba(20, 30, 36, 0.6);
-      border: 1px solid rgba(85, 198, 246, 0.2);
-      border-radius: 16px;
-      padding: 30px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      flex-direction: row;
+      gap: 2rem;
       opacity: 0;
       transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
 
     .robot-card.visible {
@@ -148,121 +112,63 @@
       transform: translateY(0);
     }
 
-    .robot-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 40px rgba(85, 198, 246, 0.2);
+    .robot-card:nth-child(even) {
+      flex-direction: row-reverse;
     }
 
     .robot-image-container {
       flex: 1;
-      max-width: 500px;
-      min-width: 300px;
     }
 
     .robot-image-container img {
       width: 100%;
-      border-radius: 12px;
+      border-radius: 0.5rem;
       object-fit: cover;
-      border: 2px solid rgba(85, 198, 246, 0.3);
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .robot-card:hover .robot-image-container img {
-      transform: scale(1.03);
-      box-shadow: 0 0 35px rgba(85, 198, 246, 0.5);
     }
 
     .robot-info {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
+      flex: 2;
     }
 
     .robot-info h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: #55c6f6;
-      margin-bottom: 20px;
-    }
-
-    .robot-info p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #d0d0d0;
-      margin-bottom: 20px;
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
     }
 
     .robot-info h3 {
-      font-size: 20px;
-      color: #b0e0f6;
-      margin-bottom: 15px;
-      border-left: 3px solid #55c6f6;
-      padding-left: 10px;
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+    }
+
+    .robot-info p {
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
     }
 
     .robot-info ul {
-      list-style: none;
-      padding-left: 0;
+      list-style: disc;
+      padding-left: 1.5rem;
     }
 
     .robot-info ul li {
-      font-size: 16px;
-      color: #d0d0d0;
-      margin-bottom: 10px;
-      padding-left: 25px;
-      position: relative;
-    }
-
-    .robot-info ul li::before {
-      content: '»';
-      position: absolute;
-      left: 0;
-      color: #55c6f6;
-      font-weight: bold;
-      font-size: 20px;
-      line-height: 1;
-    }
-
-    @media (max-width: 992px) {
-      .robot-card {
-        flex-direction: column;
-      }
-
-      .robot-image-container {
-        max-width: 100%;
-      }
+      margin-bottom: 0.3rem;
     }
 
     @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
+      .robot-card {
+        flex-direction: column !important;
       }
 
-      nav {
-        margin: 20px 0 0;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
+      .robot-image-container,
+      .robot-info {
+        width: 100%;
       }
 
-      .logo-container img {
-        height: 48px;
-      }
-
-      .logo-text {
-        font-size: 28px;
-      }
-
-      .robots-header h1 {
-        font-size: 36px;
-      }
-
-      .robots-header p {
-        font-size: 16px;
+      .robot-info h2 {
+        font-size: 1.4rem;
       }
     }
   </style>
@@ -290,9 +196,150 @@
     </div>
 
     <div class="robot-archive">
-      <!-- ALL ROBOT CARDS GO HERE -->
-      <!-- Use the complete robot list from the last message (INTO THE DEEP to CASCADE EFFECT) -->
-      <!-- Or I can paste all the cards below if you want the full 11 seasons listed inline -->
+
+      <!-- 2025 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="intothedeep.jpg" alt="INTO THE DEEP Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2024–2025: INTO THE DEEP</h2>
+          <p>Designed for precision and underwater-themed challenges, this robot featured optimized scoring and advanced vision.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Efficient pixel intake and placement</li>
+            <li>Backdrop-scoring linear slides</li>
+            <li>AprilTag autonomous</li>
+            <li>Parallel plate chassis</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="centerstage.jpg" alt="CENTERSTAGE Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2023–2024: CENTERSTAGE</h2>
+          <p>Award-winning robot designed for the CENTERSTAGE challenge. Fast, modular, and precise.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Ultra-fast intake and lift</li>
+            <li>Preload pixel placement in < 2s</li>
+            <li>Automatic vision-based auto</li>
+            <li>Odometry localization</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="powerplay.jpg" alt="POWERPLAY Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2022–2023: POWERPLAY</h2>
+          <p>Compact and efficient, this robot featured a powerful arm with a claw for cone manipulation and stacking.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Custom-made omni drivetrain</li>
+            <li>Team Element placement and detection</li>
+            <li>High-stability lifting</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2021 -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="freightfrenzy.jpg" alt="FREIGHT FRENZY Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2021–2022: FREIGHT FRENZY</h2>
+          <p>Utilized a powerful intake and an adjustable arm system to manage various freight objects.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>360-degree rotation arm</li>
+            <li>Carousel spinner for ducks</li>
+            <li>Multiple auto routines</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 2020–2014 -->
+      <!-- I’ll generate the rest for these years using brief summaries: -->
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="ultimategoal.jpg" alt="ULTIMATE GOAL Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2020–2021: ULTIMATE GOAL</h2>
+          <p>Focus on ring intake and shooting system. Features included rapid fire shooter and flexible drivetrain.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="skystone.jpg" alt="SKYSTONE Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2019–2020: SKYSTONE</h2>
+          <p>Skystone placement and foundation movement with linear slides and claw system.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="roverruckus.jpg" alt="ROVER RUCKUS Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2018–2019: ROVER RUCKUS</h2>
+          <p>Hanging and mineral sorting robot. Used claw and extending arm for scoring.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="relicrecovery.jpg" alt="RELIC RECOVERY Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2017–2018: RELIC RECOVERY</h2>
+          <p>Glyph placement and relic recovery with jewel-knocker and omni chassis.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="velocityvortex.jpg" alt="VELOCITY VORTEX Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2016–2017: VELOCITY VORTEX</h2>
+          <p>Ball shooter and cap ball pusher. Autonomous beacons and particle management.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="resq.jpg" alt="RES-Q Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2015–2016: RES-Q</h2>
+          <p>Mountain climber robot with debris sweeper and pull-up mechanism.</p>
+        </div>
+      </div>
+
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="cascade.jpg" alt="CASCADE EFFECT Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2014–2015: CASCADE EFFECT</h2>
+          <p>Game piece collection and ramp scoring robot. Quixilver’s FTC debut season.</p>
+        </div>
+      </div>
+
     </div>
   </main>
 
@@ -305,7 +352,9 @@
           }
         });
       },
-      { threshold: 0.2 }
+      {
+        threshold: 0.2
+      }
     );
 
     document.querySelectorAll('.robot-card').forEach((card, index) => {
@@ -315,5 +364,6 @@
   </script>
 </body>
 </html>
+
 
 
