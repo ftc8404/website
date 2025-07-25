@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FTC Team 8404 - Quixilver</title>
+  <title>Robots - FTC Team 8404 Quixilver</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
   <style>
+    /* --- Base and Header Styles (from your original code) --- */
     * {
       margin: 0;
       padding: 0;
@@ -69,7 +70,7 @@
       transition: color 0.3s ease;
     }
 
-    nav a:hover {
+    nav a:hover, nav a.active {
       color: #55c6f6;
     }
 
@@ -85,263 +86,149 @@
       left: 0;
     }
 
-    nav a:hover::after {
+    nav a:hover::after, nav a.active::after {
       width: 100%;
     }
+    
+    /* --- New Styles for the Robots Page --- */
 
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
-      animation: pulseBackground 6s infinite alternate;
+    .main-content {
+        padding: 60px 20px;
+        background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>')
     }
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
-      background-size: 300px;
-      z-index: 1;
-      opacity: 0.5;
-      animation: gridPulse 8s infinite alternate;
+    .robots-header {
+        text-align: center;
+        margin-bottom: 60px;
     }
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
-      background-size: 300px;
-      z-index: 1;
-      opacity: 0.5;
-      animation: rotateGear 25s linear infinite;
+    .robots-header h1 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 48px;
+        color: #55c6f6;
+        text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
+        margin-bottom: 10px;
     }
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      opacity: 0.3;
+    .robots-header p {
+        font-size: 18px;
+        color: #d0d0d0;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
     }
 
-    .robot-render {
-      width: 80vw;
-      max-width: 1000px;
-      border-radius: 30px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      object-fit: cover;
-      z-index: 2;
-      clip-path: inset(3mm 2mm round 30px);
-      box-shadow:
-        0 0 50px rgba(85, 198, 246, 0.8),
-        0 0 80px rgba(85, 198, 246, 0.6);
-      background-color: #0a0a0a;
-      position: relative;
-      padding: 10px;
-      border: 2px solid rgba(85, 198, 246, 0.3);
+    .robot-archive {
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
-    .robot-render::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
-      z-index: -1;
-      opacity: 0.7;
-      animation: pulseFrame 3s infinite linear;
+    .robot-card {
+        display: flex;
+        gap: 40px;
+        background: rgba(20, 30, 36, 0.6);
+        border: 1px solid rgba(85, 198, 246, 0.2);
+        border-radius: 16px;
+        padding: 30px;
+        box-shadow: 0 0 25px rgba(0,0,0,0.5);
+        transition: transform 0.4s ease, box-shadow 0.4s ease;
+        opacity: 0;
+        transform: translateY(40px);
     }
 
-    .robot-render:hover {
-      transform: scale(1.06);
-      box-shadow:
-        0 0 100px rgba(85, 198, 246, 1),
-        0 0 120px rgba(85, 198, 246, 0.8);
+    .robot-card.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .robot-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 40px rgba(85, 198, 246, 0.2);
     }
 
-    .robot-render.clicked {
-      transform: scale(1.06);
-      box-shadow:
-        0 0 100px rgba(85, 198, 246, 1),
-        0 0 120px rgba(85, 198, 246, 0.8);
+    .robot-image-container {
+        flex: 1;
+        max-width: 500px;
+        min-width: 300px;
     }
 
-    .hero-label {
-      position: absolute;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 100px;
-      color: #55c6f6;
-      text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6);
-      pointer-events: none;
-      user-select: none;
-      z-index: 3;
-      animation: pulseGlow 2s ease-in-out infinite;
+    .robot-image-container img {
+        width: 100%;
+        border-radius: 12px;
+        object-fit: cover;
+        border: 2px solid rgba(85, 198, 246, 0.3);
+        box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .top-left-label {
-      top: 15%;
-      left: 5%;
+    .robot-card:hover .robot-image-container img {
+        transform: scale(1.03);
+        box-shadow: 0 0 35px rgba(85, 198, 246, 0.5);
     }
 
-    .bottom-right-label {
-      bottom: 10%;
-      right: 5%;
-      font-style: italic;
-      font-size: 90px;
+    .robot-info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
     }
 
-    @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
-      50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
+    .robot-info h2 {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        color: #55c6f6;
+        margin-bottom: 20px;
     }
 
-    @keyframes pulseBackground {
-      0% { background-position: 0% 0%; }
-      100% { background-position: 0% 100%; }
+    .robot-info p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #d0d0d0;
+        margin-bottom: 20px;
     }
 
-    @keyframes gridPulse {
-      0% { opacity: 0.5; }
-      100% { opacity: 0.7; }
+    .robot-info h3 {
+        font-size: 20px;
+        color: #b0e0f6;
+        margin-bottom: 15px;
+        border-left: 3px solid #55c6f6;
+        padding-left: 10px;
     }
 
-    @keyframes rotateGear {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
+    .robot-info ul {
+        list-style: none;
+        padding-left: 0;
     }
 
-    @keyframes pulseFrame {
-      0% { opacity: 0.7; }
-      50% { opacity: 0.9; }
-      100% { opacity: 0.7; }
+    .robot-info ul li {
+        font-size: 16px;
+        color: #d0d0d0;
+        margin-bottom: 10px;
+        padding-left: 25px;
+        position: relative;
     }
 
-    .team-section {
-      max-width: 1200px;
-      margin: 80px auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-      background: linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
-      position: relative;
+    .robot-info ul li::before {
+        content: '»';
+        position: absolute;
+        left: 0;
+        color: #55c6f6;
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 1;
     }
 
-    .team-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGlow"><feGaussianBlur stdDeviation="1" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/></feMerge></filter></defs><g filter="url(#teamGlow)"><path d="M10 10 H100 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.2"/></g></svg>') repeat;
-      opacity: 0.1;
-      z-index: 0;
-    }
-
-    .team-photo, .team-text {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      position: relative;
-      z-index: 1;
-    }
-
-    .team-photo.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.2s;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-    }
-
-    .team-text.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.4s;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-    }
-
-    .team-photo {
-      flex: 1;
-      max-width: 600px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow:
-        0 0 40px rgba(85, 198, 246, 0.6),
-        0 0 60px rgba(85, 198, 246, 0.4);
-      object-fit: cover;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .team-photo:hover {
-      transform: scale(1.03);
-      box-shadow:
-        0 0 70px rgba(85, 198, 246, 0.9),
-        0 0 50px rgba(85, 198, 246, 0.6);
-    }
-
-    .team-text {
-      flex: 1;
-      max-width: 550px;
-      background: rgba(20, 20, 20, 0.8);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
-      transition: transform 0.4s ease;
-    }
-
-    .team-text:hover {
-      transform: translateY(-5px);
-    }
-
-    .team-text h2 {
-      color: #55c6f6;
-      font-weight: 700;
-      font-size: 34px;
-      margin-bottom: 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
-
-    .team-text p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #d0d0d0;
-      margin-bottom: 16px;
-    }
-
-    .learn-more {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #55c6f6;
-      color: #0d0d0d;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .learn-more:hover {
-      background: #3aa8d6;
-      transform: scale(1.05);
+    /* --- Responsive Design --- */
+    @media (max-width: 992px) {
+        .robot-card {
+            flex-direction: column;
+        }
+        .robot-image-container {
+            max-width: 100%;
+        }
     }
 
     @media (max-width: 768px) {
@@ -365,188 +252,119 @@
       .logo-text {
         font-size: 28px;
       }
-
-      .hero-label {
-        font-size: 60px;
+      
+      .robots-header h1 {
+        font-size: 36px;
       }
-
-      .bottom-right-label {
-        font-size: 50px;
-      }
-
-      .top-left-label {
-        top: 10%;
-        left: 5%;
-      }
-
-      .bottom-right-label {
-        bottom: 10%;
-        right: 5%;
-      }
-
-      .robot-render {
-        width: 90vw;
-        max-width: 90vw;
-      }
-
-      .team-section {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .team-photo, .team-text {
-        max-width: 100%;
+      .robots-header p {
+        font-size: 16px;
       }
     }
   </style>
 </head>
 
 <body>
+  <!-- Reusable Header -->
   <header>
-    <div class="logo-container">
-      <img src="logo_old5.png" alt="Team Logo" />
+    <div class="logo-container" onclick="window.location.href='index.html'">
+      <!-- Make sure you have your logo in the same directory -->
+      <img src="https://quixilver8404.org/uploads/1/4/2/1/142171833/published/logo-old5.png?1675753493" alt="Team Logo" />
       <div class="logo-text">FTC Team 8404</div>
     </div>
     <nav>
-      <a href="#">Home</a>
-      <a href="#">Robots</a>
+      <!-- Assuming your homepage is index.html -->
+      <a href="index.html">Home</a>
+      <a href="robots.html" class="active">Robots</a>
       <a href="#">Team</a>
       <a href="#">Awards</a>
       <a href="#">Contact</a>
     </nav>
   </header>
 
-  <section class="hero">
-    <canvas id="particles"></canvas>
-    <img class="robot-render" src="qual1_team.png" alt="Robot Render" />
-    <div class="hero-label top-left-label">8404</div>
-    <div class="hero-label bottom-right-label">Quixilver</div>
-  </section>
-
-  <section class="team-section">
-    <img class="team-photo" src="team_photo.jpg" alt="Team Photo" />
-    <div class="team-text">
-      <h2>About Quixilver</h2>
-      <p>
-        FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
-      </p>
-      <p>
-        We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of roboticists.
-      </p>
-      <a href="#team" class="learn-more">Learn More</a>
+  <!-- Main Content for Robots Page -->
+  <main class="main-content">
+    <div class="robots-header">
+        <h1>Robot Archive</h1>
+        <p>A legacy of innovation. Explore the evolution of our robots, from our earliest designs to our latest championship-contending machines.</p>
     </div>
-  </section>
+
+    <div class="robot-archive">
+      <!-- Robot Card: 2023-2024 CENTERSTAGE -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="https://i.imgur.com/kY1yBvC.png" alt="CENTERSTAGE Robot" onerror="this.onerror=null;this.src='https://placehold.co/500x350/0f2027/55c6f6?text=CENTERSTAGE';">
+        </div>
+        <div class="robot-info">
+          <h2>2023-2024: CENTERSTAGE</h2>
+          <p>Our 2023-2024 season robot features our most advanced parallel plate drivebase yet and competed in the South Bay League. It can pick up two pixels at a time and can accurately and precisely output each pixel on the backdrop.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Parallel plate drivebase</li>
+            <li>Auxiliary intake mechanism</li>
+            <li>Can go through the middle gate</li>
+            <li>A downward flipping output mechanism that sits flush with the backdrop</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Robot Card: 2022-2023 POWERPLAY -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="https://placehold.co/500x350/0f2027/55c6f6?text=POWERPLAY" alt="POWERPLAY Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2022-2023: POWERPLAY</h2>
+          <p>This robot was designed for high-speed cone cycling. Featuring a differential-based lift and a turret, it could quickly score on any height of junction from a single stable position, making it a formidable opponent during the POWERPLAY season.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Differential cascading lift</li>
+            <li>360-degree continuous turret</li>
+            <li>Automated cone alignment system</li>
+            <li>Robust mecanum wheel drivebase</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Robot Card: 2021-2022 FREIGHT FRENZY -->
+      <div class="robot-card">
+        <div class="robot-image-container">
+          <img src="https://placehold.co/500x350/0f2027/55c6f6?text=FREIGHT+FRENZY" alt="FREIGHT FRENZY Robot">
+        </div>
+        <div class="robot-info">
+          <h2>2021-2022: FREIGHT FRENZY</h2>
+          <p>Built for the logistics-themed FREIGHT FRENZY challenge, this robot excelled at rapidly collecting and delivering freight to the shipping hubs. Its multi-directional intake and precise carousel spinner gave us a competitive edge.</p>
+          <h3>Features:</h3>
+          <ul>
+            <li>Omni-directional intake system</li>
+            <li>Variable height linear slide lift</li>
+            <li>Independent carousel spinner</li>
+            <li>Vision-based freight detection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </main>
 
   <script>
-    // Parallax effect for robot render
-    let mouseX = 0, mouseY = 0;
-    window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX - window.innerWidth / 2) / 50;
-      mouseY = (e.clientY - window.innerHeight / 2) / 50;
-      updateRobotTransform();
-    });
-
-    // Click effect for robot render
-    const robot = document.querySelector('.robot-render');
-    robot.addEventListener('click', () => {
-      robot.classList.add('clicked');
-      setTimeout(() => robot.classList.remove('clicked'), 500);
-    });
-
-    // Consolidate transform updates to prevent jitter
-    function updateRobotTransform() {
-      const robot = document.querySelector('.robot-render');
-      const isHovering = robot.matches(':hover');
-      const scale = isHovering ? 1.06 : 1;
-      robot.style.transform = `translate(${mouseX}px, ${mouseY}px) scale(${scale})`;
-    }
-
-    // Particle system for hero section (around robot)
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles = [];
-    const particleCount = 20;
-
-    class Particle {
-      constructor() {
-        const robotRect = robot.getBoundingClientRect();
-        this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-        this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-        this.size = Math.random() * 2 + 1;
-        this.angle = Math.random() * Math.PI * 2;
-        this.speed = Math.random() * 0.1 + 0.05;
-      }
-
-      update() {
-        const robotRect = robot.getBoundingClientRect();
-        const centerX = robotRect.left + robotRect.width / 2;
-        const centerY = robotRect.top + robotRect.height / 2;
-        this.angle += this.speed;
-        this.x = centerX + Math.cos(this.angle) * 150;
-        this.y = centerY + Math.sin(this.angle) * 150;
-      }
-
-      draw() {
-        ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    let lastTime = 0;
-    const fps = 60;
-    const interval = 1000 / fps;
-
-    function animateParticles(timestamp) {
-      if (!lastTime) lastTime = timestamp;
-      const delta = timestamp - lastTime;
-
-      if (delta >= interval) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(particle => {
-          particle.update();
-          particle.draw();
-        });
-        lastTime = timestamp - (delta % interval);
-      }
-      requestAnimationFrame(animateParticles);
-    }
-
-    animateParticles();
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particles.forEach(p => {
-        const robotRect = robot.getBoundingClientRect();
-        p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-        p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-      });
-    });
-
-    // Scroll animations
+    // Scroll-triggered fade-in animation for robot cards
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
-              setTimeout(() => el.classList.add('visible'), index * 200);
-            });
+            entry.target.classList.add('visible');
           }
         });
       },
-      { threshold: 0.2 }
+      {
+        threshold: 0.2 // Trigger when 20% of the card is visible
+      }
     );
 
-    observer.observe(document.querySelector('.team-section'));
+    // Observe all robot cards
+    document.querySelectorAll('.robot-card').forEach((card) => {
+      observer.observe(card);
+    });
   </script>
 </body>
 </html>
+
