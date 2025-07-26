@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Contact - FTC Team 8404 Quixilver</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a2b7b1a5e1.js" crossorigin="anonymous"></script>
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -146,6 +148,150 @@
         padding: 30px 20px;
       }
     }
+    .site-footer {
+  background: linear-gradient(90deg, #0f2027, #203a43);
+  color: #d0d0d0;
+  padding: 60px 40px 30px;
+  font-family: 'Segoe UI', sans-serif;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.footer-brand img {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 8px #55c6f6);
+}
+
+.footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #ccc;
+  max-width: 380px;
+}
+
+.footer-links {
+  flex: 1.5;
+}
+
+.footer-links h4 {
+  font-family: 'Orbitron', sans-serif;
+  color: #55c6f6;
+  margin-bottom: 12px;
+}
+
+.link-bubbles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.link-bubbles a {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e0e0e0;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.link-bubbles a:hover {
+  background: #55c6f6;
+  color: #0d0d0d;
+  transform: scale(1.05);
+}
+
+.footer-socials {
+  flex: 1.5;
+  text-align: right;
+}
+
+.footer-socials h4 {
+  font-family: 'Orbitron', sans-serif;
+  color: #55c6f6;
+  margin-bottom: 12px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 18px;
+  justify-content: flex-end;
+  font-size: 32px;
+}
+
+.social-icons a {
+  transition: transform 0.3s ease, filter 0.4s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 8px #55c6f6);
+}
+
+.social-icons .fa-instagram { color: #e4405f; }
+.social-icons .fa-twitter { color: #1da1f2; }
+.social-icons .fa-facebook { color: #1877f2; }
+.social-icons .fa-youtube { color: #ff0000; }
+
+.footer-bottom {
+  margin-top: 40px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 15px;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer-brand {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-brand img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .social-icons {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .footer-socials {
+    text-align: center;
+  }
+
+  .link-bubbles {
+    justify-content: center;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -172,6 +318,50 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Logo + About -->
+    <div class="footer-brand">
+      <img src="logo_old5.png" alt="Team 8404 Logo">
+      <p>
+        FTC Team 8404 Quixilver is a high-school robotics team based in San Jose, CA. We build award-winning robots, promote STEM, and compete in the FIRST Tech Challenge with passion and precision.
+      </p>
+    </div>
+
+    <!-- Sitemap (bubble-style) -->
+    <div class="footer-links">
+      <h4>Sitemap</h4>
+      <div class="link-bubbles">
+        <a href="/website/index.html">Home</a>
+        <a href="/website/robots.html">Robots</a>
+        <a href="/website/team.html">Team</a>
+        <a href="/website/awards.html">Awards</a>
+        <a href="/website/contact.html">Contact</a>
+      </div>
+    </div>
+
+    <!-- Socials -->
+    <div class="footer-socials">
+      <h4>Follow Us</h4>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/ftc8404" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://twitter.com/ftc8404" target="_blank" aria-label="X (formerly Twitter)">
+          <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/x.svg"
+               alt="X Logo"
+               style="height: 32px; width: 32px; vertical-align: middle; margin-top: -2px; filter: drop-shadow(0 0 4px #00000088); transition: transform 0.3s ease;"
+               onmouseover="this.style.transform='scale(1.2)'"
+               onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <a href="https://www.facebook.com/ftc8404" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+        <a href="https://www.youtube.com/@Quixilver-lc3tv" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 FTC Team 8404 Quixilver. All rights reserved.
+  </div>
+</footer>
 
 </body>
 </html>
