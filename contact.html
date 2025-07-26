@@ -12,6 +12,18 @@
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="manifest" href="site.webmanifest">
   <style>
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
     * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -308,7 +320,7 @@
       <a href="contact.html" class="active">Contact</a>
     </nav>
   </header>
-
+  <main>
   <section class="contact-section">
     <h1>Contact Us</h1>
     <form action="https://formspree.io/f/xrblqljz" method="POST">
@@ -318,6 +330,7 @@
       <button type="submit">Send Message</button>
     </form>
   </section>
+  </main>
 <footer class="site-footer">
   <div class="footer-container">
     <!-- Logo + About -->
