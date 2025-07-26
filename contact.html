@@ -199,15 +199,18 @@ main {
   max-width: 380px;
 }
 
+
 .footer-links {
   flex: 1.5;
   display: flex;
-  justify-content: space-between;
-  gap: 40px;
+  gap: 60px;
 }
 
 .footer-links > div {
-  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* aligns heading + bubbles to the same left */
+  gap: 10px;
 }
 
 
