@@ -148,22 +148,15 @@
     }
 
     .robot-render {
-      will-change: transform;
-      width: 80vw;
-      max-width: 1000px;
-      border-radius: 30px;
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
-      object-fit: cover;
-      z-index: 2;
-      clip-path: inset(3mm 2mm round 30px);
-      box-shadow:
-        0 0 50px rgba(85, 198, 246, 0.8),
-        0 0 80px rgba(85, 198, 246, 0.6);
-      background-color: #0a0a0a;
-      position: relative;
-      padding: 10px;
-      border: 2px solid rgba(85, 198, 246, 0.3);
-    }
+  background-color: transparent;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  z-index: 2;
+  position: relative;
+  filter: drop-shadow(0 0 8px #55c6f6);
+}
+
 
     .robot-render::before {
       content: '';
