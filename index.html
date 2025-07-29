@@ -195,24 +195,30 @@
   animation: pulseGlow 3s infinite ease-in-out, floatSubtle 8s ease-in-out infinite;
 }
 
+
 .top-left-label {
-  top: 32%;
-  left: 8%;
+  top: 28%;
+  left: 6%;
+  font-size: 120px;
   transform: rotate(-10deg);
   background: linear-gradient(90deg, #55c6f6, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
 }
 
 .bottom-right-label {
-  bottom: 32%;
+  bottom: 28%;
   right: 6%;
-  transform: rotate(10deg);
+  font-size: 110px;
   font-style: italic;
+  transform: rotate(10deg);
   background: linear-gradient(270deg, #55c6f6, #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
 }
+
 
 
 .hero-overlay-grid {
