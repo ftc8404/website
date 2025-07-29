@@ -98,18 +98,19 @@
       width: 100%;
     }
 
-
 .hero {
   position: relative;
-  padding: 40px 0 60px;
+  padding: 60px 0 100px;
   background: radial-gradient(circle at center, #0f2027 0%, #203a43 40%, #0d0d0d 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  overflow: hidden;
-  z-index: 1;
+  overflow: visible; /* Allow content to flow */
+  z-index: 0;
 }
+
+
 
     .hero::before {
       content: '';
@@ -151,14 +152,15 @@
 
 
 .robot-render {
-  max-width: 88%;
-  max-height: 80vh;
-  margin-top: -30px; /* Move it slightly up */
-  filter: drop-shadow(0 0 18px #55c6f6);
-  transition: none !important; /* Removes all hover effects */
-  pointer-events: none; /* Prevents any accidental interactions */
-  z-index: 2;
+  width: 90%;
+  max-width: 1000px;
+  height: auto;
+  margin-bottom: 40px;
+  filter: drop-shadow(0 0 12px #55c6f6);
+  pointer-events: none;
+  transition: none !important; /* kill hover grow behavior */
 }
+
 
 
     .robot-render::before {
@@ -246,6 +248,7 @@
     }
 
     .team-section {
+      margin-top: 60px;
       max-width: 1200px;
       margin: 80px auto;
       padding: 0 20px;
