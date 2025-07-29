@@ -158,6 +158,7 @@
   position: relative;
   margin-top: -60px;
   filter: drop-shadow(0 0 12px #55c6f6);
+  transform: translateX(-10px); /* Adjust as needed */
 }
 
 
@@ -213,6 +214,58 @@
   -webkit-text-fill-color: transparent;
 }
 
+
+.hero-overlay-grid {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  background-image: 
+    repeating-linear-gradient(
+      to right,
+      rgba(85, 198, 246, 0.08),
+      rgba(85, 198, 246, 0.08) 1px,
+      transparent 1px,
+      transparent 60px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(85, 198, 246, 0.05),
+      rgba(85, 198, 246, 0.05) 1px,
+      transparent 1px,
+      transparent 60px
+    );
+  pointer-events: none;
+  animation: gridFade 6s ease-in-out infinite alternate;
+}
+
+@keyframes gridFade {
+  from { opacity: 0.05; }
+  to { opacity: 0.15; }
+}
+
+
+.light-sweep {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
+  animation: sweep 6s linear infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes sweep {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
 
 
 
@@ -608,7 +661,9 @@
 
   <section class="hero">
     <canvas id="particles"></canvas>
+    <div class="hero-overlay-grid"></div>
     <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
+    <div class="light-sweep"></div>
     <div class="hero-label top-left-label">8404</div>
     <div class="hero-label bottom-right-label">Quixilver</div>
   </section>
