@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,21 +99,16 @@
       width: 100%;
     }
 
-  <canvas id="particles"></canvas>
-
-.hero {
-  position: relative;
-  padding: 60px 0 100px;
-  background: radial-gradient(circle at center, #0f2027 0%, #203a43 40%, #0d0d0d 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  overflow: visible; /* Allow content to flow */
-  z-index: 0;
-}
-
-
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
+      animation: pulseBackground 6s infinite alternate;
+    }
 
     .hero::before {
       content: '';
@@ -152,17 +148,15 @@
       opacity: 0.3;
     }
 
-
-.robot-render {
-  width: 90%;
-  max-width: 1000px;
+    .robot-render {
+  background-color: transparent;
+  display: block;
+  max-width: 100%;
   height: auto;
-  margin-bottom: 40px;
-  filter: drop-shadow(0 0 12px #55c6f6);
-  pointer-events: none;
-  transition: none !important; /* kill hover grow behavior */
+  z-index: 2;
+  position: relative;
+  filter: drop-shadow(0 0 8px #55c6f6);
 }
-
 
 
     .robot-render::before {
@@ -192,41 +186,35 @@
         0 0 120px rgba(85, 198, 246, 0.8);
     }
 
-.hero-label {
-  font-family: 'Orbitron', sans-serif;
-  color: #55c6f6;
-  text-shadow: 0 0 10px #55c6f6, 0 0 20px #55c6f6, 0 0 30px rgba(85,198,246,0.5);
-  font-size: 64px;
-  letter-spacing: 2px;
-  position: absolute;
-  z-index: 3;
-  animation: pulseText 4s ease-in-out infinite;
-}
+    .hero-label {
+      position: absolute;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 100px;
+      color: #55c6f6;
+      text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6);
+      pointer-events: none;
+      user-select: none;
+      z-index: 3;
+      animation: pulseGlow 2s ease-in-out infinite;
+    }
 
-.top-left-label {
-  top: 60px;
-  left: 60px;
-}
+    .top-left-label {
+      top: 15%;
+      left: 5%;
+    }
 
-
-.bottom-right-label {
-  bottom: 60px;
-  right: 60px;
-}
+    .bottom-right-label {
+      bottom: 10%;
+      right: 5%;
+      font-style: italic;
+      font-size: 90px;
+    }
 
     @keyframes pulseGlow {
       0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
       50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
     }
-
-    @keyframes pulseText {
-  0%, 100% {
-    text-shadow: 0 0 10px #55c6f6, 0 0 20px #55c6f6;
-  }
-  50% {
-    text-shadow: 0 0 20px #55c6f6, 0 0 40px #55c6f6;
-  }
-}
 
     @keyframes pulseBackground {
       0% { background-position: 0% 0%; }
@@ -250,7 +238,6 @@
     }
 
     .team-section {
-      margin-top: 60px;
       max-width: 1200px;
       margin: 80px auto;
       padding: 0 20px;
@@ -260,7 +247,7 @@
       gap: 40px;
       flex-wrap: wrap;
       position: relative;
-      z-index: 2;
+      z-index: 1;
       background-image:
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><path d='M0 0 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 20 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 40 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 60 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 80 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/></svg>"),
     linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
@@ -594,6 +581,7 @@
   </header>
 
   <section class="hero">
+    <canvas id="particles"></canvas>
     <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
     <div class="hero-label top-left-label">8404</div>
     <div class="hero-label bottom-right-label">Quixilver</div>
@@ -626,7 +614,13 @@
       setTimeout(() => robot.classList.remove('clicked'), 500);
     });
 
+    robot.addEventListener('mouseenter', () => {
+      robot.style.transform = 'scale(1.06)';
+    });
 
+    robot.addEventListener('mouseleave', () => {
+      robot.style.transform = 'scale(1)';
+    });
 
 
     // Particle system for hero section (around robot)
@@ -778,5 +772,6 @@
 
 </body>
 </html>
+
 
 
