@@ -99,15 +99,16 @@
     }
 
     .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
-      animation: pulseBackground 6s infinite alternate;
-    }
+  position: relative;
+  background-color: #0d0d0d;
+  background-image: radial-gradient(#203a43 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+  padding: 80px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
 
     .hero::before {
       content: '';
@@ -147,15 +148,16 @@
       opacity: 0.3;
     }
 
-    .robot-render {
-  background-color: transparent;
+   .robot-render {
+  max-width: 90%;
+  max-height: 80vh;
+  margin: 0 auto;
   display: block;
-  max-width: 100%;
-  height: auto;
+  filter: drop-shadow(0 0 15px #55c6f6);
   z-index: 2;
   position: relative;
-  filter: drop-shadow(0 0 8px #55c6f6);
 }
+
 
 
     .robot-render::before {
@@ -186,28 +188,22 @@
     }
 
     .hero-label {
-      position: absolute;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 100px;
-      color: #55c6f6;
-      text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6);
-      pointer-events: none;
-      user-select: none;
-      z-index: 3;
-      animation: pulseGlow 2s ease-in-out infinite;
+      font-size: 80px;
+  color: #55c6f6;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 20px #55c6f6, 0 0 40px #55c6f6;
+  z-index: 3;
+  position: absolute;
     }
 
     .top-left-label {
-      top: 15%;
-      left: 5%;
+      top: 40px;
+  left: 60px;
     }
 
     .bottom-right-label {
-      bottom: 10%;
-      right: 5%;
-      font-style: italic;
-      font-size: 90px;
+      bottom: 40px;
+  right: 60px;
     }
 
     @keyframes pulseGlow {
@@ -580,7 +576,6 @@
   </header>
 
   <section class="hero">
-    <canvas id="particles"></canvas>
     <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
     <div class="hero-label top-left-label">8404</div>
     <div class="hero-label bottom-right-label">Quixilver</div>
