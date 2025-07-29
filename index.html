@@ -148,15 +148,17 @@
       opacity: 0.3;
     }
 
-    .robot-render {
+.robot-render {
   background-color: transparent;
   display: block;
-  max-width: 100%;
+  max-width: 85%;
   height: auto;
   z-index: 2;
   position: relative;
+  margin-top: -40px;
   filter: drop-shadow(0 0 8px #55c6f6);
 }
+
 
 
     .robot-render::before {
@@ -172,19 +174,6 @@
       animation: pulseFrame 3s infinite linear;
     }
 
-    .robot-render:hover {
-      transform: scale(1.06);
-      box-shadow:
-        0 0 100px rgba(85, 198, 246, 1),
-        0 0 120px rgba(85, 198, 246, 0.8);
-    }
-
-    .robot-render.clicked {
-      transform: scale(1.06);
-      box-shadow:
-        0 0 100px rgba(85, 198, 246, 1),
-        0 0 120px rgba(85, 198, 246, 0.8);
-    }
 
     .hero-label {
       position: absolute;
@@ -199,17 +188,19 @@
       animation: pulseGlow 2s ease-in-out infinite;
     }
 
-    .top-left-label {
-      top: 15%;
-      left: 5%;
-    }
+.top-left-label {
+  top: 12%;
+  left: 5%;
+  letter-spacing: 6px;
+}
 
-    .bottom-right-label {
-      bottom: 10%;
-      right: 5%;
-      font-style: italic;
-      font-size: 90px;
-    }
+.bottom-right-label {
+  bottom: 8%;
+  right: 5%;
+  font-style: italic;
+  font-size: 90px;
+  letter-spacing: 3px;
+}
 
     @keyframes pulseGlow {
       0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
@@ -609,18 +600,7 @@
   
     // Click effect for robot render
     const robot = document.querySelector('.robot-render');
-    robot.addEventListener('click', () => {
-      robot.classList.add('clicked');
-      setTimeout(() => robot.classList.remove('clicked'), 500);
-    });
-
-    robot.addEventListener('mouseenter', () => {
-      robot.style.transform = 'scale(1.06)';
-    });
-
-    robot.addEventListener('mouseleave', () => {
-      robot.style.transform = 'scale(1)';
-    });
+    
 
 
     // Particle system for hero section (around robot)
