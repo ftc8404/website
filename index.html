@@ -2,601 +2,600 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Home - 8404 Quixilver</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hASHYOURHASHKEY" crossorigin="anonymous" referrerpolicy="no-referrer" />  
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      scroll-behavior: smooth;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home - 8404 Quixilver</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-hASHYOURHASHKEY" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!-- Favicon -->
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+scroll-behavior: smooth;
+}
 
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      color: white;
-      overflow-x: hidden;
-    }
+body {
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+background-color: #0d0d0d;
+color: white;
+overflow-x: hidden;
+}
 
-    header {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 40px;
-      height: 100px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 10;
-    }
+header {
+background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 24px 40px;
+height: 100px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+position: relative;
+z-index: 10;
+}
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      cursor: pointer;
-    }
+.logo-container {
+display: flex;
+align-items: center;
+gap: 30px;
+transition: transform 0.4s ease, filter 0.4s ease;
+cursor: pointer;
+}
 
-    .logo-container:hover {
-      transform: scale(1.07);
-      filter: drop-shadow(0 0 6px #55c6f6);
-    }
+.logo-container:hover {
+transform: scale(1.07);
+filter: drop-shadow(0 0 6px #55c6f6);
+}
 
-    .logo-container img {
-      height: 64px;
-    }
+.logo-container img {
+height: 64px;
+}
 
-    .logo-text {
-      font-size: 36px;
-      color: #55c6f6;
-      font-weight: bold;
-    }
+.logo-text {
+font-size: 36px;
+color: #55c6f6;
+font-weight: bold;
+}
 
-    nav {
-      display: flex;
-      gap: 120px;
-      margin-right: 80px;
-    }
+nav {
+display: flex;
+gap: 120px;
+margin-right: 80px;
+}
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      position: relative;
-      transition: color 0.3s ease;
-    }
+nav a {
+color: white;
+text-decoration: none;
+font-size: 20px;
+position: relative;
+transition: color 0.3s ease;
+}
 
-    /* --- UPDATED: Added .active selector for consistent styling --- */
-    nav a:hover, nav a.active {
-      color: #55c6f6;
-    }
+/* --- UPDATED: Added .active selector for consistent styling --- */
+nav a:hover, nav a.active {
+color: #55c6f6;
+}
 
-    nav a::after {
-      content: '';
-      display: block;
-      width: 0%;
-      height: 2px;
-      background: #55c6f6;
-      transition: width 0.3s ease-in-out;
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-    }
+nav a::after {
+content: '';
+display: block;
+width: 0%;
+height: 2px;
+background: #55c6f6;
+transition: width 0.3s ease-in-out;
+position: absolute;
+bottom: -6px;
+left: 0;
+}
 
-    /* --- UPDATED: Added .active selector for consistent styling --- */
-    nav a:hover::after, nav a.active::after {
-      width: 100%;
-    }
+/* --- UPDATED: Added .active selector for consistent styling --- */
+nav a:hover::after, nav a.active::after {
+width: 100%;
+}
 
-    .hero {
-      position: relative;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-      background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
-      animation: pulseBackground 6s infinite alternate;
-    }
+.hero {
+position: relative;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+overflow: hidden;
+background: linear-gradient(to bottom, rgba(15, 32, 39, 0.8), rgba(44, 83, 100, 0.6)), radial-gradient(circle at center, #1a1a1a 20%, #0d0d0d 80%, #55c6f6 100%);
+animation: pulseBackground 6s infinite alternate;
+}
 
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
-      background-size: 300px;
-      z-index: 1;
-      opacity: 0.5;
-      animation: gridPulse 8s infinite alternate;
-    }
+.hero::before {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="glow"><feGaussianBlur stdDeviation="2" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#glow)"><path d="M10 10 H200 V20 H10 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/></path><path d="M50 50 H250 V60 H50 Z" fill="none" stroke="#55c6f6" stroke-width="0.5" opacity="0.3"><animate attributeName="opacity" values="0.3;0.5;0.3" dur="6s" repeatCount="indefinite"/></path></g></svg>') repeat;
+background-size: 300px;
+z-index: 1;
+opacity: 0.5;
+animation: gridPulse 8s infinite alternate;
+}
 
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
-      background-size: 300px;
-      z-index: 1;
-      opacity: 0.5;
-      animation: rotateGear 25s linear infinite;
-    }
+.hero::after {
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="gearGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#gearGlow)"><path d="M50 10 L60 20 L50 30 L40 20 Z M55 15 L65 25 L55 35 L45 25 Z" fill="none" stroke="#55c6f6" stroke-width="2" opacity="0.6"><animateTransform attributeName="transform" type="rotate" from="0 50 20" to="360 50 20" dur="25s" repeatCount="indefinite"/></path></g></svg>') no-repeat center;
+background-size: 300px;
+z-index: 1;
+opacity: 0.5;
+animation: rotateGear 25s linear infinite;
+}
 
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 1;
-      opacity: 0.3;
-    }
+canvas {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+opacity: 0.3;
+}
 
 
 .robot-render {
-  background-color: transparent;
-  display: block;
-  max-width: 92%;
-  height: auto;
-  z-index: 2;
-  position: relative;
-  margin-top: -60px;
-  filter: drop-shadow(0 0 12px #55c6f6);
-  transform: translateX(-150px); /* Adjust as needed */
+background-color: transparent;
+display: block;
+max-width: 92%;
+height: auto;
+z-index: 2;
+position: relative;
+margin-top: -60px;
+filter: drop-shadow(0 0 12px #55c6f6);
+transform: translateX(-150px); /* Adjust as needed */
 }
 
 
 
-    .robot-render::before {
-      content: '';
-      position: absolute;
-      top: -5px;
-      left: -5px;
-      width: calc(100% + 10px);
-      height: calc(100% + 10px);
-      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
-      z-index: -1;
-      opacity: 0.7;
-      animation: pulseFrame 3s infinite linear;
-    }
+.robot-render::before {
+content: '';
+position: absolute;
+top: -5px;
+left: -5px;
+width: calc(100% + 10px);
+height: calc(100% + 10px);
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
+z-index: -1;
+opacity: 0.7;
+animation: pulseFrame 3s infinite linear;
+}
 
 
 
 .hero-label {
-  position: absolute;
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 900;
-  font-size: 90px;
-  color: #55c6f6;
-  text-shadow:
-    0 0 6px #55c6f6,
-    0 0 16px #55c6f6,
-    0 0 32px rgba(85, 198, 246, 0.9);
-  pointer-events: none;
-  user-select: none;
-  z-index: 3;
-  letter-spacing: 3px;
-  animation: pulseGlow 3s infinite ease-in-out, floatSubtle 8s ease-in-out infinite;
+position: absolute;
+font-family: 'Orbitron', sans-serif;
+font-weight: 900;
+font-size: 90px;
+color: #55c6f6;
+text-shadow:
+0 0 6px #55c6f6,
+0 0 16px #55c6f6,
+0 0 32px rgba(85, 198, 246, 0.9);
+pointer-events: none;
+user-select: none;
+z-index: 3;
+letter-spacing: 3px;
+animation: pulseGlow 3s infinite ease-in-out, floatSubtle 8s ease-in-out infinite;
 }
 
 
 .top-left-label {
-  top: 28%;
-  left: 6%;
-  font-size: 120px;
-  transform: rotate(-10deg);
-  background: linear-gradient(90deg, #55c6f6, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
+top: 28%;
+left: 6%;
+font-size: 120px;
+transform: rotate(-10deg);
+background: linear-gradient(90deg, #55c6f6, #ffffff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
 }
 
 .bottom-right-label {
-  bottom: 28%;
-  right: 6%;
-  font-size: 110px;
-  font-style: italic;
-  transform: rotate(10deg);
-  background: linear-gradient(270deg, #55c6f6, #ffffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
+bottom: 28%;
+right: 6%;
+font-size: 110px;
+font-style: italic;
+transform: rotate(10deg);
+background: linear-gradient(270deg, #55c6f6, #ffffff);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+animation: pulseGlow 3.5s ease-in-out infinite, flicker 4s infinite;
 }
 
 
 
 .hero-overlay-grid {
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: 1;
-  background-image: 
-    repeating-linear-gradient(
-      to right,
-      rgba(85, 198, 246, 0.08),
-      rgba(85, 198, 246, 0.08) 1px,
-      transparent 1px,
-      transparent 60px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      rgba(85, 198, 246, 0.05),
-      rgba(85, 198, 246, 0.05) 1px,
-      transparent 1px,
-      transparent 60px
-    );
-  pointer-events: none;
-  animation: gridFade 6s ease-in-out infinite alternate;
+position: absolute;
+top: 0; left: 0;
+width: 100%; height: 100%;
+z-index: 1;
+background-image:
+repeating-linear-gradient(
+to right,
+rgba(85, 198, 246, 0.08),
+rgba(85, 198, 246, 0.08) 1px,
+transparent 1px,
+transparent 60px
+),
+repeating-linear-gradient(
+to bottom,
+rgba(85, 198, 246, 0.05),
+rgba(85, 198, 246, 0.05) 1px,
+transparent 1px,
+transparent 60px
+);
+pointer-events: none;
+animation: gridFade 6s ease-in-out infinite alternate;
 }
 
 @keyframes gridFade {
-  from { opacity: 0.05; }
-  to { opacity: 0.15; }
+from { opacity: 0.05; }
+to { opacity: 0.15; }
 }
 
 
 .light-sweep {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 200%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.06),
-    transparent
-  );
-  animation: sweep 6s linear infinite;
-  z-index: 2;
-  pointer-events: none;
+position: absolute;
+top: 0;
+left: -100%;
+width: 200%;
+height: 100%;
+background: linear-gradient(
+120deg,
+transparent,
+rgba(255, 255, 255, 0.06),
+transparent
+);
+animation: sweep 6s linear infinite;
+z-index: 2;
+pointer-events: none;
 }
 
 @keyframes sweep {
-  0% { left: -100%; }
-  100% { left: 100%; }
+0% { left: -100%; }
+100% { left: 100%; }
 }
 
 
 
-    @keyframes pulseGlow {
-      0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
-      50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
-    }
+@keyframes pulseGlow {
+0%, 100% { text-shadow: 0 0 25px rgba(85, 198, 246, 0.9), 0 0 15px rgba(85, 198, 246, 0.6); transform: translateY(0); }
+50% { text-shadow: 0 0 35px rgba(85, 198, 246, 1), 0 0 20px rgba(85, 198, 246, 0.8); transform: translateY(-6px); }
+}
 
-    @keyframes floatSubtle {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-10px) rotate(1deg); }
-  100% { transform: translateY(0) rotate(0deg); }
+@keyframes floatSubtle {
+0% { transform: translateY(0) rotate(0deg); }
+50% { transform: translateY(-10px) rotate(1deg); }
+100% { transform: translateY(0) rotate(0deg); }
 }
 
 
-    @keyframes pulseBackground {
-        0% {
-    background-position: 0% 0%;
-    background-size: 100% 100%;
-  }
-  100% {
-    background-position: 0% 100%;
-    background-size: 110% 110%;
-  }
-    }
+@keyframes pulseBackground {
+0% {
+background-position: 0% 0%;
+background-size: 100% 100%;
+}
+100% {
+background-position: 0% 100%;
+background-size: 110% 110%;
+}
+}
 
-    @keyframes gridPulse {
-      0% { opacity: 0.5; }
-      100% { opacity: 0.7; }
-    }
+@keyframes gridPulse {
+0% { opacity: 0.5; }
+100% { opacity: 0.7; }
+}
 
-    @keyframes rotateGear {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
+@keyframes rotateGear {
+from { transform: rotate(0deg); }
+to { transform: rotate(360deg); }
+}
 
-    @keyframes pulseFrame {
-      0% { opacity: 0.7; }
-      50% { opacity: 0.9; }
-      100% { opacity: 0.7; }
-    }
+@keyframes pulseFrame {
+0% { opacity: 0.7; }
+50% { opacity: 0.9; }
+100% { opacity: 0.7; }
+}
 
-    @keyframes flicker {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  45% { opacity: 0.8; transform: scale(1.01); }
-  70% { opacity: 0.6; transform: scale(1.015); }
-  85% { opacity: 0.9; transform: scale(0.99); }
+@keyframes flicker {
+0%, 100% { opacity: 1; transform: scale(1); }
+45% { opacity: 0.8; transform: scale(1.01); }
+70% { opacity: 0.6; transform: scale(1.015); }
+85% { opacity: 0.9; transform: scale(0.99); }
 }
 
 
-    .team-section {
-      max-width: 1200px;
-      margin: 80px auto;
-      padding: 0 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 40px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-      background-image:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><path d='M0 0 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 20 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 40 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 60 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 80 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/></svg>"),
-    linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
-  background-repeat: repeat;
-  background-size: 300px 300px;
-      
-    }
+.team-section {
+max-width: 1200px;
+margin: 80px auto;
+padding: 0 20px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 40px;
+flex-wrap: wrap;
+position: relative;
+z-index: 1;
+background-image:
+url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%'><path d='M0 0 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 20 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 40 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 60 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/><path d='M0 80 H1000' stroke='%2355c6f6' stroke-width='0.5' opacity='0.06'/></svg>"),
+linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
+background-repeat: repeat;
+background-size: 300px 300px;
+
+}
 
 
 .team-section .grid-overlay {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGrid"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#teamGrid)"><path d="M0 0 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 10 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 20 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/></g></svg>') repeat;
-  background-size: 300px;
-  z-index: 0;
-  opacity: 0.15;
-  animation: gridPulse 8s infinite alternate;
-  pointer-events: none;
+content: '';
+position: absolute;
+top: 0; left: 0;
+width: 100%;
+height: 100%;
+background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="teamGrid"><feGaussianBlur stdDeviation="1.5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#teamGrid)"><path d="M0 0 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 10 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/><path d="M0 20 H1000" stroke="%2355c6f6" stroke-width="0.4" opacity="0.1"/></g></svg>') repeat;
+background-size: 300px;
+z-index: 0;
+opacity: 0.15;
+animation: gridPulse 8s infinite alternate;
+pointer-events: none;
 }
 
 
-    .team-photo, .team-text {
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-      position: relative;
-      z-index: 1;
-    }
+.team-photo, .team-text {
+opacity: 0;
+transform: translateY(50px);
+transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+position: relative;
+z-index: 1;
+}
 
-    .team-photo.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.2s;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-    }
+.team-photo.visible {
+opacity: 1;
+transform: translateY(0);
+transition-delay: 0.2s;
+box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
+}
 
-    .team-text.visible {
-      opacity: 1;
-      transform: translateY(0);
-      transition-delay: 0.4s;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
-    }
+.team-text.visible {
+opacity: 1;
+transform: translateY(0);
+transition-delay: 0.4s;
+box-shadow: 0 0 20px rgba(85, 198, 246, 0.4);
+}
 
-    .team-photo {
-      flex: 1;
-      max-width: 600px;
-      width: 100%;
-      border-radius: 20px;
-      box-shadow:
-        0 0 40px rgba(85, 198, 246, 0.6),
-        0 0 60px rgba(85, 198, 246, 0.4);
-      object-fit: cover;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
+.team-photo {
+flex: 1;
+max-width: 600px;
+width: 100%;
+border-radius: 20px;
+box-shadow:
+0 0 40px rgba(85, 198, 246, 0.6),
+0 0 60px rgba(85, 198, 246, 0.4);
+object-fit: cover;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-    .team-photo:hover {
-      transform: scale(1.03);
-      box-shadow:
-        0 0 70px rgba(85, 198, 246, 0.9),
-        0 0 50px rgba(85, 198, 246, 0.6);
-    }
+.team-photo:hover {
+transform: scale(1.03);
+box-shadow:
+0 0 70px rgba(85, 198, 246, 0.9),
+0 0 50px rgba(85, 198, 246, 0.6);
+}
 
-    .team-text {
-      flex: 1;
-      max-width: 550px;
-      background: rgba(20, 20, 20, 0.8);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
-      transition: transform 0.4s ease;
-    }
+.team-text {
+flex: 1;
+max-width: 550px;
+background: rgba(20, 20, 20, 0.8);
+padding: 30px;
+border-radius: 12px;
+box-shadow: 0 0 20px rgba(85, 198, 246, 0.3);
+transition: transform 0.4s ease;
+}
 
-    .team-text:hover {
-      transform: translateY(-5px);
-    }
+.team-text:hover {
+transform: translateY(-5px);
+}
 
-    .team-text h2 {
-      color: #55c6f6;
-      font-weight: 700;
-      font-size: 34px;
-      margin-bottom: 20px;
-      font-family: 'Orbitron', sans-serif;
-    }
+.team-text h2 {
+color: #55c6f6;
+font-weight: 700;
+font-size: 34px;
+margin-bottom: 20px;
+font-family: 'Orbitron', sans-serif;
+}
 
-    .team-text p {
-      font-size: 16px;
-      line-height: 1.8;
-      color: #d0d0d0;
-      margin-bottom: 16px;
-    }
+.team-text p {
+font-size: 16px;
+line-height: 1.8;
+color: #d0d0d0;
+margin-bottom: 16px;
+}
 
-    .learn-more {
-      display: inline-block;
-      padding: 12px 24px;
-      background: #55c6f6;
-      color: #0d0d0d;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
+.learn-more {
+display: inline-block;
+padding: 12px 24px;
+background: #55c6f6;
+color: #0d0d0d;
+text-decoration: none;
+border-radius: 8px;
+font-weight: bold;
+transition: background 0.3s ease, transform 0.3s ease;
+}
 
-    .learn-more:hover {
-      background: #3aa8d6;
-      transform: scale(1.05);
-    }
+.learn-more:hover {
+background: #3aa8d6;
+transform: scale(1.05);
+}
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-      }
-  
+@media (max-width: 768px) {
+header {
+flex-direction: column;
+height: auto;
+padding: 20px;
+}
 
-      nav {
-        margin: 20px 0 0;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
 
-      .logo-container img {
-        height: 48px;
-      }
+nav {
+margin: 20px 0 0;
+gap: 20px;
+flex-wrap: wrap;
+justify-content: center;
+}
 
-      .logo-text {
-        font-size: 28px;
-      }
+.logo-container img {
+height: 48px;
+}
 
-      .hero-label {
-        font-size: 60px;
-      }
+.logo-text {
+font-size: 28px;
+}
 
-      .bottom-right-label {
-        font-size: 50px;
-      }
+.hero-label {
+font-size: 60px;
+}
 
-      .top-left-label {
-        top: 10%;
-        left: 5%;
-      }
+.bottom-right-label {
+font-size: 50px;
+}
 
-      .bottom-right-label {
-        bottom: 10%;
-        right: 5%;
-      }
+.top-left-label {
+top: 10%;
+left: 5%;
+}
 
-      .robot-render {
-        width: 90vw;
-        max-width: 90vw;
-      }
+.bottom-right-label {
+bottom: 10%;
+right: 5%;
+}
 
-      .team-section {
-        flex-direction: column;
-        align-items: center;
-      }
+.robot-render {
+width: 90vw;
+max-width: 90vw;
+}
 
-      .team-photo, .team-text {
-        max-width: 100%;
-      }
-    }
+.team-section {
+flex-direction: column;
+align-items: center;
+}
+
+.team-photo, .team-text {
+max-width: 100%;
+}
+}
 
 .site-footer {
-  background: linear-gradient(90deg, #0f2027, #203a43);
-  color: #d0d0d0;
-  padding: 60px 40px 30px;
-  font-family: 'Segoe UI', sans-serif;
-  border-top: 1px solid rgba(255,255,255,0.1);
+background: linear-gradient(90deg, #0f2027, #203a43);
+color: #d0d0d0;
+padding: 60px 40px 30px;
+font-family: 'Segoe UI', sans-serif;
+border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  max-width: 1300px;
-  margin: 0 auto;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+align-items: center;
+gap: 40px;
+max-width: 1300px;
+margin: 0 auto;
 }
 
 .footer-brand {
-  flex: 2;
-  display: flex;
-  align-items: center;
-  gap: 30px;
+flex: 2;
+display: flex;
+align-items: center;
+gap: 30px;
 }
 
 .footer-brand img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px #55c6f6);
+width: 120px;
+height: 120px;
+object-fit: contain;
+filter: drop-shadow(0 0 8px #55c6f6);
 }
 
 .footer-brand p {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #ccc;
-  max-width: 380px;
+font-size: 14px;
+line-height: 1.7;
+color: #ccc;
+max-width: 380px;
 }
 
 .footer-links {
-  flex: 1.5;
+flex: 1.5;
 }
 
 .footer-links h4 {
-  font-family: 'Orbitron', sans-serif;
-  color: #55c6f6;
-  margin-bottom: 12px;
+font-family: 'Orbitron', sans-serif;
+color: #55c6f6;
+margin-bottom: 12px;
 }
 
 .link-bubbles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
 }
 
 .link-bubbles a {
-  background: rgba(255, 255, 255, 0.05);
-  color: #e0e0e0;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 30px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+background: rgba(255, 255, 255, 0.05);
+color: #e0e0e0;
+text-decoration: none;
+padding: 8px 14px;
+border-radius: 30px;
+font-size: 14px;
+transition: all 0.3s ease;
+border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .link-bubbles a:hover {
-  background: #55c6f6;
-  color: #0d0d0d;
-  transform: scale(1.05);
+background: #55c6f6;
+color: #0d0d0d;
+transform: scale(1.05);
 }
 
 .footer-socials {
-  flex: 1.5;
-  text-align: right;
+flex: 1.5;
+text-align: right;
 }
 
 .footer-socials h4 {
-  font-family: 'Orbitron', sans-serif;
-  color: #55c6f6;
-  margin-bottom: 12px;
+font-family: 'Orbitron', sans-serif;
+color: #55c6f6;
+margin-bottom: 12px;
 }
 
 .social-icons {
-  display: flex;
-  gap: 18px;
-  justify-content: flex-end;
-  font-size: 32px;
+display: flex;
+gap: 18px;
+justify-content: flex-end;
+font-size: 32px;
 }
 
 .social-icons a {
-  transition: transform 0.3s ease, filter 0.4s ease;
+transition: transform 0.3s ease, filter 0.4s ease;
 }
 
 .social-icons a:hover {
-  transform: scale(1.3);
-  filter: drop-shadow(0 0 8px #55c6f6);
+transform: scale(1.3);
+filter: drop-shadow(0 0 8px #55c6f6);
 }
 
 .social-icons .fa-instagram { color: #e4405f; }
@@ -605,253 +604,242 @@
 .social-icons .fa-youtube { color: #ff0000; }
 
 .footer-bottom {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 13px;
-  color: #888;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 15px;
+margin-top: 40px;
+text-align: center;
+font-size: 13px;
+color: #888;
+border-top: 1px solid rgba(255,255,255,0.1);
+padding-top: 15px;
 }
 
 @media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
+.footer-container {
+flex-direction: column;
+text-align: center;
+align-items: center;
+}
 
-  .footer-brand {
-    flex-direction: column;
-    text-align: center;
-  }
+.footer-brand {
+flex-direction: column;
+text-align: center;
+}
 
-  .footer-brand img {
-    width: 90px;
-    height: 90px;
-  }
+.footer-brand img {
+width: 90px;
+height: 90px;
+}
 
-  .social-icons {
-    justify-content: center;
-    margin-top: 10px;
-  }
+.social-icons {
+justify-content: center;
+margin-top: 10px;
+}
 
-  .footer-socials {
-    text-align: center;
-  }
+.footer-socials {
+text-align: center;
+}
 
-  .link-bubbles {
-    justify-content: center;
-  }
+.link-bubbles {
+justify-content: center;
+}
 }
 
 
 
-  </style>
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="logo-container" onclick="window.location.href='index.html'">
-      <!-- Make sure you have your logo in the same directory -->
-      <img src="logo_old5.png" alt="Team Logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f2027/55c6f6?text=Logo';">
-      <div class="logo-text">8404 Quixilver</div>
-    </div>
-    <!-- --- UPDATED: Corrected file paths for navigation --- -->
-    <nav>
-    <a href="/website/index.html">Home</a>
-    <a href="/website/robots.html">Robots</a>
-    <a href="/website/team.html">Team</a>
-    <a href="/website/awards.html">Awards</a>
-    <a href="/website/contact.html">Contact</a>
-    </nav>
-  </header>
+<header>
+<div class="logo-container" onclick="window.location.href='index.html'">
+<!-- Make sure you have your logo in the same directory -->
+<img src="logo_old5.png" alt="Team Logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f2027/55c6f6?text=Logo';">
+<div class="logo-text">8404 Quixilver</div>
+</div>
+<!-- --- UPDATED: Corrected file paths for navigation --- -->
+<nav>
+<a href="/website/index.html">Home</a>
+<a href="/website/robots.html">Robots</a>
+<a href="/website/team.html">Team</a>
+<a href="/website/awards.html">Awards</a>
+<a href="/website/contact.html">Contact</a>
+</nav>
+</header>
 
-  <section class="hero">
-    <canvas id="particles"></canvas>
-    <div class="hero-overlay-grid"></div>
-    <!-- <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot"> -->
-    <model-viewer
-  class="robot-render"
-  src="https://ftc8404.github.io/quixilver-3d-model/robot.glb"
-  alt="3D Robot"
-  auto-rotate
-  camera-controls
-  background-color="#0d0d0d"
-  exposure="1.2"
-  style="width: 90vw; height: auto;"
-></model-viewer>
+<section class="hero">
+<canvas id="particles"></canvas>
+<div class="hero-overlay-grid"></div>
+<img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
+<div class="light-sweep"></div>
+<div class="hero-label top-left-label">8404</div>
+<div class="hero-label bottom-right-label">Quixilver</div>
+</section>
 
-    <div class="light-sweep"></div>
-    <div class="hero-label top-left-label">8404</div>
-    <div class="hero-label bottom-right-label">Quixilver</div>
-  </section>
+<section class="team-section">
+<div class="grid-overlay"></div> <!-- NEW background layer -->
 
-  <section class="team-section">
-  <div class="grid-overlay"></div> <!-- NEW background layer -->
-
-  <img class="team-photo" src="team_photo.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
-  <div class="team-text">
-    <h2>About Quixilver</h2>
-    <p>
-      FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
-    </p>
-    <p>
-      We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.
-    </p>
-    <a href="team.html" class="learn-more">Learn More</a>
-  </div>
+<img class="team-photo" src="team_photo.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
+<div class="team-text">
+<h2>About Quixilver</h2>
+<p>
+FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
+</p>
+<p>
+We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.
+</p>
+<a href="team.html" class="learn-more">Learn More</a>
+</div>
 </section>
 
 
-  <script>
-    // Parallax effect for robot render
-  
-    // Click effect for robot render
-    const robot = document.querySelector('.robot-render');
-    
+<script>
+// Parallax effect for robot render
+
+// Click effect for robot render
+const robot = document.querySelector('.robot-render');
 
 
-    // Particle system for hero section (around robot)
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
 
-    const particles = [];
-    const particleCount = 20;
+// Particle system for hero section (around robot)
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-    class Particle {
-      constructor() {
-        const robotRect = robot.getBoundingClientRect();
-        this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-        this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-        this.size = Math.random() * 2 + 1;
-        this.angle = Math.random() * Math.PI * 2;
-        this.speed = Math.random() * 0.1 + 0.05;
-      }
+const particles = [];
+const particleCount = 20;
 
-      update() {
-        const robotRect = robot.getBoundingClientRect();
-        const centerX = robotRect.left + robotRect.width / 2;
-        const centerY = robotRect.top + robotRect.height / 2;
-        this.angle += this.speed;
-        this.x = centerX + Math.cos(this.angle) * 150;
-        this.y = centerY + Math.sin(this.angle) * 150;
-      }
+class Particle {
+constructor() {
+const robotRect = robot.getBoundingClientRect();
+this.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
+this.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
+this.size = Math.random() * 2 + 1;
+this.angle = Math.random() * Math.PI * 2;
+this.speed = Math.random() * 0.1 + 0.05;
+}
 
-      draw() {
-        ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-    }
+update() {
+const robotRect = robot.getBoundingClientRect();
+const centerX = robotRect.left + robotRect.width / 2;
+const centerY = robotRect.top + robotRect.height / 2;
+this.angle += this.speed;
+this.x = centerX + Math.cos(this.angle) * 150;
+this.y = centerY + Math.sin(this.angle) * 150;
+}
 
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
+draw() {
+ctx.fillStyle = 'rgba(85, 198, 246, 0.6)';
+ctx.beginPath();
+ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+ctx.fill();
+}
+}
 
-    let lastTime = 0;
-    const fps = 60;
-    const interval = 1000 / fps;
+for (let i = 0; i < particleCount; i++) {
+particles.push(new Particle());
+}
 
-    function animateParticles(timestamp) {
-      if (!lastTime) lastTime = timestamp;
-      const delta = timestamp - lastTime;
+let lastTime = 0;
+const fps = 60;
+const interval = 1000 / fps;
 
-      if (delta >= interval) {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(particle => {
-          particle.update();
-          particle.draw();
-        });
-        lastTime = timestamp - (delta % interval);
-      }
-      requestAnimationFrame(animateParticles);
-    }
+function animateParticles(timestamp) {
+if (!lastTime) lastTime = timestamp;
+const delta = timestamp - lastTime;
 
-    animateParticles();
+if (delta >= interval) {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+particles.forEach(particle => {
+particle.update();
+particle.draw();
+});
+lastTime = timestamp - (delta % interval);
+}
+requestAnimationFrame(animateParticles);
+}
 
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      particles.forEach(p => {
-        const robotRect = robot.getBoundingClientRect();
-        p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
-        p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
-      });
-    });
+animateParticles();
 
-    // Scroll animations
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
-              setTimeout(() => el.classList.add('visible'), index * 200);
-            });
-          }
-        });
-      },
-      { threshold: 0.2 }
-    );
+window.addEventListener('resize', () => {
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+particles.forEach(p => {
+const robotRect = robot.getBoundingClientRect();
+p.x = robotRect.left + robotRect.width / 2 + (Math.random() - 0.5) * 150;
+p.y = robotRect.top + robotRect.height / 2 + (Math.random() - 0.5) * 150;
+});
+});
 
-    observer.observe(document.querySelector('.team-section'));
-  </script>
+// Scroll animations
+const observer = new IntersectionObserver(
+(entries) => {
+entries.forEach((entry) => {
+if (entry.isIntersecting) {
+entry.target.querySelectorAll('.team-photo, .team-text').forEach((el, index) => {
+setTimeout(() => el.classList.add('visible'), index * 200);
+});
+}
+});
+},
+{ threshold: 0.2 }
+);
+
+observer.observe(document.querySelector('.team-section'));
+</script>
 
 <!-- Font Awesome CDN -->
 <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 />
 
 
 
 <footer class="site-footer">
-  <div class="footer-container">
-    
-    <!-- Logo + About -->
-    <div class="footer-brand">
-      <img src="logo_old5.png" alt="Team 8404 Logo">
-      <p>
-        FTC Team 8404 Quixilver is a high-school robotics team based in San Jose, CA. We build award-winning robots, promote STEM, and compete in the FIRST Tech Challenge with passion and precision.
-      </p>
-    </div>
+<div class="footer-container">
 
-    <!-- Sitemap (bubble-style) -->
-    <div class="footer-links">
-      <h4>Sitemap</h4>
-      <div class="link-bubbles">
-        <a href="/website/index.html">Home</a>
-        <a href="/website/robots.html">Robots</a>
-        <a href="/website/team.html">Team</a>
-        <a href="/website/awards.html">Awards</a>
-        <a href="/website/contact.html">Contact</a>
-      </div>
-    </div>
+<!-- Logo + About -->
+<div class="footer-brand">
+<img src="logo_old5.png" alt="Team 8404 Logo">
+<p>
+FTC Team 8404 Quixilver is a high-school robotics team based in San Jose, CA. We build award-winning robots, promote STEM, and compete in the FIRST Tech Challenge with passion and precision.
+</p>
+</div>
 
-    <!-- Socials -->
-    <div class="footer-socials">
-      <h4>Follow Us</h4>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/ftc8404" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com/ftc8404" target="_blank" aria-label="X (formerly Twitter)">
-        <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/x.svg"
-           alt="X Logo"
-           style="height: 32px; width: 32px; vertical-align: middle; margin-top: -2px; filter: drop-shadow(0 0 4px #00000088); transition: transform 0.3s ease;"
-           onmouseover="this.style.transform='scale(1.2)'"
-           onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <a href="https://www.facebook.com/ftc8404" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.youtube.com/@Quixilver-lc3tv" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
+<!-- Sitemap (bubble-style) -->
+<div class="footer-links">
+<h4>Sitemap</h4>
+<div class="link-bubbles">
+<a href="/website/index.html">Home</a>
+<a href="/website/robots.html">Robots</a>
+<a href="/website/team.html">Team</a>
+<a href="/website/awards.html">Awards</a>
+<a href="/website/contact.html">Contact</a>
+</div>
+</div>
 
-  </div>
+<!-- Socials -->
+<div class="footer-socials">
+<h4>Follow Us</h4>
+<div class="social-icons">
+<a href="https://www.instagram.com/ftc8404" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+<a href="https://twitter.com/ftc8404" target="_blank" aria-label="X (formerly Twitter)">
+<img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/x.svg"
+alt="X Logo"
+style="height: 32px; width: 32px; vertical-align: middle; margin-top: -2px; filter: drop-shadow(0 0 4px #00000088); transition: transform 0.3s ease;"
+onmouseover="this.style.transform='scale(1.2)'"
+onmouseout="this.style.transform='scale(1)'">
+</a>
+<a href="https://www.facebook.com/ftc8404" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+<a href="https://www.youtube.com/@Quixilver-lc3tv" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+</div>
+</div>
 
-  <div class="footer-bottom">
-    © 2025 FTC Team 8404 Quixilver. All rights reserved.
-  </div>
+</div>
+
+<div class="footer-bottom">
+© 2025 FTC Team 8404 Quixilver. All rights reserved.
+</div>
 </footer>
 
 
