@@ -668,7 +668,20 @@
   <section class="hero">
     <canvas id="particles"></canvas>
     <div class="hero-overlay-grid"></div>
-    <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
+    <!-- <img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot"> -->
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+<model-viewer
+  class="robot-render"
+  src="https://cheery-cupcake-fba660.netlify.app/+Master_Robot_Shaq_2.0_(interactive_glb).glb"
+  alt="3D Robot"
+  auto-rotate
+  camera-controls
+  background-color="#0d0d0d"
+  exposure="1.2"
+  style="width: 90vw; height: auto;"
+></model-viewer>
+
     <div class="light-sweep"></div>
     <div class="hero-label top-left-label">8404</div>
     <div class="hero-label bottom-right-label">Quixilver</div>
