@@ -416,56 +416,68 @@ font-size: 16px;
 /* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
-  /* --- 1. Prevent horizontal scroll --- */
+  /* --- 1. Prevent horizontal scroll / black bar --- */
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* --- 2. Top bar (match homepage) --- */
+  /* --- 2. Top bar (match perfected homepage) --- */
   .logo-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* keep logo & text on same line */
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    margin-top: 2mm;
-    white-space: nowrap;
+    gap: 8px; /* space between logo & text */
+    margin-top: 2mm; /* slightly lower from top edge */
+    white-space: nowrap; /* prevent wrapping */
   }
   .logo-text {
-    font-size: 22px;
+    font-size: 22px; /* match homepage mobile size */
   }
 
-  /* --- 3. Robot cards --- */
+  /* --- 3. Navigation tabs: keep spacing comfortable --- */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* enough space between links */
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-size: 20px;
+    padding: 0;
+  }
+
+  /* --- 4. Robot cards: center & even padding --- */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden;
+    overflow: hidden; /* contain all content */
   }
 
-  /* --- 4. Image container with equal spacing --- */
+  /* --- 5. Image container: center images horizontally --- */
   .robot-image-container {
-    width: 100%;
-    padding: 0 10px; /* equal spacing left & right */
-    box-sizing: border-box;
+    display: flex;
+    justify-content: center; /* center horizontally */
   }
 
-  /* --- 5. Images fill container but respect spacing --- */
+  /* --- 6. Images: equal margins on both sides --- */
   .robot-image-container img {
-    display: block;
-    width: 100%;
+    width: 90%; /* leaves equal space left/right */
     height: auto;
     border-radius: 12px;
     object-fit: cover;
-    max-width: 100%;
+    display: block;
   }
 
-  /* --- 6. Text aligned with image edges --- */
+  /* --- 7. Text: match image alignment --- */
   .robot-info {
-    padding: 0 10px; /* match image container spacing */
+    padding: 0 5%; /* aligns with image's 90% width */
+    box-sizing: border-box;
   }
 }
+
 
 
   
