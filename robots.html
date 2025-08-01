@@ -412,57 +412,58 @@ font-size: 16px;
 }
 
 
+
 /* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
-  /* --- 1. Prevent horizontal scroll & black bar --- */
+  /* --- 1. Prevent horizontal scroll --- */
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* --- 2. Top bar (match homepage perfect version) --- */
+  /* --- 2. Top bar (match homepage) --- */
   .logo-container {
     display: flex;
-    flex-direction: row; /* keep logo & text on one line */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
     margin-top: 2mm;
-    white-space: nowrap; /* stop wrapping */
+    white-space: nowrap;
   }
   .logo-text {
     font-size: 22px;
   }
 
-  /* --- 3. Robot cards: centered & padded evenly --- */
+  /* --- 3. Robot cards --- */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden; /* contain children fully */
+    overflow: hidden;
   }
 
-  /* --- 4. Image container matches card padding --- */
+  /* --- 4. Image container with equal spacing --- */
   .robot-image-container {
     width: 100%;
-    padding: 0; /* no extra padding here */
+    padding: 0 10px; /* equal spacing left & right */
     box-sizing: border-box;
   }
 
-  /* --- 5. Images stay fully inside their card --- */
+  /* --- 5. Images fill container but respect spacing --- */
   .robot-image-container img {
     display: block;
     width: 100%;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
-    max-width: 100% !important; /* absolutely never exceed container */
+    max-width: 100%;
   }
 
   /* --- 6. Text aligned with image edges --- */
   .robot-info {
-    padding: 0; /* matches image alignment */
+    padding: 0 10px; /* match image container spacing */
   }
 }
 
