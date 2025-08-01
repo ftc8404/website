@@ -644,50 +644,38 @@ justify-content: center;
 }
 
 
-/* 📱 Mobile‑only refined layout */
+
+/* 📱 Mobile‑only refined adjustments */
 @media (max-width: 767px) {
 
-  /* 1. Header adjustments */
-  header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 10px 12px; /* more padding so nothing hits screen edge */
-  }
+  /* 1. Header: move logo/text down */
   .logo-container {
-    gap: 8px; /* reduce gap between logo and text */
-  }
-  .logo-container img {
-    height: 42px; /* smaller logo */
-  }
-  .logo-text {
-    font-size: 22px; /* smaller text for mobile */
+    margin-top: 2mm; /* push logo + text down */
   }
 
-  /* 2. Navigation adjustments */
-  nav {
-    gap: 12px; /* less horizontal gap */
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-  nav a {
-    font-size: 16px; /* smaller nav text */
-    padding: 6px;
-  }
-
-  /* 3. Hero render + text */
+  /* 2. Hero robot render */
   .robot-render {
     display: block;
     margin: 0 auto;
-    max-width: 180%; /* ~2× bigger than before */
-    transform: none; /* remove desktop shift */
+    max-width: 130% !important; /* increase size */
+    height: auto !important;
+    transform: none !important; /* remove desktop shift */
   }
+
+  /* 3. Hide loading animation (particles + grid) */
+  canvas#particles,
+  .hero-overlay-grid {
+    display: none !important;
+  }
+
+  /* 4. Hero labels */
   .top-left-label { /* "8404" */
-    font-size: 70px; /* slightly smaller */
+    font-size: 70px;
+    left: calc(6% + 3mm); /* shift right ~3mm */
   }
   .bottom-right-label { /* "Quixilver" */
-    font-size: 60px; /* smaller so it fits */
-    right: 8%;       /* move slightly right */
+    font-size: 52px; /* smaller */
+    right: 4%; /* move more right */
   }
 }
 
