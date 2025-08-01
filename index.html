@@ -648,18 +648,25 @@ justify-content: center;
 /* 📱 Mobile refinements */
 @media (max-width: 767px) {
 
-  /* 1. Logo + text in top bar: keep one line, just lower */
-  .logo-container {
+   .logo-container {
+    display: flex;
+    flex-direction: row; /* force same line */
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
     margin-top: 2mm; /* push down slightly */
+    white-space: nowrap; /* prevent wrapping */
   }
 
-  /* 2. Restore tab spacing to previous look */
+  /* 2. Restore original tab spacing */
   nav {
-    gap: 20px; /* original wider gap */
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* restore wider gap */
   }
   nav a {
-    font-size: 20px; /* restore original size */
-    padding: 0; /* no extra padding */
+    font-size: 20px;
+    padding: 0;
   }
 
   /* 3. Render: actually make bigger, override existing rules */
@@ -678,10 +685,9 @@ justify-content: center;
     display: none !important;
   }
 
-  /* 5. Hero labels */
-  .top-left-label { /* "8404" */
-    font-size: 68px; /* slightly smaller */
-    left: calc(6% + 4mm); /* more to the right */
+  .top-left-label {
+    font-size: 66px; /* slightly smaller */
+    left: calc(6% + 1.5mm); /* nudge right 1.5mm */
   }
   .bottom-right-label { /* "Quixilver" */
     font-size: 52px; /* keep current size */
