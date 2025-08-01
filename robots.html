@@ -412,52 +412,60 @@ font-size: 16px;
 }
 
 
-/* 📱 Final Robots Page Mobile Styles */
+/* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
-  /* --- 1. Top bar (same as homepage) --- */
+  /* --- 1. Prevent horizontal scroll & black bar --- */
+  html, body {
+    overflow-x: hidden !important;
+  }
+
+  /* --- 2. Top bar (match homepage perfect version) --- */
   .logo-container {
     display: flex;
-    flex-direction: row; /* keep logo & text on same line */
+    flex-direction: row; /* keep logo & text on one line */
     align-items: center;
     justify-content: center;
-    gap: 8px; /* space between logo & text */
-    margin-top: 2mm; /* lower slightly from top edge */
-    white-space: nowrap; /* prevent wrapping */
+    gap: 8px;
+    margin-top: 2mm;
+    white-space: nowrap; /* stop wrapping */
   }
   .logo-text {
-    font-size: 22px; /* match homepage mobile size */
+    font-size: 22px;
   }
 
-  /* --- 2. Robot cards: balanced spacing --- */
+  /* --- 3. Robot cards: centered & padded evenly --- */
   .robot-card {
-    flex-direction: column; /* stack image & text vertically */
-    padding: 20px; /* even left/right padding */
+    flex-direction: column;
+    padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
+    overflow: hidden; /* contain children fully */
   }
 
-  /* --- 3. Image container respects padding --- */
+  /* --- 4. Image container matches card padding --- */
   .robot-image-container {
     width: 100%;
-    padding: 0 10px; /* keep image inset from card edge */
+    padding: 0; /* no extra padding here */
     box-sizing: border-box;
   }
 
-  /* --- 4. Images stay inside box & centered --- */
+  /* --- 5. Images stay fully inside their card --- */
   .robot-image-container img {
     display: block;
-    width: 100%; /* fill container */
+    width: 100%;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
+    max-width: 100% !important; /* absolutely never exceed container */
   }
 
-  /* --- 5. Text stays aligned with image edges --- */
+  /* --- 6. Text aligned with image edges --- */
   .robot-info {
-    padding: 0 10px; /* match image container inset */
+    padding: 0; /* matches image alignment */
   }
 }
+
 
   
 </style>
