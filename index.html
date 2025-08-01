@@ -643,46 +643,51 @@ justify-content: center;
 }
 }
 
-/* Mobile-only changes */
+/* 📱 Mobile‑only homepage adjustments */
 @media (max-width: 767px) {
 
   /* 1. Center top bar content */
-  .top-bar {
-    display: flex;
+  header {
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 12px 0;
   }
-
-  .top-bar .logo,
-  .top-bar .team-name {
-    margin: 0 auto;
+  .logo-container {
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+  nav {
+    margin: 0;
+    justify-content: center;
   }
 
   /* 2. Fix render image size & position */
   .robot-render {
     display: block;
-    margin: 0 auto; /* center horizontally */
-    max-width: 90%; /* prevent edge clipping */
+    margin: 0 auto;
+    max-width: 95%;       /* fills screen without clipping */
     height: auto;
+    transform: none;      /* removes desktop left‑shift */
   }
 
-  /* 3. Hide loading animation on mobile */
-  .loading-animation {
+  /* 3. Hide particle grid/gear behind render on small screens */
+  canvas#particles,
+  .hero-overlay-grid {
     display: none !important;
   }
 
-  /* 4. Adjust Quixilver and 8404 text */
-  .quixilver-text {
-    position: relative;
-    left: -5px; /* move slightly left */
+  /* 4. Adjust hero labels for better mobile layout */
+  .top-left-label {
+    left: 10%;           /* move slightly right */
+    font-size: 80px;     /* scale down for small screen */
   }
-
-  .team-number {
-    position: relative;
-    left: 5mm; /* move slightly right by ~5mm */
+  .bottom-right-label {
+    right: 10%;          /* move slightly left */
+    font-size: 70px;
   }
 }
+
 
 
 </style>
