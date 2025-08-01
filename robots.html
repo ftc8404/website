@@ -411,42 +411,51 @@ font-size: 16px;
   }
 }
 
-/* 📱 Mobile-only fixes for Robots page */
+
+/* 📱 Final Robots Page Mobile Styles */
 @media (max-width: 767px) {
 
-  /* 1. Header: match homepage style */
+  /* --- 1. Top bar (same as homepage) --- */
   .logo-container {
     display: flex;
-    flex-direction: row; /* force same line */
+    flex-direction: row; /* keep logo & text on same line */
     align-items: center;
     justify-content: center;
-    gap: 8px; /* small space between logo and text */
-    margin-top: 2mm; /* same top padding as homepage */
+    gap: 8px; /* space between logo & text */
+    margin-top: 2mm; /* lower slightly from top edge */
     white-space: nowrap; /* prevent wrapping */
   }
   .logo-text {
-    font-size: 22px; /* same size as homepage mobile */
+    font-size: 22px; /* match homepage mobile size */
   }
 
- /* 1. Robot cards: even spacing left & right */
+  /* --- 2. Robot cards: balanced spacing --- */
   .robot-card {
-    padding: 20px; /* equal padding on both sides */
+    flex-direction: column; /* stack image & text vertically */
+    padding: 20px; /* even left/right padding */
     box-sizing: border-box;
-  }
-
-  /* 2. Ensure full-width elements don't overflow */
-  .robot-card,
-  .robot-image-container,
-  .robot-info {
     max-width: 100%;
   }
 
-  /* 3. Images: prevent touching edges */
+  /* --- 3. Image container respects padding --- */
+  .robot-image-container {
+    width: 100%;
+    padding: 0 10px; /* keep image inset from card edge */
+    box-sizing: border-box;
+  }
+
+  /* --- 4. Images stay inside box & centered --- */
   .robot-image-container img {
     display: block;
-    margin: 0 auto;
-    max-width: calc(100% - 20px); /* add breathing room */
+    width: 100%; /* fill container */
     height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+
+  /* --- 5. Text stays aligned with image edges --- */
+  .robot-info {
+    padding: 0 10px; /* match image container inset */
   }
 }
 
