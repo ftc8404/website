@@ -643,48 +643,51 @@ justify-content: center;
 }
 }
 
-/* 📱 Mobile‑only homepage adjustments */
+
+/* 📱 Mobile‑only refined layout */
 @media (max-width: 767px) {
 
-  /* 1. Center top bar content */
+  /* 1. Header adjustments */
   header {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 12px 0;
+    padding: 10px 12px; /* more padding so nothing hits screen edge */
   }
   .logo-container {
-    justify-content: center;
-    margin-bottom: 8px;
+    gap: 8px; /* reduce gap between logo and text */
   }
-  nav {
-    margin: 0;
-    justify-content: center;
+  .logo-container img {
+    height: 42px; /* smaller logo */
+  }
+  .logo-text {
+    font-size: 22px; /* smaller text for mobile */
   }
 
-  /* 2. Fix render image size & position */
+  /* 2. Navigation adjustments */
+  nav {
+    gap: 12px; /* less horizontal gap */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav a {
+    font-size: 16px; /* smaller nav text */
+    padding: 6px;
+  }
+
+  /* 3. Hero render + text */
   .robot-render {
     display: block;
     margin: 0 auto;
-    max-width: 95%;       /* fills screen without clipping */
-    height: auto;
-    transform: none;      /* removes desktop left‑shift */
+    max-width: 180%; /* ~2× bigger than before */
+    transform: none; /* remove desktop shift */
   }
-
-  /* 3. Hide particle grid/gear behind render on small screens */
-  canvas#particles,
-  .hero-overlay-grid {
-    display: none !important;
+  .top-left-label { /* "8404" */
+    font-size: 70px; /* slightly smaller */
   }
-
-  /* 4. Adjust hero labels for better mobile layout */
-  .top-left-label {
-    left: 10%;           /* move slightly right */
-    font-size: 80px;     /* scale down for small screen */
-  }
-  .bottom-right-label {
-    right: 10%;          /* move slightly left */
-    font-size: 70px;
+  .bottom-right-label { /* "Quixilver" */
+    font-size: 60px; /* smaller so it fits */
+    right: 8%;       /* move slightly right */
   }
 }
 
