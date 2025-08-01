@@ -413,6 +413,7 @@ font-size: 16px;
 
 
 
+
 /* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
@@ -426,37 +427,37 @@ font-size: 16px;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 20px;
-    height: auto;
+    padding: 20px; /* match homepage */
+    height: auto; /* allow flexible height like homepage */
   }
 
   .logo-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* same line */
     align-items: center;
     justify-content: center;
-    gap: 30px; /* match homepage gap */
+    gap: 30px; /* EXACT match homepage */
     margin-top: 2mm;
     white-space: nowrap;
   }
 
   .logo-container img {
-    height: 48px; /* match homepage mobile */
+    height: 48px; /* same as homepage */
   }
 
   .logo-text {
-    font-size: 28px; /* match homepage mobile */
+    font-size: 28px; /* same as homepage */
   }
 
   nav {
     margin: 20px 0 0;
-    gap: 20px; /* match homepage mobile */
+    gap: 120px; /* EXACT homepage tab gap */
     flex-wrap: wrap;
     justify-content: center;
   }
 
   nav a {
-    font-size: 20px; /* match homepage mobile */
+    font-size: 20px; /* same as homepage */
     padding: 0;
   }
 
@@ -469,18 +470,18 @@ font-size: 16px;
     overflow: hidden;
   }
 
-  /* --- 4. Image container: take full width on mobile --- */
+  /* --- 4. Image container: full width & centered --- */
   .robot-image-container {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     display: flex;
-    justify-content: center; /* center the image */
+    justify-content: center;
   }
 
-  /* --- 5. Image: equal margins left & right --- */
+  /* --- 5. Images: equal margins --- */
   .robot-image-container img {
-    width: 90%; /* equal margins */
+    width: 90%;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
@@ -489,8 +490,15 @@ font-size: 16px;
 
   /* --- 6. Text: align with image edges --- */
   .robot-info {
-    padding: 0 5%; /* matches image's 90% width */
+    padding: 0 5%;
     box-sizing: border-box;
+  }
+
+  /* --- 7. Prevent robot title overflow --- */
+  .robot-info h2 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 }
 
