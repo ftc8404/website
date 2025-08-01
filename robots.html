@@ -416,67 +416,84 @@ font-size: 16px;
 /* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
-  /* --- 1. Prevent horizontal scroll / black bar --- */
+  /* --- 1. Prevent horizontal scroll --- */
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* --- 2. Top bar (match perfected homepage) --- */
-  .logo-container {
-    display: flex;
-    flex-direction: row; /* keep logo & text on same line */
+  /* --- 2. Top bar EXACTLY like homepage --- */
+  header {
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 8px; /* space between logo & text */
-    margin-top: 2mm; /* slightly lower from top edge */
-    white-space: nowrap; /* prevent wrapping */
-  }
-  .logo-text {
-    font-size: 22px; /* match homepage mobile size */
+    text-align: center;
+    padding: 20px;
+    height: auto;
   }
 
-  /* --- 3. Navigation tabs: keep spacing comfortable --- */
-  nav {
+  .logo-container {
     display: flex;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
-    gap: 20px; /* enough space between links */
-    flex-wrap: wrap;
+    gap: 30px; /* match homepage gap */
+    margin-top: 2mm;
+    white-space: nowrap;
   }
+
+  .logo-container img {
+    height: 48px; /* match homepage mobile */
+  }
+
+  .logo-text {
+    font-size: 28px; /* match homepage mobile */
+  }
+
+  nav {
+    margin: 20px 0 0;
+    gap: 20px; /* match homepage mobile */
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   nav a {
-    font-size: 20px;
+    font-size: 20px; /* match homepage mobile */
     padding: 0;
   }
 
-  /* --- 4. Robot cards: center & even padding --- */
+  /* --- 3. Robot cards --- */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden; /* contain all content */
+    overflow: hidden;
   }
 
-  /* --- 5. Image container: center images horizontally --- */
+  /* --- 4. Image container: take full width on mobile --- */
   .robot-image-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
     display: flex;
-    justify-content: center; /* center horizontally */
+    justify-content: center; /* center the image */
   }
 
-  /* --- 6. Images: equal margins on both sides --- */
+  /* --- 5. Image: equal margins left & right --- */
   .robot-image-container img {
-    width: 90%; /* leaves equal space left/right */
+    width: 90%; /* equal margins */
     height: auto;
     border-radius: 12px;
     object-fit: cover;
     display: block;
   }
 
-  /* --- 7. Text: match image alignment --- */
+  /* --- 6. Text: align with image edges --- */
   .robot-info {
-    padding: 0 5%; /* aligns with image's 90% width */
+    padding: 0 5%; /* matches image's 90% width */
     box-sizing: border-box;
   }
 }
+
 
 
 
