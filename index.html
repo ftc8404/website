@@ -643,6 +643,46 @@ justify-content: center;
 }
 }
 
+/* Mobile-only changes */
+@media (max-width: 767px) {
+
+  /* 1. Center top bar content */
+  .top-bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .top-bar .logo,
+  .top-bar .team-name {
+    margin: 0 auto;
+  }
+
+  /* 2. Fix render image size & position */
+  .robot-render {
+    display: block;
+    margin: 0 auto; /* center horizontally */
+    max-width: 90%; /* prevent edge clipping */
+    height: auto;
+  }
+
+  /* 3. Hide loading animation on mobile */
+  .loading-animation {
+    display: none !important;
+  }
+
+  /* 4. Adjust Quixilver and 8404 text */
+  .quixilver-text {
+    position: relative;
+    left: -5px; /* move slightly left */
+  }
+
+  .team-number {
+    position: relative;
+    left: 5mm; /* move slightly right by ~5mm */
+  }
+}
 
 
 </style>
