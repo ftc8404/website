@@ -422,55 +422,54 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
-  /* --- 2. Top bar EXACTLY like homepage --- */
+  /* --- 2. Top bar: EXACT match with homepage --- */
   header {
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 20px; /* match homepage */
-    height: auto; /* allow flexible height like homepage */
+    height: auto;
+    padding: 20px;
   }
 
   .logo-container {
     display: flex;
-    flex-direction: row; /* same line */
+    flex-direction: row; /* keep logo & text on same line */
     align-items: center;
     justify-content: center;
-    gap: 30px; /* EXACT match homepage */
-    margin-top: 2mm;
+    gap: 30px; /* homepage gap */
+    margin-bottom: 8px; /* spacing before nav */
     white-space: nowrap;
   }
 
   .logo-container img {
-    height: 48px; /* same as homepage */
+    height: 48px; /* homepage logo size */
   }
 
   .logo-text {
-    font-size: 28px; /* same as homepage */
+    font-size: 28px; /* homepage text size */
   }
 
   nav {
     margin: 20px 0 0;
-    gap: 120px; /* EXACT homepage tab gap */
+    gap: 20px; /* homepage tab gap */
     flex-wrap: wrap;
     justify-content: center;
   }
 
   nav a {
-    font-size: 20px; /* same as homepage */
+    font-size: 20px; /* homepage tab font size */
     padding: 0;
   }
 
-  /* --- 3. Robot cards --- */
+  /* --- 3. Robot cards: stack vertically on mobile --- */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden;
+    overflow: hidden; /* contain children */
   }
 
-  /* --- 4. Image container: full width & centered --- */
+  /* --- 4. Image container: full width + centered image --- */
   .robot-image-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -479,9 +478,9 @@ font-size: 16px;
     justify-content: center;
   }
 
-  /* --- 5. Images: equal margins --- */
+  /* --- 5. Robot images: equal spacing left/right --- */
   .robot-image-container img {
-    width: 90%;
+    width: 90%; /* equal margins */
     height: auto;
     border-radius: 12px;
     object-fit: cover;
@@ -490,17 +489,18 @@ font-size: 16px;
 
   /* --- 6. Text: align with image edges --- */
   .robot-info {
-    padding: 0 5%;
+    padding: 0 5%; /* aligns with image's 90% width */
     box-sizing: border-box;
   }
 
-  /* --- 7. Prevent robot title overflow --- */
+  /* --- 7. Robot titles: prevent overflow for long words --- */
   .robot-info h2 {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
   }
 }
+
 
 
 
