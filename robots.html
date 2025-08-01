@@ -428,15 +428,24 @@ font-size: 16px;
     font-size: 22px; /* same size as homepage mobile */
   }
 
-  /* 2. Robot images: center + prevent overflow */
-  .robot-image-container {
-    max-width: 100%;
-    text-align: center;
+ /* 1. Robot cards: even spacing left & right */
+  .robot-card {
+    padding: 20px; /* equal padding on both sides */
+    box-sizing: border-box;
   }
+
+  /* 2. Ensure full-width elements don't overflow */
+  .robot-card,
+  .robot-image-container,
+  .robot-info {
+    max-width: 100%;
+  }
+
+  /* 3. Images: prevent touching edges */
   .robot-image-container img {
     display: block;
-    margin: 0 auto; /* center horizontally */
-    max-width: 100%; /* never exceed screen width */
+    margin: 0 auto;
+    max-width: calc(100% - 20px); /* add breathing room */
     height: auto;
   }
 }
