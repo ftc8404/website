@@ -645,39 +645,50 @@ justify-content: center;
 
 
 
-/* 📱 Mobile‑only refined adjustments */
+/* 📱 Mobile refinements */
 @media (max-width: 767px) {
 
-  /* 1. Header: move logo/text down */
+  /* 1. Logo + text in top bar: keep one line, just lower */
   .logo-container {
-    margin-top: 2mm; /* push logo + text down */
+    margin-top: 2mm; /* push down slightly */
   }
 
-  /* 2. Hero robot render */
+  /* 2. Restore tab spacing to previous look */
+  nav {
+    gap: 20px; /* original wider gap */
+  }
+  nav a {
+    font-size: 20px; /* restore original size */
+    padding: 0; /* no extra padding */
+  }
+
+  /* 3. Render: actually make bigger, override existing rules */
   .robot-render {
     display: block;
     margin: 0 auto;
-    max-width: 130% !important; /* increase size */
+    max-width: 140% !important; /* bigger than original */
+    width: auto !important;
     height: auto !important;
-    transform: none !important; /* remove desktop shift */
+    transform: none !important; /* remove left offset */
   }
 
-  /* 3. Hide loading animation (particles + grid) */
+  /* 4. Hide background animation for mobile */
   canvas#particles,
   .hero-overlay-grid {
     display: none !important;
   }
 
-  /* 4. Hero labels */
+  /* 5. Hero labels */
   .top-left-label { /* "8404" */
-    font-size: 70px;
-    left: calc(6% + 3mm); /* shift right ~3mm */
+    font-size: 68px; /* slightly smaller */
+    left: calc(6% + 4mm); /* more to the right */
   }
   .bottom-right-label { /* "Quixilver" */
-    font-size: 52px; /* smaller */
-    right: 4%; /* move more right */
+    font-size: 52px; /* keep current size */
+    right: calc(6% - 1mm); /* tiny shift left */
   }
 }
+
 
 
 
