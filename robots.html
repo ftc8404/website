@@ -243,7 +243,7 @@ header {
 flex-direction: column;
 height: auto;
 padding: 20px;
-}*/
+}
 
 nav {
 margin: 20px 0 0;
@@ -266,7 +266,7 @@ font-size: 36px;
 .robots-header p {
 font-size: 16px;
 }
-}
+}*/
 .site-footer {
   background: linear-gradient(90deg, #0f2027, #203a43);
   color: #d0d0d0;
@@ -424,9 +424,10 @@ font-size: 16px;
 
 /* --- 2. Top bar: EXACT match with homepage but slightly shorter --- */
 header {
-  flex-direction: column;
-  align-items: center;
-  padding: 18px 0;
+  flex-direction: column !important;
+  align-items: center !important;
+  height: 138px !important; /* Force match homepage */
+  padding: 18px 0 !important; /* Breathing room */
 }
 
 .logo-container {
