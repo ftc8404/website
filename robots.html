@@ -414,6 +414,7 @@ font-size: 16px;
 
 
 
+
 /* 📱 Final Robots Page Mobile Fixes */
 @media (max-width: 767px) {
 
@@ -422,61 +423,59 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
-/* --- 2. Top bar: EXACT match with homepage but slightly shorter --- */
-header {
-   flex-direction: column !important;
+  /* --- 2. Top bar: EXACT match with homepage --- */
+  header {
+    flex-direction: column !important;
     align-items: center !important;
-    height: auto !important; /* <-- THIS is key */
+    height: auto !important;
     padding-top: 26px !important;
     padding-bottom: 16px !important;
-}
+  }
 
-.logo-container {
-  margin-top: 0;
-  display: flex;
-  flex-direction: row; /* keep logo & text on same line */
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 8px; /* spacing before nav */
-  padding: 0; /* no extra top/bottom padding */
-  white-space: nowrap;
-}
+  .logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    padding: 0;
+    white-space: nowrap;
+  }
 
+  .logo-container img {
+    height: 46px;
+  }
 
-.logo-container img {
-  height: 46px; /* same size logo */
-}
+  .logo-text {
+    font-size: 28px;
+  }
 
-.logo-text {
-  font-size: 28px;
-}
+  nav {
+    margin: 20px 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+  }
 
-nav {
-  margin: 20px 0 0;
-  gap: 32px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
+  nav a {
+    font-size: 20px;
+    padding: 0;
+    flex: 0 1 calc(33.33% - 22px); /* ensures 3 tabs per row */
+    text-align: center;
+  }
 
-nav a {
-  font-size: 20px;
-  padding: 0;
-  flex: 1 1 30%;
-  text-align: center;
-}
-
-
-  /* --- 3. Robot cards: stack vertically on mobile --- */
+  /* --- 3. Robot cards: stack vertically --- */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden; /* contain children */
+    overflow: hidden;
   }
 
-  /* --- 4. Image container: full width + centered image --- */
+  /* --- 4. Image container: centered image --- */
   .robot-image-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -485,22 +484,22 @@ nav a {
     justify-content: center;
   }
 
-  /* --- 5. Robot images: equal spacing left/right --- */
+  /* --- 5. Robot images: centered and spaced --- */
   .robot-image-container img {
-    width: 90%; /* equal margins */
+    width: 90%;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
     display: block;
   }
 
-  /* --- 6. Text: align with image edges --- */
+  /* --- 6. Text aligned with image --- */
   .robot-info {
-    padding: 0 5%; /* aligns with image's 90% width */
+    padding: 0 5%;
     box-sizing: border-box;
   }
 
-  /* --- 7. Robot titles: prevent overflow for long words --- */
+  /* --- 7. Titles wrap cleanly --- */
   .robot-info h2 {
     word-wrap: break-word;
     overflow-wrap: break-word;
