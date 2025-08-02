@@ -453,17 +453,18 @@ font-size: 16px;
   /* Nav exactly like homepage */
   nav {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 14px;
+    flex-wrap: wrap; /* allow wrap to next line */
+    justify-content: center; /* center horizontally */
+    gap: 20px; /* space between tabs */
     width: 100%;
+    margin-top: 14px;
   }
 
   nav a {
     font-size: 20px;
     padding: 0;
     text-align: center;
+    flex: 0 0 28%; /* 3 fit per row on first line */
   }
 
   /* Robot cards: stack vertically */
