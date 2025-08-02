@@ -452,18 +452,25 @@ font-size: 16px;
   }
 
   nav {
-    margin: 20px 0 0;
+        margin: 20px 0 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 32px;
+    width: 100%;
   }
 
   nav a {
-    font-size: 20px;
+   font-size: 20px;
     padding: 0;
-    flex: 0 1 calc(33.33% - 22px); /* ensures 3 tabs per row */
     text-align: center;
+    flex: 0 1 auto;
+  }
+   nav a:nth-child(-n+3) {
+    flex-basis: calc(33.33% - 22px); /* First 3 links evenly spaced */
+  }
+  nav a:nth-child(n+4) {
+    flex-basis: calc(50% - 16px); /* Last 2 links evenly spaced */
   }
 
   /* --- 3. Robot cards: stack vertically --- */
