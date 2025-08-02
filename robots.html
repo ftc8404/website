@@ -412,7 +412,7 @@ font-size: 16px;
 }
 
 
-/* 📱 Robots Page Mobile Fixes - Match Homepage EXACTLY */
+/* 📱 Robots Page Mobile Fixes - Force 3-2 Tabs */
 @media (max-width: 767px) {
 
   html, body {
@@ -432,7 +432,7 @@ font-size: 16px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* homepage gap */
+    gap: 8px;
     margin-top: 2mm;
     white-space: nowrap;
     margin-bottom: 8px;
@@ -446,18 +446,20 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* --- This is the homepage nav code --- */
+  /* Force exact same nav layout as homepage */
   nav {
     display: flex;
     justify-content: center;
-    gap: 30px; /* exact homepage gap */
     flex-wrap: wrap;
+    gap: 30px;
     width: 100%;
   }
 
   nav a {
     font-size: 20px;
     padding: 0;
+    flex: 0 1 calc(33.333% - 30px); /* Force 3 per row */
+    text-align: center;
   }
 
   /* Robot cards stack vertically */
@@ -500,6 +502,7 @@ font-size: 16px;
     hyphens: auto;
   }
 }
+
 
 
   
