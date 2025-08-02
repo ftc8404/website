@@ -448,7 +448,7 @@ font-size: 16px;
 
   /* Force exact same nav layout as homepage */
   nav {
-    margin-right: 0 !important; /* Kill the left push */
+    margin-right: 0 !important;
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
@@ -457,7 +457,8 @@ font-size: 16px;
   }
 
   nav a {
-    flex: 0 1 calc(33.333% - 30px) !important; /* Force 3 per row */
+    flex: 0 0 calc(33.333% - 30px) !important; /* fixed width, not shrinkable */
+    max-width: calc(33.333% - 30px) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
