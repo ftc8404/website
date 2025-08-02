@@ -412,34 +412,30 @@ font-size: 16px;
 }
 
 
-
-/* 📱 Robots Page Mobile — Match Homepage */
+/* 📱 Robots Page Mobile Fixes - Match Homepage EXACTLY */
 @media (max-width: 767px) {
 
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* Force header into stacked layout */
   header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-    padding-top: 26px;
-    padding-bottom: 16px;
+    flex-direction: column !important;
+    align-items: center !important;
+    height: auto !important;
+    padding-top: 26px !important;
+    padding-bottom: 16px !important;
   }
 
-  /* Center logo & text */
   .logo-container {
     display: flex;
-    flex-direction: row; /* keep on same line */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 8px; /* homepage gap */
     margin-top: 2mm;
     white-space: nowrap;
-    overflow: hidden; /* prevents text from going off-screen */
+    margin-bottom: 8px;
   }
 
   .logo-container img {
@@ -450,24 +446,21 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* Nav exactly like homepage */
+  /* --- This is the homepage nav code --- */
   nav {
     display: flex;
-    flex-wrap: wrap; /* allow wrap to next line */
-    justify-content: center; /* center horizontally */
-    gap: 20px; /* space between tabs */
+    justify-content: center;
+    gap: 30px; /* exact homepage gap */
+    flex-wrap: wrap;
     width: 100%;
-    margin-top: 14px;
   }
 
   nav a {
     font-size: 20px;
     padding: 0;
-    text-align: center;
-    flex: 0 0 28%; /* 3 fit per row on first line */
   }
 
-  /* Robot cards: stack vertically */
+  /* Robot cards stack vertically */
   .robot-card {
     flex-direction: column;
     padding: 20px;
@@ -476,7 +469,7 @@ font-size: 16px;
     overflow: hidden;
   }
 
-  /* Image container: center image */
+  /* Image container full width + centered image */
   .robot-image-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -485,7 +478,7 @@ font-size: 16px;
     justify-content: center;
   }
 
-  /* Images: equal spacing on sides */
+  /* Equal margins for images */
   .robot-image-container img {
     width: 90%;
     height: auto;
@@ -494,19 +487,20 @@ font-size: 16px;
     display: block;
   }
 
-  /* Text aligned with image edges */
+  /* Text aligns with image edges */
   .robot-info {
     padding: 0 5%;
     box-sizing: border-box;
   }
 
-  /* Prevent robot titles from overflowing */
+  /* Prevent overflow on long titles */
   .robot-info h2 {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
   }
 }
+
 
   
 </style>
