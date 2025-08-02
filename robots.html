@@ -413,58 +413,69 @@ font-size: 16px;
 
 
 
-
-
-/* 📱 Final Robots Page Mobile Fixes — Match Homepage */
+/* 📱 Robots Page Mobile — Match Homepage */
 @media (max-width: 767px) {
 
-  /* --- 1. Prevent horizontal scroll --- */
   html, body {
     overflow-x: hidden !important;
   }
 
-  /* --- 2. Logo container identical to homepage --- */
+  /* Force header into stacked layout */
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding-top: 26px;
+    padding-bottom: 16px;
+  }
+
+  /* Center logo & text */
   .logo-container {
     display: flex;
-    flex-direction: row; /* keep logo & text on same line */
+    flex-direction: row; /* keep on same line */
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 2mm; /* push down slightly */
-    white-space: nowrap; /* prevent wrapping */
+    margin-top: 2mm;
+    white-space: nowrap;
+    overflow: hidden; /* prevents text from going off-screen */
   }
 
   .logo-container img {
-    height: 46px; /* same as homepage */
+    height: 46px;
   }
 
   .logo-text {
-    font-size: 28px; /* same as homepage */
+    font-size: 28px;
   }
 
-  /* --- 3. Navigation identical to homepage --- */
+  /* Nav exactly like homepage */
   nav {
     display: flex;
     justify-content: center;
-    gap: 30px; /* homepage spacing */
+    gap: 30px;
     flex-wrap: wrap;
+    margin-top: 14px;
+    width: 100%;
   }
 
   nav a {
     font-size: 20px;
     padding: 0;
+    text-align: center;
   }
 
-  /* --- 4. Robot cards: stack vertically on mobile --- */
+  /* Robot cards: stack vertically */
   .robot-card {
     flex-direction: column;
     padding: 20px;
     box-sizing: border-box;
     max-width: 100%;
-    overflow: hidden; /* contain children */
+    overflow: hidden;
   }
 
-  /* --- 5. Image container: full width + centered image --- */
+  /* Image container: center image */
   .robot-image-container {
     width: 100% !important;
     max-width: 100% !important;
@@ -473,33 +484,28 @@ font-size: 16px;
     justify-content: center;
   }
 
-  /* --- 6. Robot images: equal spacing left/right --- */
+  /* Images: equal spacing on sides */
   .robot-image-container img {
-    width: 90%; /* equal margins */
+    width: 90%;
     height: auto;
     border-radius: 12px;
     object-fit: cover;
     display: block;
   }
 
-  /* --- 7. Text: align with image edges --- */
+  /* Text aligned with image edges */
   .robot-info {
-    padding: 0 5%; /* aligns with image's 90% width */
+    padding: 0 5%;
     box-sizing: border-box;
   }
 
-  /* --- 8. Robot titles: prevent overflow for long words --- */
+  /* Prevent robot titles from overflowing */
   .robot-info h2 {
     word-wrap: break-word;
     overflow-wrap: break-word;
     hyphens: auto;
   }
 }
-
-
-
-
-
 
   
 </style>
