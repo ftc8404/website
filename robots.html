@@ -428,43 +428,25 @@ font-size: 16px;
     padding-bottom: 26px !important;
   }
 
-  /* Logo + text */
-  .logo-container {
+ .logo-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: row; /* force same line */
     align-items: center;
     justify-content: center;
     gap: 8px;
-    white-space: nowrap;
-    margin-bottom: 12px;
+    margin-top: 2mm; /* push down slightly */
+    white-space: nowrap; /* prevent wrapping */
   }
 
-  .logo-container img {
-    height: 46px;
-  }
-
-  .logo-text {
-    font-size: 28px;
-  }
-
-  /* NAV: perfect 3‑2 layout, both rows centered */
+  /* 2. Restore original tab spacing */
   nav {
-    width: 100% !important;
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important; /* center both rows */
-    gap: 20px 40px !important; /* row gap, column gap */
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* restore wider gap */
   }
-
   nav a {
-    flex: 0 0 30% !important; /* ~3 per row */
-    text-align: center !important;
-    font-size: 20px !important;
-  }
-
-  /* Ensure the last two take same width and center naturally */
-  nav a:nth-last-child(-n+2) {
-    flex: 0 0 30% !important;
+    font-size: 20px;
+    padding: 0;
   }
 
   /* Robot cards stack vertically */
