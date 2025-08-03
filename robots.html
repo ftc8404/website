@@ -419,23 +419,25 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
+  /* Top bar height + spacing */
   header {
     flex-direction: column !important;
     align-items: center !important;
     height: auto !important;
-    padding-top: 26px !important;
-    padding-bottom: 16px !important;
+    padding-top: 32px !important;   /* more breathing room above */
+    padding-bottom: 22px !important; /* more breathing room below */
   }
 
+  /* Logo and text alignment */
   .logo-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 2mm;
+    margin-top: 0;
     white-space: nowrap;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .logo-container img {
@@ -446,19 +448,19 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* Force exact same nav layout as homepage */
+  /* Nav layout - force 3-2 format and center */
   nav {
     margin-right: 0 !important;
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 30px !important;
+    gap: 38px !important; /* increased gap between labels */
   }
 
   nav a {
-    flex: 0 0 calc(33.333% - 30px) !important; /* fixed width, not shrinkable */
-    max-width: calc(33.333% - 30px) !important;
+    flex: 0 0 calc(33.333% - 38px) !important; /* fixed 3 per row, minus bigger gap */
+    max-width: calc(33.333% - 38px) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
