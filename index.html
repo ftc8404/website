@@ -649,50 +649,57 @@ justify-content: center;
 /* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials (taller bar + tighter spacing) */
 @media (max-width: 767px) {
 
-  /* Keep logo in place */
-  .logo-container {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    margin-top: 2mm !important;
-    white-space: nowrap !important;
-  }
-
-  /* Make header taller */
+   /* Match header height and padding */
   header {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     height: auto !important;
-    padding-top: 44px !important;   /* was 38px */
-    padding-bottom: 30px !important; /* was 26px */
+    padding-top: 38px !important;  /* Same as Robots */
+    padding-bottom: 26px !important;
   }
 
-  /* FORCE 3-2 layout */
-  header nav {
+  /* Match logo container look */
+  .logo-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    white-space: nowrap;
+  }
+
+  .logo-container img {
+    height: 46px; /* Same as Robots */
+  }
+
+  .logo-text {
+    font-size: 28px;
+  }
+
+  /* Match Robots page 3-2 layout */
+  nav {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 20px !important; /* was 28px → tighter by ~2mm */
-    row-gap: 14px !important;    
+    column-gap: 30px !important; /* ~2mm less than before */
+    row-gap: 14px !important; 
   }
 
-  /* Top row: exactly 3 tabs */
-  header nav a {
-    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
-    max-width: calc((100% - (20px * 2)) / 3) !important;
+  /* Top row: 3 equal tabs */
+  nav a {
+    flex: 0 0 calc((100% - (30px * 2)) / 3) !important;
+    max-width: calc((100% - (30px * 2)) / 3) !important;
     text-align: center !important;
     font-size: 20px !important;
-    padding: 0 !important;
   }
 
-  /* Bottom row: exactly 2 tabs */
-  header nav a:nth-last-child(-n+2) {
+  /* Bottom row: 2 equal tabs */
+  nav a:nth-last-child(-n+2) {
     flex: 0 0 calc((100% - 20px) / 2) !important;
     max-width: calc((100% - 20px) / 2) !important;
   }
