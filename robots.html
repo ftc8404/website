@@ -451,24 +451,26 @@ font-size: 16px;
    nav {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important; /* centers both rows */
-    gap: 0 !important; /* spacing handled inside */
+    width: 100% !important;
+    justify-content: center !important;
   }
 
-  /* First row: 3 tabs */
+  /* First row: exactly 3 items, no overlap */
   nav a:nth-child(-n+3) {
-    flex: 0 0 calc(33.333% - 12px) !important; /* -12px prevents overlap */
-    max-width: calc(33.333% - 12px) !important;
+    flex: 0 0 auto !important; /* let content size naturally */
+    min-width: 28% !important; /* safe, avoids overlap */
+    max-width: 30% !important;
     text-align: center !important;
-    margin: 0 6px !important; /* small horizontal spacing */
+    margin: 0 8px !important; /* controls gap between top row items */
   }
 
-  /* Second row: 2 tabs */
+  /* Second row: exactly 2 items, closer together */
   nav a:nth-child(n+4) {
-    flex: 0 0 calc(50% - 20px) !important; /* tweak here for more/less gap */
-    max-width: calc(50% - 20px) !important;
+    flex: 0 0 auto !important;
+    min-width: 42% !important; /* less than 50 to allow spacing */
+    max-width: 45% !important;
     text-align: center !important;
-    margin: 0 10px !important; /* controls gap between the two */
+    margin: 0 6px !important; /* controls gap between bottom row items */
   }
 
   /* Robot cards stack vertically */
