@@ -419,17 +419,16 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
- /* Top bar height same as before */
+ /* --- Top bar: match homepage height --- */
   header {
     flex-direction: column !important;
     align-items: center !important;
-    width: 100% !important;
-    min-height: 160px !important; /* taller, same as homepage feel */
-    padding-top: 38px !important;
-    padding-bottom: 26px !important;
+    height: auto !important;
+    padding-top: 38px !important;   /* extra top space */
+    padding-bottom: 28px !important; /* extra bottom space */
   }
 
-  /* Logo + text centered */
+  /* --- Logo + text --- */
   .logo-container {
     display: flex;
     flex-direction: row;
@@ -448,24 +447,25 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* NAV: force center, consistent spacing, no early wrap */
+  /* --- Nav: force 3 items in first row, 2 in second --- */
   nav {
-    width: 100% !important;                /* take full width */
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important;    /* center rows */
-    gap: 20px 40px !important;              /* row gap / column gap */
+    justify-content: center !important;
+    gap: 30px !important;
+    width: 100% !important;
   }
 
   nav a {
-    flex: 0 0 28% !important;               /* 3 per row without squish */
+    flex: 0 0 calc(33.333% - 30px) !important; /* exactly 3 per row */
+    max-width: calc(33.333% - 30px) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
 
-  /* Make last row (2 items) still centered */
+  /* --- Second row: center the last two perfectly --- */
   nav a:nth-last-child(-n+2) {
-    flex: 0 0 28% !important;               /* match first row size */
+    margin-left: calc((33.333% / 2) + 15px) !important; /* pushes 2nd row into center */
   }
 
   /* Robot cards stack vertically */
