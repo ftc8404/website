@@ -419,25 +419,24 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
-  /* Top bar height + spacing */
+   /* Top bar: taller to match homepage */
   header {
     flex-direction: column !important;
     align-items: center !important;
     height: auto !important;
-    padding-top: 32px !important;   /* more breathing room above */
-    padding-bottom: 22px !important; /* more breathing room below */
+    padding-top: 38px !important;  /* more space above */
+    padding-bottom: 26px !important; /* more space below */
   }
 
-  /* Logo and text alignment */
+  /* Logo + text alignment */
   .logo-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 0;
     white-space: nowrap;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
   .logo-container img {
@@ -448,21 +447,26 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* Nav layout - force 3-2 format and center */
+  /* Nav: perfect 3-2 layout, centered rows */
   nav {
-    margin-right: 0 !important;
+    margin: 0 auto !important;        /* ensures center container */
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 38px !important; /* increased gap between labels */
+    gap: 34px !important;              /* uniform gap between all items */
   }
 
   nav a {
-    flex: 0 0 calc(33.333% - 38px) !important; /* fixed 3 per row, minus bigger gap */
-    max-width: calc(33.333% - 38px) !important;
+    flex: 0 0 calc(33.333% - 34px) !important; /* 3 per row */
+    max-width: calc(33.333% - 34px) !important;
     text-align: center !important;
     font-size: 20px !important;
+  }
+
+  /* Center the last two items perfectly in the second row */
+  nav a:nth-last-child(-n+2) {
+    flex: 0 0 calc(33.333% - 34px) !important; /* same width as first row */
   }
 
   /* Robot cards stack vertically */
