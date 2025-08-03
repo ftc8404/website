@@ -423,10 +423,10 @@ font-size: 16px;
   header {
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important; /* <— THIS is missing now */
+    justify-content: center !important;
     height: auto !important;
-    padding-top: 34px !important;
-    padding-bottom: 24px !important;
+    padding-top: 38px !important;   /* restored from shorter version */
+    padding-bottom: 26px !important;
   }
 
   /* --- Logo + text --- */
@@ -448,6 +448,7 @@ font-size: 16px;
     font-size: 28px;
   }
 
+  /* Nav container */
   nav {
     margin: 0 !important;
     padding: 0 !important;
@@ -455,22 +456,22 @@ font-size: 16px;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 28px !important; /* horizontal gap only */
-    row-gap: 14px !important;    /* smaller vertical gap */
+    column-gap: 32px !important; /* was 28px → +4px for top row spacing */
+    row-gap: 14px !important;    /* keeps vertical gap modest */
   }
 
   /* Top row: 3 equal tabs */
   nav a {
-    flex: 0 0 calc((100% - (28px * 2)) / 3) !important;
-    max-width: calc((100% - (28px * 2)) / 3) !important;
+    flex: 0 0 calc((100% - (32px * 2)) / 3) !important;
+    max-width: calc((100% - (32px * 2)) / 3) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
 
-  /* Bottom row: 2 equal tabs */
+  /* Bottom row: 2 equal tabs with tighter gap */
   nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc((100% - 28px) / 2) !important;
-    max-width: calc((100% - 28px) / 2) !important;
+    flex: 0 0 calc((100% - 20px) / 2) !important; /* reduced gap for 2-tab row */
+    max-width: calc((100% - 20px) / 2) !important;
   }
 
   /* Robot cards stack vertically */
