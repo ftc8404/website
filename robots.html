@@ -448,28 +448,29 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* Kill desktop nav margin + giant gap */
   nav {
     margin: 0 !important;
+    padding: 0 !important;
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 28px !important; /* uniform gap for both rows */
+    column-gap: 28px !important; /* horizontal gap only */
+    row-gap: 14px !important;    /* smaller vertical gap */
   }
 
-  /* First row: exactly 3 evenly spaced */
+  /* Top row: 3 equal tabs */
   nav a {
-    flex: 0 0 calc(33.333% - 28px) !important;
-    max-width: calc(33.333% - 28px) !important;
+    flex: 0 0 calc((100% - (28px * 2)) / 3) !important;
+    max-width: calc((100% - (28px * 2)) / 3) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
 
-  /* Bottom row: exactly 2 evenly spaced & centered */
+  /* Bottom row: 2 equal tabs */
   nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc(50% - 28px) !important;
-    max-width: calc(50% - 28px) !important;
+    flex: 0 0 calc((100% - 28px) / 2) !important;
+    max-width: calc((100% - 28px) / 2) !important;
   }
 
   /* Robot cards stack vertically */
