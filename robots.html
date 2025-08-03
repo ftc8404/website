@@ -419,34 +419,53 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
-   /* Keep your top bar height adjustments */
+ /* Top bar height same as before */
   header {
     flex-direction: column !important;
     align-items: center !important;
-    min-height: 160px !important; /* match homepage height */
+    width: 100% !important;
+    min-height: 160px !important; /* taller, same as homepage feel */
     padding-top: 38px !important;
     padding-bottom: 26px !important;
   }
 
- .logo-container {
+  /* Logo + text centered */
+  .logo-container {
     display: flex;
-    flex-direction: row; /* force same line */
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 2mm; /* push down slightly */
-    white-space: nowrap; /* prevent wrapping */
+    white-space: nowrap;
+    margin-bottom: 12px;
   }
 
-  /* 2. Restore original tab spacing */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* restore wider gap */
+  .logo-container img {
+    height: 46px;
   }
+
+  .logo-text {
+    font-size: 28px;
+  }
+
+  /* NAV: force center, consistent spacing, no early wrap */
+  nav {
+    width: 100% !important;                /* take full width */
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;    /* center rows */
+    gap: 20px 40px !important;              /* row gap / column gap */
+  }
+
   nav a {
-    font-size: 20px;
-    padding: 0;
+    flex: 0 0 28% !important;               /* 3 per row without squish */
+    text-align: center !important;
+    font-size: 20px !important;
+  }
+
+  /* Make last row (2 items) still centered */
+  nav a:nth-last-child(-n+2) {
+    flex: 0 0 28% !important;               /* match first row size */
   }
 
   /* Robot cards stack vertically */
