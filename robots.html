@@ -451,12 +451,12 @@ font-size: 16px;
    nav {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important; /* center horizontally */
-    gap: 28px !important; /* overall gap between tabs */
+    justify-content: center !important; /* center both rows */
+    gap: 28px !important;
     width: 100% !important;
   }
 
-  /* Tabs: force 3 on first row */
+  /* Top row: 3 evenly spaced */
   nav a {
     flex: 0 0 calc(33.333% - 28px) !important;
     max-width: calc(33.333% - 28px) !important;
@@ -464,10 +464,10 @@ font-size: 16px;
     font-size: 20px !important;
   }
 
-  /* Bottom row: center the 2 tabs & reduce their space */
+  /* Bottom row: 2 centered & tighter spacing */
   nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc(33.333% - 28px) !important;
-    margin-left: calc(16.666% - 14px) !important; /* centers the two tabs */
+    flex: 0 0 calc(50% - 28px) !important; /* make them 50% each */
+    max-width: calc(50% - 28px) !important;
   }
 
   /* Robot cards stack vertically */
