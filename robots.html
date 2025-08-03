@@ -419,13 +419,13 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
- /* --- Top bar: match homepage height --- */
+ /* --- Top bar: slightly shorter --- */
   header {
     flex-direction: column !important;
     align-items: center !important;
     height: auto !important;
-    padding-top: 38px !important;   /* extra top space */
-    padding-bottom: 28px !important; /* extra bottom space */
+    padding-top: 34px !important;   /* was 38px */
+    padding-bottom: 24px !important; /* was 28px */
   }
 
   /* --- Logo + text --- */
@@ -452,20 +452,20 @@ font-size: 16px;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 30px !important;
+    gap: 28px !important; /* slightly smaller gap than before */
     width: 100% !important;
   }
 
   nav a {
-    flex: 0 0 calc(33.333% - 30px) !important; /* exactly 3 per row */
-    max-width: calc(33.333% - 30px) !important;
+    flex: 0 0 calc(33.333% - 28px) !important;
+    max-width: calc(33.333% - 28px) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
 
-  /* --- Second row: center the last two perfectly --- */
+  /* --- Second row: center last two with reduced gap --- */
   nav a:nth-last-child(-n+2) {
-    margin-left: calc((33.333% / 2) + 15px) !important; /* pushes 2nd row into center */
+    margin-left: calc((33.333% / 2) + 10px) !important; /* less push than before */
   }
 
   /* Robot cards stack vertically */
