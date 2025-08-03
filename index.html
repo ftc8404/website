@@ -645,7 +645,8 @@ justify-content: center;
 
 
 
-/* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Existing Essentials */
+
+/* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials (taller bar + tighter spacing) */
 @media (max-width: 767px) {
 
   /* Keep logo in place */
@@ -659,6 +660,16 @@ justify-content: center;
     white-space: nowrap !important;
   }
 
+  /* Make header taller */
+  header {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    padding-top: 44px !important;   /* was 38px */
+    padding-bottom: 30px !important; /* was 26px */
+  }
+
   /* FORCE 3-2 layout */
   header nav {
     margin: 0 !important;
@@ -667,14 +678,14 @@ justify-content: center;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 28px !important; /* horizontal gap */
-    row-gap: 14px !important;    /* vertical gap between rows */
+    column-gap: 20px !important; /* was 28px → tighter by ~2mm */
+    row-gap: 14px !important;    
   }
 
   /* Top row: exactly 3 tabs */
   header nav a {
-    flex: 0 0 calc((100% - (28px * 2)) / 3) !important;
-    max-width: calc((100% - (28px * 2)) / 3) !important;
+    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
+    max-width: calc((100% - (20px * 2)) / 3) !important;
     text-align: center !important;
     font-size: 20px !important;
     padding: 0 !important;
@@ -682,8 +693,8 @@ justify-content: center;
 
   /* Bottom row: exactly 2 tabs */
   header nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc((100% - 28px) / 2) !important;
-    max-width: calc((100% - 28px) / 2) !important;
+    flex: 0 0 calc((100% - 20px) / 2) !important;
+    max-width: calc((100% - 20px) / 2) !important;
   }
 
   /* Make robot render big + centered */
