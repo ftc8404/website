@@ -679,19 +679,18 @@ justify-content: center;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 32px !important; /* space between tabs horizontally */
-    row-gap: 16px !important;    /* space between top/bottom rows */
+    column-gap: 32px !important; /* gap between tabs horizontally */
+    row-gap: 16px !important;    /* gap between top/bottom rows */
   }
 
-  /* First row: exactly 3 tabs */
+  /* First row: 3 equal tabs */
   header nav a {
     flex: 0 0 calc((100% - (32px * 2)) / 3) !important;
     max-width: calc((100% - (32px * 2)) / 3) !important;
     text-align: center !important;
-    font-size: 20px !important;
   }
 
-  /* Last row: exactly 2 tabs, closer together */
+  /* Last row: 2 equal tabs */
   header nav a:nth-last-child(-n+2) {
     flex: 0 0 calc((100% - 24px) / 2) !important;
     max-width: calc((100% - 24px) / 2) !important;
