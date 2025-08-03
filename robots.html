@@ -448,14 +448,15 @@ font-size: 16px;
   }
 
   /* --- Nav: force 3 items in first row, 2 in second --- */
-  nav {
+   nav {
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 28px !important; /* slightly smaller gap than before */
+    justify-content: center !important; /* center horizontally */
+    gap: 28px !important; /* overall gap between tabs */
     width: 100% !important;
   }
 
+  /* Tabs: force 3 on first row */
   nav a {
     flex: 0 0 calc(33.333% - 28px) !important;
     max-width: calc(33.333% - 28px) !important;
@@ -463,9 +464,10 @@ font-size: 16px;
     font-size: 20px !important;
   }
 
-  /* --- Second row: center last two with reduced gap --- */
+  /* Bottom row: center the 2 tabs & reduce their space */
   nav a:nth-last-child(-n+2) {
-    margin-left: calc((33.333% / 2) + 10px) !important; /* less push than before */
+    flex: 0 0 calc(33.333% - 28px) !important;
+    margin-left: calc(16.666% - 14px) !important; /* centers the two tabs */
   }
 
   /* Robot cards stack vertically */
