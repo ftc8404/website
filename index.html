@@ -648,50 +648,80 @@ justify-content: center;
 /* 📱 Mobile refinements */
 @media (max-width: 767px) {
 
-   .logo-container {
+   /* --- Header / Top Bar --- */
+  header {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    padding-top: 38px !important; /* taller like desktop feel */
+    padding-bottom: 26px !important;
+  }
+
+  /* --- Logo Container --- */
+  .logo-container {
     display: flex;
-    flex-direction: row; /* force same line */
+    flex-direction: row; /* keep logo + text in one line */
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-top: 2mm; /* push down slightly */
-    white-space: nowrap; /* prevent wrapping */
+    white-space: nowrap;
+    margin-bottom: 12px;
+  }
+  .logo-container img { height: 46px; }
+  .logo-text { font-size: 28px; }
+
+  /* --- Nav Container: Force 3‑2 Layout --- */
+  header nav {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    column-gap: 32px !important; /* horizontal spacing for top row */
+    row-gap: 16px !important;    /* vertical spacing between rows */
   }
 
-  /* 2. Restore original tab spacing */
-  nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px; /* restore wider gap */
-  }
-  nav a {
-    font-size: 20px;
-    padding: 0;
+  /* Top row: first 3 tabs */
+  header nav a:nth-child(-n+3) {
+    flex: 0 0 calc((100% - (32px * 2)) / 3) !important;
+    max-width: calc((100% - (32px * 2)) / 3) !important;
+    text-align: center !important;
+    font-size: 20px !important;
   }
 
-  /* 3. Render: actually make bigger, override existing rules */
+  /* Bottom row: last 2 tabs */
+  header nav a:nth-child(n+4) {
+    flex: 0 0 calc((100% - 24px) / 2) !important;
+    max-width: calc((100% - 24px) / 2) !important;
+    text-align: center !important;
+  }
+
+  /* --- Hero Robot Render --- */
   .robot-render {
     display: block;
     margin: 0 auto;
-    max-width: 140% !important; /* bigger than original */
+    max-width: 140% !important; /* bigger than original for mobile */
     width: auto !important;
     height: auto !important;
     transform: none !important; /* remove left offset */
   }
 
-  /* 4. Hide background animation for mobile */
+  /* --- Hide heavy hero animations for mobile --- */
   canvas#particles,
   .hero-overlay-grid {
     display: none !important;
   }
 
+  /* --- Top/Bottom Hero Labels --- */
   .top-left-label {
-    font-size: 66px; /* slightly smaller */
-    left: calc(6% + 9mm); /* nudge right 1.5mm */
+    font-size: 66px; /* smaller for mobile */
+    left: calc(6% + 9mm); /* slight nudge */
   }
-  .bottom-right-label { /* "Quixilver" */
-    font-size: 52px; /* keep current size */
-    right: calc(6% - 1mm); /* tiny shift left */
+  .bottom-right-label {
+    font-size: 52px;
+    right: calc(6% - 1mm);
   }
 }
 
