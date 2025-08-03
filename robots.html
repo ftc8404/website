@@ -419,16 +419,16 @@ font-size: 16px;
     overflow-x: hidden !important;
   }
 
-  /* Top bar height + padding */
+   /* Keep your top bar height adjustments */
   header {
     flex-direction: column !important;
     align-items: center !important;
-    min-height: 160px !important;  /* force taller bar */
+    min-height: 160px !important; /* match homepage height */
     padding-top: 38px !important;
     padding-bottom: 26px !important;
   }
 
-  /* Logo + text alignment */
+  /* Logo + text */
   .logo-container {
     display: flex;
     flex-direction: row;
@@ -447,19 +447,24 @@ font-size: 16px;
     font-size: 28px;
   }
 
-  /* Nav: exact 3-2 layout */
+  /* NAV: perfect 3‑2 layout, both rows centered */
   nav {
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 30px !important;
+    justify-content: center !important; /* center both rows */
+    gap: 20px 40px !important; /* row gap, column gap */
   }
 
   nav a {
-    flex: 0 0 33.333% !important; /* exact 3 per row */
+    flex: 0 0 30% !important; /* ~3 per row */
     text-align: center !important;
     font-size: 20px !important;
+  }
+
+  /* Ensure the last two take same width and center naturally */
+  nav a:nth-last-child(-n+2) {
+    flex: 0 0 30% !important;
   }
 
   /* Robot cards stack vertically */
