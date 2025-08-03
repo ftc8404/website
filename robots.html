@@ -448,30 +448,31 @@ font-size: 16px;
     font-size: 28px;
   }
 
-   header nav {
-    margin: 0 !important; /* kill desktop right margin */
+  header nav {
+    margin: 0 !important;
     padding: 0 !important;
-    gap: 0 !important; /* reset desktop gap first */
+    gap: 0 !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
     width: 100% !important;
+    row-gap: 20px !important; /* ↑ more space between the 3-row & 2-row */
   }
 
-  /* Top row: 3 evenly spaced */
+  /* --- Top row: 3 evenly spaced, bigger gap like homepage --- */
   header nav a:nth-child(-n+3) {
-    flex: 0 0 calc(33.333% - 20px) !important;
-    max-width: calc(33.333% - 20px) !important;
+    flex: 0 0 calc(33.333% - 30px) !important; /* slightly narrower to make gap bigger */
+    max-width: calc(33.333% - 30px) !important;
     text-align: center !important;
-    margin: 0 10px !important; /* controls top row gap */
+    margin: 0 15px !important; /* ↑ wider side margin = bigger tab spacing */
   }
 
-  /* Bottom row: 2 evenly spaced */
+  /* --- Bottom row: 2 evenly spaced, smaller gap --- */
   header nav a:nth-child(n+4) {
-    flex: 0 0 calc(50% - 20px) !important;
-    max-width: calc(50% - 20px) !important;
+    flex: 0 0 calc(50% - 12px) !important; /* narrower gap than before */
+    max-width: calc(50% - 12px) !important;
     text-align: center !important;
-    margin: 0 10px !important; /* controls bottom row gap */
+    margin: 0 6px !important; /* ↓ smaller side margin = closer tabs */
   }
 
   /* Robot cards stack vertically */
