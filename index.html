@@ -649,36 +649,40 @@ justify-content: center;
 /* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials (taller bar + tighter spacing) */
 @media (max-width: 767px) {
 
-   /* Match header height and padding */
+  html, body {
+    overflow-x: hidden !important;
+  }
+
+  /* Header identical to Robots page */
   header {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     height: auto !important;
-    padding-top: 38px !important;  /* Same as Robots */
+    padding-top: 38px !important;
     padding-bottom: 26px !important;
   }
 
-  /* Match logo container look */
+  /* Logo container identical */
   .logo-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    white-space: nowrap;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    white-space: nowrap !important;
+    margin-bottom: 12px !important;
   }
 
   .logo-container img {
-    height: 46px; /* Same as Robots */
+    height: 46px !important;
   }
 
   .logo-text {
-    font-size: 28px;
+    font-size: 28px !important;
   }
 
-  /* Match Robots page 3-2 layout */
+  /* Navigation container identical */
   nav {
     margin: 0 !important;
     padding: 0 !important;
@@ -686,24 +690,23 @@ justify-content: center;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 30px !important; /* ~2mm less than before */
-    row-gap: 14px !important; 
+    column-gap: 28px !important; /* same gap as Robots page */
+    row-gap: 14px !important;    /* same vertical spacing */
   }
 
-  /* Top row: 3 equal tabs */
+  /* Top row: exactly 3 tabs evenly spaced */
   nav a {
-    flex: 0 0 calc((100% - (30px * 2)) / 3) !important;
-    max-width: calc((100% - (30px * 2)) / 3) !important;
+    flex: 0 0 calc((100% - (28px * 2)) / 3) !important;
+    max-width: calc((100% - (28px * 2)) / 3) !important;
     text-align: center !important;
     font-size: 20px !important;
   }
 
-  /* Bottom row: 2 equal tabs */
+  /* Bottom row: exactly 2 tabs evenly spaced */
   nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc((100% - 20px) / 2) !important;
-    max-width: calc((100% - 20px) / 2) !important;
+    flex: 0 0 calc((100% - 28px) / 2) !important;
+    max-width: calc((100% - 28px) / 2) !important;
   }
-
   /* Make robot render big + centered */
   .robot-render {
     display: block !important;
