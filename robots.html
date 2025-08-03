@@ -414,22 +414,18 @@ font-size: 16px;
 
 /* 📱 Robots Page Mobile Fixes - Force 3-2 Tabs */
 @media (max-width: 767px) {
-
-body {
-  background: red !important;
-}
   
-  html, body {
+ html, body {
     overflow-x: hidden !important;
   }
 
-   /* Top bar: taller to match homepage */
+  /* Top bar height + padding */
   header {
     flex-direction: column !important;
     align-items: center !important;
-    height: auto !important;
-    padding-top: 38px !important;  /* more space above */
-    padding-bottom: 26px !important; /* more space below */
+    min-height: 160px !important;  /* force taller bar */
+    padding-top: 38px !important;
+    padding-bottom: 26px !important;
   }
 
   /* Logo + text alignment */
@@ -451,26 +447,19 @@ body {
     font-size: 28px;
   }
 
-  /* Nav: perfect 3-2 layout, centered rows */
+  /* Nav: exact 3-2 layout */
   nav {
-    margin: 0 auto !important;        /* ensures center container */
     width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    gap: 34px !important;              /* uniform gap between all items */
+    gap: 30px !important;
   }
 
   nav a {
-    flex: 0 0 calc(33.333% - 34px) !important; /* 3 per row */
-    max-width: calc(33.333% - 34px) !important;
+    flex: 0 0 33.333% !important; /* exact 3 per row */
     text-align: center !important;
     font-size: 20px !important;
-  }
-
-  /* Center the last two items perfectly in the second row */
-  nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc(33.333% - 34px) !important; /* same width as first row */
   }
 
   /* Robot cards stack vertically */
