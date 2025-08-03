@@ -645,33 +645,21 @@ justify-content: center;
 
 
 
-/* 📱 Mobile refinements */
+/* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Existing Essentials */
 @media (max-width: 767px) {
 
-  /* --- Header / Top Bar --- */
-  header {
-    flex-direction: column !important;
+  /* Keep logo in place */
+  .logo-container {
+    display: flex !important;
+    flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
-    height: auto !important;
-    padding-top: 38px !important; /* restore comfortable height */
-    padding-bottom: 26px !important;
+    gap: 8px !important;
+    margin-top: 2mm !important;
+    white-space: nowrap !important;
   }
 
-  /* --- Logo Container --- */
-  .logo-container {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    white-space: nowrap;
-    margin-bottom: 12px;
-  }
-  .logo-container img { height: 46px; }
-  .logo-text { font-size: 28px; }
-
-  /* --- Nav Container --- */
+  /* FORCE 3-2 layout */
   header nav {
     margin: 0 !important;
     padding: 0 !important;
@@ -679,49 +667,52 @@ justify-content: center;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 32px !important; /* gap between tabs horizontally */
-    row-gap: 16px !important;    /* gap between top/bottom rows */
+    column-gap: 28px !important; /* horizontal gap */
+    row-gap: 14px !important;    /* vertical gap between rows */
   }
 
-  /* First row: 3 equal tabs */
+  /* Top row: exactly 3 tabs */
   header nav a {
-    flex: 0 0 calc((100% - (32px * 2)) / 3) !important;
-    max-width: calc((100% - (32px * 2)) / 3) !important;
+    flex: 0 0 calc((100% - (28px * 2)) / 3) !important;
+    max-width: calc((100% - (28px * 2)) / 3) !important;
     text-align: center !important;
+    font-size: 20px !important;
+    padding: 0 !important;
   }
 
-  /* Last row: 2 equal tabs */
+  /* Bottom row: exactly 2 tabs */
   header nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc((100% - 24px) / 2) !important;
-    max-width: calc((100% - 24px) / 2) !important;
+    flex: 0 0 calc((100% - 28px) / 2) !important;
+    max-width: calc((100% - 28px) / 2) !important;
   }
 
-  /* --- Hero Robot Render --- */
+  /* Make robot render big + centered */
   .robot-render {
-    display: block;
-    margin: 0 auto;
+    display: block !important;
+    margin: 0 auto !important;
     max-width: 140% !important;
     width: auto !important;
     height: auto !important;
     transform: none !important;
   }
 
-  /* --- Hide heavy hero animations for mobile --- */
+  /* Hide heavy background animations */
   canvas#particles,
   .hero-overlay-grid {
     display: none !important;
   }
 
-  /* --- Hero Labels --- */
+  /* Adjust hero labels for mobile */
   .top-left-label {
-    font-size: 66px;
-    left: calc(6% + 9mm);
+    font-size: 66px !important;
+    left: calc(6% + 9mm) !important;
   }
   .bottom-right-label {
-    font-size: 52px;
-    right: calc(6% - 1mm);
+    font-size: 52px !important;
+    right: calc(6% - 1mm) !important;
   }
 }
+
 
 
 
