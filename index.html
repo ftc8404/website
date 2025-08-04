@@ -649,29 +649,29 @@ justify-content: center;
 /* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials (taller bar + tighter spacing) */
 @media (max-width: 767px) {
 
-  html, body {
+    html, body {
     overflow-x: hidden !important;
   }
 
-  /* Header identical but slightly taller */
+  /* Taller header for breathing room */
   header {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     height: auto !important;
-    padding-top: 42px !important;  /* was 38px */
-    padding-bottom: 30px !important; /* was 26px */
+    padding-top: 42px !important;   /* slightly taller than before */
+    padding-bottom: 30px !important;
   }
 
-  /* Logo container identical */
+  /* Logo row */
   .logo-container {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
     justify-content: center !important;
     gap: 8px !important;
-    white-space: nowrap !important;
     margin-bottom: 12px !important;
+    white-space: nowrap !important;
   }
 
   .logo-container img {
@@ -682,30 +682,34 @@ justify-content: center;
     font-size: 28px !important;
   }
 
-  /* Navigation container identical but tweaked spacing */
+  /* Main nav container */
   nav {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
     display: flex !important;
     flex-wrap: wrap !important;
     justify-content: center !important;
-    column-gap: 24px !important; /* was 28px - tighter top row spacing */
-    row-gap: 18px !important;    /* was 14px - more vertical space between rows */
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    column-gap: 24px !important; /* tighter top row gap */
+    row-gap: 18px !important;    /* slightly more vertical space between rows */
   }
 
-  /* Top row: exactly 3 tabs evenly spaced */
-  nav a {
+  /* Force 3 in top row exactly */
+  nav a:nth-child(-n+3) {
     flex: 0 0 calc((100% - (24px * 2)) / 3) !important;
     max-width: calc((100% - (24px * 2)) / 3) !important;
     text-align: center !important;
-    font-size: 20px !important;
   }
 
-  /* Bottom row: exactly 2 tabs evenly spaced, tighter gap */
-  nav a:nth-last-child(-n+2) {
-    flex: 0 0 calc((100% - 20px) / 2) !important; /* was 28px - tighter bottom row */
+  /* Force 2 in bottom row exactly */
+  nav a:nth-child(n+4) {
+    flex: 0 0 calc((100% - 20px) / 2) !important;
     max-width: calc((100% - 20px) / 2) !important;
+    text-align: center !important;
+  }
+
+  nav a {
+    font-size: 20px !important;
   }
   /* Make robot render big + centered */
   .robot-render {
