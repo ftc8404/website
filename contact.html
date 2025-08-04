@@ -321,6 +321,78 @@ main {
   }
 }
 
+/* 📱 Contact Page Mobile Fixes */
+@media (max-width: 767px) {
+
+  /* Stack logo/text above tabs */
+  header {
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: auto !important;
+    padding-top: 42px !important;
+    padding-bottom: 30px !important;
+  }
+
+  /* Logo row inline */
+  .logo-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .logo-container img {
+    height: 46px !important;
+  }
+
+  .logo-text {
+    font-size: 28px !important;
+  }
+
+  /* Tabs container */
+  nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    column-gap: 20px !important;
+    row-gap: 18px !important;
+  }
+
+  /* Top row: exactly 3 tabs */
+  nav a:nth-child(-n+3) {
+    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
+    max-width: calc((100% - (20px * 2)) / 3) !important;
+    text-align: center !important;
+  }
+
+  /* Bottom row: exactly 2 tabs */
+  nav a:nth-child(n+4) {
+    flex: 0 0 calc((100% - 20px) / 2) !important;
+    max-width: calc((100% - 20px) / 2) !important;
+    text-align: center !important;
+  }
+
+  nav a {
+    font-size: 20px !important;
+  }
+
+  /* Remove persistent highlight/underline for active tab */
+  nav a.active {
+    color: white !important;
+  }
+  nav a.active::after {
+    width: 0 !important;
+  }
+}
+
+    
   </style>
 </head>
 <body>
