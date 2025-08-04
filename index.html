@@ -694,19 +694,19 @@ justify-content: center;
     row-gap: 18px !important;    /* slightly more vertical space between rows */
   }
 
-  /* Force 3 in top row exactly */
-  nav a:nth-child(-n+3) {
-    flex: 0 0 calc((100% - (24px * 2)) / 3) !important;
-    max-width: calc((100% - (24px * 2)) / 3) !important;
-    text-align: center !important;
-  }
+ /* Force 3 in top row exactly */
+nav a:nth-child(-n+3) {
+  flex: 0 0 calc((100% - (24px * 2)) / 3) !important;
+  max-width: calc((100% - (24px * 2)) / 3) !important;
+  text-align: center !important;
+}
 
-  /* Force 2 in bottom row exactly */
-  nav a:nth-child(n+4) {
-    flex: 0 0 calc((100% - 20px) / 2) !important;
-    max-width: calc((100% - 20px) / 2) !important;
-    text-align: center !important;
-  }
+/* Force 2 in bottom row exactly */
+nav a:nth-child(n+4) {
+  flex: 0 0 calc((100% - 24px) / 2) !important; /* <-- changed from 20px */
+  max-width: calc((100% - 24px) / 2) !important;
+  text-align: center !important;
+}
 
   nav a {
     font-size: 20px !important;
