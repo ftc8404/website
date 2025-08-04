@@ -681,31 +681,32 @@ justify-content: center;
     font-size: 28px !important;
   }
 
-  /* Main nav container */
-  nav {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    column-gap: 20px !important; /* was 24px → slightly tighter */
-    row-gap: 16px !important;    /* was 18px → slightly tighter */
-  }
+  /* Main nav container - smaller horizontal spacing */
+nav {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  column-gap: 12px !important; /* really reduced now */
+  row-gap: 16px !important;    /* vertical space between rows */
+}
 
-  /* Top row: exactly 3 items */
-  nav a:nth-child(-n+3) {
-    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
-    max-width: calc((100% - (20px * 2)) / 3) !important;
-    text-align: center !important;
-  }
+/* Top row: exactly 3 items with new gap math */
+nav a:nth-child(-n+3) {
+  flex: 0 0 calc((100% - (12px * 2)) / 3) !important;
+  max-width: calc((100% - (12px * 2)) / 3) !important;
+  text-align: center !important;
+}
 
-  /* Bottom row: exactly 2 items */
-  nav a:nth-child(n+4) {
-    flex: 0 0 calc((100% - 20px) / 2) !important;
-    max-width: calc((100% - 20px) / 2) !important;
-    text-align: center !important;
-  }
+/* Bottom row: exactly 2 items with new gap math */
+nav a:nth-child(n+4) {
+  flex: 0 0 calc((100% - 12px) / 2) !important;
+  max-width: calc((100% - 12px) / 2) !important;
+  text-align: center !important;
+}
+
 
   nav a {
     font-size: 20px !important;
