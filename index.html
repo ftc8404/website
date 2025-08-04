@@ -653,14 +653,13 @@ justify-content: center;
     overflow-x: hidden !important;
   }
 
-  /* Taller header for breathing room */
   header {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
     height: auto !important;
-    padding-top: 42px !important;   /* slightly taller than before */
-    padding-bottom: 30px !important;
+    padding-top: 40px !important;   /* was 42px */
+    padding-bottom: 28px !important; /* was 30px */
   }
 
   /* Logo row */
@@ -690,23 +689,23 @@ justify-content: center;
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
-    column-gap: 24px !important; /* tighter top row gap */
-    row-gap: 18px !important;    /* slightly more vertical space between rows */
+    column-gap: 20px !important; /* was 24px → slightly tighter */
+    row-gap: 16px !important;    /* was 18px → slightly tighter */
   }
 
- /* Force 3 in top row exactly */
-nav a:nth-child(-n+3) {
-  flex: 0 0 calc((100% - (24px * 2)) / 3) !important;
-  max-width: calc((100% - (24px * 2)) / 3) !important;
-  text-align: center !important;
-}
+  /* Top row: exactly 3 items */
+  nav a:nth-child(-n+3) {
+    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
+    max-width: calc((100% - (20px * 2)) / 3) !important;
+    text-align: center !important;
+  }
 
-/* Force 2 in bottom row exactly */
-nav a:nth-child(n+4) {
-  flex: 0 0 calc((100% - 24px) / 2) !important; /* <-- changed from 20px */
-  max-width: calc((100% - 24px) / 2) !important;
-  text-align: center !important;
-}
+  /* Bottom row: exactly 2 items */
+  nav a:nth-child(n+4) {
+    flex: 0 0 calc((100% - 20px) / 2) !important;
+    max-width: calc((100% - 20px) / 2) !important;
+    text-align: center !important;
+  }
 
   nav a {
     font-size: 20px !important;
