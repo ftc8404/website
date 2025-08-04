@@ -347,6 +347,12 @@
   nav a {
     font-size: 20px !important;
   }
+  nav a.active {
+    color: white !important; /* same as normal */
+  }
+  nav a.active::after {
+    width: 0 !important; /* no underline until tapped */
+  }
 }
 
 
