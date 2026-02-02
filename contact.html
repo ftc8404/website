@@ -39,6 +39,7 @@ main {
       justify-content: space-between;
       padding: 24px 40px;
       height: 100px;
+      margin-top: 44px; 
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
       position: relative;
       z-index: 10;
@@ -49,6 +50,9 @@ Application Interest Banner
 =========================== */
 
 .interest-banner {
+  position: fixed;      /* ← THIS is the key */
+  top: 0;
+  left: 0;
   width: 100%;
   background: linear-gradient(
     90deg,
@@ -60,11 +64,10 @@ Application Interest Banner
   font-weight: 600;
   font-size: 15px;
   padding: 10px 16px;
-  position: sticky;   /* 🔑 KEY FIX */
-  top: 0;
-  z-index: 30;        /* higher than header */
+  z-index: 1000;        /* above everything */
   box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
 }
+
 
 
 .interest-banner a {
