@@ -49,21 +49,23 @@ Application Interest Banner
 =========================== */
 
 .interest-banner {
-width: 100%;
-background: linear-gradient(
-90deg,
-rgba(85, 198, 246, 0.95),
-rgba(120, 220, 255, 0.95)
-);
-color: #0d0d0d;
-text-align: center;
-font-weight: 600;
-font-size: 15px;
-padding: 10px 16px;
-position: relative;
-z-index: 20; /* higher than header */
-box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(85, 198, 246, 0.95),
+    rgba(120, 220, 255, 0.95)
+  );
+  color: #0d0d0d;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 16px;
+  position: sticky;   /* 🔑 KEY FIX */
+  top: 0;
+  z-index: 30;        /* higher than header */
+  box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
 }
+
 
 .interest-banner a {
 color: #0d0d0d;
