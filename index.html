@@ -40,6 +40,49 @@ position: relative;
 z-index: 10;
 }
 
+/* ===========================
+   Application Interest Banner
+   =========================== */
+
+.interest-banner {
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(85, 198, 246, 0.95),
+    rgba(120, 220, 255, 0.95)
+  );
+  color: #0d0d0d;
+  text-align: center;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 10px 16px;
+  position: relative;
+  z-index: 20; /* higher than header */
+  box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
+}
+
+.interest-banner a {
+  color: #0d0d0d;
+  font-weight: 800;
+  text-decoration: underline;
+  margin-left: 6px;
+  transition: opacity 0.25s ease, text-shadow 0.25s ease;
+}
+
+.interest-banner a:hover {
+  opacity: 0.85;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile tightening */
+@media (max-width: 768px) {
+  .interest-banner {
+    font-size: 14px;
+    padding: 12px 12px;
+  }
+}
+    
+    
 .logo-container {
 display: flex;
 align-items: center;
@@ -747,6 +790,17 @@ nav a:nth-child(n+4) {
 </head>
 
 <body>
+<!-- Application Interest Banner -->
+<div class="interest-banner">
+  <span>
+    🚀 Interested in joining FTC Team 8404 Quixilver?
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfECu6Vsqrv4S3CA1pUVPSQEyhdW7TyTOYZXP5Mb32E6CFjMw/viewform" target="_blank">
+      Fill out our Interest Form →
+    </a>
+  </span>
+</div>
+
+    
 <header>
 <div class="logo-container" onclick="window.location.href='index.html'">
 <!-- Make sure you have your logo in the same directory -->
