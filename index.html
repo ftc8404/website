@@ -195,8 +195,9 @@ opacity: 0.3;
   background-color: transparent;
   display: block;
   /* Max width controls the size — tweak this value to taste */
-  max-width: 980px;   /* was 92% — now a fixed cap so it doesn't fill the screen */
-  width: 85%;          /* responsive: ~85% of viewport width on desktop */
+  max-width: none;     /* remove px cap — let vh control the size instead */
+  width: auto;
+  height: 72vh;        /* always 72% of screen height regardless of resolution */
   height: auto;
   z-index: 2;
   position: relative;
