@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +56,7 @@ z-index: 10;
   font-size: 15px;
   padding: 10px 16px;
   position: relative;
-  z-index: 20; /* higher than header */
+  z-index: 20;
   box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
 }
 
@@ -74,7 +73,6 @@ z-index: 10;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile tightening */
 @media (max-width: 768px) {
   .interest-banner {
     font-size: 14px;
@@ -120,7 +118,6 @@ position: relative;
 transition: color 0.3s ease;
 }
 
-/* --- UPDATED: Added .active selector for consistent styling --- */
 nav a:hover, nav a.active {
 color: #55c6f6;
 }
@@ -137,7 +134,6 @@ bottom: -6px;
 left: 0;
 }
 
-/* --- UPDATED: Added .active selector for consistent styling --- */
 nav a:hover::after, nav a.active::after {
 width: 100%;
 }
@@ -192,33 +188,23 @@ opacity: 0.3;
 }
 
 
+/* ================================
+   ROBOT RENDER — smaller & centered
+   ================================ */
 .robot-render {
-background-color: transparent;
-display: block;
-max-width: 92%;
-height: auto;
-z-index: 2;
-position: relative;
-margin-top: -60px;
-filter: drop-shadow(0 0 12px #55c6f6);
-transform: translateX(-150px); /* Adjust as needed */
+  background-color: transparent;
+  display: block;
+  /* Max width controls the size — tweak this value to taste */
+  max-width: 480px;   /* was 92% — now a fixed cap so it doesn't fill the screen */
+  width: 44%;          /* responsive: ~44% of viewport width on desktop */
+  height: auto;
+  z-index: 2;
+  position: relative;
+  margin-top: -60px;
+  filter: drop-shadow(0 0 18px #55c6f6);
+  /* Removed the large translateX so it stays centred */
+  transform: translateX(-60px);
 }
-
-
-
-.robot-render::before {
-content: '';
-position: absolute;
-top: -5px;
-left: -5px;
-width: calc(100% + 10px);
-height: calc(100% + 10px);
-background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"><defs><filter id="pulseGlow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs><g filter="url(#pulseGlow)"><path d="M20 20 L40 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2s" repeatCount="indefinite"/></path><path d="M60 20 L80 40" stroke="#55c6f6" stroke-width="2" opacity="0.5"><animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.5s" repeatCount="indefinite"/></path></g></svg>') repeat-x;
-z-index: -1;
-opacity: 0.7;
-animation: pulseFrame 3s infinite linear;
-}
-
 
 
 .hero-label {
@@ -381,7 +367,6 @@ url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100%
 linear-gradient(to top, rgba(15, 32, 39, 0.3), transparent);
 background-repeat: repeat;
 background-size: 300px 300px;
-
 }
 
 
@@ -493,7 +478,6 @@ height: auto;
 padding: 20px;
 }
 
-
 nav {
 margin: 20px 0 0;
 gap: 20px;
@@ -528,8 +512,9 @@ right: 5%;
 }
 
 .robot-render {
-width: 90vw;
-max-width: 90vw;
+width: 70vw !important;
+max-width: 340px !important;
+transform: translateX(0) !important;
 }
 
 .team-section {
@@ -689,10 +674,10 @@ justify-content: center;
 
 
 
-/* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials (taller bar + tighter spacing) */
+/* 📱 Homepage Mobile: Forced 3-2 Nav Layout + Essentials */
 @media (max-width: 767px) {
 
-    html, body {
+  html, body {
     overflow-x: hidden !important;
   }
 
@@ -701,11 +686,10 @@ justify-content: center;
     align-items: center !important;
     justify-content: center !important;
     height: auto !important;
-    padding-top: 40px !important;   /* was 42px */
-    padding-bottom: 28px !important; /* was 30px */
+    padding-top: 40px !important;
+    padding-bottom: 28px !important;
   }
 
-  /* Logo row */
   .logo-container {
     display: flex !important;
     flex-direction: row !important;
@@ -724,54 +708,49 @@ justify-content: center;
     font-size: 28px !important;
   }
 
-  /* Main nav container - smaller horizontal spacing */
-nav {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  justify-content: center !important;
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  column-gap: 0px !important; /* really reduced now */
-  row-gap: 16px !important;    /* vertical space between rows */
-}
+  nav {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    column-gap: 0px !important;
+    row-gap: 16px !important;
+  }
 
-/* Top row: exactly 3 items with new gap math */
-nav a:nth-child(-n+3) {
-  flex: 0 0 calc((96% - (0px * 2)) / 3) !important;
-  max-width: calc((96% - (0px * 2)) / 3) !important;
-  text-align: center !important;
-}
+  nav a:nth-child(-n+3) {
+    flex: 0 0 calc((96% - (0px * 2)) / 3) !important;
+    max-width: calc((96% - (0px * 2)) / 3) !important;
+    text-align: center !important;
+  }
 
-/* Bottom row: exactly 2 items with new gap math */
-nav a:nth-child(n+4) {
-  flex: 0 0 calc((96% - 0px) / 2) !important;
-  max-width: calc((96% - 0px) / 2) !important;
-  text-align: center !important;
-}
-
+  nav a:nth-child(n+4) {
+    flex: 0 0 calc((96% - 0px) / 2) !important;
+    max-width: calc((96% - 0px) / 2) !important;
+    text-align: center !important;
+  }
 
   nav a {
     font-size: 20px !important;
-    transform: scaleX(0.96); /* squeeze horizontally by 4% */
+    transform: scaleX(0.96);
   }
-  /* Make robot render big + centered */
+
+  /* Robot smaller on mobile */
   .robot-render {
     display: block !important;
     margin: 0 auto !important;
-    max-width: 140% !important;
-    width: auto !important;
+    max-width: 320px !important;
+    width: 75vw !important;
     height: auto !important;
     transform: none !important;
   }
 
-  /* Hide heavy background animations */
   canvas#particles,
   .hero-overlay-grid {
     display: none !important;
   }
 
-  /* Adjust hero labels for mobile */
   .top-left-label {
     font-size: 66px !important;
     left: calc(6% + 9mm) !important;
@@ -781,24 +760,16 @@ nav a:nth-child(n+4) {
     right: calc(6% - 1mm) !important;
   }
 }
-
-
-
-
-
 </style>
 </head>
 
 <body>
 
-    
 <header>
 <div class="logo-container" onclick="window.location.href='index.html'">
-<!-- Make sure you have your logo in the same directory -->
 <img src="logo_old5.png" alt="Team Logo" onerror="this.onerror=null;this.src='https://placehold.co/64x64/0f2027/55c6f6?text=Logo';">
 <div class="logo-text">8404 Quixilver</div>
 </div>
-<!-- --- UPDATED: Corrected file paths for navigation --- -->
 <nav>
 <a href="/index.html">Home</a>
 <a href="/robots.html">Robots</a>
@@ -811,14 +782,14 @@ nav a:nth-child(n+4) {
 <section class="hero">
 <canvas id="particles"></canvas>
 <div class="hero-overlay-grid"></div>
-<img class="robot-render" src="decode.png" alt="2026 Quixilver Robot">
+<img class="robot-render" src="render_2025.png" alt="2025 Quixilver Robot">
 <div class="light-sweep"></div>
 <div class="hero-label top-left-label">8404</div>
 <div class="hero-label bottom-right-label">Quixilver</div>
 </section>
 
 <section class="team-section">
-<div class="grid-overlay"></div> <!-- NEW background layer -->
+<div class="grid-overlay"></div>
 
 <img class="team-photo" src="team_photo3.jpg" alt="Team Photo" onerror="this.onerror=null;this.src='https://placehold.co/600x400/2c5364/ffffff?text=Team+Photo';">
 <div class="team-text">
@@ -827,7 +798,7 @@ nav a:nth-child(n+4) {
 FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.
 </p>
 <p>
-We’re more than a team—we’re a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.
+We're more than a team—we're a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.
 </p>
 <a href="team.html" class="learn-more">Learn More</a>
 </div>
@@ -835,14 +806,8 @@ We’re more than a team—we’re a community. By mentoring students, hosting S
 
 
 <script>
-// Parallax effect for robot render
-
-// Click effect for robot render
 const robot = document.querySelector('.robot-render');
 
-
-
-// Particle system for hero section (around robot)
 const canvas = document.getElementById('particles');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -930,18 +895,11 @@ setTimeout(() => el.classList.add('visible'), index * 200);
 observer.observe(document.querySelector('.team-section'));
 </script>
 
-<!-- Font Awesome CDN -->
-<link
-rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
 <footer class="site-footer">
 <div class="footer-container">
 
-<!-- Logo + About -->
 <div class="footer-brand">
 <img src="logo_old5.png" alt="Team 8404 Logo">
 <p>
@@ -949,7 +907,6 @@ FTC Team 8404 Quixilver is a student-run robotics team from Leland High School i
 </p>
 </div>
 
-<!-- Sitemap (bubble-style) -->
 <div class="footer-links">
 <h4>Sitemap</h4>
 <div class="link-bubbles">
@@ -961,7 +918,6 @@ FTC Team 8404 Quixilver is a student-run robotics team from Leland High School i
 </div>
 </div>
 
-<!-- Socials -->
 <div class="footer-socials">
 <h4>Follow Us</h4>
 <div class="social-icons">
@@ -985,12 +941,7 @@ onmouseout="this.style.transform='scale(1)'">
 </div>
 </footer>
 
-
 <script src="https://kit.fontawesome.com/a2b7b1a5e1.js" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
-
-
-
