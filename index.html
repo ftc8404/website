@@ -194,6 +194,7 @@ opacity: 0.3;
 .robot-render {
   background-color: transparent;
   display: block;
+  /* DEFAULT: Windows/non-retina screens */
   max-width: 1150px;
   width: 82%;
   height: auto;
@@ -204,11 +205,11 @@ opacity: 0.3;
   transform: translateX(-160px);
 }
 
-/* Shrink on very high resolution / large screens (e.g. Mac Retina) */
-@media (min-resolution: 2dppx), (min-width: 1800px) {
+/* MAC / RETINA: completely separate size */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .robot-render {
-    max-width: 580px;
-    width: 40%;
+    max-width: 560px;
+    width: 38%;
   }
 }
 
