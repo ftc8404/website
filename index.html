@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Home — 8404 Quixilver</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<script>document.documentElement.className += " js-intro";</script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+</head>
+<body class="home">
+<a class="skip-link" href="#afterHero">Skip 3D intro</a>
+<header class="site-header"><div class="header-in">
+  <a class="brand" href="index.html"><img src="assets/logo.svg" alt="Quixilver fox logo" /><span><b class="display">QUIXILVER</b><small>FTC Team 8404 · Leland High School</small></span></a>
+  <nav class="main" aria-label="Primary">
+    <a href="index.html">Home</a><a href="robots.html">Robots</a><a href="team.html">Team</a><a href="awards.html">Awards</a><a href="contact.html">Contact</a>
+  </nav>
+</div></header>
+
+<div class="prism-scroll" id="prismStage">
+  <div class="prism-sticky">
+    <div id="gl" aria-hidden="true"></div>
+    <div class="hero-fallback" id="heroFallback">
+      <img src="assets/logo.svg" alt="Quixilver fox logo" />
+    </div>
+  </div>
+</div>
+
+<main id="afterHero"><div class="wrap">
+  <section class="section">
+    <h2>About Quixilver</h2>
+    <p class="lede">FTC Team 8404 Quixilver Robotics, based in San Jose, CA, competes in the FIRST Tech Challenge with cutting-edge robots designed each season. Our passion for STEM drives us to innovate and excel.</p>
+    <img class="team-photo" src="assets/team_photo.jpg" alt="Quixilver team photo" loading="lazy" style="margin-bottom:22px" />
+    <div class="grid two">
+      <div class="card glass"><h3>Student-run, mentor-guided</h3><p>We are a student-run team from Leland High School. We design, build, program, and document every robot ourselves — and mentor younger students along the way.</p></div>
+      <div class="card glass"><h3>More than robots</h3><p>We're more than a team — we're a community. By mentoring students, hosting STEM workshops, and engaging locally, we inspire the next generation of innovators.</p></div>
+    </div>
+  </section>
+  <section class="section">
+    <h2>This season: DECODE</h2>
+    <p class="lede">Custom silicone wheels spinning at 2000 RPM pull artifacts in instantly, feeding a single-channel transition with pocketed color sorting — finished by a dual-motor 6000 RPM flywheel turret with April Tag + odometry goal locking.</p>
+    <img class="team-photo" src="assets/robots/decode.jpg" alt="DECODE season robot" loading="lazy" style="margin-bottom:18px" />
+    <p><a class="btn ghost" href="robots.html">See all 12 robots</a></p>
+  </section>
+  <section class="section">
+    <h2>A decade of awards</h2>
+    <p class="lede">From 2014–2015 Think Award to 2025–2026 Control Award and NorCal Design — 12 seasons of judged and on-field honors, including a World Championship Control Award.</p>
+    <p><a class="btn ghost" href="awards.html">Browse awards</a></p>
+  </section>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>FTC 8404 Quixilver · Leland High School, San Jose CA · <span id="year"></span></span>
+  <nav aria-label="Social"><a href="https://www.instagram.com/ftc8404">Instagram</a><a href="https://www.facebook.com/ftc8404">Facebook</a><a href="https://www.youtube.com/@Quixilver-8404">YouTube</a><a href="https://twitter.com/ftc8404">Twitter</a></nav>
+</div></footer>
+<script src="plexus-bg.js"></script>
+<script src="site.js"></script>
+<script type="module" src="hero.js"></script>
+</body>
+</html>
