@@ -3,18 +3,22 @@
 const stage = document.getElementById("prismStage");
 const mount = document.getElementById("gl");
 const fallback = document.getElementById("heroFallback");
-function showFallback() {
+function showFallback(reason) {
   if (fallback) fallback.classList.add("show");
   document.body.classList.add("intro-done");
+  // Diagnosable degrade: the exact reason is one console / DOM lookup away.
+  document.body.dataset.heroFallback = reason;
+  window.__heroFallbackReason = reason;
+  if (window.console && window.console.warn) window.console.warn("hero fallback: " + reason);
 }
 if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  showFallback();
+  showFallback("prefers-reduced-motion");
 } else {
   // Chrome (header + banner) stays hidden until the sequence is done.
   document.body.classList.add("in-intro");
-  start().catch(() => {
+  start().catch((e) => {
     document.body.classList.remove("in-intro");
-    showFallback();
+    showFallback("start-failed: " + ((e && e.message) || e));
   });
 }
 

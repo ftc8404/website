@@ -91,6 +91,10 @@ def main():
             failures.append("hero.js: 3D plexus must persist past the stage")
         if "OutputPass" not in hero:
             failures.append("hero.js: composer needs OutputPass (tone map beams)")
+        # Fallback must say why (reduced-motion vs exception) or Windows
+        # failures can't be diagnosed from the outside.
+        if "__heroFallbackReason" not in hero:
+            failures.append("hero.js: fallback must record its reason")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:
