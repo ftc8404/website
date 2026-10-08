@@ -95,6 +95,10 @@ def main():
         # failures can't be diagnosed from the outside.
         if "__heroFallbackReason" not in hero:
             failures.append("hero.js: fallback must record its reason")
+        # Owner decision: the intro always plays; fleet-default
+        # reduced-motion must never gate it again.
+        if "prefers-reduced-motion" in hero:
+            failures.append("hero.js: intro must not gate on reduced-motion")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:

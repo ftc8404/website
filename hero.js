@@ -11,16 +11,14 @@ function showFallback(reason) {
   window.__heroFallbackReason = reason;
   if (window.console && window.console.warn) window.console.warn("hero fallback: " + reason);
 }
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  showFallback("prefers-reduced-motion");
-} else {
-  // Chrome (header + banner) stays hidden until the sequence is done.
-  document.body.classList.add("in-intro");
-  start().catch((e) => {
-    document.body.classList.remove("in-intro");
-    showFallback("start-failed: " + ((e && e.message) || e));
-  });
-}
+// The intro always plays: managed lab machines report reduced-motion by
+// fleet default, which stranded the whole team on the static mark.
+// Genuine WebGL failures still fall back (with the reason recorded).
+document.body.classList.add("in-intro");
+start().catch((e) => {
+  document.body.classList.remove("in-intro");
+  showFallback("start-failed: " + ((e && e.message) || e));
+});
 
 async function start() {
   const THREE = await import("three");
