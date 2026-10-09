@@ -1,593 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF‑8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Awards – 8404 Quixilver</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <script src="https://kit.fontawesome.com/a2b7b1a5e1.js" crossorigin="anonymous"></script>
-  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="manifest" href="site.webmanifest">
-
-  <style>
-     * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      background: #0d0d0d url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="p" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M50 0 L50 100 M0 50 L100 50" stroke="%231a2f38" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(%23p)"/></svg>') repeat;
-      color: white;
-      overflow-x: hidden;
-    }
-    header {
-      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 24px 40px;
-      height: 100px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-      position: relative;
-      z-index: 10;
-    }
-
-/* ===========================
-Application Interest Banner
-=========================== */
-
-.interest-banner {
-  width: 100%;
-  background: linear-gradient(
-    90deg,
-    rgba(85, 198, 246, 0.95),
-    rgba(120, 220, 255, 0.95)
-  );
-  color: #0d0d0d;
-  text-align: center;
-  font-weight: 600;
-  font-size: 15px;
-  padding: 10px 16px;
-  position: sticky;   /* 🔑 KEY FIX */
-  top: 0;
-  z-index: 30;        /* higher than header */
-  box-shadow: 0 0 12px rgba(85, 198, 246, 0.7);
-}
-
-
-.interest-banner a {
-color: #0d0d0d;
-font-weight: 800;
-text-decoration: underline;
-margin-left: 6px;
-transition: opacity 0.25s ease, text-shadow 0.25s ease;
-}
-
-.interest-banner a:hover {
-opacity: 0.85;
-text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-/* Mobile tightening */
-@media (max-width: 768px) {
-.interest-banner {
-font-size: 14px;
-padding: 12px 12px;
-}
-}
-    
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      transition: transform 0.4s ease, filter 0.4s ease;
-      cursor: pointer;
-    }
-    .logo-container:hover {
-      transform: scale(1.07);
-      filter: drop-shadow(0 0 6px #55c6f6);
-    }
-    .logo-container img { height: 64px; }
-    .logo-text {
-      font-size: 36px;
-      color: #55c6f6;
-      font-weight: bold;
-    }
-    nav {
-      display: flex;
-      gap: 120px;
-      margin-right: 80px;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 20px;
-      position: relative;
-      transition: color 0.3s ease;
-    }
-    nav a:hover, nav a.active {
-      color: #55c6f6;
-    }
-    nav a::after {
-      content: '';
-      display: block;
-      width: 0%;
-      height: 2px;
-      background: #55c6f6;
-      transition: width 0.3s ease-in-out;
-      position: absolute;
-      bottom: -6px;
-      left: 0;
-    }
-    nav a:hover::after, nav a.active::after {
-      width: 100%;
-    }
-    .awards-header {
-      text-align: center;
-      padding: 60px 20px 30px;
-    }
-    .awards-header h1 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 48px;
-      color: #55c6f6;
-      text-shadow: 0 0 15px rgba(85, 198, 246, 0.7);
-    }
-    .awards-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    .season {
-      margin-bottom: 50px;
-      padding: 20px;
-      background: rgba(20, 30, 36, 0.5);
-      border-left: 4px solid #55c6f6;
-      border-radius: 12px;
-      box-shadow: 0 0 20px rgba(85, 198, 246, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .season:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 35px rgba(85, 198, 246, 0.2);
-    }
-    .season h2 {
-      font-size: 28px;
-      color: #b0e0f6;
-      margin-bottom: 15px;
-    }
-    .season ul {
-      list-style: none;
-      padding-left: 0;
-    }
-    .season ul li {
-      padding-left: 20px;
-      margin-bottom: 10px;
-      position: relative;
-      color: #d0d0d0;
-      font-size: 16px;
-    }
-  .season ul li::before {
-  content: '»';
-  position: absolute;
-  left: 0;
-  color: #55c6f6;
-  font-weight: bold;
-  }
-  .site-footer {
-  background: linear-gradient(90deg, #0f2027, #203a43);
-  color: #d0d0d0;
-  padding: 60px 40px 30px;
-  font-family: 'Segoe UI', sans-serif;
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-.footer-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 40px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.footer-brand {
-  flex: 2;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.footer-brand img {
-  width: 120px;
-  height: 120px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 8px #55c6f6);
-}
-
-.footer-brand p {
-  font-size: 14px;
-  line-height: 1.7;
-  color: #ccc;
-  max-width: 380px;
-}
-
-.footer-links {
-  flex: 1.5;
-}
-
-.footer-links h4 {
-  font-family: 'Orbitron', sans-serif;
-  color: #55c6f6;
-  margin-bottom: 12px;
-}
-
-.link-bubbles {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.link-bubbles a {
-  background: rgba(255, 255, 255, 0.05);
-  color: #e0e0e0;
-  text-decoration: none;
-  padding: 8px 14px;
-  border-radius: 30px;
-  font-size: 14px;
-  transition: all 0.3s ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.link-bubbles a:hover {
-  background: #55c6f6;
-  color: #0d0d0d;
-  transform: scale(1.05);
-}
-
-.footer-socials {
-  flex: 1.5;
-  text-align: right;
-}
-
-.footer-socials h4 {
-  font-family: 'Orbitron', sans-serif;
-  color: #55c6f6;
-  margin-bottom: 12px;
-}
-
-.social-icons {
-  display: flex;
-  gap: 18px;
-  justify-content: flex-end;
-  font-size: 32px;
-}
-
-.social-icons a {
-  transition: transform 0.3s ease, filter 0.4s ease;
-}
-
-.social-icons a:hover {
-  transform: scale(1.3);
-  filter: drop-shadow(0 0 8px #55c6f6);
-}
-
-.social-icons .fa-instagram { color: #e4405f; }
-.social-icons .fa-twitter { color: #1da1f2; }
-.social-icons .fa-facebook { color: #1877f2; }
-.social-icons .fa-youtube { color: #ff0000; }
-
-.footer-bottom {
-  margin-top: 40px;
-  text-align: center;
-  font-size: 13px;
-  color: #888;
-  border-top: 1px solid rgba(255,255,255,0.1);
-  padding-top: 15px;
-}
-
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    text-align: center;
-    align-items: center;
-  }
-
-  .footer-brand {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer-brand img {
-    width: 90px;
-    height: 90px;
-  }
-
-  .social-icons {
-    justify-content: center;
-    margin-top: 10px;
-  }
-
-  .footer-socials {
-    text-align: center;
-  }
-
-  .link-bubbles {
-    justify-content: center;
-  }
-}
-
-/* 📱 Awards Page Mobile Fixes */
-@media (max-width: 767px) {
-
-  /* Stack logo/text above tabs */
-  header {
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: auto !important;
-    padding-top: 42px !important;
-    padding-bottom: 30px !important;
-  }
-
-  /* Logo row: inline 8404 + Quixilver */
-  .logo-container {
-    display: flex !important;
-    flex-direction: row !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    margin-bottom: 12px !important;
-    white-space: nowrap !important;
-  }
-
-  .logo-container img {
-    height: 46px !important;
-  }
-
-  .logo-text {
-    font-size: 28px !important;
-  }
-
-  /* Tabs container */
-  nav {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    column-gap: 20px !important; /* horizontal gap */
-    row-gap: 18px !important;    /* vertical gap between rows */
-  }
-
-  /* Force 3 tabs in top row */
-  nav a:nth-child(-n+3) {
-    flex: 0 0 calc((100% - (20px * 2)) / 3) !important;
-    max-width: calc((100% - (20px * 2)) / 3) !important;
-    text-align: center !important;
-  }
-
-  /* Force 2 tabs in bottom row */
-  nav a:nth-child(n+4) {
-    flex: 0 0 calc((100% - 20px) / 2) !important;
-    max-width: calc((100% - 20px) / 2) !important;
-    text-align: center !important;
-  }
-
-  nav a {
-    font-size: 20px !important;
-  }
-
-  nav a.active {
-    color: white !important; /* same as normal tabs */
-  }
-  nav a.active::after {
-    width: 0 !important; /* no persistent underline */
-  }
-}
-
-    
-
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Awards – 8404 Quixilver</title>
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-
-  
-  <header>
-    <div class="logo-container" onclick="window.location.href='/index.html'">
-      <img src="logo_old5.png" alt="Team Logo"><div class="logo-text">8404 Quixilver</div>
-    </div>
-    <nav>
-      <a href="/index.html">Home</a>
-      <a href="/robots.html">Robots</a>
-      <a href="/team.html">Team</a>
-      <a href="/awards.html" class="active">Awards</a>
-      <a href="/contact.html">Contact</a>
-    </nav>
-  </header>
-
-  <section class="awards-header">
-    <h1>Awards &amp; Achievements</h1>
-  </section>
-
-  <section class="awards-container">
-
-    <!-- 2025–2026 -->
-    <div class="season">
-      <h2>2025–2026 Season</h2>
-      <ul>
-        <li>The Play Space #3 Qualifying Tournament – Sustain Award</li>
-        <li>The Play Space #3 Qualifying Tournament – Winning Alliance, 1st Pick</li>
-        <li>Folsom Qualifying Tournament – Control Award</li>
-        <li>Folsom Qualifying Tournament – Winning Alliance, 1st Pick</li>
-        <li>Scrimmage hosted by FTC #19819 (Astrobruins) – Winning Alliance, 1st Pick</li>
-        <li>Northern California Regional Championship – 2nd place Design Award</li>
-      </ul>
-    </div>
-    
-    <!-- 2024–2025 -->
-    <div class="season">
-      <h2>2024–2025 Season</h2>
-      <ul>
-        <li>Google Qualifying Tournament – Control Award</li>
-        <li>Fremont High School Qualifying Tournament – Innovate Award</li>
-        <li>Santa Clara High School Qualifying Tournament – Inspire Award</li>
-      </ul>
-    </div>
-
-    <!-- 2023–2024 -->
-    <div class="season">
-      <h2>2023–2024 Season</h2>
-      <ul>
-        <li>NorCal South Bay League Tournament – 2nd place Inspire Award</li>
-        <li>NorCal South Bay League Tournament – Motivate Award</li>
-        <li>NorCal South Bay League Tournament – Winning Alliance, 1st Pick</li>
-      </ul>
-    </div>
-
-    <!-- 2022–2023 -->
-    <div class="season">
-      <h2>2022–2023 Season</h2>
-      <ul>
-        <li>South Bay Metro League – 2nd place Inspire Award</li>
-        <li>South Bay Metro League – Design Award</li>
-      </ul>
-    </div>
-
-    <!-- 2021–2022 -->
-    <div class="season">
-      <h2>2021–2022 Season</h2>
-      <ul>
-        <li>Saratoga Qualifying Tournament – 1st Place Innovate Award; 4th Seed Alliance Partner</li>
-        <li>Elk Grove Qualifying Tournament – 2nd Place Inspire Award; 1st Place Connect Award; Finalist Alliance Captain</li>
-        <li>Northern California Regional Championship – Winning Alliance, 1st Pick; 2nd Place Connect Award</li>
-        <li>World Championship – Motivate Award Nominee</li>
-      </ul>
-    </div>
-
-    <!-- 2020–2021 -->
-    <div class="season">
-      <h2>2020–2021 Season</h2>
-      <ul>
-        <li>Daly City Qualifying Tournament – 1st Place Connect Award (Ranked top 4)</li>
-        <li>Oregon League Tournament – 1st Place Design Award (Ranked top 4)</li>
-        <li>NorCal Regional Championship – Ranked top 10; Dean's List Finalist – Aroshi Ghosh</li>
-      </ul>
-    </div>
-
-    <!-- 2019–2020 -->
-    <div class="season">
-      <h2>2019–2020 Season</h2>
-      <ul>
-        <li>Saratoga Qualifying Tournament – 2nd Place Inspire Award; Winning Alliance, 1st Pick; 1st Place Motivate Award; 2nd Place Design Award; 2nd Place Innovate Award</li>
-        <li>San Jose (Micron) Qualifying Tournament – 1st Place Inspire Award; Winning Alliance Captain; 2nd Place Think Award; 2nd Place Connect</li>
-        <li>Napa Qualifying Tournament – Winning Alliance Captain; 1st Place Think Award; 3rd Place Connect Award</li>
-        <li>NorCal Regional Championship – 2nd Place Inspire Award; Winning Alliance, 1st Pick; 1st Place Innovate Award</li>
-        <li>World Championship – Qualified; championship cancelled due to COVID‑19</li>
-      </ul>
-    </div>
-
-    <!-- 2018–2019 -->
-    <div class="season">
-      <h2>2018–2019 Season</h2>
-      <ul>
-        <li>Saratoga Qualifying Tournament – 1st Place Inspire Award; Finalist Alliance, 1st pick; 2nd Place Think Award; 3rd Place Connect Award; 3rd Place Design Award</li>
-        <li>Piedmont Qualifying Tournament – 2nd Place Inspire Award; 1st Place Think Award; 2nd Place Connect Award; 2nd Place Design Award; Semi‑Finalist Alliance, 1st pick</li>
-        <li>Daly City Qualifying Tournament – 1st Place Connect Award; 2nd Place Think Award; Semi‑Finalist Alliance, 1st pick</li>
-        <li>NorCal Regional Championship – 1st Place Innovate Award; 2nd Place Inspire Award; 3rd Place Motivate Award; Semi‑Finalist Alliance, 1st pick</li>
-        <li>World Championship – 1st Place Control Award</li>
-      </ul>
-    </div>
-
-    <!-- 2017–2018 -->
-    <div class="season">
-      <h2>2017–2018 Season</h2>
-      <ul>
-        <li>Saratoga Qualifying Tournament – 3rd Place Inspire Award; 1st Place Connect Award; 2nd Place Think Award</li>
-        <li>Burlingame Qualifying Tournament – 1st Place Connect Award; 2nd Place Think Award</li>
-        <li>Daly City Qualifying Tournament – 1st Place Think Award; 2nd Place Motivate Award; 2nd Place Control Award</li>
-        <li>Northern California Championship Tournament – Semi‑Finalist Alliance; Dean's List Finalist – Jessica Pearson</li>
-      </ul>
-    </div>
-
-    <!-- 2016–2017 -->
-    <div class="season">
-      <h2>2016–2017 Season</h2>
-      <ul>
-        <li>Redwood Qualifying Tournament – Finalist Alliance; 1st Place PTC Design Award; 2nd Place Inspire Award; 2nd Place Connect Award</li>
-        <li>Google HQ Qualifying Tournament – Finalist Alliance; 1st Place PTC Design Award; 2nd Place Think Award</li>
-        <li>GitHub HQ Qualifying Tournament – 1st Place Inspire Award; Semi‑Finalist Alliance Captain; 2nd Place Innovate Award; 3rd Place PTC Design Award; 3rd Place Think Award</li>
-        <li>Northern California Championship Tournament – 1st Place Think Award</li>
-        <li>Western Super‑Regionals Tournament – Ranked top 10 in division</li>
-        <li>World Championship – Finalist Think Award; Ranked 19th in division</li>
-      </ul>
-    </div>
-
-    <!-- 2015–2016 -->
-    <div class="season">
-      <h2>2015–2016 Season</h2>
-      <ul>
-        <li>Saratoga Qualifying Tournament – 1st Place Connect Award</li>
-        <li>Burlingame Qualifying Tournament – Winning Alliance Captain</li>
-      </ul>
-    </div>
-
-    <!-- 2014–2015 -->
-    <div class="season">
-      <h2>2014–2015 Season</h2>
-      <ul>
-        <li>Carmichael Qualifying Tournament – 1st Place Think Award</li>
-        <li>Elk Grove Qualifying Tournament – Semi‑Finalist Alliance</li>
-      </ul>
-    </div>
-  </section>
-<footer class="site-footer">
-  <div class="footer-container">
-    <!-- Logo + About -->
-    <div class="footer-brand">
-      <img src="logo_old5.png" alt="Team 8404 Logo">
-      <p>
-      FTC Team 8404 Quixilver is a student-run robotics team from Leland High School in San Jose, CA. We develop innovative robots and support STEM in our community as part of the FIRST Tech Challenge program.
-      </p>
-    </div>
-
-    <!-- Sitemap (bubble-style) -->
-    <div class="footer-links">
-      <h4>Sitemap</h4>
-      <div class="link-bubbles">
-        <a href="/index.html">Home</a>
-        <a href="/robots.html">Robots</a>
-        <a href="/team.html">Team</a>
-        <a href="/awards.html">Awards</a>
-        <a href="/contact.html">Contact</a>
-      </div>
-    </div>
-
-    <!-- Socials -->
-    <div class="footer-socials">
-      <h4>Follow Us</h4>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/ftc8404" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a href="https://twitter.com/ftc8404" target="_blank" aria-label="X (formerly Twitter)">
-          <img src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/x.svg"
-               alt="X Logo"
-               style="height: 32px; width: 32px; vertical-align: middle; margin-top: -2px; filter: drop-shadow(0 0 4px #00000088); transition: transform 0.3s ease;"
-               onmouseover="this.style.transform='scale(1.2)'"
-               onmouseout="this.style.transform='scale(1)'">
-        </a>
-        <a href="https://www.facebook.com/ftc8404" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-        <a href="https://www.youtube.com/@Quixilver-8404" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 FTC Team 8404 Quixilver. All rights reserved.
-  </div>
-</footer>
-
-  
+<header class="site-header"><div class="header-in">
+  <a class="brand" href="index.html"><img src="assets/logo.svg" alt="Quixilver fox logo" /><span><b class="display">QUIXILVER</b><small>FTC Team 8404</small></span></a>
+  <nav class="main" aria-label="Primary"><a href="index.html">Home</a><a href="robots.html">Robots</a><a href="team.html">Team</a><a href="awards.html">Awards</a><a href="contact.html">Contact</a></nav>
+</div></header>
+<main><div class="wrap">
+<section class="section">
+<h2>Awards &amp; Achievements</h2>
+<p class="lede">Twelve seasons of judged awards and on-field results, 2014–2015 through 2025–2026.</p>
+<div class="grid two">
+<div class="card glass"><span class="eyebrow">2025–2026</span><h3>Current season</h3><ul class="timeline">
+<li>The Play Space #3 Qualifying — Winning Alliance, 1st Pick</li>
+<li>Folsom Qualifying — Control Award; Winning Alliance, 1st Pick</li>
+<li>Scrimmage hosted by FTC #19819 Astrobruins — Winning Alliance, 1st Pick</li>
+<li>Northern California Regional Championship — 2nd place Design Award</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2024–2025</span><h3>Into the Deep</h3><ul class="timeline">
+<li>Google Qualifying — Control Award</li>
+<li>Fremont High School Qualifying — Innovate Award</li>
+<li>Santa Clara High School Qualifying — Inspire Award</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2023–2024</span><h3>Centerstage</h3><ul class="timeline">
+<li>NorCal South Bay League — 2nd place Inspire Award; Motivate Award; Winning Alliance, 1st Pick</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2022–2023</span><h3>Powerplay</h3><ul class="timeline">
+<li>South Bay Metro League — 2nd place Inspire Award; Design Award</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2021–2022</span><h3>Freight Frenzy</h3><ul class="timeline">
+<li>Saratoga Qualifying — 1st Place Innovate Award; 4th Seed Alliance Partner</li>
+<li>Elk Grove Qualifying — 2nd Place Inspire Award; 1st Place Connect Award; Finalist Alliance Captain</li>
+<li>NorCal Regional Championship — Winning Alliance, 1st Pick; 2nd Place Connect Award</li>
+<li>World Championship — Motivate Award Nominee</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2020–2021</span><h3>Ultimate Goal</h3><ul class="timeline">
+<li>Daly City Qualifying — 1st Place Connect Award (ranked top 4)</li>
+<li>Oregon League — 1st Place Design Award (ranked top 4)</li>
+<li>NorCal Regional Championship — Ranked top 10; Dean's List Finalist</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2019–2020</span><h3>Skystone</h3><ul class="timeline">
+<li>Saratoga Qualifying — 2nd Place Inspire; Winning Alliance 1st Pick; 1st Motivate; 2nd Design; 2nd Innovate</li>
+<li>San Jose (Micron) Qualifying — 1st Inspire; Winning Alliance Captain; 2nd Think; 2nd Connect</li>
+<li>Napa Qualifying — Winning Alliance Captain; 1st Think; 3rd Connect</li>
+<li>NorCal Regional Championship — 2nd Inspire; Winning Alliance 1st Pick; 1st Innovate</li>
+<li>World Championship — Qualified (cancelled due to COVID-19)</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2018–2019</span><h3>Rover Ruckus</h3><ul class="timeline">
+<li>Saratoga Qualifying — 1st Inspire; Finalist Alliance 1st pick; 2nd Think; 3rd Connect; 3rd Design</li>
+<li>Piedmont Qualifying — 2nd Inspire; 1st Think; 2nd Connect; 2nd Design; Semi-Finalist Alliance 1st pick</li>
+<li>Daly City Qualifying — 1st Connect; 2nd Think; Semi-Finalist Alliance 1st pick</li>
+<li>NorCal Regional Championship — 1st Innovate; 2nd Inspire; 3rd Motivate; Semi-Finalist Alliance 1st pick</li>
+<li>World Championship — 1st Place Control Award</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2017–2018</span><h3>Relic Recovery</h3><ul class="timeline">
+<li>Saratoga Qualifying — 3rd Inspire; 1st Connect; 2nd Think</li>
+<li>Burlingame Qualifying — 1st Connect; 2nd Think</li>
+<li>Daly City Qualifying — 1st Think; 2nd Motivate; 2nd Control</li>
+<li>NorCal Championship — Semi-Finalist Alliance; Dean's List Finalist</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2016–2017</span><h3>Velocity Vortex</h3><ul class="timeline">
+<li>Redwood Qualifying — Finalist Alliance; 1st PTC Design; 2nd Inspire; 2nd Connect</li>
+<li>Google HQ Qualifying — Finalist Alliance; 1st PTC Design; 2nd Think</li>
+<li>GitHub HQ Qualifying — 1st Inspire; Semi-Finalist Alliance Captain; 2nd Innovate; 3rd PTC Design; 3rd Think</li>
+<li>NorCal Championship — 1st Think Award</li>
+<li>Western Super-Regionals — Ranked top 10 in division</li>
+<li>World Championship — Finalist Think Award; ranked 19th in division</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2015–2016</span><h3>Res-Q</h3><ul class="timeline">
+<li>Saratoga Qualifying — 1st Place Connect Award</li>
+<li>Burlingame Qualifying — Winning Alliance Captain</li>
+</ul></div>
+<div class="card glass"><span class="eyebrow">2014–2015</span><h3>Cascade Effect</h3><ul class="timeline">
+<li>Carmichael Qualifying — 1st Place Think Award</li>
+<li>Elk Grove Qualifying — Semi-Finalist Alliance</li>
+</ul></div>
+</div>
+</section>
+</div></main>
+<footer class="site"><div class="wrap">
+<span>FTC 8404 Quixilver · <span id="year"></span></span>
+<nav aria-label="Social"><a href="https://www.instagram.com/ftc8404">Instagram</a><a href="https://www.facebook.com/ftc8404">Facebook</a><a href="https://www.youtube.com/@Quixilver-8404">YouTube</a><a href="https://twitter.com/ftc8404">Twitter</a></nav>
+</div></footer>
+<script src="plexus-bg.js"></script>
+<script src="site.js"></script>
 </body>
 </html>
