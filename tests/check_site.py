@@ -99,6 +99,9 @@ def main():
         # reduced-motion must never gate it again.
         if "prefers-reduced-motion" in hero:
             failures.append("hero.js: intro must not gate on reduced-motion")
+        # The fox reveal must play out slowly across the dive, not pop.
+        if "sstep(p, 0.78, 1.0)" not in hero:
+            failures.append("hero.js: logo reveal window must be the slow one")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:

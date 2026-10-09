@@ -571,7 +571,8 @@ async function start() {
     });
     // The camera dives into the blue; the shaft's energy condenses into
     // the fox, so the shaft itself yields some brightness as it appears.
-    const logoIn = sstep(p, 0.88, 1.0);
+    // Wide window: the reveal + grow play out slowly across the dive.
+    const logoIn = sstep(p, 0.78, 1.0);
     blue.mat.uniforms.intensity.value = blueIn * (0.55 + p * 0.25) * (1 - logoIn * 0.6) * (1 - dive * 0.55);
     if (bloomPass) bloomPass.strength = 0.4 + blueIn * 0.35 + dive * 0.1;
     logoUniforms.time.value = t;
