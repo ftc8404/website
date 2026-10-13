@@ -23,6 +23,7 @@ start().catch((e) => {
 async function start() {
   const THREE = await import("three");
   const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const SHOW_COORDS = /\bcoords=1\b/.test(location.search);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -245,7 +246,7 @@ async function start() {
   // The volume is oversized vs. the viewport so the pattern never visibly
   // ends as the camera orbits. Static — all motion comes from the camera.
   const plexus = new THREE.Group();
-  const PN = isMobile ? 150 : 320;
+  const PN = isMobile ? 70 : 140;
   const pts = [];
   for (let i = 0; i < PN; i++) {
     pts.push(new THREE.Vector3(
@@ -296,7 +297,7 @@ async function start() {
       }`,
   });
   plexus.add(new THREE.Points(pointGeo, pointMat));
-  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 400 : 1600;
+  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 140 : 520;
   const linkArr = new Float32Array(maxLinks * 6);
   const linkColArr = new Float32Array(maxLinks * 6);
   const linkGeo = new THREE.BufferGeometry();
@@ -344,27 +345,29 @@ async function start() {
   const labelTex = [];
   let labelCursor = 0;
   const tmpV = new THREE.Vector3();
-  for (const pt of pts) {
-    const cv = document.createElement("canvas");
-    cv.width = 320;
-    cv.height = 64;
-    const g = cv.getContext("2d");
-    g.font = "600 20px ui-monospace, Menlo, Consolas, monospace";
-    g.textBaseline = "middle";
-    g.fillStyle = "rgba(255,255,255,0.92)";
-    g.fillText(`(${pt.x.toFixed(2)}, ${pt.y.toFixed(2)}, ${pt.z.toFixed(2)})`, 8, 34);
-    const tex = new THREE.CanvasTexture(cv);
-    const m = new THREE.SpriteMaterial({
-      map: tex, transparent: true, opacity: 0.55, depthWrite: false,
-    });
-    const s = new THREE.Sprite(m);
-    s.position.set(pt.x + 0.55, pt.y + 0.32, pt.z);
-    s.scale.set(1.875, 0.375, 1);
-    s.renderOrder = 2;
-    labelGroup.add(s);
-    labelSprites.push(s);
-    labelCtx.push(g);
-    labelTex.push(tex);
+  if (SHOW_COORDS) {
+    for (const pt of pts) {
+      const cv = document.createElement("canvas");
+      cv.width = 320;
+      cv.height = 64;
+      const g = cv.getContext("2d");
+      g.font = "600 20px ui-monospace, Menlo, Consolas, monospace";
+      g.textBaseline = "middle";
+      g.fillStyle = "rgba(255,255,255,0.92)";
+      g.fillText(`(${pt.x.toFixed(2)}, ${pt.y.toFixed(2)}, ${pt.z.toFixed(2)})`, 8, 34);
+      const tex = new THREE.CanvasTexture(cv);
+      const m = new THREE.SpriteMaterial({
+        map: tex, transparent: true, opacity: 0.55, depthWrite: false,
+      });
+      const s = new THREE.Sprite(m);
+      s.position.set(pt.x + 0.55, pt.y + 0.32, pt.z);
+      s.scale.set(1.875, 0.375, 1);
+      s.renderOrder = 2;
+      labelGroup.add(s);
+      labelSprites.push(s);
+      labelCtx.push(g);
+      labelTex.push(tex);
+    }
   }
   scene.add(plexus);
 
@@ -454,6 +457,7 @@ async function start() {
     const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
     return t * t * (3 - 2 * t);
   }
+  let linkFrame = 0;
   function frame() {
     requestAnimationFrame(frame);
     const t = clock.getElapsedTime();
@@ -501,26 +505,28 @@ async function start() {
       pFloat[k] += pVel[k];
       pFloat[k + 1] += pVel[k + 1];
       pFloat[k + 2] += pVel[k + 2];
-      pArr[k] = Math.round(pFloat[k] * 100) / 100;
-      pArr[k + 1] = Math.round(pFloat[k + 1] * 100) / 100;
-      pArr[k + 2] = Math.round(pFloat[k + 2] * 100) / 100;
+      pArr[k] = pFloat[k];
+      pArr[k + 1] = pFloat[k + 1];
+      pArr[k + 2] = pFloat[k + 2];
       if (pArr[k] < -23 || pArr[k] > 23) pVel[k] *= -1;
       if (pArr[k + 1] < -13 || pArr[k + 1] > 13) pVel[k + 1] *= -1;
       if (pArr[k + 2] < -22 || pArr[k + 2] > 8) pVel[k + 2] *= -1;
     }
     pointAttr.needsUpdate = true;
-    rebuildLinks();
-    for (let i = 0; i < PN; i++) {
-      const s = labelSprites[i];
-      s.position.set(pArr[i * 3] + 0.55, pArr[i * 3 + 1] + 0.32, pArr[i * 3 + 2]);
-      s.getWorldPosition(tmpV);
-      const dd = tmpV.distanceTo(camera.position);
-      // On content (om→1) cull harder: nothing looms in your face.
-      const ln = 7 + 4 * om, ls = 5 + 3 * om;
-      const a = dd < ln ? 0 : Math.min(1, (dd - ln) / ls);
-      s.material.opacity = 0.55 * a * a * (3 - 2 * a);
+    if ((linkFrame++ & 1) === 0) rebuildLinks();
+    if (SHOW_COORDS) {
+      for (let i = 0; i < PN; i++) {
+        const s = labelSprites[i];
+        s.position.set(pArr[i * 3] + 0.55, pArr[i * 3 + 1] + 0.32, pArr[i * 3 + 2]);
+        s.getWorldPosition(tmpV);
+        const dd = tmpV.distanceTo(camera.position);
+        // On content (om→1) cull harder: nothing looms in your face.
+        const ln = 7 + 4 * om, ls = 5 + 3 * om;
+        const a = dd < ln ? 0 : Math.min(1, (dd - ln) / ls);
+        s.material.opacity = 0.55 * a * a * (3 - 2 * a);
+      }
     }
-    for (let k = 0; k < 3; k++) {
+    if (SHOW_COORDS) {
       labelCursor = (labelCursor + 1) % PN;
       const i = labelCursor, g = labelCtx[i];
       g.clearRect(0, 0, 320, 64);
