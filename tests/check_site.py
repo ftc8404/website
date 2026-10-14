@@ -118,6 +118,8 @@ def main():
             failures.append("site.js: eased wheel scrolling missing")
         if "(pointer: coarse)" not in site:
             failures.append("site.js: wheel easing must not hijack touch")
+        if 'behavior: "instant"' not in site:
+            failures.append("site.js: wheel lerp must not stack on CSS scroll-behavior")
         # The WebGL hero tells the 2D backdrop when it is covering the page,
         # and both loops stop while the tab is hidden.
         if 'CustomEvent("hero-live"' not in hero:
