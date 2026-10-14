@@ -113,6 +113,11 @@ def main():
         site = get("site.js")
         if "scroll-hint" not in site:
             failures.append("site.js: idle scroll hint missing")
+        # Mouse/trackpad wheel scrolling is eased. Touch stays native.
+        if "e.deltaY" not in site or "passive: false" not in site:
+            failures.append("site.js: eased wheel scrolling missing")
+        if "(pointer: coarse)" not in site:
+            failures.append("site.js: wheel easing must not hijack touch")
         # The WebGL hero tells the 2D backdrop when it is covering the page,
         # and both loops stop while the tab is hidden.
         if 'CustomEvent("hero-live"' not in hero:
