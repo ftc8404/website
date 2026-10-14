@@ -35,37 +35,67 @@
 // Disabled under reduced motion. Touch scrolling is already smooth, and a
 // preventDefault wheel hijack there fights the intro, so coarse pointers
 // keep the browser's own scroll.
+//
+// Chromium applies `html { scroll-behavior: smooth }` to scrollTo() when
+// the behavior is "auto", so a per-frame lerp stacked a second animation
+// and the synchronous scroll event (raf already cleared) snapped `target`
+// back to the in-between position. The page then barely moved. Jumps here
+// are instant; CSS smooth-scroll stays for anchor links only.
 (function () {
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   if (window.matchMedia("(pointer: coarse)").matches) return;
-  var target = window.scrollY, current = target, raf = 0;
+  var target = window.scrollY, current = target, raf = 0, animating = false;
+  function jump(y) {
+    window.scrollTo({ left: 0, top: y, behavior: "instant" });
+  }
   function tick() {
-    raf = 0;
     current += (target - current) * 0.12;
     if (Math.abs(target - current) < 0.5) {
       current = target;
-      window.scrollTo(0, current);
+      jump(current);
+      animating = false;
+      raf = 0;
       return;
     }
-    window.scrollTo(0, current);
+    jump(current);
     raf = requestAnimationFrame(tick);
   }
   window.addEventListener("wheel", function (e) {
     if (e.ctrlKey || e.metaKey) return; // leave pinch-zoom alone
-    var max = document.documentElement.scrollHeight - window.innerHeight;
-    target = Math.max(0, Math.min(max, target + e.deltaY * 1.1));
-    if (!raf) raf = requestAnimationFrame(tick);
+    var max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+    var dy = e.deltaY;
+    if (e.deltaMode === 1) dy *= 16;
+    else if (e.deltaMode === 2) dy *= window.innerHeight;
+    target = Math.max(0, Math.min(max, target + dy * 1.1));
+    if (!raf) {
+      animating = true;
+      raf = requestAnimationFrame(tick);
+    }
     e.preventDefault();
   }, { passive: false });
-  function resync() {
-    if (raf) { cancelAnimationFrame(raf); raf = 0; }
-    target = current = window.scrollY;
+  function stopTo(y) {
+    animating = false;
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+    target = current = y;
   }
   window.addEventListener("scroll", function () {
-    if (!raf) target = current = window.scrollY;
+    if (!animating) {
+      target = current = window.scrollY;
+      return;
+    }
+    // Scrollbar or keyboard moved the page out from under the lerp.
+    if (Math.abs(window.scrollY - current) > 2) stopTo(window.scrollY);
   }, { passive: true });
-  window.addEventListener("touchstart", resync, { passive: true });
-  window.addEventListener("keydown", resync, { passive: true });
+  window.addEventListener("touchstart", function () {
+    stopTo(window.scrollY);
+  }, { passive: true });
+  window.addEventListener("keydown", function (e) {
+    var k = e.key;
+    if (k === " " || k === "ArrowUp" || k === "ArrowDown" || k === "PageUp" || k === "PageDown" || k === "Home" || k === "End") {
+      stopTo(window.scrollY);
+    }
+  }, { passive: true });
 })();
 
 // Scroll hint: a quiet pill that surfaces after 6s without scrolling and

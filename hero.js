@@ -38,17 +38,11 @@ async function start() {
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
-  // One pixel-ratio cap for the whole intro. Initializing at 2x and only
-  // dropping to 1.25/1.5 after the finale switch meant retina screens paid
-  // 2x fill (4x the pixels) for every frame of the sequence. Phones also
-  // stay under a pixel budget so a tall screen does not fill 3× retina.
-  const viewW = Math.max(1, mount.clientWidth);
-  const viewH = Math.max(1, mount.clientHeight);
-  let fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25);
-  if (isMobile) {
-    const cap = Math.sqrt(280000 / (viewW * viewH));
-    fullPR = Math.min(fullPR, Math.max(0.55, cap));
-  }
+  // One pixel-ratio cap for the whole intro. A 2× buffer made bloom fill
+  // four times the pixels, and a 1× phone buffer with antialiasing off
+  // turned the glass edges into stair-steps. Slow GPUs still drop ratio
+  // in relieve().
+  let fullPR = Math.min(window.devicePixelRatio || 1, 1.25);
   renderer.setPixelRatio(fullPR);
   renderer.setSize(mount.clientWidth, mount.clientHeight);
   mount.appendChild(renderer.domElement);
@@ -58,129 +52,71 @@ async function start() {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.02);
-  // Studio environment so the desktop glass has something to reflect.
-  // Skipped on phones: the PMREM pass is a startup hitch and the physical
-  // shader that samples it is the expensive fragment program.
-  if (!isMobile) {
-    try {
-      const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
-      const pmrem = new THREE.PMREMGenerator(renderer);
-      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-      pmrem.dispose();
-    } catch (e) { /* env-less fallback: lights only */ }
-  }
   const camera = new THREE.PerspectiveCamera(
     55, mount.clientWidth / mount.clientHeight, 0.1, 100
   );
 
-  // Phones draw an unlit body. The fresnel shell and the beams carry the
-  // light, so the six-light rig (and the shader variants it creates) stays
-  // on desktop only.
-  if (!isMobile) {
-    scene.add(new THREE.HemisphereLight(0xbcd8e8, 0x0a0e12, 0.55));
-    scene.add(new THREE.AmbientLight(0x8fa8b8, 0.25));
-    const key = new THREE.DirectionalLight(0xffffff, 1.2);
-    key.position.set(-6, 5, 7);
-    scene.add(key);
-    const fill = new THREE.DirectionalLight(0xcfe8ff, 0.7);
-    fill.position.set(5, -1, 4);
-    scene.add(fill);
-    const rim = new THREE.PointLight(0x55c6f6, 35, 30, 2);
-    rim.position.set(4, -1, -3);
-    scene.add(rim);
-    const entry = new THREE.PointLight(0xffffff, 4, 20, 2);
-    entry.position.set(-4, 1.4, 2.5);
-    scene.add(entry);
-  }
-
   // Prism: triangular bar lying along X — light enters the left end face,
-  // spectrum fans out the right. Clear glass is the fresnel shell, a faint
-  // body, and the studio env — not a transmission pass.
+  // spectrum fans out the right. Transmission re-rendered the whole scene
+  // every frame and was the intro's main cost, so the glass is a fresnel
+  // shell instead: open in the middle, bright only at the rims. Flat face
+  // normals (derivatives) keep the 3-sided cylinder from smearing a
+  // smoothed normal across each face, which read as blobs on phones.
   const prismGeo = new THREE.CylinderGeometry(1.25, 1.25, 2.6, 3, 1);
-  let prism;
-  if (isMobile) {
-    prism = new THREE.Mesh(
-      prismGeo,
-      new THREE.MeshBasicMaterial({
-        color: 0xd7eaf2, transparent: true, opacity: 0.22, depthWrite: false,
-      })
-    );
-  } else try {
-    prism = new THREE.Mesh(
-      prismGeo,
-      new THREE.MeshPhysicalMaterial({
-        color: 0xe7f2f6, metalness: 0, roughness: 0.12,
-        emissive: 0x07141c, emissiveIntensity: 0.35,
-        // Transmission re-renders the scene into an offscreen buffer every
-        // frame. On a black field the refraction is almost invisible, and
-        // that extra pass was the intro's dominant cost on desktop and
-        // mobile. Clear glass here is alpha + the fresnel shell + core.
-        transmission: 0, thickness: 0,
-        ior: 1.52, envMapIntensity: 1.15,
-        clearcoat: 0.65, clearcoatRoughness: 0.18,
-        specularIntensity: 0.55,
-        transparent: true, opacity: 0.16, depthWrite: false,
-      })
-    );
-  } catch (e) {
-    prism = new THREE.Mesh(
-      prismGeo,
-      new THREE.MeshStandardMaterial({
-        color: 0xbfe4f4, transparent: true, opacity: 0.5,
-        roughness: 0.15, metalness: 0.1, envMapIntensity: 1.4,
-      })
-    );
-  }
-  prism.rotation.set(0, Math.PI / 6, Math.PI / 2);
-  prism.position.y = 0.45;
-  scene.add(prism);
-  const edges = new THREE.LineSegments(
-    new THREE.EdgesGeometry(prismGeo),
-    new THREE.LineBasicMaterial({ color: 0x86b9cf, transparent: true, opacity: 0.22 })
-  );
-  prism.add(edges);
-  // Fresnel shell: bright glass rims on every renderer, even where the
-  // transmission pass is unsupported (falls back to dark body + glow).
-  const shell = new THREE.Mesh(
-    prismGeo,
-    new THREE.ShaderMaterial({
-      precision: isMobile ? "mediump" : "highp",
+  function glassMaterial(back) {
+    return new THREE.ShaderMaterial({
+      precision: "highp",
+      extensions: { derivatives: true },
       uniforms: {
-        color: { value: new THREE.Color(0xcfe8f2) },
-        opacity: { value: 0.45 },
+        tint: { value: new THREE.Color(back ? 0xc5dce6 : 0xe9f7fb) },
+        opacity: { value: 1 },
       },
+      side: back ? THREE.BackSide : THREE.FrontSide,
+      transparent: true,
+      depthWrite: !!back,
+      depthTest: true,
+      blending: back ? THREE.NormalBlending : THREE.AdditiveBlending,
       vertexShader: `
-        varying vec3 vN; varying vec3 vW;
+        varying vec3 vW;
         void main() {
-          vN = normalize(mat3(modelMatrix) * normal);
           vec4 w = modelMatrix * vec4(position, 1.0);
           vW = w.xyz;
           gl_Position = projectionMatrix * viewMatrix * w;
         }`,
       fragmentShader: `
-        uniform vec3 color; uniform float opacity;
-        varying vec3 vN; varying vec3 vW;
+        uniform vec3 tint;
+        uniform float opacity;
+        varying vec3 vW;
         void main() {
+          vec3 N = normalize(cross(dFdx(vW), dFdy(vW)));
           vec3 V = normalize(cameraPosition - vW);
-          float f = pow(1.0 - abs(dot(normalize(vN), V)), 2.5);
-          gl_FragColor = vec4(color, f * opacity);
+          float fres = pow(clamp(1.0 - abs(dot(N, V)), 0.0, 1.0), 2.4);
+          float a = ${back ? "(0.03 + fres * 0.2)" : "fres * 0.8"} * opacity;
+          if (a < 0.004) discard;
+          gl_FragColor = vec4(tint, a);
         }`,
-      transparent: true, depthWrite: false,
-      blending: THREE.AdditiveBlending,
+    });
+  }
+  const prism = new THREE.Group();
+  const glassBack = new THREE.Mesh(prismGeo, glassMaterial(true));
+  glassBack.renderOrder = 1;
+  const glassFront = new THREE.Mesh(prismGeo, glassMaterial(false));
+  glassFront.renderOrder = 4;
+  prism.add(glassBack, glassFront);
+  prism.rotation.set(0, Math.PI / 6, Math.PI / 2);
+  prism.position.y = 0.45;
+  scene.add(prism);
+  const edges = new THREE.LineSegments(
+    new THREE.EdgesGeometry(prismGeo),
+    new THREE.LineBasicMaterial({
+      color: 0xb7d7e6, transparent: true, opacity: 0.45, depthWrite: false,
     })
   );
-  shell.scale.setScalar(1.02);
-  shell.renderOrder = 6;
-  prism.add(shell);
-  // Faint inner body: hints at glass density without tinting it blue.
-  const core = new THREE.Mesh(
-    prismGeo,
-    new THREE.MeshBasicMaterial({
-      color: 0xdfe9ee, transparent: true, opacity: 0.15,
-    })
-  );
-  core.scale.setScalar(0.985);
-  prism.add(core);
+  edges.material.polygonOffset = true;
+  edges.material.polygonOffsetFactor = -2;
+  edges.material.polygonOffsetUnits = -2;
+  edges.renderOrder = 5;
+  prism.add(edges);
 
   // Beams: additive glow planes. White in, spectrum fan out, blue hero beam.
   function beam(color, width, len, opacity, sharedMat) {
@@ -266,8 +202,10 @@ async function start() {
   function innerBeam(color, width) {
     const group = new THREE.Group();
     const m = beam(color, width, 1, 0, null);
-    m.material.depthTest = false;
-    m.renderOrder = 7;
+    // Depth-tested so the shaft sits inside the glass instead of painting
+    // over the rims. The back faces write depth; the front faces do not.
+    m.material.depthTest = true;
+    m.renderOrder = 3;
     group.add(m);
     scene.add(group);
     shafts.push(group);
@@ -489,10 +427,15 @@ async function start() {
   }
   for (let i = 0; i < PN; i++) writeLabel(i);
   codeTex.needsUpdate = true;
-  // The old sprite was 1.875×0.375 with the glyphs sitting in a short band
-  // of a 320×64 canvas (about 5:1). Mapping square atlas cells onto that
-  // full height stretched every character into a tall smear.
-  const labelGeo = new THREE.PlaneGeometry(1.875, 0.16);
+  // Square atlas cells must land on square world slots. The old sprite was
+  // 1.875×0.375 over a 320×64 canvas with a 20px font; a short plane with
+  // 24 columns made every glyph about twice as tall as it was wide.
+  // Cell height matches that 20px em, and the quad is shifted so the first
+  // glyph starts where the old left-aligned sprite text started.
+  const labelH = 0.375 * (20 / 42);
+  const labelW = labelH * MAXC;
+  const labelShiftX = labelW * 0.5 + (8 / 320 - 0.5) * 1.875;
+  const labelGeo = new THREE.PlaneGeometry(labelW, labelH);
   const alphaArr = new Float32Array(PN);
   const alphaAttr = new THREE.InstancedBufferAttribute(alphaArr, 1);
   alphaAttr.setUsage(THREE.DynamicDrawUsage);
@@ -508,11 +451,13 @@ async function start() {
       maxC: { value: MAXC },
       pn: { value: PN },
       cols: { value: GLYPHS.length },
+      shiftX: { value: labelShiftX },
     },
     transparent: true, depthWrite: false, depthTest: true,
     vertexShader: `
       attribute float aAlpha;
       attribute float aIndex;
+      uniform float shiftX;
       varying vec2 vUv;
       varying float vAlpha;
       varying float vIndex;
@@ -523,6 +468,7 @@ async function start() {
         vec3 center = instanceMatrix[3].xyz;
         vec4 mv = modelViewMatrix * vec4(center, 1.0);
         mv.xy += position.xy;
+        mv.x += shiftX;
         gl_Position = projectionMatrix * mv;
       }`,
     fragmentShader: `
@@ -862,12 +808,9 @@ async function start() {
     const endFade = 1 - Math.min(1, Math.max(0, (p - 0.78) / 0.16));
     prism.visible = endFade > 0.001;
     prism.scale.setScalar(0.35 + 0.65 * endFade);
-    edges.material.opacity = 0.22 * endFade;
-    shell.material.uniforms.opacity.value = 0.45 * endFade;
-    core.material.opacity = 0.15 * endFade;
-    if (prism.material.emissiveIntensity !== undefined) {
-      prism.material.emissiveIntensity = 0.08 * endFade;
-    }
+    edges.material.opacity = 0.45 * endFade;
+    glassBack.material.uniforms.opacity.value = endFade;
+    glassFront.material.uniforms.opacity.value = endFade;
     // Proximity yield: the camera flies into the entry knot — dim the
     // axis-aligned spans as it closes in. Reads as flying past the
     // light, not glare.
