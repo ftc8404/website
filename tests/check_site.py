@@ -113,6 +113,29 @@ def main():
         site = get("site.js")
         if "scroll-hint" not in site:
             failures.append("site.js: idle scroll hint missing")
+        # The WebGL hero tells the 2D backdrop when it is covering the page,
+        # and both loops stop while the tab is hidden.
+        if 'CustomEvent("hero-live"' not in hero:
+            failures.append("hero.js: must dispatch hero-live")
+        if "document.hidden" not in hero:
+            failures.append("hero.js: must pause while the tab is hidden")
+        perf_at = hero.find("window.__perf")
+        debug_at = hero.rfind("if (debug)", 0, perf_at if perf_at >= 0 else 0)
+        if perf_at < 0 or debug_at < 0 or perf_at - debug_at > 600:
+            failures.append("hero.js: __perf must be debug-gated")
+        beat_at = hero.find('get("beat")')
+        beat_debug = hero.rfind("if (debug)", 0, beat_at if beat_at >= 0 else 0)
+        if beat_at < 0 or beat_debug < 0 or beat_at - beat_debug > 200:
+            failures.append("hero.js: ?beat= preview must be debug-gated")
+        if "hero-live" not in bg:
+            failures.append("plexus-bg.js: must follow hero-live")
+        if "visibilitychange" not in bg:
+            failures.append("plexus-bg.js: must pause while hidden")
+        draws_at = bg.find("window.__bgDraws")
+        if draws_at >= 0:
+            draws_debug = bg.rfind("debug", 0, draws_at)
+            if draws_debug < 0 or draws_at - draws_debug > 250:
+                failures.append("plexus-bg.js: __bgDraws must be debug-gated")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:
