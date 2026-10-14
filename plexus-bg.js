@@ -9,10 +9,9 @@
   var ctx = cv.getContext("2d");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var mobile = window.matchMedia("(max-width: 760px)").matches;
-  var COUNT = mobile ? 24 : 48;
+  var COUNT = mobile ? 45 : 90;
   var LINK = mobile ? 130 : 150;
   var LINK2 = LINK * LINK;
-  var SHOW_COORDS = /\bcoords=1\b/.test(location.search);
   var W = 0, H = 0, nodes = [];
 
   function build() {
@@ -45,8 +44,8 @@
         if (n.fx === undefined) { n.fx = n.x; n.fy = n.y; }
         n.fx += n.vx;
         n.fy += n.vy;
-        n.x = n.fx;
-        n.y = n.fy;
+        n.x = Math.round(n.fx * 100) / 100;
+        n.y = Math.round(n.fy * 100) / 100;
         if (n.x < -110) n.x = W + 100;
         if (n.x > W + 110) n.x = -100;
         if (n.y < -110) n.y = H + 100;
@@ -75,13 +74,11 @@
       ctx.fillStyle = "rgba(255,255,255," + tw.toFixed(3) + ")";
       ctx.fillRect(p.x - 1, p.y - 1, 2, 2);
     }
-    if (SHOW_COORDS) {
-      ctx.font = "10px ui-monospace, Menlo, Consolas, monospace";
-      ctx.fillStyle = "rgba(255,255,255,0.38)";
-      for (i = 0; i < nodes.length; i++) {
-        var q = nodes[i];
-        ctx.fillText("(" + q.x.toFixed(2) + "," + q.y.toFixed(2) + ")", q.x + 6, q.y - 6);
-      }
+    ctx.font = "10px ui-monospace, Menlo, Consolas, monospace";
+    ctx.fillStyle = "rgba(255,255,255,0.38)";
+    for (i = 0; i < nodes.length; i++) {
+      var q = nodes[i];
+      ctx.fillText("(" + q.x.toFixed(2) + "," + q.y.toFixed(2) + ")", q.x + 6, q.y - 6);
     }
     if (!reduced) requestAnimationFrame(draw);
   }

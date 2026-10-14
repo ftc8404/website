@@ -30,3 +30,32 @@
     io.observe(el);
   });
 })();
+
+// Buttery wheel scrolling: eased window scroll that still uses the real
+// scrollbar, so sticky scenes, anchors, and keyboard/touch stay native.
+// Disabled under reduced motion; touch scrolling is already smooth.
+(function () {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var target = window.scrollY, current = target, raf = 0;
+  function tick() {
+    raf = 0;
+    current += (target - current) * 0.12;
+    if (Math.abs(target - current) < 0.5) {
+      current = target;
+      window.scrollTo(0, current);
+      return;
+    }
+    window.scrollTo(0, current);
+    raf = requestAnimationFrame(tick);
+  }
+  window.addEventListener("wheel", function (e) {
+    if (e.ctrlKey) return; // leave pinch-zoom alone
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    target = Math.max(0, Math.min(max, target + e.deltaY * 1.1));
+    if (!raf) raf = requestAnimationFrame(tick);
+    e.preventDefault();
+  }, { passive: false });
+  window.addEventListener("scroll", function () {
+    if (!raf) target = current = window.scrollY;
+  });
+})();
