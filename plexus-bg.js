@@ -11,6 +11,7 @@
   var mobile = window.matchMedia("(max-width: 760px)").matches;
   var COUNT = mobile ? 45 : 90;
   var LINK = mobile ? 130 : 150;
+  var LINK2 = LINK * LINK;
   var W = 0, H = 0, nodes = [];
 
   function build() {
@@ -56,8 +57,9 @@
       for (j = i + 1; j < nodes.length; j++) {
         var a = nodes[i], b = nodes[j];
         var dx = a.x - b.x, dy = a.y - b.y;
-        var d = Math.sqrt(dx * dx + dy * dy);
-        if (d < LINK) {
+        var d2 = dx * dx + dy * dy;
+        if (d2 < LINK2) {
+          var d = Math.sqrt(d2);
           ctx.strokeStyle = "rgba(255,255,255," + (0.09 * (1 - d / LINK)).toFixed(3) + ")";
           ctx.beginPath();
           ctx.moveTo(a.x, a.y);

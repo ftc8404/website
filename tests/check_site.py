@@ -102,6 +102,10 @@ def main():
         # The fox reveal must play out slowly across the dive, not pop.
         if "sstep(p, 0.78, 1.0)" not in hero:
             failures.append("hero.js: logo reveal window must be the slow one")
+        # Perf: links rebuild on alternate frames, points outside the
+        # camera frustum are skipped (not deleted).
+        if "linkFrame" not in hero or "Frustum" not in hero:
+            failures.append("hero.js: lazy link/point evaluation missing")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:

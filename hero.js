@@ -297,6 +297,9 @@ async function start() {
   });
   plexus.add(new THREE.Points(pointGeo, pointMat));
   const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 400 : 1600;
+  // Declared up here: rebuildLinks() runs once at setup, before the
+  // frame-loop declarations below execute.
+  const vis = new Uint8Array(PN);
   const linkArr = new Float32Array(maxLinks * 6);
   const linkColArr = new Float32Array(maxLinks * 6);
   const linkGeo = new THREE.BufferGeometry();
@@ -309,8 +312,10 @@ async function start() {
   function rebuildLinks() {
     let n = 0;
     for (let i = 0; i < PN && n < maxLinks; i++) {
+      if (!vis[i]) continue;
       const ax = pArr[i * 3], ay = pArr[i * 3 + 1], az = pArr[i * 3 + 2];
       for (let j = i + 1; j < PN && n < maxLinks; j++) {
+        if (!vis[j]) continue;
         const dx = ax - pArr[j * 3], dy = ay - pArr[j * 3 + 1], dz = az - pArr[j * 3 + 2];
         const d2 = dx * dx + dy * dy + dz * dz;
         if (d2 < LINK2) {
@@ -344,6 +349,10 @@ async function start() {
   const labelTex = [];
   let labelCursor = 0;
   const tmpV = new THREE.Vector3();
+  const frustum = new THREE.Frustum();
+  const projMat = new THREE.Matrix4();
+  let linkFrame = 0;
+  let perfN = 0, perfT = 0, perfMs = 16;
   for (const pt of pts) {
     const cv = document.createElement("canvas");
     cv.width = 320;
@@ -509,9 +518,23 @@ async function start() {
       if (pArr[k + 2] < -22 || pArr[k + 2] > 8) pVel[k + 2] *= -1;
     }
     pointAttr.needsUpdate = true;
-    rebuildLinks();
+    // Lazy points: one frustum test each, then links/labels skip whatever
+    // the camera can't see. 2-unit margin so links don't pop at the edge.
+    frustum.setFromProjectionMatrix(projMat.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
+    for (let i = 0; i < PN; i++) {
+      tmpV.set(pArr[i * 3], pArr[i * 3 + 1], pArr[i * 3 + 2]);
+      plexus.localToWorld(tmpV);
+      let v = 1;
+      for (let f = 0; f < 6; f++) {
+        if (frustum.planes[f].distanceToPoint(tmpV) < -2) { v = 0; break; }
+      }
+      vis[i] = v;
+    }
+    if ((linkFrame++ & 1) === 0) rebuildLinks();
     for (let i = 0; i < PN; i++) {
       const s = labelSprites[i];
+      if (!vis[i]) { s.visible = false; continue; }
+      s.visible = true;
       s.position.set(pArr[i * 3] + 0.55, pArr[i * 3 + 1] + 0.32, pArr[i * 3 + 2]);
       s.getWorldPosition(tmpV);
       const dd = tmpV.distanceTo(camera.position);
@@ -627,6 +650,21 @@ async function start() {
     }
     if (composer) composer.render();
     else renderer.render(scene, camera);
+    // Rolling perf readout for diagnosis (fps, ms, draw calls, tris).
+    if (typeof performance !== "undefined") {
+      const now = performance.now();
+      if (perfT > 0) perfMs += (now - perfT - perfMs) * 0.05;
+      perfT = now;
+      if (++perfN >= 20) {
+        perfN = 0;
+        window.__perf = {
+          ms: +perfMs.toFixed(1),
+          fps: Math.round(1000 / Math.max(1, perfMs)),
+          calls: renderer.info.render.calls,
+          tris: renderer.info.render.triangles,
+        };
+      }
+    }
   }
   window.addEventListener("resize", () => {
     camera.aspect = mount.clientWidth / mount.clientHeight;
