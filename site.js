@@ -59,3 +59,40 @@
     if (!raf) target = current = window.scrollY;
   });
 })();
+
+// Scroll hint: a quiet pill that surfaces after 6s without scrolling and
+// hides on the next scroll, wheel, touch, or key. Only on pages that can
+// actually scroll. All pages share this file, so all pages get the hint.
+(function () {
+  var hint = document.createElement("div");
+  hint.className = "scroll-hint";
+  hint.setAttribute("aria-hidden", "true");
+  var label = document.createElement("span");
+  label.textContent = "scroll";
+  var chev = document.createElement("i");
+  hint.appendChild(label);
+  hint.appendChild(chev);
+  document.body.appendChild(hint);
+  var timer = 0, visible = false;
+  function pageable() {
+    return document.documentElement.scrollHeight > window.innerHeight + 60;
+  }
+  function show() {
+    if (!visible && pageable()) {
+      visible = true;
+      hint.classList.add("show");
+    }
+  }
+  function hide() {
+    visible = false;
+    hint.classList.remove("show");
+  }
+  function arm() {
+    if (timer) clearTimeout(timer);
+    timer = setTimeout(show, 6000);
+  }
+  ["wheel", "touchmove", "keydown", "scroll"].forEach(function (ev) {
+    window.addEventListener(ev, function () { hide(); arm(); }, { passive: true });
+  });
+  arm();
+})();
