@@ -427,7 +427,7 @@ async function start() {
   scene.add(motes);
   // Bloom on desktop only.
   let composer = null, bloomPass = null, lowRes = false;
-  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
+  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.25);
   if (!isMobile) {
     try {
       const { EffectComposer } = await import("three/addons/postprocessing/EffectComposer.js");

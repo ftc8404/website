@@ -13,6 +13,19 @@
   var LINK = mobile ? 130 : 150;
   var LINK2 = LINK * LINK;
   var W = 0, H = 0, nodes = [];
+  var heroLive = false, everyOther = false;
+  window.__bgDraws = 0;
+  // On index the opaque WebGL hero covers this canvas entirely: once it
+  // exists (and no fallback shows), drop to a 1Hz heartbeat instead of
+  // burning a fullscreen redraw every other frame for invisible pixels.
+  // Other pages have no hero canvas, so they keep full motion.
+  function senseHero() {
+    var gl = document.querySelector("#gl canvas");
+    var fb = document.getElementById("heroFallback");
+    heroLive = !!gl && !(fb && fb.classList.contains("show"));
+  }
+  setTimeout(senseHero, 3000);
+  setTimeout(senseHero, 12000);
 
   function build() {
     W = cv.width = Math.floor(window.innerWidth);
@@ -36,6 +49,11 @@
   });
 
   function draw(t) {
+    window.__bgDraws++;
+    if (!reduced) {
+      everyOther = !everyOther;
+      if (everyOther) { requestAnimationFrame(draw); return; }
+    }
     ctx.clearRect(0, 0, W, H);
     var i, j;
     for (i = 0; i < nodes.length; i++) {
@@ -80,7 +98,12 @@
       var q = nodes[i];
       ctx.fillText("(" + q.x.toFixed(2) + "," + q.y.toFixed(2) + ")", q.x + 6, q.y - 6);
     }
-    if (!reduced) requestAnimationFrame(draw);
+    schedule();
   }
-  requestAnimationFrame(draw);
+  function schedule() {
+    if (reduced) return;
+    if (heroLive) setTimeout(function () { requestAnimationFrame(draw); }, 1000);
+    else requestAnimationFrame(draw);
+  }
+  schedule();
 })();

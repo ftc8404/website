@@ -113,6 +113,9 @@ def main():
         site = get("site.js")
         if "scroll-hint" not in site:
             failures.append("site.js: idle scroll hint missing")
+        bg = get("plexus-bg.js")
+        if "heroLive" not in bg:
+            failures.append("plexus-bg.js: must idle when hero covers it")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:
