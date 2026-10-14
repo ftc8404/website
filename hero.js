@@ -3,6 +3,11 @@
 const stage = document.getElementById("prismStage");
 const mount = document.getElementById("gl");
 const fallback = document.getElementById("heroFallback");
+// Perf counters and the ?beat= scroll preview stay off unless ?debug is set.
+const debug = new URLSearchParams(location.search).has("debug");
+function setHeroLive(live) {
+  window.dispatchEvent(new CustomEvent("hero-live", { detail: { live: !!live } }));
+}
 function showFallback(reason) {
   if (fallback) fallback.classList.add("show");
   document.body.classList.add("intro-done");
@@ -10,6 +15,8 @@ function showFallback(reason) {
   document.body.dataset.heroFallback = reason;
   window.__heroFallbackReason = reason;
   if (window.console && window.console.warn) window.console.warn("hero fallback: " + reason);
+  // The WebGL canvas is not covering the page; the 2D backdrop should run.
+  setHeroLive(false);
 }
 // The intro always plays: managed lab machines report reduced-motion by
 // fleet default, which stranded the whole team on the static mark.
@@ -22,59 +29,97 @@ start().catch((e) => {
 
 async function start() {
   const THREE = await import("three");
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false });
+  // Landscape phones are wider than 760px and were taking the desktop
+  // path: bloom, 1.25× pixels, and the heavy glass shader.
+  const isMobile = window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
+  const renderer = new THREE.WebGLRenderer({
+    antialias: false, alpha: false, powerPreference: "high-performance",
+  });
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2));
+  // One pixel-ratio cap for the whole intro. Initializing at 2x and only
+  // dropping to 1.25/1.5 after the finale switch meant retina screens paid
+  // 2x fill (4x the pixels) for every frame of the sequence. Phones also
+  // stay under a pixel budget so a tall screen does not fill 3× retina.
+  const viewW = Math.max(1, mount.clientWidth);
+  const viewH = Math.max(1, mount.clientHeight);
+  let fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25);
+  if (isMobile) {
+    const cap = Math.sqrt(280000 / (viewW * viewH));
+    fullPR = Math.min(fullPR, Math.max(0.55, cap));
+  }
+  renderer.setPixelRatio(fullPR);
   renderer.setSize(mount.clientWidth, mount.clientHeight);
   mount.appendChild(renderer.domElement);
   document.body.classList.add("intro-done");
+  // Opaque canvas now covers #bg-plexus. Tell it to stop immediately.
+  setHeroLive(true);
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.02);
-  // Studio environment so transmissive glass has something to refract.
-  try {
-    const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    pmrem.dispose();
-  } catch (e) { /* env-less fallback: lights only */ }
+  // Studio environment so the desktop glass has something to reflect.
+  // Skipped on phones: the PMREM pass is a startup hitch and the physical
+  // shader that samples it is the expensive fragment program.
+  if (!isMobile) {
+    try {
+      const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      pmrem.dispose();
+    } catch (e) { /* env-less fallback: lights only */ }
+  }
   const camera = new THREE.PerspectiveCamera(
     55, mount.clientWidth / mount.clientHeight, 0.1, 100
   );
 
-  scene.add(new THREE.HemisphereLight(0xbcd8e8, 0x0a0e12, 0.55));
-  scene.add(new THREE.AmbientLight(0x8fa8b8, 0.25));
-  const key = new THREE.DirectionalLight(0xffffff, 1.2);
-  key.position.set(-6, 5, 7);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xcfe8ff, 0.7);
-  fill.position.set(5, -1, 4);
-  scene.add(fill);
-  const rim = new THREE.PointLight(0x55c6f6, 35, 30, 2);
-  rim.position.set(4, -1, -3);
-  scene.add(rim);
-  const entry = new THREE.PointLight(0xffffff, 4, 20, 2);
-  entry.position.set(-4, 1.4, 2.5);
-  scene.add(entry);
+  // Phones draw an unlit body. The fresnel shell and the beams carry the
+  // light, so the six-light rig (and the shader variants it creates) stays
+  // on desktop only.
+  if (!isMobile) {
+    scene.add(new THREE.HemisphereLight(0xbcd8e8, 0x0a0e12, 0.55));
+    scene.add(new THREE.AmbientLight(0x8fa8b8, 0.25));
+    const key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(-6, 5, 7);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xcfe8ff, 0.7);
+    fill.position.set(5, -1, 4);
+    scene.add(fill);
+    const rim = new THREE.PointLight(0x55c6f6, 35, 30, 2);
+    rim.position.set(4, -1, -3);
+    scene.add(rim);
+    const entry = new THREE.PointLight(0xffffff, 4, 20, 2);
+    entry.position.set(-4, 1.4, 2.5);
+    scene.add(entry);
+  }
 
   // Prism: triangular bar lying along X — light enters the left end face,
-  // spectrum fans out the right. Clear glass via transmission + studio env.
+  // spectrum fans out the right. Clear glass is the fresnel shell, a faint
+  // body, and the studio env — not a transmission pass.
   const prismGeo = new THREE.CylinderGeometry(1.25, 1.25, 2.6, 3, 1);
   let prism;
-  try {
+  if (isMobile) {
+    prism = new THREE.Mesh(
+      prismGeo,
+      new THREE.MeshBasicMaterial({
+        color: 0xd7eaf2, transparent: true, opacity: 0.22, depthWrite: false,
+      })
+    );
+  } else try {
     prism = new THREE.Mesh(
       prismGeo,
       new THREE.MeshPhysicalMaterial({
-        color: 0xffffff, metalness: 0, roughness: 0.25,
-        emissive: 0x0a1a22, emissiveIntensity: 0.08,
-        transmission: 1, thickness: 0.9,
-        ior: 1.52, envMapIntensity: 1.0,
-        clearcoat: 0.15, clearcoatRoughness: 0.25,
-        specularIntensity: 0.5,
-        transparent: false, opacity: 1,
+        color: 0xe7f2f6, metalness: 0, roughness: 0.12,
+        emissive: 0x07141c, emissiveIntensity: 0.35,
+        // Transmission re-renders the scene into an offscreen buffer every
+        // frame. On a black field the refraction is almost invisible, and
+        // that extra pass was the intro's dominant cost on desktop and
+        // mobile. Clear glass here is alpha + the fresnel shell + core.
+        transmission: 0, thickness: 0,
+        ior: 1.52, envMapIntensity: 1.15,
+        clearcoat: 0.65, clearcoatRoughness: 0.18,
+        specularIntensity: 0.55,
+        transparent: true, opacity: 0.16, depthWrite: false,
       })
     );
   } catch (e) {
@@ -99,6 +144,7 @@ async function start() {
   const shell = new THREE.Mesh(
     prismGeo,
     new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: {
         color: { value: new THREE.Color(0xcfe8f2) },
         opacity: { value: 0.45 },
@@ -139,6 +185,7 @@ async function start() {
   // Beams: additive glow planes. White in, spectrum fan out, blue hero beam.
   function beam(color, width, len, opacity, sharedMat) {
     const mat = sharedMat || new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: {
         time: { value: 0 },
         color: { value: new THREE.Color(color) },
@@ -243,7 +290,7 @@ async function start() {
   // The volume is oversized vs. the viewport so the pattern never visibly
   // ends as the camera orbits. Static — all motion comes from the camera.
   const plexus = new THREE.Group();
-  const PN = isMobile ? 150 : 320;
+  const PN = isMobile ? 80 : 320;
   const pts = [];
   for (let i = 0; i < PN; i++) {
     pts.push(new THREE.Vector3(
@@ -271,6 +318,7 @@ async function start() {
   // Soft round nodes that fade out a few units from the camera, so the
   // dive never flies through a giant white square.
   const pointMat = new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
     uniforms: {
       opacity: { value: 0.5 }, fadeN: { value: 1.2 }, fadeF: { value: 3.5 },
     },
@@ -294,7 +342,7 @@ async function start() {
       }`,
   });
   plexus.add(new THREE.Points(pointGeo, pointMat));
-  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 400 : 1600;
+  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 220 : 1600;
   // Declared up here: rebuildLinks() runs once at setup, before the
   // frame-loop declarations below execute.
   const vis = new Uint8Array(PN);
@@ -307,25 +355,69 @@ async function start() {
   const linkColAttr = new THREE.BufferAttribute(linkColArr, 3);
   linkColAttr.setUsage(THREE.DynamicDrawUsage);
   linkGeo.setAttribute("color", linkColAttr);
+  // Uniform grid so link rebuild is O(n) neighbor tests, not O(n^2).
+  // Cell size equals the link distance, so a pair can only meet in
+  // adjacent cells. Same pairs, same fade, far fewer iterations.
+  const G0x = -24, G0y = -14, G0z = -23;
+  const GX = 16, GY = 10, GZ = 12;
+  const gHead = new Int32Array(GX * GY * GZ);
+  const gNext = new Int32Array(PN);
+  function gCell(x, y, z) {
+    let ix = (x - G0x) / LINK | 0;
+    let iy = (y - G0y) / LINK | 0;
+    let iz = (z - G0z) / LINK | 0;
+    if (ix < 0) ix = 0; else if (ix >= GX) ix = GX - 1;
+    if (iy < 0) iy = 0; else if (iy >= GY) iy = GY - 1;
+    if (iz < 0) iz = 0; else if (iz >= GZ) iz = GZ - 1;
+    return (ix * GY + iy) * GZ + iz;
+  }
   function rebuildLinks() {
+    gHead.fill(-1);
+    for (let i = 0; i < PN; i++) {
+      if (!vis[i]) continue;
+      const c = gCell(pArr[i * 3], pArr[i * 3 + 1], pArr[i * 3 + 2]);
+      gNext[i] = gHead[c];
+      gHead[c] = i;
+    }
     let n = 0;
     for (let i = 0; i < PN && n < maxLinks; i++) {
       if (!vis[i]) continue;
       const ax = pArr[i * 3], ay = pArr[i * 3 + 1], az = pArr[i * 3 + 2];
-      for (let j = i + 1; j < PN && n < maxLinks; j++) {
-        if (!vis[j]) continue;
-        const dx = ax - pArr[j * 3], dy = ay - pArr[j * 3 + 1], dz = az - pArr[j * 3 + 2];
-        const d2 = dx * dx + dy * dy + dz * dz;
-        if (d2 < LINK2) {
-          const o = n * 6;
-          linkArr[o] = ax; linkArr[o + 1] = ay; linkArr[o + 2] = az;
-          linkArr[o + 3] = pArr[j * 3]; linkArr[o + 4] = pArr[j * 3 + 1]; linkArr[o + 5] = pArr[j * 3 + 2];
-          // Per-link edge ramp: shade to black at the cutoff so pairs
-          // forming/breaking fade instead of popping (no flicker).
-          const sh = 1 - sstep(Math.sqrt(d2), LINK * 0.65, LINK);
-          linkColArr[o] = sh; linkColArr[o + 1] = sh; linkColArr[o + 2] = sh;
-          linkColArr[o + 3] = sh; linkColArr[o + 4] = sh; linkColArr[o + 5] = sh;
-          n++;
+      let ix = (ax - G0x) / LINK | 0;
+      let iy = (ay - G0y) / LINK | 0;
+      let iz = (az - G0z) / LINK | 0;
+      if (ix < 0) ix = 0; else if (ix >= GX) ix = GX - 1;
+      if (iy < 0) iy = 0; else if (iy >= GY) iy = GY - 1;
+      if (iz < 0) iz = 0; else if (iz >= GZ) iz = GZ - 1;
+      for (let ox = -1; ox <= 1; ox++) {
+        const cx = ix + ox;
+        if (cx < 0 || cx >= GX) continue;
+        for (let oy = -1; oy <= 1; oy++) {
+          const cy = iy + oy;
+          if (cy < 0 || cy >= GY) continue;
+          for (let oz = -1; oz <= 1; oz++) {
+            const cz = iz + oz;
+            if (cz < 0 || cz >= GZ) continue;
+            let j = gHead[(cx * GY + cy) * GZ + cz];
+            while (j >= 0 && n < maxLinks) {
+              if (j > i && vis[j]) {
+                const dx = ax - pArr[j * 3], dy = ay - pArr[j * 3 + 1], dz = az - pArr[j * 3 + 2];
+                const d2 = dx * dx + dy * dy + dz * dz;
+                if (d2 < LINK2) {
+                  const o = n * 6;
+                  linkArr[o] = ax; linkArr[o + 1] = ay; linkArr[o + 2] = az;
+                  linkArr[o + 3] = pArr[j * 3]; linkArr[o + 4] = pArr[j * 3 + 1]; linkArr[o + 5] = pArr[j * 3 + 2];
+                  // Per-link edge ramp: shade to black at the cutoff so pairs
+                  // forming/breaking fade instead of popping (no flicker).
+                  const sh = 1 - sstep(Math.sqrt(d2), LINK * 0.65, LINK);
+                  linkColArr[o] = sh; linkColArr[o + 1] = sh; linkColArr[o + 2] = sh;
+                  linkColArr[o + 3] = sh; linkColArr[o + 4] = sh; linkColArr[o + 5] = sh;
+                  n++;
+                }
+              }
+              j = gNext[j];
+            }
+          }
         }
       }
     }
@@ -338,13 +430,11 @@ async function start() {
     color: 0xffffff, vertexColors: true, transparent: true, opacity: 0.07, depthWrite: false,
   }));
   plexus.add(plexusLinks);
-  // Coordinate tags bound to every node: one billboarded label per point,
-  // hovering just up-right of its node, drifting with the plexus group.
+  // Coordinate tags: one instanced billboard, one draw call. A static glyph
+  // atlas plus a tiny code texture replaces a canvas texture per node
+  // (that was one draw call and a 320x64 canvas each, hundreds of them).
   const labelGroup = new THREE.Group();
   plexus.add(labelGroup);
-  const labelSprites = [];
-  const labelCtx = [];
-  const labelTex = [];
   let labelCursor = 0;
   const tmpV = new THREE.Vector3();
   const frustum = new THREE.Frustum();
@@ -356,33 +446,123 @@ async function start() {
   const tmpM = new THREE.Matrix4();
   let linkFrame = 0;
   let perfN = 0, perfT = 0, perfMs = 16;
-  for (const pt of pts) {
-    const cv = document.createElement("canvas");
-    cv.width = 320;
-    cv.height = 64;
-    const g = cv.getContext("2d");
-    g.font = "600 20px ui-monospace, Menlo, Consolas, monospace";
-    g.textBaseline = "middle";
-    g.fillStyle = "rgba(255,255,255,0.92)";
-    g.fillText(`(${pt.x.toFixed(2)}, ${pt.y.toFixed(2)}, ${pt.z.toFixed(2)})`, 8, 34);
-    const tex = new THREE.CanvasTexture(cv);
-    const m = new THREE.SpriteMaterial({
-      map: tex, transparent: true, opacity: 0.55, depthWrite: false,
-    });
-    const s = new THREE.Sprite(m);
-    s.position.set(pt.x + 0.55, pt.y + 0.32, pt.z);
-    s.scale.set(1.875, 0.375, 1);
-    s.renderOrder = 2;
-    labelGroup.add(s);
-    labelSprites.push(s);
-    labelCtx.push(g);
-    labelTex.push(tex);
+  const GLYPHS = " 0123456789.,()-";
+  const glyphIndex = new Uint8Array(128);
+  for (let i = 0; i < GLYPHS.length; i++) glyphIndex[GLYPHS.charCodeAt(i)] = i;
+  const cell = 64;
+  const atlas = document.createElement("canvas");
+  atlas.width = GLYPHS.length * cell;
+  atlas.height = cell;
+  const atlasCtx = atlas.getContext("2d");
+  atlasCtx.font = "600 42px ui-monospace, Menlo, Consolas, monospace";
+  atlasCtx.textAlign = "center";
+  atlasCtx.textBaseline = "middle";
+  atlasCtx.fillStyle = "rgba(255,255,255,0.92)";
+  for (let i = 1; i < GLYPHS.length; i++) {
+    atlasCtx.fillText(GLYPHS[i], i * cell + cell / 2, cell / 2 + 1);
   }
+  const glyphTex = new THREE.CanvasTexture(atlas);
+  glyphTex.generateMipmaps = false;
+  glyphTex.minFilter = THREE.LinearFilter;
+  glyphTex.magFilter = THREE.LinearFilter;
+  glyphTex.wrapS = glyphTex.wrapT = THREE.ClampToEdgeWrapping;
+  const MAXC = 24;
+  const codeData = new Uint8Array(MAXC * PN * 4);
+  const codeTex = new THREE.DataTexture(codeData, MAXC, PN, THREE.RGBAFormat);
+  codeTex.colorSpace = THREE.NoColorSpace;
+  codeTex.minFilter = codeTex.magFilter = THREE.NearestFilter;
+  codeTex.wrapS = codeTex.wrapT = THREE.ClampToEdgeWrapping;
+  codeTex.generateMipmaps = false;
+  codeTex.flipY = false;
+  const labelStr = new Array(PN);
+  function writeLabel(i) {
+    const s = `(${pArr[i * 3].toFixed(2)}, ${pArr[i * 3 + 1].toFixed(2)}, ${pArr[i * 3 + 2].toFixed(2)})`;
+    if (labelStr[i] === s) return false;
+    labelStr[i] = s;
+    const base = i * MAXC * 4;
+    for (let c = 0; c < MAXC; c++) {
+      const gi = c < s.length ? (glyphIndex[s.charCodeAt(c)] || 0) : 0;
+      codeData[base + c * 4] = gi;
+      codeData[base + c * 4 + 3] = 255;
+    }
+    return true;
+  }
+  for (let i = 0; i < PN; i++) writeLabel(i);
+  codeTex.needsUpdate = true;
+  // The old sprite was 1.875×0.375 with the glyphs sitting in a short band
+  // of a 320×64 canvas (about 5:1). Mapping square atlas cells onto that
+  // full height stretched every character into a tall smear.
+  const labelGeo = new THREE.PlaneGeometry(1.875, 0.16);
+  const alphaArr = new Float32Array(PN);
+  const alphaAttr = new THREE.InstancedBufferAttribute(alphaArr, 1);
+  alphaAttr.setUsage(THREE.DynamicDrawUsage);
+  labelGeo.setAttribute("aAlpha", alphaAttr);
+  const indexArr = new Float32Array(PN);
+  for (let i = 0; i < PN; i++) indexArr[i] = i;
+  labelGeo.setAttribute("aIndex", new THREE.InstancedBufferAttribute(indexArr, 1));
+  const labels = new THREE.InstancedMesh(labelGeo, new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
+    uniforms: {
+      glyphTex: { value: glyphTex },
+      codeTex: { value: codeTex },
+      maxC: { value: MAXC },
+      pn: { value: PN },
+      cols: { value: GLYPHS.length },
+    },
+    transparent: true, depthWrite: false, depthTest: true,
+    vertexShader: `
+      attribute float aAlpha;
+      attribute float aIndex;
+      varying vec2 vUv;
+      varying float vAlpha;
+      varying float vIndex;
+      void main() {
+        vUv = uv;
+        vAlpha = aAlpha;
+        vIndex = aIndex;
+        vec3 center = instanceMatrix[3].xyz;
+        vec4 mv = modelViewMatrix * vec4(center, 1.0);
+        mv.xy += position.xy;
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform sampler2D glyphTex;
+      uniform sampler2D codeTex;
+      uniform float maxC;
+      uniform float pn;
+      uniform float cols;
+      varying vec2 vUv;
+      varying float vAlpha;
+      varying float vIndex;
+      void main() {
+        if (vAlpha < 0.004) discard;
+        float col = floor(vUv.x * maxC);
+        float gi = floor(texture2D(codeTex, vec2((col + 0.5) / maxC, (vIndex + 0.5) / pn)).r * 255.0 + 0.5);
+        if (gi < 0.5) discard;
+        float fx = vUv.x * maxC - col;
+        vec4 g = texture2D(glyphTex, vec2((gi + fx) / cols, vUv.y));
+        if (g.a < 0.08) discard;
+        gl_FragColor = vec4(g.rgb, g.a * vAlpha);
+      }`,
+  }), PN);
+  labels.frustumCulled = false;
+  labels.renderOrder = 2;
+  labels.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  const labelDummy = new THREE.Object3D();
+  for (let i = 0; i < PN; i++) {
+    labelDummy.position.set(pArr[i * 3] + 0.55, pArr[i * 3 + 1] + 0.32, pArr[i * 3 + 2]);
+    labelDummy.updateMatrix();
+    labels.setMatrixAt(i, labelDummy.matrix);
+    alphaArr[i] = 0.55;
+  }
+  labels.instanceMatrix.needsUpdate = true;
+  alphaAttr.needsUpdate = true;
+  labelGroup.add(labels);
   scene.add(plexus);
 
   // Beam dust: faint motes hanging in the light's volume. One draw call,
   // slow drift, no labels — pure depth cue for the shafts.
-  const moteN = isMobile ? 60 : 120;
+  const moteN = isMobile ? 18 : 120;
   const moteArr = new Float32Array(moteN * 3);
   const moteVel = new Float32Array(moteN * 3);
   for (let i = 0; i < moteN; i++) {
@@ -398,6 +578,7 @@ async function start() {
   const moteGeo = new THREE.BufferGeometry();
   moteGeo.setAttribute("position", moteAttr);
   const motes = new THREE.Points(moteGeo, new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
     uniforms: {
       opacity: { value: 0.32 },
       fadeN: pointMat.uniforms.fadeN,
@@ -425,18 +606,18 @@ async function start() {
   motes.renderOrder = 4;
   motes.frustumCulled = false;
   scene.add(motes);
-  // Bloom on desktop only.
-  let composer = null, bloomPass = null, lowRes = false;
-  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.25);
+  // Bloom on desktop only. The composer sizes itself from the renderer
+  // (CSS pixels × fullPR) instead of a hand-built target that ignored the
+  // pixel ratio. UnrealBloomPass already blurs at half that size.
+  let composer = null, bloomPass = null;
+  let renderBloom = false;
   if (!isMobile) {
     try {
       const { EffectComposer } = await import("three/addons/postprocessing/EffectComposer.js");
       const { RenderPass } = await import("three/addons/postprocessing/RenderPass.js");
       const { UnrealBloomPass } = await import("three/addons/postprocessing/UnrealBloomPass.js");
       const { OutputPass } = await import("three/addons/postprocessing/OutputPass.js");
-      composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(
-        mount.clientWidth, mount.clientHeight, { type: THREE.HalfFloatType, samples: 0 }
-      ));
+      composer = new EffectComposer(renderer);
       composer.addPass(new RenderPass(scene, camera));
       // Single billboard planes can't stack knots anymore, so the gate
       // comes back down: cores breathe softly, nothing splats.
@@ -447,18 +628,26 @@ async function start() {
       // Tone map + sRGB at the end of the chain. Without this the stacked
       // additive beams clip to hard white squares; with it they roll off.
       composer.addPass(new OutputPass());
-    } catch (e) { composer = null; }
+      renderBloom = true;
+    } catch (e) { composer = null; renderBloom = false; }
   }
 
   const clock = new THREE.Clock();
-  const frameRect = { r: null, total: 1 };
-  function progress() {
+  // Scroll progress is measured on scroll/resize, not inside the frame.
+  // Reading layout in the same turn that writes styles was a thrash, and
+  // the intro does not need a fresh rect every animation frame.
+  const frameRect = { top: 0, total: 1 };
+  function measureScroll() {
     const r = stage.getBoundingClientRect();
-    const total = r.height - window.innerHeight;
-    frameRect.r = r;
-    frameRect.total = Math.max(1, total);
-    return Math.min(1, Math.max(0, -r.top / total));
+    frameRect.total = Math.max(1, r.height - window.innerHeight);
+    frameRect.top = r.top;
   }
+  function progress() {
+    return Math.min(1, Math.max(0, -frameRect.top / frameRect.total));
+  }
+  measureScroll();
+  window.addEventListener("scroll", measureScroll, { passive: true });
+  window.addEventListener("resize", measureScroll, { passive: true });
   // Fox reveal, purely in-scene: the beam's own energy condensed into the
   // team mark. Luminance-masked (not alpha-masked) so any dark pixels in
   // the source art vanish into the black background. No DOM overlay.
@@ -470,6 +659,7 @@ async function start() {
   const logoMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(2.6, 2.6),
     new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: logoUniforms,
       transparent: true, depthWrite: false, depthTest: false,
       blending: THREE.AdditiveBlending,
@@ -500,8 +690,8 @@ async function start() {
     tex.colorSpace = THREE.SRGBColorSpace;
     logoUniforms.map.value = tex;
   });
-  // Preview hook: ?beat=0..1 jumps the scroll timeline (used for screenshots).
-  {
+  // Preview hook: ?debug&beat=0..1 jumps the scroll timeline (screenshots).
+  if (debug) {
     const b = new URLSearchParams(location.search).get("beat");
     if (b !== null) {
       const f = Math.min(1, Math.max(0, parseFloat(b) || 0));
@@ -516,7 +706,51 @@ async function start() {
     const t = Math.min(1, Math.max(0, (x - a) / (b - a)));
     return t * t * (3 - 2 * t);
   }
+  let loopOn = true;
+  let budgetT = 0, budgetN = 0, slowStreak = 0, relief = 0;
+  function applyPixelRatio(pr) {
+    renderer.setPixelRatio(pr);
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    if (composer) {
+      composer.setPixelRatio(pr);
+      composer.setSize(mount.clientWidth, mount.clientHeight);
+    }
+  }
+  function relieve() {
+    slowStreak = 0;
+    if (relief === 0 && renderBloom) {
+      renderBloom = false;
+      relief = 1;
+      return;
+    }
+    const pr = renderer.getPixelRatio();
+    if (pr > 1.05) {
+      applyPixelRatio(1);
+      relief = 2;
+      return;
+    }
+    // Phones already have no bloom and ~1× pixels. If frames are still
+    // slow, drop the drawing buffer instead of no-op'ing.
+    if (pr > 0.62) {
+      applyPixelRatio(0.55);
+      relief = 3;
+    }
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      loopOn = false;
+      return;
+    }
+    if (!loopOn) {
+      loopOn = true;
+      measureScroll();
+      requestAnimationFrame(frame);
+    }
+  });
   function frame() {
+    // Tab hidden: do not keep a rAF alive (bloom included) for a page
+    // nobody is looking at. visibilitychange starts it again.
+    if (document.hidden) { loopOn = false; return; }
     requestAnimationFrame(frame);
     const t = clock.getElapsedTime();
     const p = progress();
@@ -532,24 +766,11 @@ async function start() {
       0.45 * (1 - dive) + logoHome.y * dive,
       logoHome.z * dive
     );
-    // The finale is soft fullscreen glow: render it at 1:1 pixels instead
-    // of full device resolution. One step down, then a smooth ride — far
-    // cheaper than stuttering through the dive at 2x fill rate.
-    const wantLow = lowRes ? dive > 0.02 : dive > 0.06;
-    if (wantLow !== lowRes) {
-      lowRes = wantLow;
-      renderer.setPixelRatio(lowRes ? 1 : fullPR);
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-      if (composer) {
-        composer.setPixelRatio(lowRes ? 1 : fullPR);
-        composer.setSize(mount.clientWidth, mount.clientHeight);
-      }
-    }
     // Over-scroll past the stage (0 at the finale, 1 a breath later).
     // Computed early: label/point near-fades below blend on it too.
-    // Layout read shared with progress() above: one per frame, not two.
-    const r = frameRect.r, total = frameRect.total;
-    const overRaw = Math.min(1, Math.max(0, (-r.top - total) / (total * 0.12 + 1)));
+    // Values come from the scroll handler, so this frame does not read layout.
+    const total = frameRect.total;
+    const overRaw = Math.min(1, Math.max(0, (-frameRect.top - total) / (total * 0.12 + 1)));
     const om = overRaw * overRaw * (3 - 2 * overRaw);
     // The plexus alone stays alive — a slow drift and faint breathing.
     plexus.rotation.y += 0.00022;
@@ -583,42 +804,55 @@ async function start() {
     moteAttr.needsUpdate = true;
     // Lazy points: one frustum test each, then links/labels skip whatever
     // the camera can't see. 2-unit margin so links don't pop at the edge.
+    plexus.updateWorldMatrix(true, false);
+    const pmw = plexus.matrixWorld;
     frustum.setFromProjectionMatrix(projMat.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
     for (let i = 0; i < PN; i++) {
-      tmpV.set(pArr[i * 3], pArr[i * 3 + 1], pArr[i * 3 + 2]);
-      plexus.localToWorld(tmpV);
+      tmpV.set(pArr[i * 3], pArr[i * 3 + 1], pArr[i * 3 + 2]).applyMatrix4(pmw);
       let v = 1;
       for (let f = 0; f < 6; f++) {
         if (frustum.planes[f].distanceToPoint(tmpV) < -2) { v = 0; break; }
       }
       vis[i] = v;
     }
-    if ((linkFrame++ & 1) === 0) rebuildLinks();
+    // Phones rebuild links and move labels less often. The drift is slow
+    // enough that every third frame still reads as continuous.
+    const linkStride = isMobile ? 3 : 2;
+    if ((linkFrame % linkStride) === 0) rebuildLinks();
     // Labels ride the opposite phase from links: half the matrix churn
     // per frame, still every-frame fresh through the text refresh below.
-    if ((linkFrame & 1) === 1) for (let i = 0; i < PN; i++) {
-      const s = labelSprites[i];
-      if (!vis[i]) { s.visible = false; continue; }
-      s.visible = true;
-      s.position.set(pArr[i * 3] + 0.55, pArr[i * 3 + 1] + 0.32, pArr[i * 3 + 2]);
-      s.getWorldPosition(tmpV);
-      const dd = tmpV.distanceTo(camera.position);
-      // On content (om→1) cull harder: nothing looms in your face.
-      const ln = 7 + 4 * om, ls = 5 + 3 * om;
-      const a = dd < ln ? 0 : Math.min(1, (dd - ln) / ls);
-      s.material.opacity = 0.55 * a * a * (3 - 2 * a);
+    if ((linkFrame % linkStride) === 1) {
+      for (let i = 0; i < PN; i++) {
+        const x = pArr[i * 3], y = pArr[i * 3 + 1], z = pArr[i * 3 + 2];
+        if (!vis[i]) { alphaArr[i] = 0; continue; }
+        labelDummy.position.set(x + 0.55, y + 0.32, z);
+        labelDummy.updateMatrix();
+        labels.setMatrixAt(i, labelDummy.matrix);
+        tmpV.set(x + 0.55, y + 0.32, z).applyMatrix4(pmw);
+        const dd = tmpV.distanceTo(camera.position);
+        // On content (om→1) cull harder: nothing looms in your face.
+        const ln = 7 + 4 * om, ls = 5 + 3 * om;
+        const a = dd < ln ? 0 : Math.min(1, (dd - ln) / ls);
+        alphaArr[i] = 0.55 * a * a * (3 - 2 * a);
+      }
+      labels.instanceMatrix.needsUpdate = true;
+      alphaAttr.needsUpdate = true;
     }
-    for (let k = 0; k < 3; k++) {
+    let textChanged = false;
+    const labelBudget = isMobile ? 1 : 3;
+    for (let k = 0; k < labelBudget; k++) {
       labelCursor = (labelCursor + 1) % PN;
-      const i = labelCursor, g = labelCtx[i];
-      g.clearRect(0, 0, 320, 64);
-      g.fillText(`(${pArr[i * 3].toFixed(2)}, ${pArr[i * 3 + 1].toFixed(2)}, ${pArr[i * 3 + 2].toFixed(2)})`, 8, 34);
-      labelTex[i].needsUpdate = true;
+      if (writeLabel(labelCursor)) textChanged = true;
     }
+    if (textChanged) codeTex.needsUpdate = true;
+    linkFrame++;
     // Reveal the site chrome once the sequence is finished. Latched with
     // hysteresis so boundary jitter can't flap it back and forth.
-    if (p >= 0.999) document.body.classList.remove("in-intro");
-    else if (p < 0.985) document.body.classList.add("in-intro");
+    if (p >= 0.999) {
+      if (document.body.classList.contains("in-intro")) document.body.classList.remove("in-intro");
+    } else if (p < 0.985) {
+      if (!document.body.classList.contains("in-intro")) document.body.classList.add("in-intro");
+    }
     // Scroll draws each shaft tip-forward: light travels as you scroll.
     // Chained handoffs — each span starts as the previous tip arrives:
     // white .04-.20, inner .16-.34, inner fan .32-.50, fan .46-.68+.05/i,
@@ -718,10 +952,13 @@ async function start() {
       if (composer) composer.setSize(mount.clientWidth, mount.clientHeight);
       logoMesh.visible = true;
     }
-    if (composer) composer.render();
+    // Past the intro the beams are gone, so the bloom chain is pure cost.
+    // A machine that still misses ~30fps after shaders settle drops bloom
+    // for the rest of the session and renders with the tone-mapped path.
+    const pastIntro = om > 0.85;
+    if (renderBloom && composer && !pastIntro) composer.render();
     else renderer.render(scene, camera);
-    // Rolling perf readout for diagnosis (fps, ms, draw calls, tris).
-    if (typeof performance !== "undefined") {
+    if (debug) {
       const now = performance.now();
       if (perfT > 0) perfMs += (now - perfT - perfMs) * 0.05;
       perfT = now;
@@ -734,6 +971,21 @@ async function start() {
           tris: renderer.info.render.triangles,
         };
       }
+    }
+    if (relief < 3 && typeof performance !== "undefined") {
+      const now = performance.now();
+      if (budgetT && budgetN > 4) {
+        const dt = now - budgetT;
+        // Three slow frames in a row, after the first handful, means this
+        // GPU cannot hold the current quality. Bloom goes first, then
+        // extra pixel ratio, then a sub-1× buffer for phones. A fast GPU
+        // never trips it.
+        const limit = relief === 0 && renderBloom ? 45 : 28;
+        slowStreak = dt > limit ? slowStreak + 1 : 0;
+        if (slowStreak >= 3) relieve();
+      }
+      budgetT = now;
+      budgetN++;
     }
   }
   window.addEventListener("resize", () => {
