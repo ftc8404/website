@@ -29,15 +29,26 @@ start().catch((e) => {
 
 async function start() {
   const THREE = await import("three");
-  const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false });
+  // Landscape phones are wider than 760px and were taking the desktop
+  // path: bloom, 1.25× pixels, and the heavy glass shader.
+  const isMobile = window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
+  const renderer = new THREE.WebGLRenderer({
+    antialias: false, alpha: false, powerPreference: "high-performance",
+  });
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
   // One pixel-ratio cap for the whole intro. Initializing at 2x and only
   // dropping to 1.25/1.5 after the finale switch meant retina screens paid
-  // 2x fill (4x the pixels) for every frame of the sequence.
-  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25);
+  // 2x fill (4x the pixels) for every frame of the sequence. Phones also
+  // stay under a pixel budget so a tall screen does not fill 3× retina.
+  const viewW = Math.max(1, mount.clientWidth);
+  const viewH = Math.max(1, mount.clientHeight);
+  let fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1 : 1.25);
+  if (isMobile) {
+    const cap = Math.sqrt(280000 / (viewW * viewH));
+    fullPR = Math.min(fullPR, Math.max(0.55, cap));
+  }
   renderer.setPixelRatio(fullPR);
   renderer.setSize(mount.clientWidth, mount.clientHeight);
   mount.appendChild(renderer.domElement);
@@ -47,38 +58,54 @@ async function start() {
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0x000000, 0.02);
-  // Studio environment so transmissive glass has something to refract.
-  try {
-    const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
-    const pmrem = new THREE.PMREMGenerator(renderer);
-    scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
-    pmrem.dispose();
-  } catch (e) { /* env-less fallback: lights only */ }
+  // Studio environment so the desktop glass has something to reflect.
+  // Skipped on phones: the PMREM pass is a startup hitch and the physical
+  // shader that samples it is the expensive fragment program.
+  if (!isMobile) {
+    try {
+      const { RoomEnvironment } = await import("three/addons/environments/RoomEnvironment.js");
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
+      pmrem.dispose();
+    } catch (e) { /* env-less fallback: lights only */ }
+  }
   const camera = new THREE.PerspectiveCamera(
     55, mount.clientWidth / mount.clientHeight, 0.1, 100
   );
 
-  scene.add(new THREE.HemisphereLight(0xbcd8e8, 0x0a0e12, 0.55));
-  scene.add(new THREE.AmbientLight(0x8fa8b8, 0.25));
-  const key = new THREE.DirectionalLight(0xffffff, 1.2);
-  key.position.set(-6, 5, 7);
-  scene.add(key);
-  const fill = new THREE.DirectionalLight(0xcfe8ff, 0.7);
-  fill.position.set(5, -1, 4);
-  scene.add(fill);
-  const rim = new THREE.PointLight(0x55c6f6, 35, 30, 2);
-  rim.position.set(4, -1, -3);
-  scene.add(rim);
-  const entry = new THREE.PointLight(0xffffff, 4, 20, 2);
-  entry.position.set(-4, 1.4, 2.5);
-  scene.add(entry);
+  // Phones draw an unlit body. The fresnel shell and the beams carry the
+  // light, so the six-light rig (and the shader variants it creates) stays
+  // on desktop only.
+  if (!isMobile) {
+    scene.add(new THREE.HemisphereLight(0xbcd8e8, 0x0a0e12, 0.55));
+    scene.add(new THREE.AmbientLight(0x8fa8b8, 0.25));
+    const key = new THREE.DirectionalLight(0xffffff, 1.2);
+    key.position.set(-6, 5, 7);
+    scene.add(key);
+    const fill = new THREE.DirectionalLight(0xcfe8ff, 0.7);
+    fill.position.set(5, -1, 4);
+    scene.add(fill);
+    const rim = new THREE.PointLight(0x55c6f6, 35, 30, 2);
+    rim.position.set(4, -1, -3);
+    scene.add(rim);
+    const entry = new THREE.PointLight(0xffffff, 4, 20, 2);
+    entry.position.set(-4, 1.4, 2.5);
+    scene.add(entry);
+  }
 
   // Prism: triangular bar lying along X — light enters the left end face,
   // spectrum fans out the right. Clear glass is the fresnel shell, a faint
   // body, and the studio env — not a transmission pass.
   const prismGeo = new THREE.CylinderGeometry(1.25, 1.25, 2.6, 3, 1);
   let prism;
-  try {
+  if (isMobile) {
+    prism = new THREE.Mesh(
+      prismGeo,
+      new THREE.MeshBasicMaterial({
+        color: 0xd7eaf2, transparent: true, opacity: 0.22, depthWrite: false,
+      })
+    );
+  } else try {
     prism = new THREE.Mesh(
       prismGeo,
       new THREE.MeshPhysicalMaterial({
@@ -117,6 +144,7 @@ async function start() {
   const shell = new THREE.Mesh(
     prismGeo,
     new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: {
         color: { value: new THREE.Color(0xcfe8f2) },
         opacity: { value: 0.45 },
@@ -157,6 +185,7 @@ async function start() {
   // Beams: additive glow planes. White in, spectrum fan out, blue hero beam.
   function beam(color, width, len, opacity, sharedMat) {
     const mat = sharedMat || new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: {
         time: { value: 0 },
         color: { value: new THREE.Color(color) },
@@ -261,7 +290,7 @@ async function start() {
   // The volume is oversized vs. the viewport so the pattern never visibly
   // ends as the camera orbits. Static — all motion comes from the camera.
   const plexus = new THREE.Group();
-  const PN = isMobile ? 150 : 320;
+  const PN = isMobile ? 80 : 320;
   const pts = [];
   for (let i = 0; i < PN; i++) {
     pts.push(new THREE.Vector3(
@@ -289,6 +318,7 @@ async function start() {
   // Soft round nodes that fade out a few units from the camera, so the
   // dive never flies through a giant white square.
   const pointMat = new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
     uniforms: {
       opacity: { value: 0.5 }, fadeN: { value: 1.2 }, fadeF: { value: 3.5 },
     },
@@ -312,7 +342,7 @@ async function start() {
       }`,
   });
   plexus.add(new THREE.Points(pointGeo, pointMat));
-  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 400 : 1600;
+  const LINK = 3.4, LINK2 = LINK * LINK, maxLinks = isMobile ? 220 : 1600;
   // Declared up here: rebuildLinks() runs once at setup, before the
   // frame-loop declarations below execute.
   const vis = new Uint8Array(PN);
@@ -471,6 +501,7 @@ async function start() {
   for (let i = 0; i < PN; i++) indexArr[i] = i;
   labelGeo.setAttribute("aIndex", new THREE.InstancedBufferAttribute(indexArr, 1));
   const labels = new THREE.InstancedMesh(labelGeo, new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
     uniforms: {
       glyphTex: { value: glyphTex },
       codeTex: { value: codeTex },
@@ -531,7 +562,7 @@ async function start() {
 
   // Beam dust: faint motes hanging in the light's volume. One draw call,
   // slow drift, no labels — pure depth cue for the shafts.
-  const moteN = isMobile ? 60 : 120;
+  const moteN = isMobile ? 18 : 120;
   const moteArr = new Float32Array(moteN * 3);
   const moteVel = new Float32Array(moteN * 3);
   for (let i = 0; i < moteN; i++) {
@@ -547,6 +578,7 @@ async function start() {
   const moteGeo = new THREE.BufferGeometry();
   moteGeo.setAttribute("position", moteAttr);
   const motes = new THREE.Points(moteGeo, new THREE.ShaderMaterial({
+    precision: isMobile ? "mediump" : "highp",
     uniforms: {
       opacity: { value: 0.32 },
       fadeN: pointMat.uniforms.fadeN,
@@ -627,6 +659,7 @@ async function start() {
   const logoMesh = new THREE.Mesh(
     new THREE.PlaneGeometry(2.6, 2.6),
     new THREE.ShaderMaterial({
+      precision: isMobile ? "mediump" : "highp",
       uniforms: logoUniforms,
       transparent: true, depthWrite: false, depthTest: false,
       blending: THREE.AdditiveBlending,
@@ -675,6 +708,14 @@ async function start() {
   }
   let loopOn = true;
   let budgetT = 0, budgetN = 0, slowStreak = 0, relief = 0;
+  function applyPixelRatio(pr) {
+    renderer.setPixelRatio(pr);
+    renderer.setSize(mount.clientWidth, mount.clientHeight);
+    if (composer) {
+      composer.setPixelRatio(pr);
+      composer.setSize(mount.clientWidth, mount.clientHeight);
+    }
+  }
   function relieve() {
     slowStreak = 0;
     if (relief === 0 && renderBloom) {
@@ -682,14 +723,17 @@ async function start() {
       relief = 1;
       return;
     }
-    if (renderer.getPixelRatio() > 1.05) {
-      renderer.setPixelRatio(1);
-      renderer.setSize(mount.clientWidth, mount.clientHeight);
-      if (composer) {
-        composer.setPixelRatio(1);
-        composer.setSize(mount.clientWidth, mount.clientHeight);
-      }
+    const pr = renderer.getPixelRatio();
+    if (pr > 1.05) {
+      applyPixelRatio(1);
       relief = 2;
+      return;
+    }
+    // Phones already have no bloom and ~1× pixels. If frames are still
+    // slow, drop the drawing buffer instead of no-op'ing.
+    if (pr > 0.62) {
+      applyPixelRatio(0.55);
+      relief = 3;
     }
   }
   document.addEventListener("visibilitychange", () => {
@@ -771,10 +815,13 @@ async function start() {
       }
       vis[i] = v;
     }
-    if ((linkFrame++ & 1) === 0) rebuildLinks();
+    // Phones rebuild links and move labels less often. The drift is slow
+    // enough that every third frame still reads as continuous.
+    const linkStride = isMobile ? 3 : 2;
+    if ((linkFrame % linkStride) === 0) rebuildLinks();
     // Labels ride the opposite phase from links: half the matrix churn
     // per frame, still every-frame fresh through the text refresh below.
-    if ((linkFrame & 1) === 1) {
+    if ((linkFrame % linkStride) === 1) {
       for (let i = 0; i < PN; i++) {
         const x = pArr[i * 3], y = pArr[i * 3 + 1], z = pArr[i * 3 + 2];
         if (!vis[i]) { alphaArr[i] = 0; continue; }
@@ -798,6 +845,7 @@ async function start() {
       if (writeLabel(labelCursor)) textChanged = true;
     }
     if (textChanged) codeTex.needsUpdate = true;
+    linkFrame++;
     // Reveal the site chrome once the sequence is finished. Latched with
     // hysteresis so boundary jitter can't flap it back and forth.
     if (p >= 0.999) {
@@ -924,14 +972,15 @@ async function start() {
         };
       }
     }
-    if (relief < 2 && typeof performance !== "undefined") {
+    if (relief < 3 && typeof performance !== "undefined") {
       const now = performance.now();
       if (budgetT && budgetN > 4) {
         const dt = now - budgetT;
         // Three slow frames in a row, after the first handful, means this
-        // GPU cannot hold the current quality. Bloom goes first (45ms),
-        // then the extra pixel ratio (24ms). A fast GPU never trips it.
-        const limit = relief === 0 ? 45 : 24;
+        // GPU cannot hold the current quality. Bloom goes first, then
+        // extra pixel ratio, then a sub-1× buffer for phones. A fast GPU
+        // never trips it.
+        const limit = relief === 0 && renderBloom ? 45 : 28;
         slowStreak = dt > limit ? slowStreak + 1 : 0;
         if (slowStreak >= 3) relieve();
       }
