@@ -23,7 +23,7 @@ start().catch((e) => {
 async function start() {
   const THREE = await import("three");
   const isMobile = window.matchMedia("(max-width: 760px)").matches;
-  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
+  const renderer = new THREE.WebGLRenderer({ antialias: false, alpha: false });
   renderer.setClearColor(0x000000, 1);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.1;
@@ -70,11 +70,11 @@ async function start() {
       new THREE.MeshPhysicalMaterial({
         color: 0xffffff, metalness: 0, roughness: 0.25,
         emissive: 0x0a1a22, emissiveIntensity: 0.08,
-        transmission: isMobile ? 0 : 1, thickness: 0.9,
+        transmission: 1, thickness: 0.9,
         ior: 1.52, envMapIntensity: 1.0,
         clearcoat: 0.15, clearcoatRoughness: 0.25,
         specularIntensity: 0.5,
-        transparent: isMobile, opacity: isMobile ? 0.55 : 1,
+        transparent: false, opacity: 1,
       })
     );
   } catch (e) {
@@ -172,21 +172,23 @@ async function start() {
     m.renderOrder = 5;
     return m;
   }
-  // Volumetric shafts: three planes crossed around the beam axis, sharing
-  // one material, so the light has body from every camera angle instead of
-  // vanishing edge-on like a single flat plane.
+  // Volumetric shafts: ONE camera-facing billboard per beam, cylindrically
+  // constrained to its axis. A single surface can never split into visible
+  // segments, and it draws a third of the crossed-plane stack it replaces.
+  const shafts = [];
   function beam3D(color, width, len, opacity) {
     const group = new THREE.Group();
-    let mat = null;
-    for (let k = 0; k < 3; k++) {
-      const m = beam(color, width, len, opacity, mat);
-      if (!mat) mat = m.material;
-      m.rotation.x = (k * Math.PI) / 3;
-      m.renderOrder = 5;
-      group.add(m);
-    }
+    const m = beam(color, width, len, opacity, null);
+    m.renderOrder = 5;
+    group.add(m);
     scene.add(group);
-    return { group, mat };
+    shafts.push(group);
+    return { group, mat: m.material };
+  }
+  function driveBeam(b, time, head, intensity) {
+    b.mat.uniforms.time.value = time;
+    b.mat.uniforms.head.value = head;
+    b.mat.uniforms.intensity.value = intensity;
   }
   const white = beam3D(0xffffff, 0.22, 7.0, 0.0);
   white.group.position.set(-4.45, 1.0, 0);
@@ -216,17 +218,13 @@ async function start() {
   // Drawn over the body (no depth test) so it reads on every renderer.
   function innerBeam(color, width) {
     const group = new THREE.Group();
-    let mat = null;
-    for (let k = 0; k < 3; k++) {
-      const m = beam(color, width, 1, 0, mat);
-      if (!mat) mat = m.material;
-      m.material.depthTest = false;
-      m.rotation.x = (k * Math.PI) / 3;
-      m.renderOrder = 7;
-      group.add(m);
-    }
+    const m = beam(color, width, 1, 0, null);
+    m.material.depthTest = false;
+    m.renderOrder = 7;
+    group.add(m);
     scene.add(group);
-    return { group, mat };
+    shafts.push(group);
+    return { group, mat: m.material };
   }
   function span(shaft, x1, y1, x2, y2) {
     const dx = x2 - x1, dy = y2 - y1;
@@ -351,6 +349,11 @@ async function start() {
   const tmpV = new THREE.Vector3();
   const frustum = new THREE.Frustum();
   const projMat = new THREE.Matrix4();
+  const tmpAxis = new THREE.Vector3();
+  const tmpCam = new THREE.Vector3();
+  const tmpN = new THREE.Vector3();
+  const tmpY = new THREE.Vector3();
+  const tmpM = new THREE.Matrix4();
   let linkFrame = 0;
   let perfN = 0, perfT = 0, perfMs = 16;
   for (const pt of pts) {
@@ -377,21 +380,68 @@ async function start() {
   }
   scene.add(plexus);
 
+  // Beam dust: faint motes hanging in the light's volume. One draw call,
+  // slow drift, no labels — pure depth cue for the shafts.
+  const moteN = isMobile ? 60 : 120;
+  const moteArr = new Float32Array(moteN * 3);
+  const moteVel = new Float32Array(moteN * 3);
+  for (let i = 0; i < moteN; i++) {
+    moteArr[i * 3] = -7 + Math.random() * 14;
+    moteArr[i * 3 + 1] = -2 + Math.random() * 5.5;
+    moteArr[i * 3 + 2] = -3 + Math.random() * 6;
+    moteVel[i * 3] = (Math.random() - 0.5) * 0.01;
+    moteVel[i * 3 + 1] = (Math.random() - 0.5) * 0.006;
+    moteVel[i * 3 + 2] = (Math.random() - 0.5) * 0.01;
+  }
+  const moteAttr = new THREE.BufferAttribute(moteArr, 3);
+  moteAttr.setUsage(THREE.DynamicDrawUsage);
+  const moteGeo = new THREE.BufferGeometry();
+  moteGeo.setAttribute("position", moteAttr);
+  const motes = new THREE.Points(moteGeo, new THREE.ShaderMaterial({
+    uniforms: {
+      opacity: { value: 0.32 },
+      fadeN: pointMat.uniforms.fadeN,
+      fadeF: pointMat.uniforms.fadeF,
+    },
+    transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
+    vertexShader: `
+      varying float vD;
+      void main() {
+        vec4 mv = modelViewMatrix * vec4(position, 1.0);
+        vD = -mv.z;
+        gl_PointSize = 0.045 * (400.0 / max(0.1, -mv.z));
+        gl_Position = projectionMatrix * mv;
+      }`,
+    fragmentShader: `
+      uniform float opacity; uniform float fadeN; uniform float fadeF;
+      varying float vD;
+      void main() {
+        vec2 c = gl_PointCoord - vec2(0.5);
+        float m = smoothstep(0.5, 0.1, length(c));
+        float a = smoothstep(fadeN, fadeF, vD);
+        gl_FragColor = vec4(vec3(0.81, 0.91, 1.0), m * a * opacity);
+      }`,
+  }));
+  motes.renderOrder = 4;
+  motes.frustumCulled = false;
+  scene.add(motes);
   // Bloom on desktop only.
   let composer = null, bloomPass = null, lowRes = false;
-  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 2);
+  const fullPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
   if (!isMobile) {
     try {
       const { EffectComposer } = await import("three/addons/postprocessing/EffectComposer.js");
       const { RenderPass } = await import("three/addons/postprocessing/RenderPass.js");
       const { UnrealBloomPass } = await import("three/addons/postprocessing/UnrealBloomPass.js");
       const { OutputPass } = await import("three/addons/postprocessing/OutputPass.js");
-      composer = new EffectComposer(renderer);
+      composer = new EffectComposer(renderer, new THREE.WebGLRenderTarget(
+        mount.clientWidth, mount.clientHeight, { type: THREE.HalfFloatType, samples: 0 }
+      ));
       composer.addPass(new RenderPass(scene, camera));
-      // Only absurd cores breathe: the entry/split knots stack past 2.0
-      // in linear HDR, so the gate sits above them. No square ghosts.
+      // Single billboard planes can't stack knots anymore, so the gate
+      // comes back down: cores breathe softly, nothing splats.
       bloomPass = new UnrealBloomPass(
-        new THREE.Vector2(mount.clientWidth, mount.clientHeight), 0.35, 0.3, 2.0
+        new THREE.Vector2(mount.clientWidth, mount.clientHeight), 0.5, 0.35, 1.0
       );
       composer.addPass(bloomPass);
       // Tone map + sRGB at the end of the chain. Without this the stacked
@@ -401,9 +451,12 @@ async function start() {
   }
 
   const clock = new THREE.Clock();
+  const frameRect = { r: null, total: 1 };
   function progress() {
     const r = stage.getBoundingClientRect();
     const total = r.height - window.innerHeight;
+    frameRect.r = r;
+    frameRect.total = Math.max(1, total);
     return Math.min(1, Math.max(0, -r.top / total));
   }
   // Fox reveal, purely in-scene: the beam's own energy condensed into the
@@ -469,10 +522,10 @@ async function start() {
     const p = progress();
     // Camera: slow 200deg orbit + push-in.
     // Scroll = orbit + push-in. Finale = dive into the blue beam itself.
-    const az = -0.7 + p * 3.4;
+    const az = -0.7 + p * 3.4 + Math.sin(t * 0.4) * 0.012;
     const dive = sstep(p, 0.8, 1.0);
     const radius = (7.6 - p * 2.2) * (1 - dive) + 4.2 * dive;
-    const camY = (1.7 - p * 0.8) * (1 - dive) + -0.05 * dive;
+    const camY = (1.7 - p * 0.8) * (1 - dive) + -0.05 * dive + Math.sin(t * 0.53 + 1.7) * 0.05;
     camera.position.set(Math.sin(az) * radius, camY, Math.cos(az) * radius);
     camera.lookAt(
       0.2 * (1 - dive) + logoHome.x * dive,
@@ -494,8 +547,8 @@ async function start() {
     }
     // Over-scroll past the stage (0 at the finale, 1 a breath later).
     // Computed early: label/point near-fades below blend on it too.
-    const r = stage.getBoundingClientRect();
-    const total = Math.max(1, r.height - window.innerHeight);
+    // Layout read shared with progress() above: one per frame, not two.
+    const r = frameRect.r, total = frameRect.total;
     const overRaw = Math.min(1, Math.max(0, (-r.top - total) / (total * 0.12 + 1)));
     const om = overRaw * overRaw * (3 - 2 * overRaw);
     // The plexus alone stays alive — a slow drift and faint breathing.
@@ -518,6 +571,16 @@ async function start() {
       if (pArr[k + 2] < -22 || pArr[k + 2] > 8) pVel[k + 2] *= -1;
     }
     pointAttr.needsUpdate = true;
+    for (let i = 0; i < moteN; i++) {
+      const k = i * 3;
+      moteArr[k] += moteVel[k];
+      moteArr[k + 1] += moteVel[k + 1];
+      moteArr[k + 2] += moteVel[k + 2];
+      if (moteArr[k] < -7 || moteArr[k] > 7) moteVel[k] *= -1;
+      if (moteArr[k + 1] < -2 || moteArr[k + 1] > 3.5) moteVel[k + 1] *= -1;
+      if (moteArr[k + 2] < -3 || moteArr[k + 2] > 3) moteVel[k + 2] *= -1;
+    }
+    moteAttr.needsUpdate = true;
     // Lazy points: one frustum test each, then links/labels skip whatever
     // the camera can't see. 2-unit margin so links don't pop at the edge.
     frustum.setFromProjectionMatrix(projMat.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse));
@@ -531,7 +594,9 @@ async function start() {
       vis[i] = v;
     }
     if ((linkFrame++ & 1) === 0) rebuildLinks();
-    for (let i = 0; i < PN; i++) {
+    // Labels ride the opposite phase from links: half the matrix churn
+    // per frame, still every-frame fresh through the text refresh below.
+    if ((linkFrame & 1) === 1) for (let i = 0; i < PN; i++) {
       const s = labelSprites[i];
       if (!vis[i]) { s.visible = false; continue; }
       s.visible = true;
@@ -569,34 +634,25 @@ async function start() {
     if (prism.material.emissiveIntensity !== undefined) {
       prism.material.emissiveIntensity = 0.08 * endFade;
     }
-    white.mat.uniforms.time.value = t;
-    white.mat.uniforms.head.value = sstep(p, 0.04, 0.2) * 1.2;
-    // Proximity yield: the camera flies at the entry knot, where six
-    // additive layers stack past any bloom gate — dim the axis-aligned
-    // spans as it closes in. Reads as flying past the light, not glare.
+    // Proximity yield: the camera flies into the entry knot — dim the
+    // axis-aligned spans as it closes in. Reads as flying past the
+    // light, not glare.
     const prox = 1 - sstep(p, 0.5, 0.75) * 0.7;
-    white.mat.uniforms.intensity.value = 0.42 * endFade * prox;
+    driveBeam(white, t, sstep(p, 0.04, 0.2) * 1.2, 1.0 * endFade * prox);
     fan.forEach((b, i) => {
-      b.mat.uniforms.time.value = t + i * 0.4;
-      b.mat.uniforms.head.value = sstep(p, 0.46 + i * 0.05, 0.68 + i * 0.05) * 1.2;
-      b.mat.uniforms.intensity.value = 0.5 * endFade;
+      driveBeam(b, t + i * 0.4, sstep(p, 0.46 + i * 0.05, 0.68 + i * 0.05) * 1.2, 1.2 * endFade);
     });
-    blue.mat.uniforms.time.value = t;
-    blue.mat.uniforms.head.value = sstep(p, 0.5, 0.86) * 1.2;
+    driveBeam(blue, t, sstep(p, 0.5, 0.86) * 1.2, 0);
     blue.group.scale.y = (1 + blueIn * 1.2) * (1 + dive * 1.2);
-    innerWhite.mat.uniforms.time.value = t;
-    innerWhite.mat.uniforms.head.value = sstep(p, 0.16, 0.34) * 1.2;
-    innerWhite.mat.uniforms.intensity.value = 0.4 * endFade * prox;
+    driveBeam(innerWhite, t, sstep(p, 0.16, 0.34) * 1.2, 0.95 * endFade * prox);
     innerFan.forEach((b, i) => {
-      b.mat.uniforms.time.value = t + i * 0.4;
-      b.mat.uniforms.head.value = sstep(p, 0.32 + i * 0.03, 0.5 + i * 0.03) * 1.2;
-      b.mat.uniforms.intensity.value = 0.38 * endFade * prox;
+      driveBeam(b, t + i * 0.4, sstep(p, 0.32 + i * 0.03, 0.5 + i * 0.03) * 1.2, 0.9 * endFade * prox);
     });
     // The camera dives into the blue; the shaft's energy condenses into
     // the fox, so the shaft itself yields some brightness as it appears.
     // Wide window: the reveal + grow play out slowly across the dive.
     const logoIn = sstep(p, 0.78, 1.0);
-    blue.mat.uniforms.intensity.value = blueIn * (0.55 + p * 0.25) * (1 - logoIn * 0.6) * (1 - dive * 0.55);
+    blue.mat.uniforms.intensity.value = blueIn * (2.75 + p * 1.25) * (1 - logoIn * 0.6) * (1 - dive * 0.55);
     if (bloomPass) bloomPass.strength = 0.4 + blueIn * 0.35 + dive * 0.1;
     logoUniforms.time.value = t;
     logoUniforms.reveal.value = logoIn;
@@ -612,6 +668,20 @@ async function start() {
     // labels in keeping their distance.
     pointMat.uniforms.fadeN.value = 1.2 + 3.8 * om;
     pointMat.uniforms.fadeF.value = 3.5 + 5.5 * om;
+    // Cylindrical billboards: every shaft turns about its own axis to face
+    // the camera. One surface per beam from all angles — never segments.
+    for (const g of shafts) {
+      if (!g.userData.baseQ) g.userData.baseQ = g.quaternion.clone();
+      tmpAxis.set(1, 0, 0).applyQuaternion(g.userData.baseQ);
+      tmpCam.copy(camera.position).sub(g.position);
+      tmpN.copy(tmpCam).addScaledVector(tmpAxis, -tmpCam.dot(tmpAxis));
+      if (tmpN.lengthSq() > 1e-4) {
+        tmpN.normalize();
+        tmpY.crossVectors(tmpN, tmpAxis).normalize();
+        tmpM.makeBasis(tmpAxis, tmpY, tmpN);
+        g.quaternion.setFromRotationMatrix(tmpM);
+      }
+    }
     // Past the stage, the SAME 3D plexus field continues as the page
     // backdrop: the canvas pins to the viewport, intro actors yield, and
     // the camera eases into a slow ambient drift. Driven by over-scroll

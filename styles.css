@@ -156,3 +156,26 @@ input.field, textarea.field {
   width: 100%; background: #0f151b; border: 1px solid var(--line);
   border-radius: 8px; color: var(--ink); padding: 10px 12px; font-size: 15px;
 }
+.scroll-hint {
+  position: fixed; left: 50%; bottom: 22px; z-index: 60;
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 16px; border-radius: 999px;
+  background: rgba(10, 18, 24, 0.55); border: 1px solid rgba(85, 198, 246, 0.35);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  color: rgba(255, 255, 255, 0.75); font-size: 12px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  opacity: 0; pointer-events: none;
+  transform: translateX(-50%) translateY(8px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.scroll-hint.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.scroll-hint i {
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--cyan); border-bottom: 2px solid var(--cyan);
+  transform: rotate(45deg) translateY(-2px);
+  animation: hintbob 1.6s ease-in-out infinite;
+}
+@keyframes hintbob {
+  0%, 100% { transform: rotate(45deg) translateY(-2px); opacity: 0.6; }
+  50% { transform: rotate(45deg) translateY(2px); opacity: 1; }
+}

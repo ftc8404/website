@@ -106,6 +106,13 @@ def main():
         # camera frustum are skipped (not deleted).
         if "linkFrame" not in hero or "Frustum" not in hero:
             failures.append("hero.js: lazy link/point evaluation missing")
+        # Beams must billboard (one surface each) and every page shares
+        # the idle scroll hint.
+        if "makeBasis" not in hero:
+            failures.append("hero.js: beams must be camera billboards")
+        site = get("site.js")
+        if "scroll-hint" not in site:
+            failures.append("site.js: idle scroll hint missing")
     except Exception as e:  # noqa: BLE001
         failures.append(f"chrome gate: {e}")
     if failures:
